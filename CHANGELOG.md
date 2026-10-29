@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Linux top bar
+- The Wingpanel indicator shows Mochi with the island's own engine (a small page in WebKit, offline), its minis, a popup with the session's steps, last answer and Spotify controls, and Allow / Deny for permission requests (`coucou --decide`).
+- `status.json` v2 carries the agent, colour, request id and the music; `coucou --spotify playPause|next|previous` drives the player.
+- With the indicator installed the island window is not shown; the page stays loaded as the engine behind it.
+
 - **Local only (this branch: Windows and Linux)** — nothing comes in and nothing goes out.
   - Inbound: the phone link (no TLS server, no mDNS announcement, no relay, no pairing, nothing approved, answered or chatted from a phone) and the WhatsApp integration are removed. Only the agents' local hook pipe listens.
   - Outbound: the one HTTP client now refuses any address that is not this computer and the build has no TLS. Removed: updates and "What's new", the cloud chat (Anthropic, OpenAI, Google AI, OpenRouter), the GitHub, GitLab, Gitea, Stripe, Vercel, n8n, Resend, Notion and Cal.com pills, « OK Coucou », the Claude clean-up of dictations and the call summaries, the Codex plan gauge, the voice model download (the files are copied by hand) and Spotify's cover and download-page fetches.

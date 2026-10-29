@@ -519,6 +519,13 @@ pub fn spawn_cursor_poll(app: AppHandle, gate: Arc<PollGate>) {
 /// tick decides from the cursor. Without it (Linux) the input region is set to
 /// the island itself, or to the whole wake strip while collapsed.
 pub fn refresh_click_through(app: &AppHandle, gate: &PollGate) {
+    if bar_only() {
+        // The top bar shows Mochi; the island window stays behind it, unseen and untouched.
+        if let Some(win) = window(app) {
+            platform::set_input_region(&win, Some((0.0, 0.0, 0.0, 0.0)));
+        }
+        return;
+    }
     if platform::CURSOR_POLL {
         set_ignore_cursor(app, false);
         gate.forget_ignore_state();
@@ -544,6 +551,12 @@ pub fn refresh_click_through(app: &AppHandle, gate: &PollGate) {
         }
     };
     platform::set_input_region(&win, region);
+}
+
+/// On Linux, once the top bar's indicator is installed it is the only face of Mochi:
+/// the island keeps running (it takes the hooks and the answers) but is not drawn.
+pub fn bar_only() -> bool {
+    cfg!(target_os = "linux") && std::path::Path::new("/usr/share/coucou-indicator/index.html").exists()
 }
 
 pub fn set_ignore_cursor(app: &AppHandle, ignore: bool) {

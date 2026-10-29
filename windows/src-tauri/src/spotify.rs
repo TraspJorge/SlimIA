@@ -420,6 +420,8 @@ fn now_ms() -> f64 {
 fn emit_state(app: &AppHandle, state: &PlayerState) {
     use tauri::Emitter;
     let _ = app.emit_to(crate::island::WINDOW_LABEL, STATE_EVENT, state);
+    // The top bar's indicator shows it too (status.rs).
+    crate::status::music(state);
 }
 
 // ── Commands ──────────────────────────────────────────────────────────────────

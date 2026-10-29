@@ -216,7 +216,9 @@ async fn handle(app: AppHandle, mut pipe: impl Relay) {
     // Counts for the weekly recap — never the command, path or prompt itself.
     crate::recap::observe(&app, &payload);
     // What the bar's indicator shows (status.rs).
-    crate::status::observe(&payload, &event);
+    if event != "PermissionRequest" {
+        crate::status::observe(&payload, &event);
+    }
 
     if event != "PermissionRequest" {
         // The status line relay calls in with every Claude Code update: not log-worthy.
@@ -236,11 +238,14 @@ async fn handle(app: AppHandle, mut pipe: impl Relay) {
     }
     crate::recap::note_request(&app, &id, &payload);
     payload["request_id"] = json!(id);
+    // After the id: the bar's indicator answers by it.
+    crate::status::observe(&payload, &event);
     log::line(format!("hook PermissionRequest id={id}"));
     let _ = app.emit_to(WINDOW_LABEL, "hook", payload);
 
     let decision = wait_for_decision(&id, &mut rx).await;
     app.state::<Pending>().0.lock().unwrap().remove(&id);
+    crate::status::resolve(&id);
 
     // No decision: say nothing at all. coucou-hook then writes nothing to stdout
     // and Claude Code asks in the terminal, exactly as if Coucou were closed.

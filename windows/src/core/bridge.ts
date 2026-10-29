@@ -147,6 +147,8 @@ export const Bridge = {
   approvalDecision: (requestId: string, decision: "allow" | "deny") =>
     call<void>("approval_decision", { requestId, decision }),
   /** "The card is up" — until this lands the relay only waits a moment. */
+  barOnly: () => call<boolean>("bar_only"),
+
   approvalAck: (requestId: string) => call<void>("approval_ack", { requestId }),
   /** Answers a question Claude Code asked: question text → chosen label. */
   approvalAnswer: (requestId: string, answers: Record<string, string | string[]>) =>

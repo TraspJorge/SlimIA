@@ -537,6 +537,11 @@ fn set_hub_shown(win: &tauri::WebviewWindow, shown: bool) {
 
 /// The page asks once at load, in case it missed the event.
 #[tauri::command]
+fn bar_only() -> bool {
+    island::bar_only()
+}
+
+#[tauri::command]
 fn hub_shown() -> bool {
     HUB_SHOWN.load(Ordering::Relaxed)
 }
@@ -574,6 +579,30 @@ fn open_settings_window(app: AppHandle, page: Option<String>) {
     show_hub(&app, Some(page.as_deref().unwrap_or("general")));
 }
 
+/// `--spotify <action>` on the command line: only the three buttons of a player.
+fn spotify_action(args: &[String]) -> Option<&'static str> {
+    let at = args.iter().position(|a| a == "--spotify")?;
+    match args.get(at + 1)?.as_str() {
+        "playPause" => Some("playPause"),
+        "next" => Some("next"),
+        "previous" => Some("previous"),
+        _ => None,
+    }
+}
+
+/// `--decide allow|deny <request>` on the command line: the bar's Allow / Deny.
+fn bar_decision(args: &[String]) -> Option<(&'static str, String)> {
+    let at = args.iter().position(|a| a == "--decide")?;
+    let decision = match args.get(at + 1)?.as_str() {
+        "allow" => "allow",
+        "deny" => "deny",
+        _ => return None,
+    };
+    let id = args.get(at + 2)?;
+    let valid = !id.is_empty() && id.len() <= 40 && id.chars().all(|c| c.is_ascii_digit() || c == '-');
+    valid.then(|| (decision, id.clone()))
+}
+
 pub fn run() {
     platform::prepare_environment();
     let loaded = settings::load();
@@ -584,6 +613,22 @@ pub fn run() {
         .plugin(tauri_plugin_single_instance::init(|app, argv, _cwd| {
             // `coucou --shortcut <action>`: what a desktop's own keyboard
             // settings run where we can't listen for keys ourselves (Wayland).
+            // `coucou --spotify playPause|next|previous`: the top bar's indicator.
+            if let Some(action) = spotify_action(&argv) {
+                let app = app.clone();
+                tauri::async_runtime::spawn(async move {
+                    let _ = spotify::spotify_control(app, action.to_string(), None).await;
+                });
+                return;
+            }
+            if let Some((decision, request)) = bar_decision(&argv) {
+                let _ = app.emit_to(
+                    island::WINDOW_LABEL,
+                    "bar-decision",
+                    serde_json::json!({ "decision": decision, "requestId": request }),
+                );
+                return;
+            }
             match shortcuts::from_args(&argv) {
                 Some(action) => shortcuts::dispatch(app, action),
                 // Opening Coucou again (its shortcut, the Start menu) shows its window.
@@ -614,6 +659,7 @@ pub fn run() {
             reposition,
             fit_zoom,
             hub_shown,
+            bar_only,
             list_monitors,
             open_url,
             open_in_vscode,
@@ -678,7 +724,13 @@ pub fn run() {
             if let Some(win) = island::window(&handle) {
                 platform::make_non_activating(&win);
                 island::apply_geometry(&handle, &loaded.screen, false);
-                let _ = win.show();
+                // With the top bar's indicator there is no island to see: the page
+                // stays loaded, as the engine behind it (hooks, answers, sounds).
+                if island::bar_only() {
+                    let _ = win.hide();
+                } else {
+                    let _ = win.show();
+                }
             }
             gate.collapsed.store(false, Ordering::Relaxed);
             // Nothing drawn yet, so nothing takes the mouse until the page
@@ -713,7 +765,26 @@ pub fn run() {
 
 #[cfg(test)]
 mod tests {
-    use super::diff_file;
+    use super::{bar_decision, diff_file, spotify_action};
+
+    #[test]
+    fn the_command_line_can_press_only_a_players_three_buttons() {
+        let args = |a: &[&str]| a.iter().map(|s| s.to_string()).collect::<Vec<_>>();
+        assert_eq!(spotify_action(&args(&["coucou", "--spotify", "playPause"])), Some("playPause"));
+        assert_eq!(spotify_action(&args(&["coucou", "--spotify", "next"])), Some("next"));
+        assert_eq!(spotify_action(&args(&["coucou", "--spotify", "previous"])), Some("previous"));
+        // Nothing else: no seek, no volume, no free text.
+        for bad in ["seek", "volume", "shuffle", "", "playpause", "next; rm -rf"] {
+            assert_eq!(spotify_action(&args(&["coucou", "--spotify", bad])), None, "{bad}");
+        }
+        assert_eq!(spotify_action(&args(&["coucou", "--spotify"])), None);
+        assert_eq!(bar_decision(&args(&["coucou", "--decide", "allow", "123-4"])), Some(("allow", "123-4".into())));
+        assert_eq!(bar_decision(&args(&["coucou", "--decide", "deny", "9-1"])), Some(("deny", "9-1".into())));
+        for bad in [&["--decide", "always", "1-1"][..], &["--decide", "allow"], &["--decide", "allow", "x;rm"], &["--decide", "allow", ""]] {
+            assert_eq!(bar_decision(&args(bad)), None, "{bad:?}");
+        }
+        assert_eq!(spotify_action(&args(&["coucou", "--shortcut", "openChat"])), None);
+    }
 
     #[test]
     fn only_an_existing_file_by_its_full_path_reaches_the_editor() {

@@ -31,14 +31,20 @@ const MAX_ANSWER: usize = 700;
 /// rewritten at most this often unless the state changes.
 const MIN_GAP: Duration = Duration::from_millis(400);
 
+/// The states of Mochi on the island (BOT_STATES in src/mochi/engine.ts) that a hook can cause.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum State {
     Idle,
     Finished,
+    Thinking,
     Working,
+    Ratelimit,
     Error,
-    Waiting,
+    /// Claude Code asks you a question (AskUserQuestion).
+    Question,
+    /// A permission waits for your Allow or Deny.
+    Approval,
 }
 
 impl State {
@@ -48,9 +54,12 @@ impl State {
         match self {
             State::Idle => 0,
             State::Finished => 1,
-            State::Working => 2,
-            State::Error => 3,
-            State::Waiting => 4,
+            State::Thinking => 2,
+            State::Working => 3,
+            State::Ratelimit => 4,
+            State::Error => 5,
+            State::Question => 6,
+            State::Approval => 7,
         }
     }
 }
@@ -60,11 +69,18 @@ impl State {
 pub struct SessionStatus {
     pub id: String,
     pub project: String,
+    /// Which agent: "claude", "codex", "gemini"… (the pill it has on the island).
+    pub agent: String,
+    /// That pill's colour, "#RRGGBB".
+    pub color: String,
     pub state: State,
     /// The tool in use, as the island writes it ("Edit · main.rs").
     pub detail: String,
     /// The last few tools, oldest first, ending with `detail`.
     pub steps: Vec<String>,
+    /// The permission request waiting for an answer, when the state is `approval`.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub request: String,
     pub updated_at: u64,
 }
 
@@ -88,12 +104,49 @@ pub struct Snapshot {
     pub updated_at: u64,
     pub sessions: Vec<SessionStatus>,
     pub last_answer: Option<LastAnswer>,
+    /// The Spotify player as the island's pill sees it (cover left out), or none.
+    pub music: Option<Value>,
 }
 
 #[derive(Default)]
 struct Tracker {
     sessions: HashMap<String, SessionStatus>,
     last_answer: Option<LastAnswer>,
+    music: Option<Value>,
+}
+
+/// The agent a hook comes from, as the island routes it: a tagged agent, Cursor's
+/// terminal, else Claude Code.
+fn agent_of(payload: &Value) -> String {
+    let tag = payload.get("coucou_agent").and_then(Value::as_str).unwrap_or("");
+    let valid = !tag.is_empty()
+        && tag.len() <= 24
+        && tag != "claude"
+        && tag.chars().all(|c| c.is_ascii_lowercase() || c.is_ascii_digit() || c == '-' || c == '_');
+    if valid {
+        return tag.to_string();
+    }
+    if payload.get("term_editor").and_then(Value::as_str) == Some("cursor") {
+        return "cursor".to_string();
+    }
+    "claude".to_string()
+}
+
+/// The pill colours of the catalog (src/core/pills.ts, island/agents.ts).
+fn agent_color(agent: &str) -> &'static str {
+    match agent {
+        "claude" => "#F5F6F8",
+        "cursor" => "#C0C4CC",
+        "antigravity" => "#E879F9",
+        "codex" => "#2DD4BF",
+        "gemini" => "#8AB4F8",
+        "copilot" => "#818CF8",
+        "muse" => "#38BDF8",
+        "opencode" => "#4ADE80",
+        "amp" => "#F59E0B",
+        "hermes" => "#C084FC",
+        _ => "#9AA0AA",
+    }
 }
 
 fn basename(path: &str) -> String {
@@ -120,29 +173,43 @@ impl Tracker {
         if event == "SessionEnd" {
             return self.sessions.remove(id).is_some();
         }
+        let tool = payload.get("tool_name").and_then(Value::as_str).unwrap_or("");
+        let message = payload.get("message").and_then(Value::as_str).unwrap_or("").to_lowercase();
         let (state, detail) = match event {
-            "SessionStart" => (State::Idle, String::new()),
-            "UserPromptSubmit" => (State::Working, String::new()),
+            "SessionStart" | "Interrupt" => (State::Idle, String::new()),
+            "UserPromptSubmit" => (State::Thinking, String::new()),
+            "PreToolUse" if tool == "ask_question" || tool.ends_with(":ask_question") => (State::Question, tool_line(payload)),
             "PreToolUse" => (State::Working, tool_line(payload)),
             "PostToolUse" | "PostToolUseFailure" | "SubagentStart" | "SubagentStop" => (State::Working, String::new()),
-            "PermissionRequest" => (State::Waiting, tool_line(payload)),
+            "Notification" if message.contains("rate limit") || message.contains("limite d") => (State::Ratelimit, String::new()),
+            "Notification" if message.ends_with('?') => (State::Question, String::new()),
+            "PermissionRequest" if tool == "AskUserQuestion" => (State::Question, String::new()),
+            "PermissionRequest" => (State::Approval, tool_line(payload)),
             "Stop" => (State::Finished, String::new()),
             "StopFailure" => (State::Error, String::new()),
             _ => return false,
         };
         let project = payload.get("cwd").and_then(Value::as_str).map(basename).unwrap_or_default();
+        let agent = agent_of(payload);
         let entry = self.sessions.entry(id.to_string()).or_insert_with(|| SessionStatus {
             id: id.to_string(),
             project: project.clone(),
+            agent: agent.clone(),
+            color: agent_color(&agent).to_string(),
             state: State::Idle,
             detail: String::new(),
             steps: Vec::new(),
+            request: String::new(),
             updated_at: now,
         });
         // A tool finishing keeps the line of the tool that ran; only a new one replaces it.
-        let keep_detail = detail.is_empty() && state == State::Working && entry.state == State::Working;
+        let keep_detail = detail.is_empty() && matches!(state, State::Working | State::Thinking) && matches!(entry.state, State::Working | State::Thinking);
         let changed = entry.state != state || (!keep_detail && entry.detail != detail);
         entry.state = state;
+        entry.request = match state {
+            State::Approval => payload.get("request_id").and_then(Value::as_str).unwrap_or("").to_string(),
+            _ => String::new(),
+        };
         if event == "UserPromptSubmit" {
             // A new question starts a new list of steps.
             entry.steps.clear();
@@ -160,6 +227,12 @@ impl Tracker {
             entry.project = project;
         }
         entry.updated_at = now;
+        changed
+    }
+
+    fn set_music(&mut self, music: Option<Value>) -> bool {
+        let changed = self.music != music;
+        self.music = music;
         changed
     }
 
@@ -190,6 +263,7 @@ impl Tracker {
             updated_at: now,
             sessions,
             last_answer: self.last_answer.clone(),
+            music: self.music.clone(),
         }
     }
 }
@@ -257,6 +331,42 @@ pub fn reset() {
     flush(true);
 }
 
+/// The Spotify player changed (src-tauri/src/spotify.rs): the indicator shows the
+/// track and dances to it. The cover is left out, and nothing is kept when Spotify is not running.
+pub fn music(state: &impl Serialize) {
+    let mut value = serde_json::to_value(state).ok();
+    if let Some(Value::Object(map)) = value.as_mut() {
+        if let Some(Value::Object(track)) = map.get_mut("track") {
+            track.remove("artUrl");
+        }
+        if map.get("running") == Some(&Value::Bool(false)) {
+            value = None;
+        }
+    }
+    let changed = TRACKER.lock().unwrap().get_or_insert_with(Tracker::default).set_music(value);
+    if changed {
+        flush(false);
+    }
+}
+
+/// A permission request was answered (from the island or the bar): its buttons go away.
+pub fn resolve(request_id: &str) {
+    let changed = {
+        let mut guard = TRACKER.lock().unwrap();
+        let t = guard.get_or_insert_with(Tracker::default);
+        let mut any = false;
+        for s in t.sessions.values_mut().filter(|s| !request_id.is_empty() && s.request == request_id) {
+            s.request.clear();
+            s.state = State::Working;
+            any = true;
+        }
+        any
+    };
+    if changed {
+        flush(true);
+    }
+}
+
 /// A hook event came in. Called for every one; most change nothing.
 pub fn observe(payload: &Value, event: &str) {
     let changed = {
@@ -297,7 +407,9 @@ mod tests {
         let mut t = Tracker::default();
         assert!(ev(&mut t, "UserPromptSubmit", "a", 1000));
         let s = t.snapshot(1000);
-        assert_eq!((s.state, s.sessions[0].project.as_str()), (State::Working, "projeto"));
+        assert_eq!((s.state, s.sessions[0].project.as_str()), (State::Thinking, "projeto"));
+        assert!(ev(&mut t, "PreToolUse", "a", 1500));
+        assert_eq!(t.snapshot(1500).state, State::Working);
         assert!(ev(&mut t, "Stop", "a", 2000));
         assert_eq!(t.snapshot(2000).state, State::Finished);
     }
@@ -316,7 +428,7 @@ mod tests {
         ev(&mut t, "UserPromptSubmit", "a", 1000);
         t.apply("PermissionRequest", &json!({ "session_id": "b", "cwd": "/x/y", "tool_name": "Bash", "tool_input": { "command": "rm -r build" } }), 1100);
         let s = t.snapshot(1200);
-        assert_eq!(s.state, State::Waiting);
+        assert_eq!(s.state, State::Approval);
         assert_eq!(s.sessions[0].id, "b");
         assert_eq!(s.sessions[0].detail, "Bash · rm -r build");
         // Answered: the next tool brings it back to work.
@@ -381,6 +493,52 @@ mod tests {
     }
 
     #[test]
+    fn the_island_states_come_from_the_same_events() {
+        let mut t = Tracker::default();
+        let state = |t: &mut Tracker| t.snapshot(9).state;
+        t.apply("Notification", &json!({ "session_id": "a", "message": "Rate limit reached" }), 1);
+        assert_eq!(state(&mut t), State::Ratelimit);
+        t.apply("Notification", &json!({ "session_id": "a", "message": "Which one do you prefer?" }), 2);
+        assert_eq!(state(&mut t), State::Question);
+        t.apply("PermissionRequest", &json!({ "session_id": "a", "tool_name": "AskUserQuestion" }), 3);
+        assert_eq!(state(&mut t), State::Question);
+        t.apply("PermissionRequest", &json!({ "session_id": "a", "tool_name": "Bash", "tool_input": { "command": "ls" } }), 4);
+        assert_eq!(state(&mut t), State::Approval);
+        t.apply("Interrupt", &json!({ "session_id": "a" }), 5);
+        assert_eq!(state(&mut t), State::Idle);
+        // A notification that says nothing we know changes nothing.
+        assert!(!t.apply("Notification", &json!({ "session_id": "a", "message": "Claude is waiting for your input" }), 6));
+    }
+
+    #[test]
+    fn each_session_knows_its_agent_and_the_pill_colour() {
+        let mut t = Tracker::default();
+        t.apply("Stop", &json!({ "session_id": "c" }), 1);
+        t.apply("Stop", &json!({ "session_id": "g", "coucou_agent": "gemini" }), 2);
+        t.apply("Stop", &json!({ "session_id": "x", "term_editor": "cursor" }), 3);
+        t.apply("Stop", &json!({ "session_id": "bad", "coucou_agent": "Has Space" }), 4);
+        let s = t.snapshot(5);
+        let of = |id: &str| s.sessions.iter().find(|x| x.id == id).map(|x| (x.agent.clone(), x.color.clone())).unwrap();
+        assert_eq!(of("c"), ("claude".into(), "#F5F6F8".into()));
+        assert_eq!(of("g"), ("gemini".into(), "#8AB4F8".into()));
+        assert_eq!(of("x"), ("cursor".into(), "#C0C4CC".into()));
+        assert_eq!(of("bad").0, "claude", "an invalid tag falls back to Claude Code, like the island");
+    }
+
+    #[test]
+    fn the_music_is_kept_without_its_cover_and_forgotten_when_spotify_closes() {
+        let mut t = Tracker::default();
+        let playing = json!({ "running": true, "playing": true, "track": { "id": "spotify:track:1", "title": "T", "artist": "A", "album": "", "duration": 200.0, "artUrl": "https://x" }, "position": 3.0, "positionAt": 1000.0 });
+        let mut value = playing.clone();
+        value["track"].as_object_mut().unwrap().remove("artUrl");
+        assert!(t.set_music(Some(value.clone())));
+        assert!(!t.set_music(Some(value)), "the same state again is no news");
+        assert_eq!(t.snapshot(1).music.unwrap()["track"]["title"], "T");
+        assert!(t.set_music(None));
+        assert!(t.snapshot(2).music.is_none());
+    }
+
+    #[test]
     fn the_last_answer_is_cut_short() {
         let mut t = Tracker::default();
         t.set_answer("p", &"x".repeat(2000), 5);
@@ -395,10 +553,10 @@ mod tests {
         let mut t = Tracker::default();
         ev(&mut t, "UserPromptSubmit", "a", 1);
         let v = serde_json::to_value(t.snapshot(2)).unwrap();
-        for key in ["version", "pid", "exe", "state", "updatedAt", "sessions", "lastAnswer"] {
+        for key in ["version", "pid", "exe", "state", "updatedAt", "sessions", "lastAnswer", "music"] {
             assert!(v.get(key).is_some(), "{key}");
         }
-        assert_eq!(v["state"], "working");
+        assert_eq!(v["state"], "thinking");
         assert_eq!(v["sessions"][0]["updatedAt"], 1);
     }
 }

@@ -2,7 +2,7 @@
 // Mirrors IslandRootView.swift + IslandWindowController.swift.
 
 import { Tracked, Spring, clamp } from "../core/anim";
-import { Bridge, IS_TAURI } from "../core/bridge";
+import { Bridge, IS_TAURI, onEvent } from "../core/bridge";
 import {
   EXPANDED_CORNER, EXPANDED_W, NOTCH_W, PANEL_H, PANEL_W,
   ROUNDED_CORNER, VIEW_LAYOUTS, botGlowColor, botGlowOpacity, botPosition,
@@ -151,7 +151,21 @@ export class Island {
 
   // ── DOM ─────────────────────────────────────────────────────────────────────
 
+  /** Allow / Deny pressed in the top bar: only the request it was shown for, and never a question. */
+  private decideFromBar(d: "allow" | "deny", requestId: string) {
+    const req = State.pendingApproval;
+    if (!req || req.requestId !== requestId || req.questions) return;
+    Sound.play(d === "deny" ? "blip" : "approve");
+    void Bridge.approvalDecision(req.requestId, d);
+    this.closeApproval();
+  }
+
   private build() {
+    // The top bar's indicator is the face of Mochi: the island is kept, unseen.
+    void Bridge.barOnly().then((on) => document.documentElement.classList.toggle("bar-only", on === true));
+    void onEvent<{ decision: string; requestId: string }>("bar-decision", (e) => {
+      if (e.decision === "allow" || e.decision === "deny") this.decideFromBar(e.decision, e.requestId);
+    });
     const actions: ViewActions = {
       setView: (v) => this.setView(v),
       collapse: () => this.collapse(),
