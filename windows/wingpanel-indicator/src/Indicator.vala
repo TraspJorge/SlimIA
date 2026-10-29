@@ -1450,8 +1450,8 @@ namespace SlimIA {
             if (f != null && f.is_music) {
                 add_player (main);
             } else {
-                if (f != null && f.mood.alerts ()) {
-                    main.pack_start (label (tr ("Answer in the SlimIA island.", "Responda na ilha do SlimIA."), "coucou-dim"), false, false, 0);
+                if (f != null && f.mood.alerts () && !(f.mood == Mood.APPROVAL && f.request != "")) {
+                    main.pack_start (label (tr ("Answer in the terminal.", "Responda no terminal."), "coucou-dim"), false, false, 0);
                 }
                 add_answer (main, f);
             }

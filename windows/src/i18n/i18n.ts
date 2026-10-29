@@ -4,7 +4,7 @@
 // `t("Allow")`, `t("Uploading {name}", { name })`. Two tables, both keyed by
 // the English text:
 // - strings.json, generated from the Mac's Localizable.xcstrings by
-//   scripts/gen-strings.mjs (never edited by hand);
+//   strings.json (shared strings);
 // - extra.json, the strings only Windows and Linux have, written by hand.
 // A string missing from both, or from one language, shows in English.
 //

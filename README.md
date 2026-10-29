@@ -7,6 +7,17 @@ avisa quando termina, deixa você **permitir ou negar** pedidos de permissão se
 
 **Tudo local: nada entra e nada sai do computador.** Não há rede, voz, celular, nuvem nem atualização automática.
 
+## Amostra
+
+A cápsula na barra superior (aqui com um pedido de permissão esperando: a borda pulsa em laranja) e o popup que
+abre ao clicar nela, com **Negar** e **Permitir**:
+
+<p>
+  <img src="docs/barra.png" alt="A cápsula do Mochi na barra superior, com a borda laranja" height="90">
+</p>
+
+<img src="docs/popup.png" alt="O popup com o pedido de permissão, os botões Negar e Permitir e os outros agentes e o Spotify na coluna da direita" width="640">
+
 ## O que ele faz
 
 | | |
