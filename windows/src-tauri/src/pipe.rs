@@ -213,8 +213,6 @@ async fn handle(app: AppHandle, mut pipe: impl Relay) {
         .to_string();
 
     note_session_window(&pipe, &payload, &event);
-    // Counts for the weekly recap — never the command, path or prompt itself.
-    crate::recap::observe(&app, &payload);
     // What the bar's indicator shows (status.rs).
     if event != "PermissionRequest" {
         crate::status::observe(&payload, &event);
@@ -236,7 +234,6 @@ async fn handle(app: AppHandle, mut pipe: impl Relay) {
         let pending = app.state::<Pending>();
         pending.0.lock().unwrap().insert(id.clone(), tx);
     }
-    crate::recap::note_request(&app, &id, &payload);
     payload["request_id"] = json!(id);
     // After the id: the bar's indicator answers by it.
     crate::status::observe(&payload, &event);

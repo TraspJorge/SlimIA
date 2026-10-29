@@ -274,32 +274,6 @@
       "de": "Codex führt neue Hooks erst aus, nachdem du ihnen vertraust: Starte Codex und prüfe sie einmal mit /hooks.",
       "tr": "Codex yeni hook'ları ancak güvendiğinde çalıştırır: Codex'i başlat ve /hooks ile bir kez incele."
     },
-    "Copied — paste it anywhere.": {
-      "zh-Hans": "已复制 — 可以粘贴到任何地方。",
-      "hi": "कॉपी हो गया — कहीं भी पेस्ट करें।",
-      "es": "Copiada — pégala donde quieras.",
-      "ar": "تم النسخ — الصقها في أي مكان.",
-      "fr": "Copiée — colle-la où tu veux.",
-      "bn": "কপি হয়েছে — যেকোনো জায়গায় পেস্ট করুন।",
-      "pt-BR": "Copiada — cole onde quiser.",
-      "ru": "Скопировано — вставьте куда угодно.",
-      "id": "Disalin — tempel di mana saja.",
-      "de": "Kopiert — überall einfügen.",
-      "tr": "Kopyalandı — istediğin yere yapıştır."
-    },
-    "Copying images isn't available here — use Save image.": {
-      "zh-Hans": "此处无法复制图片 — 请使用“保存图片”。",
-      "hi": "यहाँ छवियाँ कॉपी नहीं हो सकतीं — “छवि सहेजें” का उपयोग करें।",
-      "es": "Aquí no se pueden copiar imágenes — usa Guardar imagen.",
-      "ar": "نسخ الصور غير متاح هنا — استخدم «حفظ الصورة».",
-      "fr": "Copier des images n'est pas possible ici — utilise Enregistrer l'image.",
-      "bn": "এখানে ছবি কপি করা যায় না — “ছবি সংরক্ষণ করুন” ব্যবহার করুন।",
-      "pt-BR": "Não é possível copiar imagens aqui — use Salvar imagem.",
-      "ru": "Копировать изображения здесь нельзя — используйте «Сохранить изображение».",
-      "id": "Menyalin gambar tidak tersedia di sini — gunakan Simpan gambar.",
-      "de": "Bilder können hier nicht kopiert werden — verwende Bild speichern.",
-      "tr": "Burada görsel kopyalanamıyor — Görseli kaydet seçeneğini kullan."
-    },
     "Slimai could not list the agents.": {
       "zh-Hans": "Slimai 无法列出代理。",
       "hi": "Slimai एजेंटों की सूची नहीं बना सका।",
@@ -312,19 +286,6 @@
       "id": "Slimai tidak dapat menampilkan daftar agen.",
       "de": "Slimai konnte die Agenten nicht auflisten.",
       "tr": "Slimai ajanları listeleyemedi."
-    },
-    "Slimai counts your agent sessions as they happen — check back next Monday.": {
-      "zh-Hans": "Slimai 会实时统计你的代理会话 — 下周一再来看看吧。",
-      "hi": "Slimai आपके एजेंट सत्रों को होते-होते गिनता है — अगले सोमवार फिर देखें।",
-      "es": "Slimai cuenta tus sesiones de agentes a medida que ocurren — vuelve el próximo lunes.",
-      "ar": "يحسب Slimai جلسات وكلائك أثناء حدوثها — عُد يوم الاثنين القادم.",
-      "fr": "Slimai compte tes sessions d'agents au fil de l'eau — reviens lundi prochain.",
-      "bn": "Slimai আপনার এজেন্ট সেশন ঘটার সঙ্গে সঙ্গে গোনে — পরের সোমবার আবার দেখুন।",
-      "pt-BR": "O Slimai conta suas sessões de agentes conforme acontecem — volte na próxima segunda-feira.",
-      "ru": "Slimai считает ваши сессии агентов по ходу дела — загляните в следующий понедельник.",
-      "id": "Slimai menghitung sesi agen Anda saat berlangsung — cek lagi Senin depan.",
-      "de": "Slimai zählt deine Agentensitzungen mit — schau nächsten Montag wieder vorbei.",
-      "tr": "Slimai ajan oturumlarını gerçekleştiği sırada sayar — gelecek pazartesi tekrar bak."
     },
     "Slimai is hooked into your Claude Code sessions. Tool calls, questions and permission requests show up in the island, and you can answer them there.": {
       "zh-Hans": "Slimai 已接入你的 Claude Code 会话。工具调用、问题和权限请求都会显示在岛中，你可以直接在那里回应。",
@@ -351,19 +312,6 @@
       "id": "Tidak dapat menghapus {path}: {error}",
       "de": "{path} konnte nicht entfernt werden: {error}",
       "tr": "{path} kaldırılamadı: {error}"
-    },
-    "Could not save the image: {error}": {
-      "zh-Hans": "无法保存图片：{error}",
-      "hi": "छवि सहेजी नहीं जा सकी: {error}",
-      "es": "No se pudo guardar la imagen: {error}",
-      "ar": "تعذّر حفظ الصورة: {error}",
-      "fr": "Impossible d'enregistrer l'image : {error}",
-      "bn": "ছবিটি সংরক্ষণ করা যায়নি: {error}",
-      "pt-BR": "Não foi possível salvar a imagem: {error}",
-      "ru": "Не удалось сохранить изображение: {error}",
-      "id": "Tidak dapat menyimpan gambar: {error}",
-      "de": "Das Bild konnte nicht gespeichert werden: {error}",
-      "tr": "Görsel kaydedilemedi: {error}"
     },
     "Could not save your current status line next to the relay; nothing was changed.": {
       "zh-Hans": "无法将你当前的状态栏保存到中继旁边；未做任何更改。",
@@ -443,19 +391,6 @@
       "de": "Fertig. Vorherige Version unter {paths} gesichert.",
       "tr": "Tamamlandı. Önceki sürüm {paths} olarak kaydedildi."
     },
-    "Friday": {
-      "zh-Hans": "星期五",
-      "hi": "शुक्रवार",
-      "es": "Viernes",
-      "ar": "الجمعة",
-      "fr": "Vendredi",
-      "bn": "শুক্রবার",
-      "pt-BR": "Sexta-feira",
-      "ru": "Пятница",
-      "id": "Jumat",
-      "de": "Freitag",
-      "tr": "Cuma"
-    },
     "Go to pill 1 to 9": {
       "zh-Hans": "前往第 1 至 9 个标签",
       "hi": "टैब 1 से 9 पर जाएँ",
@@ -481,19 +416,6 @@
       "id": "Buka izin atau pertanyaan yang menunggu",
       "de": "Zur wartenden Berechtigungsanfrage oder Frage wechseln",
       "tr": "Bekleyen izin isteğine veya soruya git"
-    },
-    "Hide project names": {
-      "zh-Hans": "隐藏项目名称",
-      "hi": "प्रोजेक्ट के नाम छिपाएँ",
-      "es": "Ocultar nombres de proyecto",
-      "ar": "إخفاء أسماء المشاريع",
-      "fr": "Masquer les noms de projet",
-      "bn": "প্রজেক্টের নাম লুকান",
-      "pt-BR": "Ocultar nomes de projeto",
-      "ru": "Скрыть названия проектов",
-      "id": "Sembunyikan nama proyek",
-      "de": "Projektnamen ausblenden",
-      "tr": "Proje adlarını gizle"
     },
     "Install hooks…": {
       "zh-Hans": "安装 hooks…",
@@ -573,19 +495,6 @@
       "de": "Beim Systemstart öffnen",
       "tr": "Açılışta başlat"
     },
-    "Monday": {
-      "zh-Hans": "星期一",
-      "hi": "सोमवार",
-      "es": "Lunes",
-      "ar": "الاثنين",
-      "fr": "Lundi",
-      "bn": "সোমবার",
-      "pt-BR": "Segunda-feira",
-      "ru": "Понедельник",
-      "id": "Senin",
-      "de": "Montag",
-      "tr": "Pazartesi"
-    },
     "Mute": {
       "zh-Hans": "静音",
       "hi": "म्यूट",
@@ -637,19 +546,6 @@
       "id": "Tab berikutnya",
       "de": "Nächste Pill",
       "tr": "Sonraki araç"
-    },
-    "No Pictures or Downloads folder to save into.": {
-      "zh-Hans": "没有可保存的“图片”或“下载”文件夹。",
-      "hi": "सहेजने के लिए कोई Pictures या Downloads फ़ोल्डर नहीं है।",
-      "es": "No hay una carpeta Imágenes o Descargas donde guardar.",
-      "ar": "لا يوجد مجلد «الصور» أو «التنزيلات» للحفظ فيه.",
-      "fr": "Aucun dossier Images ou Téléchargements où enregistrer.",
-      "bn": "সংরক্ষণের জন্য কোনো Pictures বা Downloads ফোল্ডার নেই।",
-      "pt-BR": "Não há uma pasta Imagens ou Downloads para salvar.",
-      "ru": "Нет папки «Изображения» или «Загрузки» для сохранения.",
-      "id": "Tidak ada folder Gambar atau Unduhan untuk menyimpan.",
-      "de": "Kein Bilder- oder Downloads-Ordner zum Speichern vorhanden.",
-      "tr": "Kaydetmek için Resimler veya İndirilenler klasörü yok."
     },
     "No change.": {
       "zh-Hans": "没有改动。",
@@ -742,19 +638,6 @@
       "de": "Terminal öffnen",
       "tr": "Terminali aç"
     },
-    "Open the wardrobe": {
-      "zh-Hans": "打开衣橱",
-      "hi": "अलमारी खोलें",
-      "es": "Abrir el guardarropa",
-      "ar": "فتح خزانة الملابس",
-      "fr": "Ouvrir la garde-robe",
-      "bn": "পোশাক ঘর খুলুন",
-      "pt-BR": "Abrir o guarda-roupa",
-      "ru": "Открыть гардероб",
-      "id": "Buka lemari",
-      "de": "Garderobe öffnen",
-      "tr": "Gardırobu aç"
-    },
     "Previous pill": {
       "zh-Hans": "上一个标签",
       "hi": "पिछला टैब",
@@ -767,19 +650,6 @@
       "id": "Tab sebelumnya",
       "de": "Vorherige Pill",
       "tr": "Önceki araç"
-    },
-    "Questions": {
-      "zh-Hans": "问题",
-      "hi": "प्रश्न",
-      "es": "Preguntas",
-      "ar": "الأسئلة",
-      "fr": "Questions",
-      "bn": "প্রশ্ন",
-      "pt-BR": "Perguntas",
-      "ru": "Вопросы",
-      "id": "Pertanyaan",
-      "de": "Fragen",
-      "tr": "Sorular"
     },
     "Reinstall hooks…": {
       "zh-Hans": "重新安装 hooks…",
@@ -872,58 +742,6 @@
       "de": "Starte OpenCode neu, um das Plugin zu laden.",
       "tr": "Eklentiyi yüklemek için OpenCode'u yeniden başlat."
     },
-    "Saturday": {
-      "zh-Hans": "星期六",
-      "hi": "शनिवार",
-      "es": "Sábado",
-      "ar": "السبت",
-      "fr": "Samedi",
-      "bn": "শনিবার",
-      "pt-BR": "Sábado",
-      "ru": "Суббота",
-      "id": "Sabtu",
-      "de": "Samstag",
-      "tr": "Cumartesi"
-    },
-    "Save image": {
-      "zh-Hans": "保存图片",
-      "hi": "छवि सहेजें",
-      "es": "Guardar imagen",
-      "ar": "حفظ الصورة",
-      "fr": "Enregistrer l'image",
-      "bn": "ছবি সংরক্ষণ করুন",
-      "pt-BR": "Salvar imagem",
-      "ru": "Сохранить изображение",
-      "id": "Simpan gambar",
-      "de": "Bild speichern",
-      "tr": "Görseli kaydet"
-    },
-    "Saved as {name}": {
-      "zh-Hans": "已保存为 {name}",
-      "hi": "{name} के रूप में सहेजा गया",
-      "es": "Guardada como {name}",
-      "ar": "حُفظت باسم {name}",
-      "fr": "Enregistrée sous {name}",
-      "bn": "{name} নামে সংরক্ষিত",
-      "pt-BR": "Salva como {name}",
-      "ru": "Сохранено как {name}",
-      "id": "Disimpan sebagai {name}",
-      "de": "Als {name} gespeichert",
-      "tr": "{name} olarak kaydedildi"
-    },
-    "Saving…": {
-      "zh-Hans": "正在保存…",
-      "hi": "सहेजा जा रहा है…",
-      "es": "Guardando…",
-      "ar": "جارٍ الحفظ…",
-      "fr": "Enregistrement…",
-      "bn": "সংরক্ষণ হচ্ছে…",
-      "pt-BR": "Salvando…",
-      "ru": "Сохранение…",
-      "id": "Menyimpan…",
-      "de": "Wird gespeichert…",
-      "tr": "Kaydediliyor…"
-    },
     "Send Mochi to the desktop": {
       "zh-Hans": "把 Mochi 送到桌面",
       "hi": "Mochi को डेस्कटॉप पर भेजें",
@@ -962,32 +780,6 @@
       "id": "Sesi, dan Izinkan / Tolak dari pulau",
       "de": "Sitzungen und Zulassen / Ablehnen aus der Insel",
       "tr": "Oturumlar ve adadan İzin ver / Reddet"
-    },
-    "Share your week": {
-      "zh-Hans": "分享你的一周",
-      "hi": "अपना हफ़्ता शेयर करें",
-      "es": "Comparte tu semana",
-      "ar": "شارك أسبوعك",
-      "fr": "Partage ta semaine",
-      "bn": "আপনার সপ্তাহ শেয়ার করুন",
-      "pt-BR": "Compartilhe sua semana",
-      "ru": "Поделитесь своей неделей",
-      "id": "Bagikan minggu Anda",
-      "de": "Deine Woche teilen",
-      "tr": "Haftanı paylaş"
-    },
-    "Show in folder": {
-      "zh-Hans": "在文件夹中显示",
-      "hi": "फ़ोल्डर में दिखाएँ",
-      "es": "Mostrar en la carpeta",
-      "ar": "إظهار في المجلد",
-      "fr": "Afficher dans le dossier",
-      "bn": "ফোল্ডারে দেখান",
-      "pt-BR": "Mostrar na pasta",
-      "ru": "Показать в папке",
-      "id": "Tampilkan di folder",
-      "de": "Im Ordner anzeigen",
-      "tr": "Klasörde göster"
     },
     "Show other coding agents in the island. Slimai adds its entries to each agent's own config: you see the exact change and where the backup goes before anything is written, and uninstalling removes only what Slimai added.": {
       "zh-Hans": "在岛中显示其他编程代理。Slimai 会把自己的条目添加到各代理的配置中：写入之前，你会看到确切的改动和备份位置；卸载只会移除 Slimai 添加的内容。",
@@ -1054,19 +846,6 @@
       "de": "Starte eine neue Muse Code-Sitzung, um die Hooks zu aktivieren.",
       "tr": "Hook'ları kullanmak için yeni bir Muse Code oturumu başlat."
     },
-    "Sunday": {
-      "zh-Hans": "星期日",
-      "hi": "रविवार",
-      "es": "Domingo",
-      "ar": "الأحد",
-      "fr": "Dimanche",
-      "bn": "রবিবার",
-      "pt-BR": "Domingo",
-      "ru": "Воскресенье",
-      "id": "Minggu",
-      "de": "Sonntag",
-      "tr": "Pazar"
-    },
     "The file is removed.": {
       "zh-Hans": "该文件将被删除。",
       "hi": "फ़ाइल हटा दी जाती है।",
@@ -1079,32 +858,6 @@
       "id": "File dihapus.",
       "de": "Die Datei wurde entfernt.",
       "tr": "Dosya kaldırıldı."
-    },
-    "The image could not be read.": {
-      "zh-Hans": "无法读取图片。",
-      "hi": "छवि पढ़ी नहीं जा सकी।",
-      "es": "No se pudo leer la imagen.",
-      "ar": "تعذّرت قراءة الصورة.",
-      "fr": "L'image n'a pas pu être lue.",
-      "bn": "ছবিটি পড়া যায়নি।",
-      "pt-BR": "Não foi possível ler a imagem.",
-      "ru": "Не удалось прочитать изображение.",
-      "id": "Gambar tidak dapat dibaca.",
-      "de": "Das Bild konnte nicht gelesen werden.",
-      "tr": "Görsel okunamadı."
-    },
-    "The image is too large.": {
-      "zh-Hans": "图片过大。",
-      "hi": "छवि बहुत बड़ी है।",
-      "es": "La imagen es demasiado grande.",
-      "ar": "الصورة كبيرة جدًا.",
-      "fr": "L'image est trop volumineuse.",
-      "bn": "ছবিটি অনেক বড়।",
-      "pt-BR": "A imagem é grande demais.",
-      "ru": "Изображение слишком большое.",
-      "id": "Gambar terlalu besar.",
-      "de": "Das Bild ist zu groß.",
-      "tr": "Görsel çok büyük."
     },
     "The preview is out of date. Nothing was written — review the new diff.": {
       "zh-Hans": "预览已过期。未写入任何内容 — 请查看新的差异。",
@@ -1210,32 +963,6 @@
       "de": "Entfernt nur Slimais Einträge. Deine eigenen Hooks bleiben unverändert.",
       "tr": "Yalnızca Slimai'nun girdilerini kaldırır. Kendi hook'ların korunur."
     },
-    "Thursday": {
-      "zh-Hans": "星期四",
-      "hi": "गुरुवार",
-      "es": "Jueves",
-      "ar": "الخميس",
-      "fr": "Jeudi",
-      "bn": "বৃহস্পতিবার",
-      "pt-BR": "Quinta-feira",
-      "ru": "Четверг",
-      "id": "Kamis",
-      "de": "Donnerstag",
-      "tr": "Perşembe"
-    },
-    "Tuesday": {
-      "zh-Hans": "星期二",
-      "hi": "मंगलवार",
-      "es": "Martes",
-      "ar": "الثلاثاء",
-      "fr": "Mardi",
-      "bn": "মঙ্গলবার",
-      "pt-BR": "Terça-feira",
-      "ru": "Вторник",
-      "id": "Selasa",
-      "de": "Dienstag",
-      "tr": "Salı"
-    },
     "Turn it on once with `hermes plugins enable coucou`, then start a new Hermes session.": {
       "zh-Hans": "先用 `hermes plugins enable coucou` 启用一次，然后开启新的 Hermes 会话。",
       "hi": "इसे एक बार `hermes plugins enable coucou` से चालू करें, फिर Hermes का नया सत्र शुरू करें।",
@@ -1287,19 +1014,6 @@
       "id": "Agen tidak dikenal “{id}”.",
       "de": "Unbekannter Agent \"{id}\".",
       "tr": "Bilinmeyen ajan \"{id}\"."
-    },
-    "Wednesday": {
-      "zh-Hans": "星期三",
-      "hi": "बुधवार",
-      "es": "Miércoles",
-      "ar": "الأربعاء",
-      "fr": "Mercredi",
-      "bn": "বুধবার",
-      "pt-BR": "Quarta-feira",
-      "ru": "Среда",
-      "id": "Rabu",
-      "de": "Mittwoch",
-      "tr": "Çarşamba"
     },
     "Write to {path} failed: {error}": {
       "zh-Hans": "写入 {path} 失败：{error}",
@@ -1379,19 +1093,6 @@
       "de": "stellt eine Frage",
       "tr": "soru soruyor"
     },
-    "lines": {
-      "zh-Hans": "行",
-      "hi": "पंक्तियाँ",
-      "es": "líneas",
-      "ar": "أسطر",
-      "fr": "lignes",
-      "bn": "লাইন",
-      "pt-BR": "linhas",
-      "ru": "строк",
-      "id": "baris",
-      "de": "Zeilen",
-      "tr": "satır"
-    },
     "settings.json: {what} has an unexpected type — Slimai has not touched it.": {
       "zh-Hans": "settings.json：{what} 的类型不符合预期 — Slimai 没有修改它。",
       "hi": "settings.json: {what} का प्रकार अपेक्षित नहीं है — Slimai ने इसे नहीं छुआ।",
@@ -1404,19 +1105,6 @@
       "id": "settings.json: {what} bertipe tak terduga — Slimai tidak menyentuhnya.",
       "de": "settings.json: {what} hat einen unerwarteten Typ — Slimai hat nichts verändert.",
       "tr": "settings.json: {what} beklenmeyen bir türde — Slimai bunu değiştirmedi."
-    },
-    "{allowed} allowed, {denied} denied": {
-      "zh-Hans": "允许 {allowed} 次，拒绝 {denied} 次",
-      "hi": "{allowed} अनुमत, {denied} अस्वीकृत",
-      "es": "{allowed} permitidos, {denied} denegados",
-      "ar": "{allowed} مسموح، {denied} مرفوض",
-      "fr": "{allowed} autorisées, {denied} refusées",
-      "bn": "{allowed}টি অনুমোদিত, {denied}টি প্রত্যাখ্যাত",
-      "pt-BR": "{allowed} permitidas, {denied} negadas",
-      "ru": "разрешено: {allowed}, отклонено: {denied}",
-      "id": "{allowed} diizinkan, {denied} ditolak",
-      "de": "{allowed} zugelassen, {denied} abgelehnt",
-      "tr": "{allowed} izin verildi, {denied} reddedildi"
     },
     "{file} isn't UTF-8 text — Slimai won't touch it.": {
       "zh-Hans": "{file} 不是 UTF-8 文本 — Slimai 不会修改它。",
@@ -1457,19 +1145,6 @@
       "de": "{file} ist kein gültiges JSON ({error}). Korrigiere oder verschiebe die Datei und versuche es erneut — Slimai überschreibt sie nicht.",
       "tr": "{file} geçerli JSON değil ({error}). Düzelt veya taşı, ardından tekrar dene — Slimai üzerine yazmayacak."
     },
-    "{h}h {m}m": {
-      "zh-Hans": "{h} 小时 {m} 分钟",
-      "hi": "{h} घं. {m} मि.",
-      "es": "{h} h {m} min",
-      "ar": "{h} س {m} د",
-      "fr": "{h} h {m} min",
-      "bn": "{h} ঘ. {m} মি.",
-      "pt-BR": "{h} h {m} min",
-      "ru": "{h} ч {m} мин",
-      "id": "{h} j {m} mnt",
-      "de": "{h} Std. {m} Min.",
-      "tr": "{h} sa {m} dk"
-    },
     "{name} wasn't written by Slimai — Slimai has not touched it.": {
       "zh-Hans": "{name} 不是由 Slimai 写入的 — Slimai 没有修改它。",
       "hi": "{name} Slimai ने नहीं लिखा था — Slimai ने इसे नहीं छुआ।",
@@ -1508,32 +1183,6 @@
       "id": "{n} tersedia",
       "de": "{n} verfügbar",
       "tr": "{n} kullanılabilir"
-    },
-    "{n}h": {
-      "zh-Hans": "{n} 小时",
-      "hi": "{n} घं.",
-      "es": "{n} h",
-      "ar": "{n} س",
-      "fr": "{n} h",
-      "bn": "{n} ঘ.",
-      "pt-BR": "{n} h",
-      "ru": "{n} ч",
-      "id": "{n} j",
-      "de": "{n} Std.",
-      "tr": "{n} sa"
-    },
-    "{n}m": {
-      "zh-Hans": "{n} 分钟",
-      "hi": "{n} मि.",
-      "es": "{n} min",
-      "ar": "{n} د",
-      "fr": "{n} min",
-      "bn": "{n} মি.",
-      "pt-BR": "{n} min",
-      "ru": "{n} мин",
-      "id": "{n} mnt",
-      "de": "{n} Min.",
-      "tr": "{n} dk"
     },
     "{path} changed since the preview. Nothing was written — review the new diff.": {
       "zh-Hans": "{path} 在预览后已被修改。未写入任何内容 — 请查看新的差异。",

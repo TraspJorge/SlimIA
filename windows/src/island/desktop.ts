@@ -20,8 +20,6 @@ const WINDOW = "mochi";
 export interface DesktopHost {
   /** Shows the island (compact) if it is hidden. */
   reveal(): void;
-  /** Right-click on the desktop Mochi: the wardrobe, or back. */
-  wardrobeFromDesktop(): void;
   /** Three pokes on the desktop Mochi. */
   dizzyFromDesktop(): void;
 }
@@ -74,7 +72,6 @@ export class DesktopLink {
       this.onDropped(e.from, e.home),
     );
     await onEvent<null>(DESKTOP_EVENTS.home, () => void this.controller.flyHome());
-    await onEvent<null>(DESKTOP_EVENTS.wardrobe, () => this.host.wardrobeFromDesktop());
     await onEvent<null>(DESKTOP_EVENTS.dizzy, () => this.host.dizzyFromDesktop());
     // The window's page (re)loaded: it knows nothing yet.
     await onEvent<null>(DESKTOP_EVENTS.ready, () => {
@@ -167,7 +164,7 @@ export class DesktopLink {
   private push() {
     const snapshot: DesktopSnapshot = {
       state: State.effectiveState,
-      outfit: State.wardrobePreview ?? this.seasons.get(parseOutfit(State.settings.mochiOutfit)),
+      outfit: this.seasons.get(parseOutfit(State.settings.mochiOutfit)),
       soundEnabled: State.settings.soundEnabled,
       soundVolume: State.settings.soundVolume,
       paused: State.paused,

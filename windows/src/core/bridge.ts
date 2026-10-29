@@ -5,7 +5,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { emitTo, listen } from "@tauri-apps/api/event";
 import type { Settings } from "./state";
-import type { RecapHistory, RecapPrefs } from "../recap/summary";
 import type { SpotifyState } from "./spotify";
 
 export const IS_TAURI =
@@ -167,19 +166,6 @@ export const Bridge = {
   /** Lets go of every global shortcut while Settings records a new one. */
   shortcutsSuspend: (suspended: boolean) => call<void>("shortcuts_suspend", { suspended }),
 
-  // ── Weekly recap ──────────────────────────────────────────────────────────
-  /** Turns and decisions from `since` (Unix seconds) on, plus the recap prefs. */
-  recapHistory: (since: number) => call<RecapHistory>("recap_history", { since: Math.floor(since) }),
-  recapPrefs: () => call<RecapPrefs>("recap_prefs"),
-  recapSetEnabled: (enabled: boolean) => call<void>("recap_set_enabled", { enabled }),
-  recapSetHideProjects: (hide: boolean) => call<void>("recap_set_hide_projects", { hide }),
-  /** `week` is the Monday (YYYY-MM-DD) the recap opened on its own for. */
-  recapMarkShown: (week: string) => call<void>("recap_mark_shown", { week }),
-  recapClear: () => call<void>("recap_clear"),
-  /** Writes the PNG (a data URL) into Pictures or Downloads; returns its path. */
-  recapSavePng: (data: string, week: string) => callOrThrow<string>("recap_save_png", { data, week }),
-  /** Opens the folder of the image saved last. */
-  recapRevealSaved: () => call<void>("recap_reveal_saved"),
 
   // ── Mochi on the desktop (src-tauri/src/desktop.rs) ───────────────────────
   desktopInfo: () => call<DesktopInfo>("desktop_mochi_info"),

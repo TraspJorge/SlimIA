@@ -96,11 +96,6 @@ export class Island {
   private confusedRecovery: number | null = null;
   private prevViewBeforeConfused: IslandViewName = "overview";
 
-  /** The launch greeting ended, or the island came out of hidden — two of the
-   *  moments the Monday recap may open (see src/recap/recap.ts). */
-  onGreetingDone: (() => void) | null = null;
-  onWake: (() => void) | null = null;
-
   /** Where a press on Mochi started: moving past DRAG_THRESHOLD drags him out. */
   private botPress: { x: number; y: number } | null = null;
 
@@ -113,7 +108,6 @@ export class Island {
     this.root = root;
     this.desktop = new DesktopLink({
       reveal: () => this.reveal(),
-      wardrobeFromDesktop: () => this.wardrobeFromDesktop(),
       dizzyFromDesktop: () => this.handleDizzy(),
     });
     this.build();
@@ -122,7 +116,6 @@ export class Island {
     this.engine.onDizzy = () => this.handleDizzy();
     this.greeting.onComplete = () => {
       this.fsm.greetComplete();
-      this.onGreetingDone?.();
     };
     State.subscribe(() => {
       this.dirty = true;
@@ -238,18 +231,6 @@ export class Island {
       },
       openSettingsWindow: () => void Bridge.openSettingsWindow(),
       blip: () => Sound.play("blip"),
-      chooseOutfit: (selection) => {
-        if (parseOutfit(State.settings.mochiOutfit) === selection) return;
-        State.settings.mochiOutfit = selection;
-        void Bridge.saveSettings(State.settings);
-        Sound.play("pop");
-        this.engine.triggerEmote("proud");
-        State.notify();
-      },
-      previewOutfit: (outfit) => {
-        State.wardrobePreview = outfit;
-        State.notify();
-      },
       keyboard: (on) => {
         if (on) void Bridge.focusWindow(true);
         else if (State.mode === "expanded") void Bridge.focusWindow(false);
@@ -341,7 +322,6 @@ export class Island {
           break;
       }
       State.notify();
-      if (from === "hidden") this.onWake?.();
     };
   }
 
@@ -431,37 +411,6 @@ export class Island {
     this.silentReveal = true;
     this.fsm.reveal();
     this.silentReveal = false;
-  }
-
-  /** Right-click on Mochi: wardrobe open ↔ back to the usual view. */
-  toggleWardrobe() {
-    if (State.paused || State.mode === "hidden") return;
-    // The greeting and the drop sequence draw a Mochi of their own.
-    if (State.mode === "expanded" && (State.view === "greeting")) return;
-    if (State.mode === "expanded" && State.view === "wardrobe") this.setView(State.defaultView());
-    else this.setView("wardrobe");
-  }
-
-  /**
-   * Right-click on the desktop Mochi (macOS openWardrobeFromDesktop): opens the
-   * wardrobe from any state, or goes back if it is already open.
-   */
-  wardrobeFromDesktop() {
-    this.wardrobeAnywhere();
-  }
-
-  /**
-   * The wardrobe from any state — compact or hidden island included — or back
-   * to the usual view if it is already open. The desktop Mochi's right-click
-   * and the wardrobe shortcut (`open-wardrobe`) both land here.
-   */
-  wardrobeAnywhere() {
-    if (State.mode === "expanded" && State.view === "wardrobe") {
-      this.setView(State.defaultView());
-      return;
-    }
-    if (State.paused) return;
-    this.alert("wardrobe");
   }
 
   /** An alert stopped waiting for an answer: let the island auto-close again. */
@@ -614,12 +563,6 @@ export class Island {
       if (e.button === 0 && this.isBotHit(e.clientX, e.clientY)) {
         this.botPress = { x: e.clientX, y: e.clientY };
       }
-      // Right-click on Mochi opens the wardrobe, and closes it again.
-      if (e.button === 2 && this.isBotHit(e.clientX, e.clientY)) {
-        this.cancelBotHover();
-        this.toggleWardrobe();
-        return;
-      }
       if (State.mode !== "expanded") {
         this.fsm.click();
         return;
@@ -628,12 +571,6 @@ export class Island {
         this.cancelBotHover();
         this.engine.slap();
       }
-    });
-
-    // No browser menu over Mochi: his right-click is the wardrobe. Everywhere
-    // else (the chat field) the webview keeps its own menu.
-    this.islandEl.addEventListener("contextmenu", (e) => {
-      if (this.isBotHit(e.clientX, e.clientY)) e.preventDefault();
     });
 
     // Dragging Mochi out of the island puts him on the desktop.
@@ -954,13 +891,11 @@ export class Island {
     }
     // Only the main Mochi is dressed — the one of the main tool's pill (Settings →
     // Active pills): a focused integration pill shows its own colours, unless
-    // the wardrobe is open (BotCanvasView.showOutfit, macOS).
-    // In the wardrobe the hovered outfit swaps in at once, without the drop-in.
-    const inWardrobe = State.mode === "expanded" && State.view === "wardrobe";
+    // (BotCanvasView.showOutfit, macOS).
     const mainFocused = State.focusId == null || State.focusId === State.mainPillId;
-    const showOutfit = mainFocused || State.mode !== "expanded" || inWardrobe;
-    const outfit = State.wardrobePreview ?? this.seasons.get(parseOutfit(State.settings.mochiOutfit));
-    this.engine.setOutfit(showOutfit ? outfit : "none", !inWardrobe);
+    const showOutfit = mainFocused || State.mode !== "expanded";
+    const outfit = this.seasons.get(parseOutfit(State.settings.mochiOutfit));
+    this.engine.setOutfit(showOutfit ? outfit : "none", true);
     // Dances while music plays: always in the compact island, expanded only on
     // the music pill's card (BotCanvasView, macOS). Asked every frame.
     this.engine.setDancing(islandDances({
@@ -1023,8 +958,6 @@ export class Island {
     // Leaving the greeting, however it ends, lets its sound fade out.
     if (this.greetingShown && !greetingActive) this.greeting.leave();
     this.greetingShown = greetingActive;
-    // A wardrobe try-on never outlives the wardrobe.
-    if (State.wardrobePreview && !(expanded && State.view === "wardrobe")) State.wardrobePreview = null;
 
     this.header.sync();
     for (const [name, view] of this.views) {

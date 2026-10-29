@@ -9,7 +9,7 @@ import {
 import type { CodexPlanUsage, PlanUsage } from "./plan";
 import type { FileDiff } from "./diff";
 import type { Bindings } from "./shortcuts";
-import { DEFAULT_OUTFIT, type Outfit } from "../mochi/wardrobe";
+import { DEFAULT_OUTFIT } from "../mochi/wardrobe";
 import { pillColor } from "./pill-colors";
 import { Spotify, musicPlaying } from "./spotify";
 
@@ -205,8 +205,6 @@ class AppState {
    */
   mochiOnDesktop = false;
 
-  /** Outfit shown on Mochi while the pointer rests on a wardrobe button. */
-  wardrobePreview: Outfit | null = null;
 
   lastActivity = performance.now();
 

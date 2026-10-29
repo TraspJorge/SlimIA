@@ -13,9 +13,7 @@ export type IslandViewName =
   | "finished"
   | "confused"
   | "settings"
-  | "greeting"
-  | "recap"
-  | "wardrobe";
+  | "greeting";
 
 export type BotStateName =
   | "idle"
@@ -70,11 +68,6 @@ export const VIEW_LAYOUTS: Record<IslandViewName, ViewLayout> = {
   confused: { height: 160, botX: 76, botY: null, botDiameter: 66, agentMode: "column" },
   settings: { height: 160, botX: 54, botY: null, botDiameter: 46, agentMode: "none" },
   greeting: { height: 150, botX: 320, botY: 90, botDiameter: 0, agentMode: "none" },
-  // Mac: 160. The extra 24 hold the two lines with top agent, project, busiest
-  // day, longest session, permissions and questions, which the Mac card leaves
-  // to the shared image.
-  recap: { height: 184, botX: 62, botY: null, botDiameter: 58, agentMode: "column" },
-  wardrobe: { height: 160, botX: 68, botY: null, botDiameter: 58, agentMode: "none" },
 };
 
 // The upload views above are only the fallback geometry. Once a file is actually

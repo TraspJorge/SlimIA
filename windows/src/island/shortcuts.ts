@@ -2,8 +2,7 @@
 // handleIslandKey from the macOS app.
 //
 // Global shortcuts are caught by Rust and arrive as a `shortcut` event with
-// the action id (the wardrobe goes out as `open-wardrobe` instead, for the
-// wardrobe view to pick up). The in-island keys are read here, while the
+// the action id. The in-island keys are read here, while the
 // island has the keyboard: it takes it for the chat, and when a global
 // shortcut opens it.
 
@@ -24,8 +23,6 @@ export interface ShortcutHost {
   setPinned(on: boolean): void;
   /** Gives the island the keyboard, so the in-island keys work (Mac: makeKey). */
   takeKeyboard(): void;
-  /** The wardrobe from any state, or back if it is open (Island.wardrobeAnywhere). */
-  wardrobeAnywhere(): void;
   /** False where Mochi can't leave the island (GNOME on Wayland). */
   canLeaveIsland(): boolean;
   /** Mochi out to the desktop, or home (DesktopMochiController.flyOutOrHome). */
@@ -132,7 +129,6 @@ export function runGlobalShortcut(host: ShortcutHost, action: string, resume: ()
       host.flyOutOrHome();
       break;
 
-    // wardrobeToggle never comes this way (Rust sends `open-wardrobe`), and
     // attachFrontWindow isn't in this version.
     default:
       break;
@@ -180,13 +176,6 @@ function inTextField(target: EventTarget | null): boolean {
 
 export function registerShortcutHandlers(host: ShortcutHost, resume: () => void) {
   void onEvent<string>("shortcut", (action) => runGlobalShortcut(host, action, resume));
-  // The wardrobe shortcut comes as its own event (shortcuts.rs): it opens the
-  // wardrobe (mochi/wardrobe.ts, views/wardrobe.ts), or closes it again.
-  void onEvent<null>("open-wardrobe", () => {
-    resume();
-    host.wardrobeAnywhere();
-  });
-
   // Capture phase: the chat field stops its own key events from bubbling.
   window.addEventListener(
     "keydown",

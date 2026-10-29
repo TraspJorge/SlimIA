@@ -12,7 +12,6 @@ mod pipe;
 mod platform;
 #[cfg(target_os = "linux")]
 mod portal;
-mod recap;
 mod returns;
 mod session_window;
 mod settings;
@@ -403,7 +402,6 @@ fn status_line_apply(
 
 #[tauri::command]
 fn approval_decision(app: AppHandle, request_id: String, decision: String) {
-    recap::record_decision(&app, &request_id, &decision);
     pipe::answer(&app, &request_id, &decision);
 }
 
@@ -414,8 +412,6 @@ fn approval_answer(
     request_id: String,
     answers: std::collections::HashMap<String, serde_json::Value>,
 ) {
-    // An answered question is not an Allow / Deny: nothing for the recap.
-    recap::forget_request(&app, &request_id);
     pipe::answer_question(&app, &request_id, &answers);
 }
 
@@ -431,7 +427,6 @@ fn approval_ack(app: AppHandle, request_id: String) {
 /// already up. Claude Code falls back to asking in the terminal immediately.
 #[tauri::command]
 fn approval_decline(app: AppHandle, request_id: String) {
-    recap::forget_request(&app, &request_id);
     pipe::decline(&app, &request_id);
 }
 
@@ -648,7 +643,6 @@ pub fn run() {
         })
         .manage(Pending::default())
         .manage(shortcuts::Registry::default())
-        .manage(recap::load())
         .invoke_handler(tauri::generate_handler![
             boot,
             save_settings,
@@ -686,14 +680,6 @@ pub fn run() {
             shortcuts_suspend,
             returns::returns_sessions,
             returns::returns_read,
-            recap::recap_history,
-            recap::recap_prefs,
-            recap::recap_set_enabled,
-            recap::recap_set_hide_projects,
-            recap::recap_mark_shown,
-            recap::recap_clear,
-            recap::recap_save_png,
-            recap::recap_reveal_saved,
             desktop::desktop_mochi_info,
             desktop::desktop_mochi_pick_up,
             desktop::desktop_mochi_carry,

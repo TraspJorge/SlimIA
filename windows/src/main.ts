@@ -10,7 +10,6 @@ import { registerIntegrationHandlers, refreshConfigured } from "./island/integra
 import { registerShortcutHandlers } from "./island/shortcuts";
 import { applySpotify, registerSpotifyHandlers } from "./island/spotify";
 import { SPOTIFY_ID } from "./core/spotify";
-import { Recap } from "./recap/recap";
 import { onLanguageChange, resolveLanguage, setLanguage, systemLanguages } from "./i18n/i18n";
 
 /** Shows the language Settings asks for ("" = the system's, when Slimai has it). */
@@ -61,31 +60,6 @@ async function main() {
     State.paused = on;
   };
 
-  await onEvent<string>("tray", (what) => {
-    switch (what) {
-      case "settings":
-        setPaused(false);
-        island.alert("settings");
-        break;
-      case "open":
-        setPaused(false);
-        island.alert(State.defaultView());
-        break;
-      case "recap":
-        setPaused(false);
-        void Recap.open(island);
-        break;
-      case "wardrobe":
-        setPaused(false);
-        island.alert("wardrobe");
-        break;
-      case "pause":
-        setPaused(!State.paused);
-        if (State.paused) island.fsm.forceHidden();
-        else island.reveal();
-        break;
-    }
-  });
 
   const checkZoom = async () => {
     const dpr = window.devicePixelRatio || 1;
@@ -150,12 +124,6 @@ async function main() {
   if (State.settings.activeIntegrations.includes(SPOTIFY_ID)) {
     void Bridge.spotifyRefresh().then((s) => s && applySpotify(island, s));
   }
-
-  // Monday recap: app start (greeting over), an agent starting work, waking up.
-  const checkRecap = () => void Recap.check(island);
-  island.onGreetingDone = checkRecap;
-  island.onWake = checkRecap;
-  await onEvent<null>("recap-check", checkRecap);
 
   island.launch();
 

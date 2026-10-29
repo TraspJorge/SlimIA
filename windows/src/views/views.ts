@@ -16,11 +16,8 @@ import {
 import { buildDiffCard } from "./diff";
 import { lastTextStep } from "../core/diff";
 import { Bridge } from "../core/bridge";
-import { buildRecap } from "./recap";
-import { buildWardrobe } from "./wardrobe";
 import { buildSpotifyCard, buildSpotifyPill, type SpotifyPillHost } from "./spotify";
 import { SPOTIFY_ID } from "../core/spotify";
-import type { Outfit, OutfitSelection } from "../mochi/wardrobe";
 import { language, t, tl, type Msg } from "../i18n/i18n";
 import type { ViewCommand } from "../island/shortcuts";
 
@@ -45,10 +42,6 @@ export interface ViewActions {
   setAutoClose(seconds: number): void;
   openSettingsWindow(page?: string): void;
   blip(): void;
-  /** Wardrobe click: keeps the outfit ("auto" and "none" included). */
-  chooseOutfit(selection: OutfitSelection): void;
-  /** Wardrobe hover: shows an outfit on Mochi without keeping it; null ends it. */
-  previewOutfit(outfit: Outfit | null): void;
   /** The island takes the keyboard (a text field in a card) or gives it back. */
   keyboard(on: boolean): void;
   /** Something is being typed in a card: the island stays open until it is sent or cleared. */
@@ -772,7 +765,5 @@ export function buildViews(
   map.set("finished", buildFinished(actions));
   map.set("confused", buildConfused());
   map.set("settings", buildSettings(actions));
-  map.set("recap", buildRecap(actions));
-  map.set("wardrobe", buildWardrobe(actions));
   return map;
 }
