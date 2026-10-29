@@ -77,8 +77,6 @@ namespace Coucou {
     }
 
     public class Indicator : Wingpanel.Indicator {
-        private const int ICON_SIZE = 24;
-
         private Gtk.DrawingArea? mochi = null;
         private Gtk.Box? panel = null;
         private Gtk.Label? headline = null;
@@ -97,6 +95,8 @@ namespace Coucou {
         private uint poll_id = 0;
         private uint tick_id = 0;
         private string last_raw = "";
+        private bool blinking = false;
+        private uint blink_id = 0;
 
         public Indicator () {
             Object (code_name: "coucou");
@@ -110,8 +110,15 @@ namespace Coucou {
         public override Gtk.Widget get_display_widget () {
             if (mochi == null) {
                 mochi = new Gtk.DrawingArea ();
-                mochi.set_size_request (ICON_SIZE + 6, ICON_SIZE);
+                mochi.set_size_request (wanted_width (), 28);
                 mochi.draw.connect (draw_mochi);
+                // He blinks now and then; between blinks nothing is redrawn.
+                blink_id = Timeout.add (3600, () => {
+                    blinking = true;
+                    mochi.queue_draw ();
+                    Timeout.add (150, () => { blinking = false; mochi.queue_draw (); return false; });
+                    return true;
+                });
                 refresh ();
                 // The file is tiny: reading it once a second costs nothing.
                 poll_id = Timeout.add_seconds (1, () => { refresh (); return true; });
@@ -244,60 +251,214 @@ namespace Coucou {
                     return true;
                 });
             }
-            if (mochi != null) mochi.queue_draw ();
+            update_size ();
+            if (mochi != null) {
+                mochi.queue_draw ();
+                string hint = mood_text (mood);
+                if (sessions != null && sessions.get_length () > 0) {
+                    var detail = sessions.get_object_element (0).get_string_member_with_default ("detail", "");
+                    if (detail != "") hint = hint + " · " + detail;
+                }
+                mochi.set_tooltip_text (hint);
+            }
             update_panel ();
         }
 
-        // ── The Mochi in the bar ─────────────────────────────────────────────
+        // ── The island in the bar ────────────────────────────────────────────
+        //
+        // The same look as Coucou's compact island: a black capsule, Mochi on the
+        // left (soft grey body, a highlight, two dark eyes that blink), and on the
+        // right a small coloured Mochi for each session.
+
+        private const double INK_R = 0.102;
+        private const double INK_G = 0.078;
+        private const double INK_B = 0.071;
+
+        private static void squircle (Cairo.Context cr, double x, double y, double w, double h, double r) {
+            cr.new_sub_path ();
+            cr.arc (x + w - r, y + r, r, -Math.PI / 2, 0);
+            cr.arc (x + w - r, y + h - r, r, 0, Math.PI / 2);
+            cr.arc (x + r, y + h - r, r, Math.PI / 2, Math.PI);
+            cr.arc (x + r, y + r, r, Math.PI, 3 * Math.PI / 2);
+            cr.close_path ();
+        }
+
+        private static void mini_rgb (Mood m, out double r, out double g, out double b) {
+            switch (m) {
+                case Mood.WORKING: r = 0.231; g = 0.620; b = 1.000; break;
+                case Mood.WAITING: r = 0.961; g = 0.647; b = 0.141; break;
+                case Mood.FINISHED: r = 0.204; g = 0.827; b = 0.600; break;
+                case Mood.ERROR: r = 0.957; g = 0.314; b = 0.369; break;
+                default: r = 0.54; g = 0.56; b = 0.60; break;
+            }
+        }
+
+        private double mochi_radius (double capsule_h) {
+            return capsule_h * 0.37;
+        }
+
+        private int session_count () {
+            return sessions == null ? 0 : (int) uint.min (sessions.get_length (), 4);
+        }
+
+        private int wanted_width () {
+            double r = mochi_radius (24);
+            double w = 7 + r * 2 * 1.12 + 7;
+            int n = session_count ();
+            if (n > 0) {
+                int cols = n > 2 ? 2 : n;
+                w += 5 + cols * 8 + (cols - 1) * 3;
+            }
+            return (int) Math.ceil (w);
+        }
+
+        private void update_size () {
+            if (mochi != null) {
+                mochi.set_size_request (wanted_width (), 28);
+            }
+        }
+
+        private void paint_mochi (Cairo.Context cr, double cx, double cy, double R) {
+            double breath = mood.pulses () ? 0.5 + 0.5 * Math.sin (phase * 0.35) : 0.0;
+            double sc = 1.0 + 0.05 * breath;
+            double rw = R * 1.12 * sc;
+            double rh = R * 0.98 * sc;
+            double alpha = mood == Mood.OFF ? 0.5 : 1.0;
+
+            cr.save ();
+            squircle (cr, cx - rw, cy - rh, rw * 2, rh * 2, rh * 0.84);
+            cr.clip ();
+
+            var body = new Cairo.Pattern.linear (cx + rw * 0.7, cy - rh * 0.85, cx - rw * 0.8, cy + rh * 0.9);
+            body.add_color_stop_rgba (0, 0.929, 0.929, 0.937, alpha);
+            body.add_color_stop_rgba (1, 0.769, 0.773, 0.792, alpha);
+            cr.set_source (body);
+            cr.paint ();
+
+            // The colour of what is going on rises from the bottom, like Mochi's tint.
+            double strength = 0;
+            switch (mood) {
+                case Mood.WORKING: strength = 0.45 + 0.35 * breath; break;
+                case Mood.WAITING: strength = 0.6 + 0.3 * breath; break;
+                case Mood.FINISHED: strength = 0.6; break;
+                case Mood.ERROR: strength = 0.7; break;
+                default: break;
+            }
+            if (strength > 0) {
+                double tr_, tg, tb;
+                mood.rgb (out tr_, out tg, out tb);
+                var tint = new Cairo.Pattern.linear (0, cy + rh, 0, cy - rh);
+                tint.add_color_stop_rgba (0, tr_, tg, tb, 0.85 * strength);
+                tint.add_color_stop_rgba (1, tr_, tg, tb, 0);
+                cr.set_source (tint);
+                cr.paint ();
+            }
+
+            var shade = new Cairo.Pattern.radial (cx, cy, R * 0.15, cx, cy, R * 1.25);
+            shade.add_color_stop_rgba (0, 0, 0, 0, 0);
+            shade.add_color_stop_rgba (0.6, 0, 0, 0, 0);
+            shade.add_color_stop_rgba (1, 0, 0, 0, 0.2);
+            cr.set_source (shade);
+            cr.paint ();
+
+            var light = new Cairo.Pattern.radial (cx + rw * 0.34, cy - rh * 0.46, 0, cx + rw * 0.34, cy - rh * 0.46, R * 0.42);
+            light.add_color_stop_rgba (0, 1, 1, 1, 0.55 * alpha * alpha);
+            light.add_color_stop_rgba (1, 1, 1, 1, 0);
+            cr.set_source (light);
+            cr.paint ();
+            cr.restore ();
+
+            // Eyes.
+            double ex = R * 0.37;
+            double ey = cy - R * 0.12;
+            double look = mood == Mood.WORKING ? Math.sin (phase * 0.22) * R * 0.14 : 0.0;
+            cr.set_source_rgba (INK_R, INK_G, INK_B, alpha);
+            if (mood == Mood.OFF) {
+                cr.set_line_width (1.2);
+                cr.set_line_cap (Cairo.LineCap.ROUND);
+                foreach (double sd in new double[] { -1, 1 }) {
+                    cr.move_to (cx + sd * ex - R * 0.13, ey + R * 0.04);
+                    cr.line_to (cx + sd * ex + R * 0.13, ey + R * 0.04);
+                    cr.stroke ();
+                }
+            } else if (mood == Mood.FINISHED) {
+                cr.set_line_width (1.4);
+                cr.set_line_cap (Cairo.LineCap.ROUND);
+                foreach (double sd in new double[] { -1, 1 }) {
+                    cr.new_sub_path ();
+                    cr.arc (cx + sd * ex, ey + R * 0.1, R * 0.17, Math.PI, 2 * Math.PI);
+                    cr.stroke ();
+                }
+            } else {
+                double erx = mood == Mood.WAITING ? R * 0.17 : R * 0.14;
+                double ery = (mood == Mood.WAITING ? R * 0.27 : R * 0.21) * (blinking ? 0.12 : 1.0);
+                foreach (double sd in new double[] { -1, 1 }) {
+                    cr.save ();
+                    cr.translate (cx + sd * ex + look, ey);
+                    cr.scale (erx, ery);
+                    cr.arc (0, 0, 1, 0, 2 * Math.PI);
+                    cr.restore ();
+                    cr.fill ();
+                }
+            }
+
+            // The badge Mochi wears when you are needed, or when something broke.
+            if (mood == Mood.WAITING || mood == Mood.ERROR) {
+                double br, bg, bb;
+                mood.rgb (out br, out bg, out bb);
+                cr.set_source_rgb (0, 0, 0);
+                cr.arc (cx + rw * 0.92, cy - rh * 0.9, 3.6, 0, 2 * Math.PI);
+                cr.fill ();
+                cr.set_source_rgb (br, bg, bb);
+                cr.arc (cx + rw * 0.92, cy - rh * 0.9, 2.7, 0, 2 * Math.PI);
+                cr.fill ();
+            }
+        }
+
+        private void paint_mini (Cairo.Context cr, double x, double y, Mood m) {
+            double r, g, b;
+            mini_rgb (m, out r, out g, out b);
+            squircle (cr, x, y, 8, 7, 2.8);
+            cr.set_source_rgb (r, g, b);
+            cr.fill ();
+            cr.set_source_rgb (0.063, 0.075, 0.102);
+            cr.arc (x + 2.6, y + 3.1, 0.85, 0, 2 * Math.PI);
+            cr.fill ();
+            cr.arc (x + 5.4, y + 3.1, 0.85, 0, 2 * Math.PI);
+            cr.fill ();
+        }
 
         private bool draw_mochi (Cairo.Context cr) {
             int w = mochi.get_allocated_width ();
             int h = mochi.get_allocated_height ();
-            double size = double.min (w, h) - 6;
-            double breath = mood.pulses () ? 0.5 + 0.5 * Math.sin (phase * 0.35) : 0.0;
-            double scale = 1.0 + 0.06 * breath;
-            double cx = w / 2.0;
-            double cy = h / 2.0;
-            double radius = size / 2.0 * scale;
+            double ch = double.min (h - 4.0, 24.0);
+            double top = (h - ch) / 2.0;
+            double mid = h / 2.0;
+            double width = double.min (w - 1.0, wanted_width () - 1.0);
+            double x0 = (w - width) / 2.0;
 
-            double r, g, b;
-            mood.rgb (out r, out g, out b);
-
-            // Body: a soft squircle.
-            double x = cx - radius, y = cy - radius, d = radius * 2, corner = radius * 0.62;
-            cr.new_sub_path ();
-            cr.arc (x + d - corner, y + corner, corner, -Math.PI / 2, 0);
-            cr.arc (x + d - corner, y + d - corner, corner, 0, Math.PI / 2);
-            cr.arc (x + corner, y + d - corner, corner, Math.PI / 2, Math.PI);
-            cr.arc (x + corner, y + corner, corner, Math.PI, 3 * Math.PI / 2);
-            cr.close_path ();
-            cr.set_source_rgb (r, g, b);
+            // The capsule: black, with the faintest rim.
+            squircle (cr, x0, top, width, ch, ch / 2.0);
+            cr.set_source_rgb (0, 0, 0);
             cr.fill_preserve ();
-            cr.set_source_rgba (0, 0, 0, 0.35);
+            cr.set_source_rgba (1, 1, 1, 0.1);
             cr.set_line_width (1);
             cr.stroke ();
 
-            // Eyes: two dark dots; a waiting Mochi looks wide awake.
-            double eye = mood == Mood.WAITING ? radius * 0.2 : radius * 0.15;
-            double ey = cy - radius * 0.08;
-            cr.set_source_rgb (0.07, 0.07, 0.09);
-            cr.arc (cx - radius * 0.32, ey, eye, 0, 2 * Math.PI);
-            cr.fill ();
-            cr.arc (cx + radius * 0.32, ey, eye, 0, 2 * Math.PI);
-            cr.fill ();
+            double R = mochi_radius (ch);
+            paint_mochi (cr, x0 + 7 + R * 1.12, mid, R);
 
-            // A small badge when you are needed or something went wrong.
-            if (mood == Mood.WAITING || mood == Mood.ERROR) {
-                cr.set_source_rgb (0, 0, 0);
-                cr.arc (cx + radius * 0.95, cy - radius * 0.85, 4.2, 0, 2 * Math.PI);
-                cr.fill ();
-                cr.set_source_rgb (r, g, b);
-                cr.arc (cx + radius * 0.95, cy - radius * 0.85, 3.2, 0, 2 * Math.PI);
-                cr.fill ();
-            }
-            if (mood == Mood.OFF) {
-                // A sleeping Mochi: the eyes are lines.
-                cr.set_source_rgb (0.45, 0.46, 0.50);
+            int n = session_count ();
+            if (n > 0) {
+                int cols = n > 2 ? 2 : n;
+                int rows = n > 2 ? 2 : 1;
+                double gx = x0 + 7 + R * 2 * 1.12 + 5;
+                double gy = mid - (rows * 7 + (rows - 1) * 3) / 2.0;
+                for (int i = 0; i < n; i++) {
+                    var s = sessions.get_object_element (i);
+                    var m = Mood.parse (s.get_string_member_with_default ("state", "idle"));
+                    paint_mini (cr, gx + (i % cols) * 11, gy + (i / cols) * 10, m);
+                }
             }
             return true;
         }
