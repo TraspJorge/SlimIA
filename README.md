@@ -7,9 +7,6 @@ avisa quando termina, deixa você **permitir ou negar** pedidos de permissão se
 
 **Tudo local: nada entra e nada sai do computador.** Não há rede, voz, celular, nuvem nem atualização automática.
 
-> Baseado em [Louis-CFM/coucou](https://github.com/Louis-CFM/coucou) (MIT), reduzido a uma versão para Linux e
-> Windows, só local. O app para Mac, iPhone e Android não está aqui.
-
 ## O que ele faz
 
 | | |
@@ -88,6 +85,5 @@ cargo test --workspace
 
 ## Licença
 
-O **código** é MIT, de Louis Raillé (veja [LICENSE](LICENSE)). O **nome, o personagem e as ilustrações** do projeto
-original **não** são MIT e continuam sendo de Louis Raillé: veja [LICENSE-ASSETS.md](LICENSE-ASSETS.md) antes de
-redistribuir.
+O código é MIT (veja [LICENSE](LICENSE)). O nome, o personagem e as ilustrações têm termos próprios: veja
+[LICENSE-ASSETS.md](LICENSE-ASSETS.md) antes de redistribuir.
