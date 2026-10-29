@@ -148,7 +148,7 @@ namespace SlimIA {
         private const double BPM = 112.0;
 
         // Where the page with the island's own Mochi engine is installed (web/).
-        private const string WEB_PAGE = "/usr/share/coucou-indicator/index.html";
+        private const string WEB_DIR = "/usr/share/coucou-indicator/";
 
         private Gtk.EventBox? capsule = null;
         private Gtk.DrawingArea? cap_draw = null;
@@ -156,6 +156,8 @@ namespace SlimIA {
         private WebKit.WebView? big_view = null;
         private Gtk.EventBox? big_box = null;
         private string last_scene = "";
+        private WebKit.WebView? answer_view = null;
+        private string answer_sent = "";
         private Gtk.Box? panel = null;
         private Gtk.Revealer? reveal = null;
         private Gtk.DrawingArea? big_mochi = null;
@@ -218,7 +220,7 @@ namespace SlimIA {
                 capsule.above_child = true;
                 capsule.set_size_request (wanted_width (), 28);
                 // The island's own Mochi when its page is installed; else a Cairo copy.
-                cap_view = make_view ("", wanted_width (), 28);
+                cap_view = make_view ("index.html", "", wanted_width (), 28);
                 if (cap_view != null) {
                     capsule.add (cap_view);
                 } else {
@@ -387,8 +389,8 @@ namespace SlimIA {
 
         // ── The page with the island's Mochi ─────────────────────────────────
 
-        private WebKit.WebView? make_view (string hash, int w, int h) {
-            if (!FileUtils.test (WEB_PAGE, FileTest.EXISTS)) {
+        private WebKit.WebView? make_view (string page, string hash, int w, int h) {
+            if (!FileUtils.test (WEB_DIR + page, FileTest.EXISTS)) {
                 return null;
             }
             // Nothing is kept: no cookies, no cache, no storage.
@@ -413,9 +415,11 @@ namespace SlimIA {
                 if (ev == WebKit.LoadEvent.FINISHED) {
                     last_scene = "";
                     push_scene ();
+                    answer_sent = "";
+                    push_answer ();
                 }
             });
-            view.load_uri ("file://" + WEB_PAGE + hash);
+            view.load_uri ("file://" + WEB_DIR + page + hash);
             return view;
         }
 
@@ -470,6 +474,19 @@ namespace SlimIA {
             last_scene = scene;
             js (cap_view, "coucou.set(" + scene + ")");
             js (big_view, "coucou.set(" + scene + ")");
+        }
+
+        // The last answer goes to its page as a JSON string; the page draws the markdown.
+        private void push_answer () {
+            if (answer_view == null || answer_body == "" || answer_body == answer_sent) {
+                return;
+            }
+            var node = new Json.Node (Json.NodeType.VALUE);
+            node.set_string (answer_body);
+            var gen = new Json.Generator ();
+            gen.root = node;
+            answer_sent = answer_body;
+            js (answer_view, "coucou.answer(" + gen.to_data (null) + ")");
         }
 
         private void redraw () {
@@ -1378,6 +1395,9 @@ namespace SlimIA {
             if (big_box != null && big_box.get_parent () != null) {
                 big_box.get_parent ().remove (big_box);
             }
+            if (answer_view != null && answer_view.get_parent () != null) {
+                answer_view.get_parent ().remove (answer_view);
+            }
             foreach (var child in panel.get_children ()) {
                 panel.remove (child);
             }
@@ -1393,7 +1413,7 @@ namespace SlimIA {
 
             var top_row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 14);
             if (big_view == null) {
-                big_view = make_view ("#big", 84, 76);
+                big_view = make_view ("index.html", "#big", 84, 76);
                 if (big_view != null) {
                     big_box = new Gtk.EventBox ();
                     big_box.visible_window = false;
@@ -1535,6 +1555,22 @@ namespace SlimIA {
             main.pack_start (label (tr ("Last answer", "Última resposta")
                 + (answer_project != "" ? " · " + answer_project : "")
                 + (when != "" ? " · " + when : ""), "coucou-dim"), false, false, 0);
+            if (answer_view == null) {
+                answer_view = make_view ("answer.html", "", 330, 40);
+                if (answer_view != null) {
+                    // The page says how tall its text is (its title); up to a screenful, then it scrolls.
+                    answer_view.notify["title"].connect (() => {
+                        int want = int.parse (answer_view.title ?? "0");
+                        answer_view.set_size_request (330, int.max (40, int.min (want + 4, 280)));
+                    });
+                    answer_view.show ();
+                }
+            }
+            if (answer_view != null) {
+                main.pack_start (answer_view, false, false, 0);
+                push_answer ();
+                return;
+            }
             var answer = label (answer_body, "coucou-answer", true);
             answer.lines = 7;
             answer.ellipsize = Pango.EllipsizeMode.END;

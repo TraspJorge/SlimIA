@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; background: transparent; overflow: hidden; height: 100%; }
+  body { color: rgba(255,255,255,.82); font: 400 13px/1.5 "Inter", "Noto Sans", sans-serif; }
+  #md { box-sizing: border-box; max-height: 100vh; overflow-y: auto; padding-right: 6px; }
+  #md::-webkit-scrollbar { width: 6px; }
+  #md::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 3px; }
+  #md { overflow-wrap: anywhere; display: flex; flex-direction: column; gap: 6px; }
+  #md p { margin: 0 0 8px; }
+  #md pre { margin: 6px 0; overflow-x: auto; }
+  .md-p { font: 400 13px/1.5 "Inter", "Noto Sans", sans-serif; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .md-h { font: 600 14px "Inter", "Noto Sans", sans-serif; overflow-wrap: anywhere; }
+  .md-h1 { font-weight: 700; font-size: 15px; }
+  .md-code { padding: 1px 5px; border-radius: 4px; background: rgba(255,255,255,.1); font: 400 12px ui-monospace, monospace; }
+  .md-link { color: #60a5fa; text-decoration: underline; }
+  .md-pre { display: flex; align-items: flex-start; gap: 8px; padding: 10px; border: 1px solid rgba(255,255,255,.08); border-radius: 8px; background: rgba(0,0,0,.35); }
+  .md-pre pre { flex: 1 1 auto; min-width: 0; margin: 0; font: 400 12px ui-monospace, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .md-copy { display: none; }
+  .md-item { display: flex; align-items: flex-start; gap: 6px; }
+  .md-bullet { flex: 0 0 auto; min-width: 10px; opacity: .6; }
+  .md-quote { display: flex; align-items: stretch; gap: 8px; opacity: .85; }
+  .md-quote i { flex: 0 0 2px; border-radius: 1px; background: rgba(255,255,255,.3); }
+  .md-rule { width: 100%; border: 0; border-top: 1px solid rgba(255,255,255,.25); }
+</style>
+</head>
+<body>
+<div id="md"></div>
+<script src="answer.js"></script>
+</body>
+</html>

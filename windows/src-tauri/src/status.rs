@@ -26,7 +26,7 @@ const FORGET_AFTER_MS: u64 = 30 * 60 * 1000;
 /// "Finished" is shown this long, then the icon rests.
 const FINISHED_FOR_MS: u64 = 3 * 60 * 1000;
 /// The last answer is cut to this many characters.
-const MAX_ANSWER: usize = 700;
+const MAX_ANSWER: usize = 8000;
 /// Events come in bursts (a tool each fraction of a second): the file is
 /// rewritten at most this often unless the state changes.
 const MIN_GAP: Duration = Duration::from_millis(400);
@@ -545,7 +545,7 @@ mod tests {
     #[test]
     fn the_last_answer_is_cut_short() {
         let mut t = Tracker::default();
-        t.set_answer("p", &"x".repeat(2000), 5);
+        t.set_answer("p", &"x".repeat(MAX_ANSWER + 2000), 5);
         let a = t.snapshot(6).last_answer.unwrap();
         assert_eq!(a.text.chars().count(), MAX_ANSWER + 1);
         t.set_answer("p", "   ", 7);
