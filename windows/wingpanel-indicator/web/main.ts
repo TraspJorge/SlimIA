@@ -38,6 +38,9 @@ let scene: Scene = { front: null, others: [] };
 let hovering = false;
 let hoverSince = 0;
 let lastLove = 0;
+// When the front pill turned to "finished": the rim gets a lap of light, like Mochi's roll.
+let finishedAt = -10;
+let lastFront = "";
 
 function apply(engine: BotEngine, p: PillIn, forMini: boolean) {
   engine.setState(stateOf(p.state));
@@ -48,7 +51,13 @@ function apply(engine: BotEngine, p: PillIn, forMini: boolean) {
 const api = {
   set(next: Scene) {
     scene = next;
-    if (next.front) apply(main, next.front, false);
+    if (next.front) {
+      if (next.front.state === "finished" && lastFront !== "finished") finishedAt = performance.now();
+      lastFront = next.front.state;
+      apply(main, next.front, false);
+    } else {
+      lastFront = "";
+    }
     const keep = new Set<string>();
     for (const p of next.others) {
       keep.add(p.id);
@@ -112,6 +121,22 @@ function pill(x: CanvasRenderingContext2D, X: number, Y: number, W: number, H: n
   x.strokeStyle = "rgba(255,255,255,0.1)";
   x.lineWidth = 1;
   x.stroke();
+  // A bright stretch runs once around the capsule while Mochi rolls (950 ms).
+  const lap = (nowMs - finishedAt) / 950;
+  if (scene.front?.state === "finished" && lap >= 0 && lap < 1) {
+    const L = 2 * (W - H) + Math.PI * H;
+    const e = lap * lap * (3 - 2 * lap);
+    x.save();
+    x.setLineDash([L * 0.3, L]);
+    x.lineDashOffset = -(e * L - L * 0.3);
+    x.strokeStyle = "rgba(52,211,153,0.95)";
+    x.lineWidth = 2;
+    x.lineCap = "round";
+    x.shadowColor = "rgba(52,211,153,0.8)";
+    x.shadowBlur = 4;
+    x.stroke();
+    x.restore();
+  }
   const rim = scene.front ? ALERT_RIM[scene.front.state] : undefined;
   if (rim) {
     const k = 0.5 + 0.5 * Math.sin(nowMs / 1000 * 4.5);
