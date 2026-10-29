@@ -398,7 +398,6 @@ export const THEMES: Record<string, Theme> = {
   },
   chat: { color: "#E07950", cast: [m("#E07950", 58, 0.3, { state: "thinking", roams: false }), m("#F5F6F8", 48, 0.85)] },
   integrations: { color: "#7C5CFF", cast: [m("#7C5CFF", 54, 0.15), m("#22D3EE", 46, 0.55), m("#F7B32B", 42, 0.95)] },
-  phone: { color: "#3DDC84", cast: [m("#3DDC84", 56, 0.25), m("#F5F6F8", 46, 0.8, { outfit: "beanie" })] },
   voice: { color: "#F97316", cast: [m("#F97316", 60, 0.3), m("#F5F6F8", 48, 0.85, { outfit: "roundGlasses" })] },
   shortcuts: { color: "#6366F1", cast: [m("#6366F1", 56, 0.2, { outfit: "sunglasses" }), m("#F5F6F8", 46, 0.8)] },
 };

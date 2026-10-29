@@ -62,20 +62,13 @@ pub fn present(key: &str) -> bool {
 
 // ── Entries only Rust reads and writes ───────────────────────────────────────
 //
-// The phone link's certificate, key and pairing token, the relay's room, end-to-end key and access key,
-// and WhatsApp's gateway address, credential and webhook secret.
+// WhatsApp's gateway address, credential and webhook secret.
 // They are not in KNOWN_KEYS
 // on purpose: the island has `secret_present` / `secret_set` / `secret_clear`
 // for those, and none of the three may be reachable from a webview.
 
 /// Every entry of that kind. Anything outside this list is refused.
 pub const INTERNAL_KEYS: &[&str] = &[
-    "phone-link-cert",
-    "phone-link-key",
-    "phone-link-token",
-    "phone-relay-room",
-    "phone-relay-key",
-    "phone-relay-access",
     // WhatsApp's gateway address, its credential (GOWA's user:password or OpenWA's API key) and
     // the webhook's signing secret: set from Settings through whatsapp_save_gateway, read by Rust only.
     "whatsapp-url",
@@ -116,7 +109,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn the_phone_links_secrets_cannot_be_reached_from_the_island() {
+    fn internal_secrets_cannot_be_reached_from_the_island() {
         // The island's commands go through `get`/`set`/`clear`/`present`, which
         // only know KNOWN_KEYS.
         for key in INTERNAL_KEYS {
@@ -128,19 +121,5 @@ mod tests {
         }
         // And the other way round: a key of the island is not an internal one.
         assert!(set_internal("github-token", "x").is_err());
-    }
-
-    /// Windows Credential Manager caps a secret's size. The phone link stores its certificate (about
-    /// 600 hex characters) and key there, so prove that a secret of that size round-trips through the
-    /// real store. A separate service name: this can never touch a user's real entries.
-    #[cfg(windows)]
-    #[test]
-    fn a_certificate_sized_secret_round_trips_through_credential_manager() {
-        let entry = keyring::Entry::new("fr.louisraille.coucou.test", "phone-link-size-check").unwrap();
-        let big: String = (0..1_200).map(|i| char::from(b"0123456789abcdef"[i % 16])).collect();
-        entry.set_password(&big).expect("Credential Manager refused a certificate-sized secret");
-        let back = entry.get_password().expect("could not read it back");
-        let _ = entry.delete_credential();
-        assert_eq!(back, big);
     }
 }

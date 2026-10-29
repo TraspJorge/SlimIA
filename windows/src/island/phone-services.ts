@@ -1,5 +1,4 @@
-// What the island's service pills show, written as small read-only cards for the phone (docs/ANDROID_LINK.md,
-// "Service cards"). Rust sends a phone only the services its user ticked in Settings -> Android phone; what is built
+// What the island's service pills show, written as small read-only cards for "OK Coucou" (island/voice.ts). What is built
 // here is the most each card can say, kept short on purpose: a headline, why, and three lines.
 //
 // What never goes in a card: an email address or subject (Resend), a payment's description (Stripe), the text of an
