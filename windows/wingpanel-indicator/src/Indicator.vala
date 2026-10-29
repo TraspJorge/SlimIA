@@ -601,6 +601,12 @@ namespace SlimIA {
                     p.detail = s.get_string_member_with_default ("detail", "");
                     p.request = s.get_string_member_with_default ("request", "");
                     p.mood = Mood.parse (s.get_string_member_with_default ("state", "idle"));
+                    // An idle or finished session that nobody touched for two minutes is not shown
+                    // (the file only changes when something happens).
+                    int64 age = GLib.get_real_time () / 1000 - s.get_int_member_with_default ("updatedAt", 0);
+                    if ((p.mood == Mood.IDLE || p.mood == Mood.FINISHED) && age > 2 * 60 * 1000) {
+                        continue;
+                    }
                     parse_hex (s.get_string_member_with_default ("color", "#F5F6F8"), out p.r, out p.g, out p.b);
                     var agent = s.get_string_member_with_default ("agent", "claude");
                     p.kind = agent_name (agent);

@@ -23,8 +23,10 @@ use serde_json::Value;
 const MAX_STEPS: usize = 3;
 /// A session nobody touched for this long is dropped from the file.
 const FORGET_AFTER_MS: u64 = 30 * 60 * 1000;
+/// An idle or finished session leaves the list after this long: it is not doing anything.
+const INACTIVE_FOR_MS: u64 = 2 * 60 * 1000;
 /// "Finished" is shown this long, then the icon rests.
-const FINISHED_FOR_MS: u64 = 3 * 60 * 1000;
+const FINISHED_FOR_MS: u64 = INACTIVE_FOR_MS;
 /// The last answer is cut to this many characters.
 const MAX_ANSWER: usize = 8000;
 /// Events come in bursts (a tool each fraction of a second): the file is
@@ -244,7 +246,10 @@ impl Tracker {
     }
 
     fn snapshot(&mut self, now: u64) -> Snapshot {
-        self.sessions.retain(|_, s| now.saturating_sub(s.updated_at) < FORGET_AFTER_MS);
+        self.sessions.retain(|_, s| {
+            let limit = if matches!(s.state, State::Idle | State::Finished) { INACTIVE_FOR_MS } else { FORGET_AFTER_MS };
+            now.saturating_sub(s.updated_at) < limit
+        });
         let mut sessions: Vec<SessionStatus> = self.sessions.values().cloned().collect();
         // A finished session rests after a while.
         for s in &mut sessions {
@@ -483,6 +488,21 @@ mod tests {
         assert!(t.snapshot(4).sessions.is_empty());
         // Ending a session nobody knows is not news.
         assert!(!ev(&mut t, "SessionEnd", "zzz", 5));
+    }
+
+    #[test]
+    fn an_idle_or_finished_session_leaves_the_list_but_a_busy_one_stays() {
+        let mut t = Tracker::default();
+        ev(&mut t, "UserPromptSubmit", "busy", 1);
+        ev(&mut t, "Stop", "done", 1);
+        ev(&mut t, "SessionStart", "idle", 1);
+        let ids = |t: &mut Tracker, now| {
+            let mut v: Vec<String> = t.snapshot(now).sessions.into_iter().map(|s| s.id).collect();
+            v.sort();
+            v
+        };
+        assert_eq!(ids(&mut t, 1000), ["busy", "done", "idle"]);
+        assert_eq!(ids(&mut t, 1 + INACTIVE_FOR_MS + 1), ["busy"]);
     }
 
     #[test]
