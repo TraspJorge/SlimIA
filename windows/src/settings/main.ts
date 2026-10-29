@@ -698,6 +698,19 @@ function generalSection(): HTMLElement {
     void save();
   });
 
+  const offsetValue = h("span", { class: "hint", style: "min-width:48px", text: `${settings.islandOffsetX ?? 0} px` });
+  const offset = h("input", {
+    type: "range", min: "-600", max: "600", step: "5",
+    value: String(settings.islandOffsetX ?? 0), style: "flex:1 1 auto;min-width:0",
+  }) as HTMLInputElement;
+  offset.addEventListener("input", () => {
+    offsetValue.textContent = `${offset.value} px`;
+  });
+  offset.addEventListener("change", () => {
+    settings.islandOffsetX = Number(offset.value);
+    void save();
+  });
+
   return h(
     "section",
     {},
@@ -728,6 +741,12 @@ function generalSection(): HTMLElement {
       h("label", { text: t("Island lives on") }),
       screen,
     ),
+    h("div", { class: "row" },
+      h("label", { text: t("Island position") }),
+      offset,
+      offsetValue,
+    ),
+    h("div", { class: "hint", text: t("Moves the island along the top edge: left is negative, right is positive. Beside a centred system clock, try about 120.") }),
     h("div", { class: "row" },
       h("label", { text: t("Launch at startup") }),
       toggle(settings.autostart, (v) => { settings.autostart = v; void save(); }),

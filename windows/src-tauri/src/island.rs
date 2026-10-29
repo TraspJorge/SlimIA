@@ -362,7 +362,15 @@ pub fn apply_geometry(app: &AppHandle, pref: &str, collapsed: bool) {
     let (lw, lh) = if collapsed { (STRIP_W, STRIP_H) } else { (PANEL_W, PANEL_H) };
     let pw = (lw * scale).round().max(1.0) as u32;
     let ph = (lh * scale).round().max(1.0) as u32;
-    let x = mp.x + (ms.width as i32 - pw as i32) / 2;
+    // Centred, then moved along the edge by the user's offset (to sit beside a
+    // centred system clock), and kept on the display.
+    let offset = app
+        .try_state::<crate::Shared>()
+        .map(|s| s.settings.lock().unwrap().island_offset_x)
+        .unwrap_or(0);
+    let centred = mp.x + (ms.width as i32 - pw as i32) / 2;
+    let shifted = centred + (offset as f64 * scale).round() as i32;
+    let x = shifted.clamp(mp.x, (mp.x + ms.width as i32 - pw as i32).max(mp.x));
     let y = mp.y;
 
     // GTK never sizes a non-resizable window below its natural size (200 px

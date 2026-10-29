@@ -25,6 +25,9 @@ pub struct Settings {
     pub main_pill: String,
     /// "primary" = the main display, "cursor" = whichever display the mouse is on.
     pub screen: String,
+    /// How far the island is moved along the top edge from the centre, in logical
+    /// pixels: negative to the left, positive to the right (beside a centred clock).
+    pub island_offset_x: i32,
     pub autostart: bool,
     pub hooks_installed: bool,
     /// Show the Claude plan pill (5 h and weekly limits) in the island's header.
@@ -97,6 +100,7 @@ impl Default for Settings {
             active_integrations: Vec::new(),
             main_pill: "integration_claude".into(),
             screen: "primary".into(),
+            island_offset_x: 0,
             autostart: false,
             hooks_installed: false,
             show_plan_in_notch: false,
@@ -374,6 +378,7 @@ mod tests {
   "activeIntegrations": ["integration_notion"],
   "mainPill": "agent_cursor",
   "screen": "cursor",
+  "islandOffsetX": 120,
   "autostart": true,
   "hooksInstalled": true,
   "showPlanInNotch": true,
@@ -475,7 +480,6 @@ mod tests {
     fn a_file_from_before_the_wardrobe_dresses_mochi_for_the_seasons() {
         let loaded = parse(&custom_with("mochiOutfit", None)).unwrap();
         assert_eq!(loaded.mochi_outfit, "auto");
-        assert_eq!(loaded.mochi_outfit, "witchHat");
         assert!(!loaded.sound_enabled);
     }
 
@@ -769,6 +773,7 @@ mod tests {
                 "activeIntegrations",
                 "mainPill",
                 "screen",
+                "islandOffsetX",
                 "autostart",
                 "hooksInstalled",
                 "showPlanInNotch",

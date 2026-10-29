@@ -103,7 +103,7 @@ pub fn prepare_environment() {
     }
 }
 
-/// GNOME on Wayland has no layer-shell and ignores where a regular window asks
+/// GNOME and Pantheon (elementary) on Wayland have no layer-shell and ignore where a regular window asks
 /// to go, so the island lands in the middle of the screen. Through XWayland it
 /// can be placed, and a Dock window survives "show desktop" (Super+D).
 /// An inherited GDK_BACKEND=wayland is overridden too: editors and terminals
@@ -124,7 +124,7 @@ fn prefer_x11_on_gnome() {
 /// would leave GTK with no display at all.
 fn should_prefer_x11(session: &str, desktop: &str, opt: &str, display: &str) -> bool {
     session.eq_ignore_ascii_case("wayland")
-        && desktop.split(':').any(|d| d.eq_ignore_ascii_case("gnome"))
+        && desktop.split(':').any(|d| d.eq_ignore_ascii_case("gnome") || d.eq_ignore_ascii_case("pantheon"))
         && opt != "0"
         && !display.trim().is_empty()
 }
@@ -776,6 +776,7 @@ mod tests {
     fn x11_is_only_preferred_on_gnome_wayland_unless_opted_out() {
         assert!(should_prefer_x11("wayland", "ubuntu:GNOME", "", ":0"));
         assert!(!should_prefer_x11("x11", "ubuntu:GNOME", "", ":0"));
+        assert!(should_prefer_x11("wayland", "Pantheon", "", ":0"));
         assert!(!should_prefer_x11("wayland", "KDE", "", ":0"));
         assert!(!should_prefer_x11("wayland", "GNOME", "0", ":0"));
         // No XWayland: keep the Wayland window rather than no display at all.

@@ -3170,6 +3170,32 @@
       "id": "Tidak ada yang keluar dari komputer ini: Coucou hanya berbicara dengan server di PC ini.",
       "de": "Nichts verlässt diesen Computer: Coucou spricht nur mit Servern auf diesem PC.",
       "tr": "Hiçbir şey bu bilgisayardan çıkmaz: Coucou yalnızca bu bilgisayardaki sunucularla konuşur."
+    },
+    "Island position": {
+      "zh-Hans": "岛的位置",
+      "hi": "आइलैंड की स्थिति",
+      "es": "Posición de la isla",
+      "ar": "موضع الجزيرة",
+      "fr": "Position de l'île",
+      "bn": "আইল্যান্ডের অবস্থান",
+      "pt-BR": "Posição da ilha",
+      "ru": "Положение острова",
+      "id": "Posisi pulau",
+      "de": "Position der Insel",
+      "tr": "Ada konumu"
+    },
+    "Moves the island along the top edge: left is negative, right is positive. Beside a centred system clock, try about 120.": {
+      "zh-Hans": "沿顶部边缘移动岛：负数向左，正数向右。若要靠在居中的系统时钟旁边，可试试 120 左右。",
+      "hi": "आइलैंड को ऊपरी किनारे पर खिसकाता है: बाएँ के लिए ऋणात्मक, दाएँ के लिए धनात्मक। बीच में लगी सिस्टम घड़ी के बगल में रखने के लिए लगभग 120 आज़माएँ।",
+      "es": "Mueve la isla a lo largo del borde superior: negativo a la izquierda, positivo a la derecha. Junto a un reloj del sistema centrado, prueba con unos 120.",
+      "ar": "يحرّك الجزيرة على الحافة العلوية: القيمة السالبة لليسار والموجبة لليمين. بجانب ساعة النظام في المنتصف جرّب نحو 120.",
+      "fr": "Déplace l'île le long du bord supérieur : négatif vers la gauche, positif vers la droite. À côté d'une horloge système centrée, essaie environ 120.",
+      "bn": "আইল্যান্ডকে ওপরের কিনারা বরাবর সরায়: ঋণাত্মক মানে বাঁয়ে, ধনাত্মক মানে ডানে। মাঝখানের সিস্টেম ঘড়ির পাশে রাখতে প্রায় ১২০ চেষ্টা করুন।",
+      "pt-BR": "Move a ilha ao longo da borda superior: negativo para a esquerda, positivo para a direita. Ao lado de um relógio do sistema centralizado, tente cerca de 120.",
+      "ru": "Сдвигает остров вдоль верхнего края: отрицательное значение — влево, положительное — вправо. Рядом с системными часами по центру попробуйте около 120.",
+      "id": "Menggeser pulau di sepanjang tepi atas: negatif ke kiri, positif ke kanan. Di samping jam sistem yang berada di tengah, coba sekitar 120.",
+      "de": "Verschiebt die Insel entlang der oberen Kante: negativ nach links, positiv nach rechts. Neben einer zentrierten Systemuhr probiere etwa 120.",
+      "tr": "Adayı üst kenar boyunca kaydırır: negatif sola, pozitif sağa. Ortalanmış sistem saatinin yanı için yaklaşık 120 deneyin."
     }
   }
 }

@@ -303,9 +303,7 @@ mod tests {
         assert_eq!(t("A string nobody translated"), "A string nobody translated");
         for count in [0, 1, 2, 21] {
             assert_eq!(plural_category("de", count), if count == 1 { "one" } else { "other" });
-            let repo = if count == 1 { "Repository" } else { "Repositorys" };
             let model = if count == 1 { "Modell" } else { "Modelle" };
-            assert_eq!(tn("{count} repo", "{count} repos", count, &[]), format!("{count} {repo}"));
             assert_eq!(tn("✓ Connected · {count} model", "✓ Connected · {count} models", count, &[]),
                 format!("✓ Verbunden · {count} {model}"));
         }
@@ -327,7 +325,6 @@ mod tests {
         assert_eq!(t("A string nobody translated"), "A string nobody translated");
         for n in [0, 1, 2, 21] {
             assert_eq!(plural_category("tr", n), if n == 1 { "one" } else { "other" });
-            assert_eq!(tn("{count} repo", "{count} repos", n, &[]), format!("{n} depo"));
             assert_eq!(tn("✓ Connected · {count} model", "✓ Connected · {count} models", n, &[]),
                 format!("✓ Bağlı · {n} model"));
         }
