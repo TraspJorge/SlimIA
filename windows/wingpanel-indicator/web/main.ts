@@ -95,7 +95,15 @@ function fit(): { w: number; h: number; dpr: number } {
   return { w, h, dpr };
 }
 
-function pill(x: CanvasRenderingContext2D, X: number, Y: number, W: number, H: number) {
+// The rim pulses in the colour of what needs you (the island's own state colours).
+const ALERT_RIM: Record<string, string> = {
+  approval: "245,165,36",
+  question: "34,211,238",
+  error: "244,80,94",
+  ratelimit: "251,146,60",
+};
+
+function pill(x: CanvasRenderingContext2D, X: number, Y: number, W: number, H: number, nowMs: number) {
   const r = H / 2;
   x.beginPath();
   x.roundRect(X, Y, W, H, r);
@@ -104,6 +112,13 @@ function pill(x: CanvasRenderingContext2D, X: number, Y: number, W: number, H: n
   x.strokeStyle = "rgba(255,255,255,0.1)";
   x.lineWidth = 1;
   x.stroke();
+  const rim = scene.front ? ALERT_RIM[scene.front.state] : undefined;
+  if (rim) {
+    const k = 0.5 + 0.5 * Math.sin(nowMs / 1000 * 4.5);
+    x.strokeStyle = `rgba(${rim},${0.35 + 0.55 * k})`;
+    x.lineWidth = 1.2 + 0.8 * k;
+    x.stroke();
+  }
 }
 
 function drawBot(engine: BotEngine, cx: number, cy: number, size: number) {
@@ -135,7 +150,7 @@ function frame(nowMs: number) {
   } else {
     const ch = Math.min(h - 4, 24);
     const top = (h - ch) / 2;
-    pill(ctx, 0.5, top, w - 1, ch);
+    pill(ctx, 0.5, top, w - 1, ch, nowMs);
     drawBot(main, 7 + 10.5, h / 2, 31);
     const n = Math.min(scene.others.length, 4);
     const cols = n > 2 ? 2 : n;

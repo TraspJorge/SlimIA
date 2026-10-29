@@ -350,14 +350,18 @@ pub fn music(state: &impl Serialize) {
 }
 
 /// A permission request was answered (from the island or the bar): its buttons go away.
-pub fn resolve(request_id: &str) {
+/// Answered: Claude goes on working. Not answered (timed out, or handed to the terminal):
+/// the buttons go but the alert stays until the next event, because it still waits for you.
+pub fn resolve(request_id: &str, answered: bool) {
     let changed = {
         let mut guard = TRACKER.lock().unwrap();
         let t = guard.get_or_insert_with(Tracker::default);
         let mut any = false;
         for s in t.sessions.values_mut().filter(|s| !request_id.is_empty() && s.request == request_id) {
             s.request.clear();
-            s.state = State::Working;
+            if answered {
+                s.state = State::Working;
+            }
             any = true;
         }
         any
