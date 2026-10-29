@@ -200,7 +200,10 @@ fn tool_line(payload: &Value) -> String {
     if name.is_empty() {
         return String::new();
     }
-    crate::returns::step_text(name, payload.get("tool_input").unwrap_or(&Value::Null))
+    let line = crate::returns::step_text(name, payload.get("tool_input").unwrap_or(&Value::Null));
+    // One short line: a command of several lines would break the indicator's layout.
+    let one: String = line.split_whitespace().collect::<Vec<_>>().join(" ");
+    clip(&one, 64)
 }
 
 fn now_ms() -> u64 {
@@ -343,6 +346,15 @@ mod tests {
         assert_eq!(t.snapshot(11).sessions[0].steps.len(), 3);
         t.apply("UserPromptSubmit", &json!({ "session_id": "s" }), 12);
         assert!(t.snapshot(13).sessions[0].steps.is_empty());
+    }
+
+    #[test]
+    fn a_step_is_one_short_line_even_for_a_long_multiline_command() {
+        let long = format!("cd /a/b &&\n  cat > x <<'EOF'\n{}\nEOF", "y".repeat(300));
+        let line = tool_line(&json!({ "tool_name": "Bash", "tool_input": { "command": long } }));
+        assert!(!line.contains('\n'));
+        assert!(line.chars().count() <= 65, "{line}");
+        assert!(line.starts_with("Bash · cd /a/b && cat"));
     }
 
     #[test]
