@@ -17,7 +17,7 @@ use serde_json::{json, Map, Value};
 use crate::config_file::{self, FileEdit, Plan};
 use crate::{platform, settings};
 
-/// Marker that identifies a SlamIA entry: the relay's file name.
+/// Marker that identifies a SlimIA entry: the relay's file name.
 const MARKER: &str = "coucou-hook";
 
 // ── The relay command line ────────────────────────────────────────────────────
@@ -154,7 +154,7 @@ impl Agent {
         }
     }
 
-    /// The edits that install (or remove) SlamIA for this agent.
+    /// The edits that install (or remove) SlimIA for this agent.
     fn edits(self, home: &Path, relay: &Relay, install: bool) -> Vec<FileEdit<'static>> {
         let files = self.files(home);
         if let Some(contents) = self.plugin(relay) {
@@ -180,7 +180,7 @@ impl Agent {
     }
 
     /// The change to this agent's JSON config: the new object, or `None` to
-    /// remove a file that is SlamIA's alone. Command lines are built here, up
+    /// remove a file that is SlimIA's alone. Command lines are built here, up
     /// front, so the change itself is pure.
     fn json_change(self, relay: &Relay, install: bool) -> JsonChange {
         match (self, install) {
@@ -236,7 +236,7 @@ impl Agent {
         }
     }
 
-    /// True when the agent's config already routes to SlamIA. Never fails: a
+    /// True when the agent's config already routes to SlimIA. Never fails: a
     /// file we cannot read just reads as "not installed".
     fn installed(self, home: &Path) -> bool {
         let files = self.files(home);
@@ -315,7 +315,7 @@ pub struct AgentStatus {
     pub id: &'static str,
     pub name: &'static str,
     pub installed: bool,
-    /// The file (or files, one per line) SlamIA writes.
+    /// The file (or files, one per line) SlimIA writes.
     pub path: String,
     pub hook_ready: bool,
     /// The island can allow or deny this agent's permission requests.
@@ -369,7 +369,7 @@ fn apply_in(agent: Agent, home: &Path, relay: &Relay, install: bool, fingerprint
 // ── Shared JSON helpers ───────────────────────────────────────────────────────
 
 fn unexpected(what: &str) -> String {
-    crate::i18n::tf("{what} has an unexpected type — SlamIA has not touched it.", &[("what", what)])
+    crate::i18n::tf("{what} has an unexpected type — SlimIA has not touched it.", &[("what", what)])
 }
 
 /// `root[key]` as an object to edit: absent is empty, anything else is refused.
@@ -390,7 +390,7 @@ fn list_at(hooks: &Map<String, Value>, event: &str) -> Result<Vec<Value>, String
     }
 }
 
-/// A command line written by SlamIA for `agent`.
+/// A command line written by SlimIA for `agent`.
 fn is_our_command(command: Option<&Value>, agent: &str) -> bool {
     command
         .and_then(Value::as_str)
@@ -398,7 +398,7 @@ fn is_our_command(command: Option<&Value>, agent: &str) -> bool {
 }
 
 /// Claude-style groups (`{"matcher"?, "hooks": [{"command"}]}`, or a legacy
-/// flat `{"command"}`) without SlamIA's entries for `agent`. A group left
+/// flat `{"command"}`) without SlimIA's entries for `agent`. A group left
 /// empty goes; everything else stays exactly as it was.
 fn without_ours_in_groups(groups: &[Value], agent: &str) -> Vec<Value> {
     groups
@@ -425,8 +425,8 @@ fn without_ours_in_groups(groups: &[Value], agent: &str) -> Vec<Value> {
         .collect()
 }
 
-/// `root` with one SlamIA group per event, built by `group(event)`. Earlier
-/// SlamIA entries for `agent` are replaced; nobody else's are touched.
+/// `root` with one SlimIA group per event, built by `group(event)`. Earlier
+/// SlimIA entries for `agent` are replaced; nobody else's are touched.
 fn groups_install(
     root: &Value,
     agent: &str,
@@ -443,7 +443,7 @@ fn groups_install(
     Ok(root)
 }
 
-/// `root` without any SlamIA group for `agent`; an event left empty goes, and
+/// `root` without any SlimIA group for `agent`; an event left empty goes, and
 /// so does `hooks` when nothing is left in it.
 fn groups_uninstall(root: &Value, agent: &str) -> Result<Value, String> {
     let mut root = root.as_object().cloned().unwrap_or_default();
@@ -514,7 +514,7 @@ fn gemini_install(root: &Value, commands: &[(String, String, u64)]) -> Result<Va
 
 // ── Antigravity — ~/.gemini/config/hooks.json ─────────────────────────────────
 //
-// Hooks are named groups at the top level; SlamIA's is `coucou`. Tool events
+// Hooks are named groups at the top level; SlimIA's is `coucou`. Tool events
 // take matcher groups, lifecycle events take handlers directly; timeouts are
 // in seconds. Merge and removal come from #298 (kobaltgit). The relay answers
 // PreToolUse with "{}" — no decision — never with an allow: Antigravity's own
@@ -541,7 +541,7 @@ fn antigravity_block(relay: &Relay) -> Value {
     Value::Object(block)
 }
 
-/// A `coucou` group SlamIA wrote (it runs the relay as `--agent antigravity`).
+/// A `coucou` group SlimIA wrote (it runs the relay as `--agent antigravity`).
 fn antigravity_is_ours(group: &Value) -> bool {
     let text = group.to_string();
     text.contains(MARKER) && text.contains("--agent antigravity")
@@ -550,13 +550,13 @@ fn antigravity_is_ours(group: &Value) -> bool {
 fn antigravity_install(root: &Value, block: &Value) -> Result<Value, String> {
     let mut root = root.as_object().cloned().unwrap_or_default();
     if root.get("coucou").is_some_and(|g| !antigravity_is_ours(g)) {
-        return Err(crate::i18n::t("A hook group named \"coucou\" that SlamIA did not write is already there — SlamIA has not touched it."));
+        return Err(crate::i18n::t("A hook group named \"coucou\" that SlimIA did not write is already there — SlimIA has not touched it."));
     }
     root.insert("coucou".into(), block.clone());
     Ok(Value::Object(root))
 }
 
-/// Removes SlamIA's group, and only if it is SlamIA's.
+/// Removes SlimIA's group, and only if it is SlimIA's.
 fn antigravity_uninstall(root: &Value) -> Result<Value, String> {
     let mut root = root.as_object().cloned().unwrap_or_default();
     if root.get("coucou").is_some_and(antigravity_is_ours) {
@@ -612,7 +612,7 @@ const CODEX_EVENTS: &[(&str, u64)] = &[
     ("SessionEnd", 3),
 ];
 
-const CODEX_WAITING: &str = "Waiting for your answer in the island (SlamIA)";
+const CODEX_WAITING: &str = "Waiting for your answer in the island (SlimIA)";
 
 fn codex_install(root: &Value, command: &str) -> Result<Value, String> {
     let events = CODEX_EVENTS.iter().map(|(event, timeout)| {
@@ -627,12 +627,12 @@ fn codex_install(root: &Value, command: &str) -> Result<Value, String> {
 
 // ── GitHub Copilot CLI — ~/.copilot/hooks/coucou.json ─────────────────────────
 //
-// A file of SlamIA's own in Copilot's hooks folder: camelCase events, each
+// A file of SlimIA's own in Copilot's hooks folder: camelCase events, each
 // entry `{"type": "command", "bash": …, "timeoutSec": N}`, plus `powershell`
 // on Windows, where Copilot runs that one. The event goes on the command line
 // because Copilot does not put it in the payload. Copilot is fail-closed on
 // permissionRequest: the relay always answers it with valid JSON — "ask" when
-// nobody clicked. Removing the last of SlamIA's entries removes the file.
+// nobody clicked. Removing the last of SlimIA's entries removes the file.
 
 const COPILOT_EVENTS: &[(&str, u64)] = &[
     ("sessionStart", 10),
@@ -688,7 +688,7 @@ fn copilot_uninstall(root: &Value) -> Result<Option<Value>, String> {
             root.insert("hooks".into(), Value::Object(hooks));
         }
     }
-    // Nothing of anyone else's left: the file was SlamIA's, and goes.
+    // Nothing of anyone else's left: the file was SlimIA's, and goes.
     if root.keys().all(|k| k == "version") {
         return Ok(None);
     }
@@ -731,13 +731,13 @@ fn muse_install(root: &Value, commands: &[(String, String, u64)]) -> Result<Valu
 // These agents load code rather than run hook commands. The Mac's plugins
 // start `/bin/sh` on a script at a macOS path; these start the relay itself,
 // at this machine's path, with no shell in between. Every one is
-// fire-and-forget: the agent never waits on SlamIA, and if SlamIA is closed
+// fire-and-forget: the agent never waits on SlimIA, and if SlimIA is closed
 // nothing happens. None of them ever answers a permission: Hermes keeps its
 // approvals (as on the Mac), and Amp's steps come from `tool.result` so the
 // plugin never has to return a verdict from `tool.call`.
 
-/// Every plugin file SlamIA writes says so; only such a file is replaced or removed.
-const GENERATED: &str = "generated by SlamIA";
+/// Every plugin file SlimIA writes says so; only such a file is replaced or removed.
+const GENERATED: &str = "generated by SlimIA";
 
 fn is_our_plugin(text: &str) -> bool {
     text.contains(GENERATED)
@@ -748,7 +748,7 @@ fn plugin_edit(path: PathBuf, content: String, install: bool) -> FileEdit<'stati
     let name = label.clone();
     let edit = config_file::text_edit(label, move |current| match (install, current) {
         (_, Some(text)) if !is_our_plugin(text) => {
-            Err(crate::i18n::tf("{name} wasn't written by SlamIA — SlamIA has not touched it.", &[("name", &name.to_string())]))
+            Err(crate::i18n::tf("{name} wasn't written by SlimIA — SlimIA has not touched it.", &[("name", &name.to_string())]))
         }
         (true, _) => Ok(Some(content.clone())),
         (false, _) => Ok(None),
@@ -756,9 +756,9 @@ fn plugin_edit(path: PathBuf, content: String, install: bool) -> FileEdit<'stati
     FileEdit { path, edit }
 }
 
-const OPENCODE_PLUGIN: &str = r#"// SlamIA plugin for OpenCode — generated by SlamIA.
-// Forwards OpenCode's events to SlamIA's relay (coucou-hook), fire-and-forget:
-// OpenCode never waits on it, and nothing happens when SlamIA is closed.
+const OPENCODE_PLUGIN: &str = r#"// SlimIA plugin for OpenCode — generated by SlimIA.
+// Forwards OpenCode's events to SlimIA's relay (coucou-hook), fire-and-forget:
+// OpenCode never waits on it, and nothing happens when SlimIA is closed.
 import { spawn } from 'node:child_process';
 
 const HOOK = {HOOK};
@@ -854,8 +854,8 @@ export default {
 };
 "#;
 
-const AMP_PLUGIN: &str = r#"// SlamIA plugin for Amp — generated by SlamIA.
-// Forwards Amp's events to SlamIA's relay (coucou-hook), fire-and-forget and
+const AMP_PLUGIN: &str = r#"// SlimIA plugin for Amp — generated by SlimIA.
+// Forwards Amp's events to SlimIA's relay (coucou-hook), fire-and-forget and
 // display only: Amp never waits on it, and it never decides anything for Amp.
 import { spawn } from 'node:child_process';
 
@@ -882,7 +882,7 @@ export default function (amp: any): void {
     forward('UserPromptSubmit', { ...session(e), prompt: typeof e?.message === 'string' ? e.message : '' });
   });
   // A step per tool once it has run: listening to tool.call would mean
-  // returning a verdict for Amp, and SlamIA never makes one.
+  // returning a verdict for Amp, and SlimIA never makes one.
   amp.on('tool.result', (e: any) => {
     forward('PreToolUse', { ...session(e), tool_name: typeof e?.tool === 'string' ? e.tool : '', tool_input: e?.input ?? null });
   });
@@ -890,8 +890,8 @@ export default function (amp: any): void {
 }
 "#;
 
-const HERMES_PLUGIN: &str = r#"# SlamIA plugin for Hermes Agent — generated by SlamIA.
-# Session and tool events go to SlamIA's relay (coucou-hook), fire-and-forget:
+const HERMES_PLUGIN: &str = r#"# SlimIA plugin for Hermes Agent — generated by SlimIA.
+# Session and tool events go to SlimIA's relay (coucou-hook), fire-and-forget:
 # Hermes never waits on it, and keeps every approval decision to itself.
 import json, os, subprocess, threading
 
@@ -962,7 +962,7 @@ def register(ctx):
 
 const HERMES_PLUGIN_YAML: &str = r#"name: coucou
 version: "1.0"
-description: SlamIA island integration — generated by SlamIA
+description: SlimIA island integration — generated by SlimIA
 "#;
 
 #[cfg(test)]
@@ -1222,7 +1222,7 @@ mod tests {
         assert_eq!(installed["hooks"]["PermissionRequest"][0]["hooks"][0]["timeout"], 120_000);
         assert_eq!(installed["hooks"]["PreToolUse"][0]["matcher"], "*");
         assert!(installed["hooks"]["Stop"][0]["hooks"][0]["command"].as_str().unwrap().ends_with("--agent muse Stop"));
-        // Only SlamIA's hooks go; the file and its schema_version stay.
+        // Only SlimIA's hooks go; the file and its schema_version stay.
         assert_eq!(removed.unwrap(), json!({ "schema_version": 1 }));
         let _ = std::fs::remove_dir_all(home);
 
@@ -1274,7 +1274,7 @@ mod tests {
         std::fs::write(&file, "export const Mine = async () => ({});\n").unwrap();
         for install in [true, false] {
             let err = config_file::preview(&Agent::OpenCode.edits(&home, &linux(), install)).unwrap_err();
-            assert!(err.contains("wasn't written by SlamIA"), "{err}");
+            assert!(err.contains("wasn't written by SlimIA"), "{err}");
         }
         assert_eq!(std::fs::read_to_string(&file).unwrap(), "export const Mine = async () => ({});\n");
         let _ = std::fs::remove_dir_all(home);

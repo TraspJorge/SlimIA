@@ -1,4 +1,4 @@
-// SlamIA for Windows — app wiring and the commands the island calls.
+// SlimIA for Windows — app wiring and the commands the island calls.
 
 mod agent_hooks;
 mod agents;
@@ -122,7 +122,7 @@ fn set_system_languages(app: AppHandle, languages: Vec<String>) {
 fn language_changed(app: &AppHandle) {
     tray::retitle(app);
     if let Some(window) = app.get_webview_window(HUB_LABEL) {
-        let _ = window.set_title("SlamIA");
+        let _ = window.set_title("SlimIA");
     }
 }
 
@@ -308,7 +308,7 @@ fn hooks_status() -> HookStatus {
     hooks::status()
 }
 
-/// Pill ID → whether that agent's hooks reach SlamIA. Read-only.
+/// Pill ID → whether that agent's hooks reach SlimIA. Read-only.
 #[tauri::command]
 fn agent_hooks_status() -> std::collections::HashMap<String, bool> {
     agent_hooks::status()
@@ -477,11 +477,11 @@ fn settings_page_url(app: &AppHandle) -> WebviewUrl {
     WebviewUrl::App("settings.html".into())
 }
 
-/// The SlamIA window (Flow dictation, the Notetaker and every setting of the
+/// The SlimIA window (Flow dictation, the Notetaker and every setting of the
 /// island), labelled "settings" since it grew out of the settings window.
 pub const HUB_LABEL: &str = "settings";
 
-/// The SlamIA window is created hidden at launch and only ever shown and
+/// The SlimIA window is created hidden at launch and only ever shown and
 /// hidden afterwards. A WebView2 window created later — on the main thread or
 /// not — silently comes up blank in this app, so the window that works is the
 /// one that exists before the island's webview does.
@@ -489,7 +489,7 @@ fn create_settings_window(app: &AppHandle) {
     let url = settings_page_url(app);
     match WebviewWindowBuilder::new(app, HUB_LABEL, url)
         .additional_browser_args(BROWSER_ARGS)
-        .title("SlamIA")
+        .title("SlimIA")
         .inner_size(1100.0, 720.0)
         .min_inner_size(820.0, 560.0)
         .resizable(true)
@@ -514,11 +514,11 @@ fn create_settings_window(app: &AppHandle) {
                 _ => {}
             });
         }
-        Err(err) => log::line(format!("SlamIA window failed: {err}")),
+        Err(err) => log::line(format!("SlimIA window failed: {err}")),
     }
 }
 
-/// Whether the SlamIA window is on screen (shown and not minimised). Its page
+/// Whether the SlimIA window is on screen (shown and not minimised). Its page
 /// animates its canvases only then (hub/hero.ts): WebKitGTK can keep
 /// `document.visibilityState` at "visible" for a hidden window, and its
 /// animation loop then kept a core busy with the window closed (#792).
@@ -545,11 +545,11 @@ pub fn show_settings_window(app: &AppHandle) {
     show_hub(app, Some("general"));
 }
 
-/// Shows the SlamIA window, on `page` when given ("dictation", "notes",
+/// Shows the SlimIA window, on `page` when given ("dictation", "notes",
 /// "settings", "general", "shortcuts"…).
 pub fn show_hub(app: &AppHandle, page: Option<&str>) {
     let Some(win) = app.get_webview_window(HUB_LABEL) else {
-        log::line("SlamIA window missing");
+        log::line("SlimIA window missing");
         return;
     };
     if let Some(page) = page {
@@ -561,10 +561,10 @@ pub fn show_hub(app: &AppHandle, page: Option<&str>) {
     set_hub_shown(&win, true);
 }
 
-/// The argument the login item starts SlamIA with.
+/// The argument the login item starts SlimIA with.
 const AUTOSTART_ARG: &str = "--autostart";
 
-/// SlamIA started with the computer, not opened by the user: the window stays hidden.
+/// SlimIA started with the computer, not opened by the user: the window stays hidden.
 pub fn launched_at_login() -> bool {
     std::env::args().any(|a| a == AUTOSTART_ARG)
 }
@@ -626,7 +626,7 @@ pub fn run() {
             }
             match shortcuts::from_args(&argv) {
                 Some(action) => shortcuts::dispatch(app, action),
-                // Opening SlamIA again (its shortcut, the Start menu) shows its window.
+                // Opening SlimIA again (its shortcut, the Start menu) shows its window.
                 None => show_hub(app, None),
             }
         }))
@@ -727,7 +727,7 @@ pub fn run() {
             gate.set_active(true);
             island::spawn_cursor_poll(handle.clone(), gate.clone());
 
-            log::line(format!("--- SlamIA {} started ---", env!("CARGO_PKG_VERSION")));
+            log::line(format!("--- SlimIA {} started ---", env!("CARGO_PKG_VERSION")));
             hooks::ensure_hook_exe(&handle);
             status::reset();
             pipe::start(handle.clone());
@@ -735,7 +735,7 @@ pub fn run() {
             shortcuts::apply(&handle, &loaded.shortcuts);
             // New versions: nothing goes to GitHub until the user agrees (update.rs).
             if loaded.autostart {
-                // Login items written before 0.5 start SlamIA without --autostart:
+                // Login items written before 0.5 start SlimIA without --autostart:
                 // writing it again adds it, so the window stays hidden at login.
                 let _ = handle.autolaunch().enable();
             }
@@ -745,7 +745,7 @@ pub fn run() {
             Ok(())
         })
         .build(tauri::generate_context!())
-        .expect("error while building SlamIA")
+        .expect("error while building SlimIA")
         .run(|_app, _event| {});
 }
 

@@ -1,4 +1,4 @@
-// The SlamIA window: a sidebar with the Chat page (what Claude answered) and the
+// The SlimIA window: a sidebar with the Chat page (what Claude answered) and the
 // island's settings, and the page on the right, under its coloured band.
 // Port of FlowHub.swift, without the dictation pages: this build has no voice.
 
@@ -85,7 +85,7 @@ export async function startHub(root: HTMLElement, opts: HubOptions) {
   // ── The sidebar ──
   const side = h("nav", { class: "hub-side" });
   const logo = h("canvas", {});
-  side.append(h("div", { class: "hub-brand" }, logo, h("span", { text: "SlamIA" })));
+  side.append(h("div", { class: "hub-brand" }, logo, h("span", { text: "SlimIA" })));
   liveMochi(logo as HTMLCanvasElement);
   for (const p of PAGES) {
     const b = h("button", { class: "hub-item", onclick: () => void show(p.id) });
@@ -93,7 +93,7 @@ export async function startHub(root: HTMLElement, opts: HubOptions) {
     items.set(p.id, b);
     side.append(b);
   }
-  side.append(h("div", { class: "spacer" }), h("div", { class: "hub-version", text: `SlamIA ${opts.version}` }));
+  side.append(h("div", { class: "spacer" }), h("div", { class: "hub-version", text: `SlimIA ${opts.version}` }));
 
   clear(root);
   root.append(side, h("main", { class: "hub-panel" }, scroll));

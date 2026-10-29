@@ -1,4 +1,4 @@
-// The SlamIA window (settings.html): Flow dictation, the Notetaker and, under
+// The SlimIA window (settings.html): Flow dictation, the Notetaker and, under
 // Notch, every setting of the island — the place where anything that writes to
 // disk is confirmed. The window's frame and the Flow pages live in ../hub; the
 // island's settings are drawn here, one Notch page at a time.
@@ -69,7 +69,7 @@ const HOOKS_CHANGE: Change = {
   preview: Bridge.hooksPreview,
   apply: Bridge.hooksApply,
   get installText() { return t("This is exactly what will change in your settings.json. Your own hooks are left untouched."); },
-  get removeText() { return t("This removes SlamIA's entries only. Your own hooks are left untouched."); },
+  get removeText() { return t("This removes SlimIA's entries only. Your own hooks are left untouched."); },
   get installButton() { return t("Back up and write"); },
   get removeButton() { return t("Back up and remove"); },
   done: (backup) => backup
@@ -165,7 +165,7 @@ function claudeSection(status: HookStatus): HTMLElement {
       h("div", {
         class: "hint",
         text: status.installed
-          ? t("SlamIA is hooked into your Claude Code sessions. Tool calls, questions and permission requests show up in the island, and you can answer them there.")
+          ? t("SlimIA is hooked into your Claude Code sessions. Tool calls, questions and permission requests show up in the island, and you can answer them there.")
           : t("Install the hooks to see your Claude Code sessions in the island and approve permissions without leaving what you are doing."),
       }),
       h("div", { class: "row" },
@@ -182,7 +182,7 @@ function claudeSection(status: HookStatus): HTMLElement {
     if (!status.hookReady) {
       body.append(h("div", {
         class: "notice warn",
-        text: t("coucou-hook.exe is not in place yet. Restart SlamIA; if it still fails, build it with `cargo build -p coucou-hook`."),
+        text: t("coucou-hook.exe is not in place yet. Restart SlimIA; if it still fails, build it with `cargo build -p coucou-hook`."),
       }));
     }
 
@@ -346,7 +346,7 @@ function generalSection(): HTMLElement {
 
 /**
  * Settings → General → Language, as on the Mac: "System" follows the
- * system's language when SlamIA has it (else English), or one of the ten.
+ * system's language when SlimIA has it (else English), or one of the ten.
  * Both windows and the tray switch in place, without a restart.
  */
 function languageRow(): HTMLElement {
@@ -378,7 +378,7 @@ function applyLanguage() {
 
 function applyDirection() {
   document.documentElement.dir = isRtl() ? "rtl" : "ltr";
-  document.title = "SlamIA";
+  document.title = "SlimIA";
 }
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
@@ -439,7 +439,7 @@ async function render() {
   if (notchPage === "general") {
     root.append(h("div", {
       class: "hint",
-      text: t("Nothing leaves this computer: SlamIA only talks to servers on this PC."),
+      text: t("Nothing leaves this computer: SlimIA only talks to servers on this PC."),
     }));
   }
 }

@@ -6,7 +6,7 @@
 //
 // Claude Code is read here, with the Mac's own rule. Every other agent is read
 // by agents.rs — the code that writes their configs is the one source of truth
-// for where those files are and what SlamIA's entries look like, so the pill
+// for where those files are and what SlimIA's entries look like, so the pill
 // and Settings → Agents always agree.
 
 use std::collections::HashMap;
@@ -17,7 +17,7 @@ use serde_json::Value;
 
 /// Port of `coucouHooksPresent(inSettings:)` (ClaudeHookDetection.swift): true
 /// when a parsed `~/.claude/settings.json` routes Claude Code's SessionStart
-/// events to SlamIA. The command text is what tells: SlamIA's relay here is
+/// events to SlimIA. The command text is what tells: SlimIA's relay here is
 /// `coucou-hook`, the Mac's is `~/.claude/coucou/nb-hook` (or NotchBuddy in the
 /// App Store build), so a settings file shared between machines reads the same.
 pub fn claude_hooks_present(settings: &Value) -> bool {

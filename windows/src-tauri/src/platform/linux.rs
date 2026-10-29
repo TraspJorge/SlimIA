@@ -90,7 +90,7 @@ fn xdg_user_dir(text: &str, key: &str, home: &Path) -> Option<PathBuf> {
 /// keeps its plugin registry in ~/.cache/gstreamer-1.0 by default — the same
 /// file the system's GStreamer uses. The AppImage is mounted somewhere new on
 /// every launch, so each launch would rewrite the system's registry with
-/// plugin paths that vanish once SlamIA quits. Give ours its own file.
+/// plugin paths that vanish once SlimIA quits. Give ours its own file.
 pub fn prepare_environment() {
     prefer_x11_on_gnome();
     follow_gnome_text_scaling();

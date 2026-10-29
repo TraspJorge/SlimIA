@@ -1,45 +1,93 @@
-# PetAI-coucou: Windows and Linux, local only
+# SlimIA
 
-A tiny animated friend (Mochi) at the top of your screen that keeps an eye on your AI coding agent sessions
-(Claude Code, Codex, Gemini CLI, Cursor and others). You see what the agents do and answer, you get told when
-they finish, you approve permissions and answer their questions, and the **Chat** page of its window shows
-what Claude answered, like the panel of the VS Code extension. No voice, no network.
+Um bichinho animado (o **Mochi**) que fica na barra superior do seu computador e acompanha o que o Claude Code, o
+Codex, o Gemini CLI, o Cursor e outros agentes de código estão fazendo. Ele mostra o que o agente está fazendo,
+avisa quando termina, deixa você **permitir ou negar** pedidos de permissão sem abrir o terminal, controla o
+**Spotify** e tem uma página de **Chat** com o que o Claude respondeu, como o painel da extensão do VS Code.
 
-This branch is a trimmed copy of [Louis-CFM/coucou](https://github.com/Louis-CFM/coucou) (MIT) that keeps only the
-Windows and Linux app (Tauri 2: Rust in `windows/src-tauri`, TypeScript in `windows/src`), and **never goes to the network**.
+**Tudo local: nada entra e nada sai do computador.** Não há rede, voz, celular, nuvem nem atualização automática.
 
-## What is different from upstream
+> Baseado em [Louis-CFM/coucou](https://github.com/Louis-CFM/coucou) (MIT), reduzido a uma versão para Linux e
+> Windows, só local. O app para Mac, iPhone e Android não está aqui.
 
-**Nothing comes in.** No phone link (no TLS server, no local-network announcement, no relay), no WhatsApp gateway,
-no port. Only the local pipe the agents' hooks use listens, on this computer. Approving, denying and answering an
-agent's question still work, from the island.
+## O que ele faz
 
-**Nothing goes out.**
-- The program has no HTTP client at all. The windows' content security policy allows no outside address.
-- Removed: automatic updates and "What's new", every chat (cloud and local models, the file drop that fed it), the
-  service pills (GitHub, GitLab, Gitea, Stripe, Vercel, n8n, Resend, Notion, Cal.com), « OK Coucou », the Codex plan
-  gauge (it started `codex app-server`) and Spotify's cover download.
-- **No voice:** no dictation, no notes of calls, no microphone, no speech model.
-- Kept: the Mochi and all its animations, the agents' pills with their live steps, the alert and sound when something
-  finishes, approvals and the agents' questions answered from the island, the **Chat** page that reads Claude Code's
-  conversations from `~/.claude/projects`, the Claude plan gauge read from Claude Code's status line, the weekly recap
-  and Spotify's local controls.
-- A second lock, from the system: [windows/firewall/](windows/firewall/README.md).
+| | |
+|---|---|
+| **Mochi na barra** | Uma cápsula na barra superior com o Mochi e mini-Mochis para os outros agentes e o Spotify. Ele pensa, trabalha, pede permissão, faz pergunta, comemora, erra, cansa com o limite de uso e dorme, com as animações da ilha original. Os olhos seguem o mouse. |
+| **Permitir / Negar** | Quando o Claude Code pede permissão, o Mochi pula e a borda pulsa em laranja até você decidir. Clique na cápsula e use **Permitir** ou **Negar**. |
+| **Avisos** | Som e animação quando um agente termina. |
+| **Passos ao vivo** | O popup mostra as últimas etapas do agente (`Edit · main.rs`) e a última resposta dele. |
+| **Spotify** | Música atual, anterior, play/pause e próxima, direto no popup. Botão do meio na cápsula dá play/pause; a roda troca entre agentes e Spotify. |
+| **Chat** | Página da janela que lê as conversas do Claude Code em `~/.claude/projects` (somente leitura). **Limpar lista** só esconde as conversas antigas da tela, sem apagar nada. |
 
-The macOS, iPhone and Android apps and their CI are not here.
+As perguntas de múltipla escolha do Claude Code (`AskUserQuestion`) **não** são respondidas pela barra: caem no
+terminal.
 
-## Build
+## Garantias de ser local
 
-```
+- **Nada entra:** não há servidor, porta, link com celular nem WhatsApp. Só o canal local (pipe) que os hooks dos
+  agentes usam escuta, neste computador.
+- **Nada sai:** o programa não tem cliente HTTP. A política de conteúdo das janelas não permite nenhum endereço de
+  fora, e a página do Mochi na barra roda num WebKit efêmero que só abre o próprio arquivo.
+- **Sem voz:** sem ditado, sem microfone, sem modelo de fala.
+- **Segunda trava, pelo sistema:** [windows/firewall/](windows/firewall/README.md).
+- O indicador da barra só lê um arquivo local (`~/.local/share/coucou/status.json`) e só executa o app com
+  `--shortcut openChat`, `--spotify <ação>` e `--decide allow|deny <pedido>`.
+
+## Instalar (Linux, testado no elementary OS 8 / Pantheon)
+
+Precisa de Rust, Node 20+ e, para o indicador da barra: `meson`, `valac`, `libwingpanel-dev`,
+`libwebkit2gtk-4.1-dev`, `libgee-0.8-dev`, `libjson-glib-dev`.
+
+```sh
 cd windows
 npm install
-npm run tauri dev
+npx tauri build --no-bundle          # gera windows/target/release/coucou
+GDK_BACKEND=x11 ./target/release/coucou
 ```
 
-Linux needs the Tauri system libraries (webkit2gtk 4.1 and friends); see [windows/README.md](windows/README.md).
-`npm test` runs the TypeScript tests, `cargo test` in `windows/src-tauri` the Rust ones. There is no ready-made installer.
+1. Abra **Configurações → Agentes** e instale o hook do Claude Code (e dos outros agentes que usar).
+2. Em **Configurações → Integrações**, ligue o **Spotify** se quiser os controles.
+3. Para o Mochi na barra superior do Pantheon:
 
-## License
+```sh
+cd windows/wingpanel-indicator
+./install.sh        # pede sua senha pelo diálogo do sistema e reinicia a barra
+./uninstall.sh      # para tirar
+```
 
-Code: MIT (see [LICENSE](LICENSE)). The Coucou name, Mochi and the sounds belong to Louis Raillé
-([LICENSE-ASSETS.md](LICENSE-ASSETS.md)): replace them before you redistribute under another name.
+Com o indicador instalado, a janela da ilha **não é mostrada**: o app segue rodando por trás (recebe os eventos
+e executa suas respostas) e o Mochi aparece só na barra. Em outros desktops, sem o indicador, a ilha aparece
+no topo da tela como no projeto original.
+
+No **Windows** o app usa a ilha no topo da tela. O build para Windows está no código, mas **não foi testado**
+nesta versão.
+
+## Estrutura
+
+```
+windows/
+  src/                  front-end (TypeScript): ilha e janela (Chat, Geral, Agentes, Integrações)
+  src-tauri/            backend (Rust): hooks, canal local, Spotify, status.json
+  hook/                 coucou-hook: o relé que os agentes chamam
+  wingpanel-indicator/  indicador da barra (Vala + página do Mochi em web/)
+  firewall/             scripts para bloquear a rede pelo sistema
+```
+
+Os nomes internos continuam `coucou` (comando, pasta `~/.config/coucou`, `coucou-hook`) para não quebrar hooks
+já instalados nem configurações.
+
+## Testes
+
+```sh
+cd windows
+npx tsc --noEmit && npm test
+cargo test --workspace
+```
+
+## Licença
+
+O **código** é MIT, de Louis Raillé (veja [LICENSE](LICENSE)). O **nome, o personagem e as ilustrações** do projeto
+original **não** são MIT e continuam sendo de Louis Raillé: veja [LICENSE-ASSETS.md](LICENSE-ASSETS.md) antes de
+redistribuir.

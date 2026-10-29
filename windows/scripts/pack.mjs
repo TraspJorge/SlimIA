@@ -22,22 +22,22 @@ const PACKAGES = {
     {
       dir: "nsis",
       suffix: "-setup.exe",
-      names: [`SlamIA-Windows-${version}-setup.exe`, "SlamIA-Windows-setup.exe"],
+      names: [`SlimIA-Windows-${version}-setup.exe`, "SlimIA-Windows-setup.exe"],
     },
     {
       dir: "msi",
       suffix: ".msi",
-      names: [`SlamIA-Windows-${version}.msi`, "SlamIA-Windows.msi"],
+      names: [`SlimIA-Windows-${version}.msi`, "SlimIA-Windows.msi"],
     },
   ],
   linux: [
     {
       dir: "appimage",
       suffix: ".AppImage",
-      names: [`SlamIA-Linux-${version}-${arch}.AppImage`, `SlamIA-Linux-${arch}.AppImage`],
+      names: [`SlimIA-Linux-${version}-${arch}.AppImage`, `SlimIA-Linux-${arch}.AppImage`],
     },
-    { dir: "deb", suffix: ".deb", names: [`SlamIA-Linux-${version}-${debArch}.deb`] },
-    { dir: "rpm", suffix: ".rpm", names: [`SlamIA-Linux-${version}-${arch}.rpm`] },
+    { dir: "deb", suffix: ".deb", names: [`SlimIA-Linux-${version}-${debArch}.deb`] },
+    { dir: "rpm", suffix: ".rpm", names: [`SlimIA-Linux-${version}-${arch}.rpm`] },
   ],
 };
 

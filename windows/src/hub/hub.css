@@ -1,6 +1,6 @@
-/* The SlamIA window: an OLED-black sidebar, a dark panel holding the pages,
+/* The SlimIA window: an OLED-black sidebar, a dark panel holding the pages,
    and on top of each page a coloured band where little Mochis walk. Same
-   look as the Mac's SlamIA window (FlowHub.swift). */
+   look as the Mac's SlimIA window (FlowHub.swift). */
 
 :root {
   --hub-panel: #0e0f11;

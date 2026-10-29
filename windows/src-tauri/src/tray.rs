@@ -9,7 +9,7 @@ use crate::i18n::{n_, t};
 /// The menu's items, id and English label, in order. The labels are shown in
 /// the interface language (i18n.rs) and follow it when it changes.
 const ITEMS: [(&str, &str); 3] = [
-    ("open", n_("Open SlamIA")),
+    ("open", n_("Open SlimIA")),
     ("settings", n_("Settings…")),
     ("quit", n_("Quit")),
 ];
@@ -29,7 +29,7 @@ pub fn build(app: &AppHandle) -> tauri::Result<()> {
     app.manage(Items(items));
 
     let mut builder = TrayIconBuilder::with_id("coucou")
-        .tooltip("SlamIA")
+        .tooltip("SlimIA")
         .menu(&menu)
         .on_menu_event(|app: &AppHandle, event| match event.id.as_ref() {
             "quit" => app.exit(0),
