@@ -7,6 +7,7 @@
   - Outbound: the one HTTP client now refuses any address that is not this computer and the build has no TLS. Removed: updates and "What's new", the cloud chat (Anthropic, OpenAI, Google AI, OpenRouter), the GitHub, GitLab, Gitea, Stripe, Vercel, n8n, Resend, Notion and Cal.com pills, « OK Coucou », the Claude clean-up of dictations and the call summaries, the Codex plan gauge, the voice model download (the files are copied by hand) and Spotify's cover and download-page fetches.
   - The Settings pages for all of this, their commands, settings, keystore entries, translations and tests are gone, and so are the dependencies (`rustls`, `rcgen`, `qrcode`, `mdns-sd`, `tokio-tungstenite`, `ring`).
   - New: [firewall scripts](windows/firewall/README.md) to block the network from the system's side too.
+  - Later: the dictation, the Notetaker and the voice model are gone too (no voice), and so is the local-model chat with its HTTP client, keystore and file drop. The **Chat** page of the Coucou window now shows what Claude answered, read from `~/.claude/projects`. New settings: *Island position*, *Distance from the top* and *Keep the island visible*.
 - **Trimmed to Windows and Linux** — the macOS, iPhone and Android apps are not part of this branch. The entries below are upstream's history and still describe them.
 
 ## Windows and Linux 0.5.3 — October 22, 2026

@@ -5,7 +5,6 @@
 
 import "./settings.css";
 import { Bridge, onEvent, type HookPreview, type HookStatus, type ShortcutsReport } from "../core/bridge";
-import { CUSTOM_SERVER_KEY, providerDef, urlExposure } from "../core/providers";
 import {
   ISLAND_SHORTCUTS, SHORTCUTS, SHORTCUT_TEXT, activeKeys, displayKeys, duplicates, effective,
   recordPress, type Binding,
@@ -23,7 +22,7 @@ import { agentsSection } from "./agents";
 import { colorDot } from "./colors";
 import { renderDiff, statusDot } from "./parts";
 import {
-  LANGUAGES, N_, isRtl, onLanguageChange, resolveLanguage, setLanguage, systemLanguages, t, tn,
+  LANGUAGES, isRtl, onLanguageChange, resolveLanguage, setLanguage, systemLanguages, t,
 } from "../i18n/i18n";
 
 
@@ -333,7 +332,6 @@ function activePillsSection(connected: Record<string, boolean>): HTMLElement {
   function hint(def: PillDefinition): string | null {
     if (isComingSoon(def.id)) return t("Coming soon");
     if (def.connect.kind === "hooks" && !connected[def.id]) return t("Hooks not installed");
-    if (def.connect.kind === "server" && !settings[def.connect.field]) return t("Not connected");
     return null;
   }
 
@@ -388,176 +386,6 @@ function activePillsSection(connected: Record<string, boolean>): HTMLElement {
     h("div", { class: "row" }, h("label", { text: t("Main tool") }), main),
     groups,
   );
-}
-
-// ── Chat providers section ────────────────────────────────────────────────────
-
-const CHAT_STRINGS = {
-  get stored() { return `••••••••  ${t("(stored)")}`; },
-  get save() { return t("Save"); },
-  get remove() { return t("Remove"); },
-  get localTitle() { return t("Local models"); },
-  get localHint() { return t("Chat with a model you run yourself: Ollama or LM Studio (leave the address empty for the usual one on this computer), or any server that speaks the OpenAI API, such as vLLM or llama.cpp. Once connected, pick it above the chat box."); },
-  get connect() { return t("Connect"); },
-  get connecting() { return t("Connecting…"); },
-  get disconnect() { return t("Disconnect"); },
-  get useInChat() { return t("Use in chat"); },
-  get inUse() { return t("In use"); },
-  get keyOptional() { return t("API key (optional)"); },
-  get localOnly() { return t("Nothing leaves your PC: the server runs on this computer."); },
-  get remote() { return t("Only a server on this computer is allowed."); },
-  get invalid() { return t("Not a valid http:// or https:// address."); },
-  noModels: (name: string) => t("No models yet. Download one in {name} first.", { name }),
-  models: (n: number) => tn("{count} model", "{count} models", n),
-};
-
-// ── Local models section ──────────────────────────────────────────────────────
-
-type LocalId = "ollama" | "lmstudio" | "custom";
-
-/** Redraws the local models section after a change made elsewhere (the island). */
-let localRedraw: (() => void) | null = null;
-
-const LOCAL: Record<LocalId, { name: string; usual: string }> = {
-  ollama: { name: "Ollama", usual: "http://127.0.0.1:11434" },
-  lmstudio: { name: "LM Studio", usual: "http://127.0.0.1:1234" },
-  // No usual address: any server that speaks the OpenAI API.
-  custom: { name: N_("OpenAI-compatible"), usual: "" },
-};
-
-/** What an address means for the user's data, as a hint line. */
-function exposureNotice(url: string): HTMLElement | null {
-  switch (urlExposure(url)) {
-    case "local":
-      return h("div", { class: "hint", text: CHAT_STRINGS.localOnly });
-    case "remote":
-      return h("div", { class: "notice err", text: CHAT_STRINGS.remote });
-    case "invalid":
-      return url.trim() ? h("div", { class: "notice err", text: CHAT_STRINGS.invalid }) : null;
-  }
-}
-
-function localSection(customKey: boolean): HTMLElement {
-  const body = h("div", { style: "display:flex;flex-direction:column;gap:14px" });
-  const section = h(
-    "section",
-    {},
-    h("h2", {}, h("span", { text: CHAT_STRINGS.localTitle })),
-    h("div", { class: "hint", text: CHAT_STRINGS.localHint }),
-    body,
-  );
-  const redraw = () => {
-    clear(body);
-    for (const id of Object.keys(LOCAL) as LocalId[]) body.append(serverBlock(id));
-  };
-
-  function serverBlock(id: LocalId): HTMLElement {
-    const def = LOCAL[id];
-    const p = providerDef(id);
-    const field = p.urlField!;
-    const connected = settings[field] !== "";
-    const status = h("div", {});
-    const exposure = h("div", {});
-    const label = h("label", {},
-      h("i", { class: "dot", style: `background:${p.accent};margin-right:8px` }),
-      h("span", { text: t(def.name) }),
-    );
-    const block = h("div", { style: "display:flex;flex-direction:column;gap:6px" });
-
-    if (connected) {
-      const inUse = settings.chatProvider === id;
-      const use = h("button", { class: inUse ? "" : "primary", text: inUse ? CHAT_STRINGS.inUse : CHAT_STRINGS.useInChat });
-      use.disabled = inUse;
-      use.addEventListener("click", () => {
-        settings.chatProvider = id;
-        void save().then(redraw);
-      });
-      const disconnect = h("button", { class: "danger", text: CHAT_STRINGS.disconnect });
-      disconnect.addEventListener("click", async () => {
-        settings[field] = "";
-        if (settings.chatProvider === id) settings.chatProvider = "ollama";
-        if (id === "custom") {
-          await Bridge.secretClear(CUSTOM_SERVER_KEY).catch(() => {});
-          customKey = false;
-        }
-        await save();
-        redraw();
-      });
-      block.append(
-        h("div", { class: "row" }, label, h("span", { class: "path", text: settings[field] }), statusDot(true), use, disconnect),
-        status,
-      );
-      exposure.append(exposureNotice(settings[field]) ?? "");
-      block.append(exposure);
-      return block;
-    }
-
-    const input = h("input", {
-      type: "text",
-      placeholder: def.usual || "https://llm.example.com",
-      style: "flex:1 1 auto;min-width:0",
-      spellcheck: "false",
-      autocomplete: "off",
-    }) as HTMLInputElement;
-    // A custom server may want a key; it goes to the keychain, never to settings.json.
-    const key = h("input", {
-      type: "password",
-      placeholder: customKey ? CHAT_STRINGS.stored : CHAT_STRINGS.keyOptional,
-      style: "flex:1 1 auto;min-width:0",
-      autocomplete: "off",
-      spellcheck: "false",
-    }) as HTMLInputElement;
-    const connect = h("button", { class: "primary", text: CHAT_STRINGS.connect });
-
-    const showExposure = () => {
-      clear(exposure);
-      const notice = exposureNotice(input.value || def.usual);
-      if (notice) exposure.append(notice);
-    };
-    input.addEventListener("input", showExposure);
-    key.addEventListener("input", showExposure);
-
-    connect.addEventListener("click", async () => {
-      connect.disabled = true;
-      clear(status);
-      status.append(h("div", { class: "hint", text: CHAT_STRINGS.connecting }));
-      try {
-        if (id === "custom" && key.value.trim()) {
-          // Stored with this address: the key is only ever sent there.
-          await Bridge.localSetKey(input.value || def.usual, key.value.trim());
-          key.value = "";
-          customKey = true;
-        }
-        const server = await Bridge.localConnect(id, input.value);
-        if (!server.models.length) {
-          clear(status);
-          status.append(h("div", { class: "notice err", text: CHAT_STRINGS.noModels(t(def.name)) }));
-        } else {
-          settings[field] = server.url;
-          if (!server.models.includes(settings.chatModels[id] ?? "")) {
-            settings.chatModels = { ...settings.chatModels, [id]: server.models[0] };
-          }
-          await save();
-          redraw();
-          return;
-        }
-      } catch (err) {
-        clear(status);
-        status.append(h("div", { class: "notice err", text: String(err).replace(/^Error:\s*/, "") }));
-      }
-      connect.disabled = false;
-    });
-
-    block.append(h("div", { class: "row" }, label, input, connect));
-    if (id === "custom") block.append(h("div", { class: "row" }, h("label", { text: "" }), key));
-    block.append(status, exposure);
-    showExposure();
-    return block;
-  }
-
-  redraw();
-  localRedraw = redraw;
-  return section;
 }
 
 // ── Integrations section ──────────────────────────────────────────────────────
@@ -740,6 +568,11 @@ function generalSection(): HTMLElement {
       toggle(settings.openOnHover, (v) => { settings.openOnHover = v; void save(); }),
     ),
     h("div", { class: "hint", text: t("Hovering the island opens it; it folds again shortly after the pointer leaves. Click inside to keep it open.") }),
+    h("div", { class: "row" },
+      h("label", { text: t("Keep the island visible") }),
+      toggle(settings.keepVisible ?? true, (v) => { settings.keepVisible = v; void save(); }),
+    ),
+    h("div", { class: "hint", text: t("The compact island stays on screen instead of hiding after a minute.") }),
     h("div", { class: "row" },
       h("label", { text: t("Show clock in the island") }),
       toggle(settings.showClock, (v) => { settings.showClock = v; void save(); }),
@@ -1096,12 +929,9 @@ async function main() {
 
   void onEvent<ShortcutsReport>("shortcuts-status", (fresh) => shortcutsListener?.report(fresh));
   void onEvent<Settings>("settings-changed", (s) => {
-    const before = `${settings.chatProvider}|${settings.ollamaUrl}|${settings.lmstudioUrl}|${settings.customUrl}`;
     settings = { ...settings, ...s };
     shortcutsListener?.settingsChanged();
     for (const redraw of declaredViews) redraw();
-    const after = `${settings.chatProvider}|${settings.ollamaUrl}|${settings.lmstudioUrl}|${settings.customUrl}`;
-    if (before !== after) localRedraw?.();
     applyLanguage();
   });
 }
@@ -1122,17 +952,13 @@ async function render() {
   settings = { ...settings, ...sanitizeDeclared(settings) };
   const connected: Record<string, boolean> = { ...((await Bridge.agentHooksStatus()) ?? {}) };
 
-  const customKey = (await Bridge.secretPresent(CUSTOM_SERVER_KEY)) ?? false;
-
   declaredViews.length = 0;
-  localRedraw = null;
   shortcutsListener = null;
   clear(root);
   const sections: Partial<Record<PageId, () => HTMLElement[]>> = {
     general: () => [generalSection()],
     pills: () => [activePillsSection(connected)],
     agents: () => [claudeSection(status), agentsSection(agents), planSection(status)],
-    chat: () => [localSection(customKey)],
     integrations: () => [integrationsSection()],
     shortcuts: () => [shortcutsSection(shortcutReport)],
   };

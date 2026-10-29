@@ -26,8 +26,8 @@ Approve Claude Code permissions, watch your session work, drop a file, chat with
 This copy is built to stay on your PC:
 
 - **Nothing comes in.** No phone link, no WhatsApp, no port is opened. Only the local pipe the agents' hooks use listens, on this computer.
-- **Nothing goes out.** There are no updates, no cloud AI, no services (GitHub, Stripe, Vercel…), no downloads. The one HTTP client (`src-tauri/src/net.rs`) refuses any address that is not this computer, and it is built without TLS, so `https://` cannot even be tried. The windows' content security policy allows no outside address either.
-- **The voice model is copied by hand.** Coucou never downloads it: put the files in the folder Coucou → Settings shows (`Models` in the data folder).
+- **Nothing goes out.** There is no HTTP client at all: no updates, no cloud AI, no local-model chat, no services (GitHub, Stripe, Vercel…), no downloads. The windows' content security policy allows no outside address either.
+- **No voice.** No dictation, no recording of calls, no microphone, no speech model.
 - To make sure, run it with [the firewall scripts](firewall/README.md), which block everything but this computer from the system's side.
 
 There is no ready-made installer for this copy: [build it yourself](#build-it-yourself).
@@ -118,24 +118,18 @@ session, and they are forgotten an hour after the last edit or when the session
 ends. When Claude finishes, the card keeps the first paragraph of its final
 answer on one line, still, until the next prompt.
 
-## Flow and the Notetaker
+## The Chat page
 
-Coucou has its own window (tray → Open, or launch Coucou again): **Flow** on the
-left (Dictation, Notetaker, Statistics, Dictionary, Snippets, Settings),
-then **Notch**, the island's settings. Everything below runs on
-[Parakeet](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3) through
-[sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx), on your CPU and offline;
-the model files (about 700 MB) are copied by hand into Coucou's data folder under
-`Models`; nothing is downloaded.
+Coucou has its own window (tray → Open, or launch Coucou again). Its first page,
+**Chat**, shows what Claude answered, read from the conversations Claude Code
+keeps on this computer (`~/.claude/projects/<project>/<session>.jsonl`, or
+`$CLAUDE_CONFIG_DIR`). On the left, your recent conversations (the VS Code
+extension's too: it runs the same Claude Code); on the right, the one you picked:
+what you asked, Claude's answers as Markdown, and the tools it used as small
+lines. It follows the conversation every 2 seconds while the page is open.
 
-| What you do | What happens |
-|---|---|
-| Hold **right Ctrl** anywhere, speak, let go | Your words are pasted where you type. Pick another key in Flow → Settings: right Alt, right Shift, Ctrl + Win (Ctrl + Super on Linux) |
-| Tap the key twice | Hands-free: speak as long as you like, tap once to paste. `Esc` cancels |
-| Hover the pill at the bottom of the screen | Dictate, record a call, open Coucou. Put the pill on the left or right edge in Flow → Settings |
-| Click **Record a call** | Your microphone and what the computer plays, transcribed live, then written person by person. The audio is deleted once the transcript is written |
-
-Your voice never leaves the computer, and neither does the text.
+The files are only read, and only inside that folder: the page names a session by
+its id, never by a path. Permissions and questions are answered from the island.
 
 ## Your pills
 
@@ -189,28 +183,6 @@ default; turn it on in **Settings… → Plan usage**.
 
 The Codex gauge of the Mac and of upstream is not here: its numbers came from
 `codex app-server`, which talks to Codex's own service.
-
-## Chat
-
-The chat talks to a model that runs on this PC: **Settings… → Local models**
-connects **Ollama** or **LM Studio** (leave the address empty for the usual one
-on this PC; Ollama's `OLLAMA_HOST` is honoured) or any server that speaks the
-OpenAI API (vLLM, llama.cpp…) on this computer, with an optional key kept in the
-credential store. An address that is another machine is refused. Click the model
-name above the chat box to switch server and model. Answers stream in as they are
-written, and the `<think>` blocks of reasoning models stay hidden. A text file you
-dropped goes along inline (24 000 characters at most); images and PDFs by name
-only.
-
-Answers are shown as **Markdown**: headings, lists, bold, inline code, quotes, and
-code blocks with a copy button. It is built from text nodes, never parsed as
-HTML, and only `http`/`https` links open (in your browser, when you click them).
-Mochi greets you by your first name when your account has one (the Windows
-display name or the Linux GECOS full name; a bare login name is not used).
-
-Keys (only the optional one of your own server) live in the **Windows Credential
-Manager** or the Linux Secret Service, never on disk and never in the interface —
-the island can only ask whether a key exists. No telemetry.
 
 ## Build it yourself
 
@@ -329,22 +301,6 @@ own window.
 
 ## What's different from the Mac version
 
-- **Flow dictation** pastes with `Ctrl+V` (`Ctrl+Shift+V` in a terminal),
-  typed by `SendInput` on Windows and XTest on X11, and puts back what the
-  clipboard held once it is pasted; clipboard history (Windows, KDE, GNOME
-  extensions) leaves the dictation out. On **Wayland** no app may watch the
-  keyboard: the desktop holds the dictation key through its GlobalShortcuts
-  portal (`Ctrl+Alt+V` unless you pick others when it asks) and the
-  RemoteDesktop portal types the paste, asked once and remembered. Desktops
-  without those portals (older GNOME) dictate from the pill's microphone and
-  leave the words on the clipboard. The Mac's fn key and Apple's own
-  recognition have no equivalent: Parakeet is the only engine.
-- **The Notetaker** records what the computer plays through WASAPI loopback on
-  Windows and the default output's monitor on Linux (PulseAudio or PipeWire).
-  The people in a call are told apart by
-  [pyannote](https://github.com/pyannote/pyannote-audio)'s segmentation and
-  3D-Speaker's voice prints, also on the CPU. Summaries are Claude's only:
-  there is no Apple Intelligence here.
 - No notch, so the island lives at the top centre of the screen and retracts into
   the top edge instead of hiding in a notch.
 - Permission approval works from **any** terminal; the Mac build only listens to

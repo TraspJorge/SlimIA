@@ -944,3 +944,21 @@ button.hub-icon svg {
 .ret-time { margin-top: 4px; font-size: 10.5px; opacity: .45; text-align: end; }
 .ret-step { align-self: flex-start; font-size: 11.5px; opacity: .55; padding: 1px 4px 1px 10px; border-inline-start: 2px solid rgba(255,255,255,.18); font-family: ui-monospace, monospace; overflow-wrap: anywhere; }
 .ret-foot { flex: 0 0 auto; }
+
+/* Markdown inside Claude's answers (views/markdown.ts), for this window. */
+.ret-md { display: flex; flex-direction: column; gap: 6px; }
+.ret-md .md-p { font: 400 13.5px/1.5 var(--font); white-space: pre-wrap; overflow-wrap: anywhere; }
+.ret-md .md-h { font: 600 14px var(--font); overflow-wrap: anywhere; }
+.ret-md .md-h1 { font-weight: 700; font-size: 15px; }
+.ret-md .md-code { padding: 1px 5px; border-radius: 4px; background: rgba(255,255,255,.1); font: 400 12px ui-monospace, monospace; }
+.ret-md .md-link { color: #60a5fa; text-decoration: underline; }
+.ret-md .md-pre { display: flex; align-items: flex-start; gap: 8px; padding: 10px; border: 1px solid rgba(255,255,255,.08); border-radius: 8px; background: rgba(0,0,0,.35); }
+.ret-md .md-pre pre { flex: 1 1 auto; min-width: 0; margin: 0; font: 400 12px ui-monospace, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.ret-md .md-copy { flex: 0 0 22px; display: grid; place-items: center; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 4px; background: rgba(255,255,255,.08); color: inherit; opacity: .7; cursor: pointer; }
+.ret-md .md-copy:hover { opacity: 1; }
+.ret-md .md-copy svg { width: 11px; height: 11px; fill: currentColor; }
+.ret-md .md-item { display: flex; align-items: flex-start; gap: 6px; }
+.ret-md .md-bullet { flex: 0 0 auto; min-width: 10px; opacity: .6; }
+.ret-md .md-quote { display: flex; align-items: stretch; gap: 8px; opacity: .85; }
+.ret-md .md-quote i { flex: 0 0 2px; border-radius: 1px; background: rgba(255,255,255,.3); }
+.ret-md .md-rule { width: 100%; border: 0; border-top: 1px solid rgba(255,255,255,.25); }

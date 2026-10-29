@@ -1,4 +1,4 @@
-// Whether each pill is connected (hooks in place, local model server connected),
+// Whether each pill is connected (hooks in place),
 // for the idle cards. Nothing here talks to the network.
 
 import { Bridge } from "../core/bridge";
@@ -11,8 +11,7 @@ export function registerIntegrationHandlers() {
 
 /**
  * Whether each pill is connected, so its idle card can say so: the hooks in
- * place for a pill fed by hook events, a connected local model server, nothing
- * at all for Claude Desktop.
+ * place for a pill fed by hook events, nothing at all for Claude Desktop.
  */
 export async function refreshConfigured() {
   const hooks = (await Bridge.agentHooksStatus()) ?? null;
@@ -24,10 +23,6 @@ export async function refreshConfigured() {
         // falls back to what the settings say about its hooks.
         configured = hooks?.[def.id] ??
           (def.id === "integration_claude" ? State.settings.hooksInstalled : false);
-        break;
-      case "server":
-        // A local model server counts once the chat is connected to it.
-        configured = State.settings[def.connect.field] !== "";
         break;
       case "none":
         configured = true;

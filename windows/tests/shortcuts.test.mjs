@@ -237,11 +237,10 @@ test("Ctrl stands in for ⌘ inside the island", () => {
   assert.equal(islandKeyAction(ctrl("0", "Digit0"), ctx), null);
   assert.deepEqual(islandKeyAction(ctrl("p", "KeyP"), ctx), { kind: "pin" });
   assert.deepEqual(islandKeyAction(ctrl(",", "Comma"), ctx), { kind: "settings" });
-  // Ctrl+K only means something in the chat.
+  // Ctrl+K was "new chat": there is no chat in the island any more.
   assert.equal(islandKeyAction(ctrl("k", "KeyK"), ctx), null);
-  assert.deepEqual(islandKeyAction(ctrl("k", "KeyK"), { view: "prompt", inTextField: true }), { kind: "newChat" });
   // In a text field Ctrl+← → move by word.
-  assert.equal(islandKeyAction(ctrl("ArrowRight"), { view: "prompt", inTextField: true }), null);
+  assert.equal(islandKeyAction(ctrl("ArrowRight"), { view: "settings", inTextField: true }), null);
   // Anything with another modifier, or no Ctrl, is left alone.
   assert.equal(islandKeyAction(press({ key: "ArrowRight", ctrlKey: true, altKey: true }), ctx), null);
   assert.equal(islandKeyAction(press({ key: "p", code: "KeyP" }), ctx), null);
@@ -259,9 +258,9 @@ test("Ctrl+↓ ↑ walk a card's list, Ctrl+O opens, Ctrl+E is the overview's di
   assert.deepEqual(islandKeyAction(ctrl("E", "KeyE"), ctx), { kind: "diff" });
   assert.equal(islandKeyAction(press({ key: "E", code: "KeyE", ctrlKey: true, shiftKey: true }), ctx), null);
   // ⌘E only means something in the overview, where the diff opens.
-  assert.equal(islandKeyAction(ctrl("e", "KeyE"), { view: "prompt", inTextField: true }), null);
+  assert.equal(islandKeyAction(ctrl("e", "KeyE"), { view: "settings", inTextField: true }), null);
   // In the chat field Ctrl+↑ ↓ keep moving by paragraph.
-  assert.equal(islandKeyAction(ctrl("ArrowDown", "ArrowDown"), { view: "prompt", inTextField: true }), null);
+  assert.equal(islandKeyAction(ctrl("ArrowDown", "ArrowDown"), { view: "settings", inTextField: true }), null);
   // Settings lists them in the Mac's order (ShortcutLogic.islandShortcuts).
   assert.deepEqual(ISLAND_SHORTCUTS.map((s) => s.keys).slice(0, 5), [
     "Ctrl+→ / Ctrl+←", "Ctrl+1 – Ctrl+9", "Ctrl+↓ / Ctrl+↑", "Ctrl+O", "Ctrl+E",
@@ -303,7 +302,6 @@ beforeEach(() => {
   State.isPinned = false;
   State.pendingApproval = null;
   State.stateOverride = null;
-  State.chatHistory = [];
   State.settings = { ...DEFAULT_SETTINGS, activeIntegrations: ["agent_amp", "agent_hermes"] };
   State.mochiOnDesktop = false;
   State.cardSelection = null;
@@ -317,12 +315,13 @@ test("the wardrobe shortcut's own event opens the wardrobe", () => {
   assert.deepEqual(did, ["resume", "wardrobe"]);
 });
 
-test("a global shortcut arrives as an event and opens the chat", () => {
+test("the chat shortcut opens the Chat page of the Coucou window, not the island", () => {
   emit("shortcut", "openChat");
-  assert.deepEqual(did, ["resume", "alert:prompt"]);
+  assert.deepEqual(did, []);
+  assert.deepEqual(sent("open_settings_window"), [{ page: "chat" }]);
 });
 
-test("island keys are read before the chat field sees them, and only while open", () => {
+test("island keys are read before a text field sees them, and only while open", () => {
   const keydown = listeners.find((l) => l.type === "keydown");
   assert.equal(keydown.capture, true);
   const ev = (over) => {
@@ -341,7 +340,7 @@ test("island keys are read before the chat field sees them, and only while open"
   assert.ok(pin.prevented && pin.stopped);
   assert.deepEqual(did, ["pin:true"]);
 
-  // Typing in the chat is left alone, word jumps included.
+  // Typing in a text field is left alone, word jumps included.
   const word = ev({ key: "ArrowLeft", ctrlKey: true });
   word.target = { tagName: "INPUT" };
   keydown.fn(word);
@@ -477,7 +476,7 @@ test("actions that aren't the island's do nothing here", () => {
   assert.deepEqual(calls, []);
 });
 
-test("island keys: pills by number, new chat, settings, pin", () => {
+test("island keys: pills by number, settings, pin", () => {
   const ids = State.tasks.map((t) => t.id);
   runIslandKey(host, { kind: "pill", number: 2 });
   assert.equal(State.focusId, ids[1]);
@@ -486,22 +485,13 @@ test("island keys: pills by number, new chat, settings, pin", () => {
   runIslandKey(host, { kind: "cycle", delta: 1 });
   assert.equal(State.focusId, ids[2 % ids.length]);
 
-  State.chatHistory = [{ id: 1, role: "user", content: "hi" }];
-  State.stateOverride = "thinking";
-  runIslandKey(host, { kind: "newChat" });
-  assert.equal(State.chatHistory.length, 1, "not while an answer is on its way");
-  State.stateOverride = null;
-  runIslandKey(host, { kind: "newChat" });
-  assert.deepEqual(State.chatHistory, []);
-  assert.equal(sent("chat_reset").length, 1);
-
   runIslandKey(host, { kind: "settings" });
   assert.equal(sent("open_settings_window").length, 1);
 
   runIslandKey(host, { kind: "pin" });
   State.pendingApproval = { requestId: "r1", sessionId: "s", pillId: "integration_claude", tool: "Bash", command: "ls" };
   runIslandKey(host, { kind: "pin" });
-  assert.deepEqual(did, ["setView:overview", "setView:overview", "setView:prompt", "pin:true"]);
+  assert.deepEqual(did, ["setView:overview", "setView:overview", "pin:true"]);
 });
 
 test("island keys: the highlight walks the list on screen, Ctrl+O opens it, Ctrl+E the diff", () => {
@@ -528,7 +518,7 @@ test("island keys: the highlight walks the list on screen, Ctrl+O opens it, Ctrl
   assert.equal(State.cardSelection, 2);
 
   // Another view is on screen: the overview's list isn't walked.
-  State.view = "prompt";
+  State.view = "settings";
   runIslandKey(host, { kind: "list", delta: -1 });
   assert.equal(State.cardSelection, 2);
   State.view = "overview";

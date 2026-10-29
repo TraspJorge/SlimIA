@@ -2,32 +2,24 @@
 
 mod agent_hooks;
 mod agents;
-mod chat;
 mod config_file;
 mod desktop;
-mod files;
 mod hooks;
 mod i18n;
-mod identity;
 mod island;
-mod local_chat;
 mod log;
-mod net;
 mod pipe;
 mod platform;
 #[cfg(target_os = "linux")]
 mod portal;
 mod recap;
 mod returns;
-mod secrets;
 mod session_window;
 mod settings;
 mod shortcuts;
 mod sounds;
 mod spotify;
 mod tray;
-#[cfg(windows)]
-mod webview_drop;
 
 use std::process::Command;
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -37,8 +29,6 @@ use serde::Serialize;
 use tauri::{AppHandle, Emitter, Manager, State, WebviewUrl, WebviewWindowBuilder};
 use tauri_plugin_autostart::{ManagerExt, MacosLauncher};
 
-use chat::{Chat, ChatContext, ChatReply, ModelInfo};
-use files::DroppedFile;
 use hooks::{HookPreview, HookStatus};
 use island::{PollGate, ScreenInfo};
 use pipe::Pending;
@@ -444,75 +434,6 @@ fn approval_decline(app: AppHandle, request_id: String) {
     pipe::decline(&app, &request_id);
 }
 
-// ── Chat, files and secrets ───────────────────────────────────────────────────
-
-/// One chat turn with the provider picked in the chat view. API keys and any
-/// file bytes stay on the Rust side.
-#[tauri::command]
-async fn chat_send(
-    app: AppHandle,
-    shared: State<'_, Shared>,
-    chat: State<'_, Chat>,
-    query: String,
-    context: Option<ChatContext>,
-) -> Result<ChatReply, String> {
-    let settings = shared.settings.lock().unwrap().clone();
-    chat::send(&app, &chat, &settings, query, context).await
-}
-
-/// The models a provider offers, for the picker in the chat view. Only asked
-/// once the user picked that provider, and only with its key or address.
-#[tauri::command]
-async fn chat_models(shared: State<'_, Shared>, provider: String) -> Result<Vec<ModelInfo>, String> {
-    let settings = shared.settings.lock().unwrap().clone();
-    chat::models(&settings, &provider).await
-}
-
-/// Settings → Local models → Connect: does the server answer, and with which models?
-#[tauri::command]
-async fn local_connect(provider: String, url: String) -> Result<local_chat::Connected, String> {
-    local_chat::connect(&provider, &url).await
-}
-
-/// Stores the custom server's key for the address typed next to it; it is only
-/// ever sent to that address.
-#[tauri::command]
-fn local_set_key(url: String, key: String) -> Result<(), String> {
-    local_chat::set_custom_key(&url, &key)
-}
-
-#[tauri::command]
-fn chat_reset(chat: State<Chat>) {
-    chat.reset();
-}
-
-/// Copies a dropped file into the inbox and reports its name back.
-#[tauri::command]
-fn ingest_file(path: String) -> Result<DroppedFile, String> {
-    files::ingest(&path)
-}
-
-/// The island may only ask whether a key exists — never read it.
-#[tauri::command]
-fn secret_present(key: String) -> bool {
-    secrets::present(&key)
-}
-
-#[tauri::command]
-fn secret_set(key: String, value: String) -> Result<(), String> {
-    // Bound to its server's address: only local_set_key may store it.
-    if key == local_chat::CUSTOM_KEY {
-        return Err("use local_set_key".into());
-    }
-    secrets::set(&key, &value)
-
-}
-
-#[tauri::command]
-fn secret_clear(key: String) -> Result<(), String> {
-    secrets::clear(&key)
-}
-
 /// Lets the island write to the same log as the Rust side.
 #[tauri::command]
 fn log_line(message: String) {
@@ -680,7 +601,6 @@ pub fn run() {
             gate: gate.clone(),
         })
         .manage(Pending::default())
-        .manage(Chat::default())
         .manage(shortcuts::Registry::default())
         .manage(recap::load())
         .invoke_handler(tauri::generate_handler![
@@ -714,15 +634,6 @@ pub fn run() {
             approval_ack,
             approval_decline,
             log_line,
-            chat_send,
-            chat_models,
-            local_connect,
-            local_set_key,
-            chat_reset,
-            ingest_file,
-            secret_present,
-            secret_set,
-            secret_clear,
             open_settings_window,
             shortcuts_status,
             shortcuts_suspend,
@@ -764,16 +675,7 @@ pub fn run() {
             desktop::setup(&handle);
 
             if let Some(win) = island::window(&handle) {
-                // Where Tauri takes the drop itself (Linux), its paths are the
-                // ones ingest_file may copy (files.rs).
-                win.on_window_event(|event| {
-                    if let tauri::WindowEvent::DragDrop(tauri::DragDropEvent::Drop { paths, .. }) = event {
-                        files::allow_dropped(paths.iter().map(|p| p.to_string_lossy().to_string()));
-                    }
-                });
                 platform::make_non_activating(&win);
-                #[cfg(windows)]
-                webview_drop::install(&handle);
                 island::apply_geometry(&handle, &loaded.screen, false);
                 let _ = win.show();
             }

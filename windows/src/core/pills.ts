@@ -5,19 +5,17 @@
 //
 // What is added for Windows and Linux is `support` — not every Mac pill has
 // something behind it here — and `connect`, which says what makes the pill
-// "connected": its hooks being installed, a model server being connected, or
-// nothing at all.
+// "connected": its hooks being installed, or nothing at all.
 
 import type { AgentSource } from "./state";
 import { N_ } from "../i18n/i18n";
 
-export type PillCategory = "workspace" | "agent" | "ai" | "service";
+export type PillCategory = "workspace" | "agent" | "service";
 
 /** Section titles (English keys, shown with `t()`), in display order. */
 export const PILL_CATEGORIES: { id: PillCategory; title: string }[] = [
   { id: "workspace", title: N_("Where you code") },
   { id: "agent", title: N_("Agents") },
-  { id: "ai", title: N_("AI for the chat") },
   { id: "service", title: N_("Services") },
 ];
 
@@ -35,8 +33,6 @@ export type PillSupport = "yes" | "windows" | "linux" | "soon" | "no";
 export type PillConnect =
   /** Hook events: connected once the hooks are installed (Mac #183). */
   | { kind: "hooks" }
-  /** A model server the chat is connected to (Settings → Local models). */
-  | { kind: "server"; field: "ollamaUrl" | "lmstudioUrl" }
   /** Nothing to set up. */
   | { kind: "none" };
 
@@ -56,16 +52,6 @@ export type HostOs = "windows" | "linux";
 
 const hooks: PillConnect = { kind: "hooks" };
 const none: PillConnect = { kind: "none" };
-const server = (field: "ollamaUrl" | "lmstudioUrl"): PillConnect => ({ kind: "server", field });
-
-/** ChatProvider.accentHex on macOS. */
-const ACCENT = {
-  anthropic: "#E07950",
-  google: "#4285F4",
-  openai: "#10A37F",
-  ollama: "#FACC15",
-  lmstudio: "#A3E635",
-};
 
 export const PILL_CATALOG: readonly PillDefinition[] = [
   // ── Where you code ─────────────────────────────────────────────────────────
@@ -97,12 +83,6 @@ export const PILL_CATALOG: readonly PillDefinition[] = [
   // Linux build.
   { id: "agent_claude-desktop", name: "Claude Desktop", color: "#D97757", category: "agent",
     subtitle: N_("Agent"), source: "agent", support: "windows", connect: none },
-  // ── AI for the chat ────────────────────────────────────────────────────────
-  // The chat talks to a model server on this computer (src-tauri/src/chat.rs).
-  { id: "ai_ollama", name: "Ollama", color: ACCENT.ollama, category: "ai",
-    subtitle: N_("Chat"), source: "n8n", support: "yes", connect: server("ollamaUrl") },
-  { id: "ai_lmstudio", name: "LM Studio", color: ACCENT.lmstudio, category: "ai",
-    subtitle: N_("Chat"), source: "n8n", support: "yes", connect: server("lmstudioUrl") },
   // ── Services ───────────────────────────────────────────────────────────────
   { id: "integration_music", name: "Apple Music", color: "#FA2D48", category: "service",
     subtitle: N_("Integration"), source: "n8n", support: "no", connect: none },

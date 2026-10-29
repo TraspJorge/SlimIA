@@ -4,7 +4,6 @@
 
 import { invoke } from "@tauri-apps/api/core";
 import { emitTo, listen } from "@tauri-apps/api/event";
-import { getCurrentWebview } from "@tauri-apps/api/webview";
 import type { Settings } from "./state";
 import type { RecapHistory, RecapPrefs } from "../recap/summary";
 import type { SpotifyState } from "./spotify";
@@ -110,7 +109,7 @@ export const Bridge = {
 
   quit: () => call<void>("quit_app"),
 
-  openSettingsWindow: () => call<void>("open_settings_window"),
+  openSettingsWindow: (page?: string) => call<void>("open_settings_window", { page: page ?? null }),
 
   /** Writes to %LOCALAPPDATA%\Coucou\coucou.log, next to the Rust lines. */
   log: (message: string) => call<void>("log_line", { message }),
@@ -159,29 +158,6 @@ export const Bridge = {
   // ── Chat page: Claude Code's conversations, read from this computer ──────
   returnsSessions: () => call<ReturnSession[]>("returns_sessions"),
   returnsRead: (id: string, limit?: number) => call<ReturnEntry[]>("returns_read", { id, limit: limit ?? null }),
-
-  // ── Chat, files, secrets ──────────────────────────────────────────────────
-  /** One chat turn, answered by a model on this computer. File bytes never leave Rust. */
-  chatSend: (query: string, context: ChatContext | null) =>
-    callOrThrow<{ text: string }>("chat_send", { query, context }),
-  chatReset: () => call<void>("chat_reset"),
-  /**
-   * The models a provider offers, for the picker in the chat view. Rust asks
-   * the provider only when it has a key (or a server address).
-   */
-  chatModels: (provider: string) => callOrThrow<ModelInfo[]>("chat_models", { provider }),
-  /** Settings → Local models → Connect: does the server answer, and with which models? */
-  /** The custom server's key, bound to the address it is entered for. */
-  localSetKey: (url: string, key: string) => call<void>("local_set_key", { url, key }),
-
-  localConnect: (provider: "ollama" | "lmstudio" | "custom", url: string) =>
-    callOrThrow<LocalServer>("local_connect", { provider, url }),
-  /** Copies a dropped file into the inbox. */
-  ingestFile: (path: string) => callOrThrow<DroppedFile>("ingest_file", { path }),
-  /** Only ever tells you whether a key exists — never its value. */
-  secretPresent: (key: string) => call<boolean>("secret_present", { key }),
-  secretSet: (key: string, value: string) => callOrThrow<void>("secret_set", { key, value }),
-  secretClear: (key: string) => callOrThrow<void>("secret_clear", { key }),
 
   // ── Global shortcuts ──────────────────────────────────────────────────────
   /** How each global shortcut went when Rust last registered them. */
@@ -275,29 +251,6 @@ export async function emitToWindow(label: string, event: string, payload?: unkno
   }
 }
 
-export type ChatContext =
-  | { kind: "file"; name: string; path: string }
-  | { kind: "window"; appName: string; title: string; url?: string };
-
-export interface ModelInfo {
-  id: string;
-  label: string;
-}
-
-export interface LocalServer {
-  /** The address as it is stored. */
-  url: string;
-  models: string[];
-  /** The address is this machine. */
-  loopback: boolean;
-}
-
-export interface DroppedFile {
-  name: string;
-  path: string;
-  size: number;
-}
-
 export interface HookStatus {
   installed: boolean;
   /** Coucou's status line relay (plan usage) is the status line in settings.json. */
@@ -350,77 +303,7 @@ export type BridgeEvent =
   | { name: "hook"; payload: Record<string, unknown> }
   | { name: "screen-changed"; payload: null };
 
-export interface DragDropPayload {
-  type: "enter" | "over" | "drop" | "leave";
-  paths?: string[];
-}
-
-interface WebView2Bridge {
-  postMessageWithAdditionalObjects(message: unknown, objects: ArrayLike<unknown>): void;
-}
-
-/**
- * Files dragged onto the island. Only reaches us when the window takes the mouse.
- *
- * On Windows WebView2 takes the drop itself, as in Edge — Tauri's drop handling
- * never sees drags from the classic Explorer folder view (see
- * src-tauri/src/webview_drop.rs). Enter/over/leave come straight from the page;
- * the drop hands the File objects to Rust, which answers with their real paths
- * as a `file-drag` event. Elsewhere (Linux) Tauri's own drag events still do it.
- */
-export async function onDragDrop(handler: (e: DragDropPayload) => void) {
-  if (!IS_TAURI) return () => {};
-  const webview = (window as unknown as { chrome?: { webview?: WebView2Bridge } }).chrome?.webview;
-  if (!webview) {
-    return getCurrentWebview().onDragDropEvent((event) => {
-      handler(event.payload as DragDropPayload);
-    });
-  }
-  const hasFiles = (e: DragEvent) => e.dataTransfer?.types.includes("Files") ?? false;
-  // dragenter/dragleave fire for every element crossed; only the outermost pair counts.
-  let depth = 0;
-
-  const onEnter = (e: DragEvent) => {
-    if (!hasFiles(e)) return;
-    e.preventDefault();
-    if (depth++ === 0) handler({ type: "enter" });
-  };
-  const onOver = (e: DragEvent) => {
-    if (!hasFiles(e)) return;
-    // Without this WebView2 refuses the drop — or navigates to the file.
-    e.preventDefault();
-    if (e.dataTransfer) e.dataTransfer.dropEffect = "copy";
-    handler({ type: "over" });
-  };
-  const onLeave = (e: DragEvent) => {
-    if (!hasFiles(e) || depth === 0) return;
-    if (--depth === 0) handler({ type: "leave" });
-  };
-  const onDrop = (e: DragEvent) => {
-    e.preventDefault();
-    depth = 0;
-    const files = e.dataTransfer?.files;
-    if (!files || files.length === 0) {
-      handler({ type: "drop", paths: [] });
-      return;
-    }
-    webview.postMessageWithAdditionalObjects("coucou-file-drop", files);
-  };
-
-  window.addEventListener("dragenter", onEnter);
-  window.addEventListener("dragover", onOver);
-  window.addEventListener("dragleave", onLeave);
-  window.addEventListener("drop", onDrop);
-  const unlisten = await listen<DragDropPayload>("file-drag", (e) => handler(e.payload));
-  return () => {
-    window.removeEventListener("dragenter", onEnter);
-    window.removeEventListener("dragover", onOver);
-    window.removeEventListener("dragleave", onLeave);
-    window.removeEventListener("drop", onDrop);
-    unlisten();
-  };
-}
-
+/** Listens to an event from the Rust side; a no-op in a plain browser. */
 export async function onEvent<T>(name: string, handler: (payload: T) => void) {
   if (!IS_TAURI) return () => {};
   return listen<T>(name, (e) => handler(e.payload));

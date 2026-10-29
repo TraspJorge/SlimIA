@@ -35,8 +35,6 @@ export const SHORTCUT_TEXT = {
     navItems: N_("Navigate list items"),
     open: N_("Open selected item"),
     diff: N_("Open / close current diff"),
-    send: N_("Send the message"),
-    newChat: N_("Start a new chat"),
     settings: N_("Open Settings"),
     pin: N_("Keep the island open"),
     close: N_("Close the island"),
@@ -359,8 +357,6 @@ export const ISLAND_SHORTCUTS: readonly { keys: string; description: string }[] 
   { keys: "Ctrl+↓ / Ctrl+↑", description: SHORTCUT_TEXT.island.navItems },
   { keys: "Ctrl+O", description: SHORTCUT_TEXT.island.open },
   { keys: "Ctrl+E", description: SHORTCUT_TEXT.island.diff },
-  { keys: "Ctrl+Enter", description: SHORTCUT_TEXT.island.send },
-  { keys: "Ctrl+K", description: SHORTCUT_TEXT.island.newChat },
   { keys: "Ctrl+,", description: SHORTCUT_TEXT.island.settings },
   { keys: "Ctrl+P", description: SHORTCUT_TEXT.island.pin },
   { keys: "Esc", description: SHORTCUT_TEXT.island.close },
@@ -375,7 +371,6 @@ export type IslandKeyAction =
   | { kind: "openSelection" }
   /** Ctrl+E: the latest edit's diff, or closes the one open (⌘E). */
   | { kind: "diff" }
-  | { kind: "newChat" }
   | { kind: "settings" }
   | { kind: "pin" };
 
@@ -400,7 +395,6 @@ export function islandKeyAction(
   const digit = /^Digit([1-9])$/.exec(e.code);
   if (digit) return { kind: "pill", number: Number(digit[1]) };
   const letter = /^[a-z]$/i.test(e.key) ? e.key.toLowerCase() : /^Key([A-Z])$/.exec(e.code)?.[1].toLowerCase();
-  if (letter === "k") return ctx.view === "prompt" ? { kind: "newChat" } : null;
   if (letter === "p") return { kind: "pin" };
   if (letter === "o") return { kind: "openSelection" };
   // The diff lives in the overview's left card: ⌘E means something only there.

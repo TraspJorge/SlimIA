@@ -32,8 +32,6 @@ test("the catalog holds the pills of this build, with the Claude Code label for 
     ["agent_amp", "Amp", "#F59E0B", "agent", "Agent"],
     ["agent_hermes", "Hermes", "#C084FC", "agent", "Agent"],
     ["agent_claude-desktop", "Claude Desktop", "#D97757", "agent", "Agent"],
-    ["ai_ollama", "Ollama", "#FACC15", "ai", "Chat"],
-    ["ai_lmstudio", "LM Studio", "#A3E635", "ai", "Chat"],
     ["integration_music", "Apple Music", "#FA2D48", "service", "Integration"],
     ["integration_spotify", "Spotify", "#1DB954", "service", "Integration"],
   ];
@@ -42,7 +40,7 @@ test("the catalog holds the pills of this build, with the Claude Code label for 
     mac,
   );
   assert.deepEqual(PILL_CATEGORIES.map((c) => c.title), [
-    "Where you code", "Agents", "AI for the chat", "Services",
+    "Where you code", "Agents", "Services",
   ]);
 });
 
@@ -71,7 +69,7 @@ test("this build leaves out what only macOS has, and Claude Desktop on Linux", (
   }
   // Their plugins are written from Settings → Agents, and the chat talks to
   // every provider (port/chat-providers), on both systems.
-  for (const id of ["agent_opencode", "agent_amp", "agent_hermes", "ai_ollama", "ai_lmstudio"]) {
+  for (const id of ["agent_opencode", "agent_amp", "agent_hermes"]) {
     assert.ok(windows.includes(id), id);
     assert.ok(linux.includes(id), id);
   }
@@ -106,15 +104,11 @@ test("Spotify can be declared on both systems; Claude Desktop only on Windows", 
   assert.deepEqual(toggleDeclared(empty, "agent_claude-desktop", "windows"), ["agent_claude-desktop"]);
 });
 
-test("no chat provider that works here says Coming soon", () => {
-  for (const id of ["ai_ollama", "ai_lmstudio"]) {
-    assert.ok(!isComingSoon(id), id);
+test("no chat provider is offered: this build has no chat, so nothing here can leave the computer", () => {
+  for (const id of ["ai_anthropic", "ai_google", "ai_openai", "ai_ollama", "ai_lmstudio"]) {
+    assert.equal(pillDefinition(id), undefined, id);
   }
-  // The local servers are connected through Settings → Local models, not a key.
-  assert.deepEqual(pillDefinition("ai_ollama").connect, { kind: "server", field: "ollamaUrl" });
-  assert.deepEqual(pillDefinition("ai_lmstudio").connect, { kind: "server", field: "lmstudioUrl" });
-  // The cloud providers are not offered at all: nothing here leaves the computer.
-  for (const id of ["ai_anthropic", "ai_google", "ai_openai"]) assert.equal(pillDefinition(id), undefined, id);
+  assert.ok(!PILL_CATALOG.some((p) => p.category === "ai"));
 });
 
 test("the main pill is a workspace tool that works here", () => {
@@ -128,7 +122,7 @@ test("hook-driven pills are the workspace tools and the agents with hooks", () =
   for (const id of ["integration_claude", "agent_cursor", "agent_codex", "agent_gemini", "agent_copilot", "agent_muse", "agent_antigravity", "agent_opencode", "agent_amp", "agent_hermes"]) {
     assert.ok(isHookPill(id), id);
   }
-  for (const id of ["agent_claude-desktop", "ai_ollama", "integration_spotify", "agent_unknown"]) {
+  for (const id of ["agent_claude-desktop", "integration_spotify", "agent_unknown"]) {
     assert.ok(!isHookPill(id), id);
   }
 });
@@ -168,15 +162,13 @@ test("up to four pills next to the main one, never the main one itself", () => {
   };
   const four = toggleDeclared(d, "agent_gemini", "linux");
   assert.equal(four.length, MAX_DECLARED);
-  assert.equal(toggleDeclared({ ...d, activeIntegrations: four }, "ai_ollama", "linux"), null);
+  assert.equal(toggleDeclared({ ...d, activeIntegrations: four }, "agent_cursor", "linux"), null);
   assert.equal(toggleDeclared(d, "integration_claude", "linux"), null);
   assert.equal(toggleDeclared(d, "integration_music", "linux"), null);
   assert.equal(toggleDeclared(d, "agent_claude-desktop", "linux"), null);
   assert.ok(toggleDeclared(d, "agent_claude-desktop", "windows").includes("agent_claude-desktop"));
   assert.deepEqual(toggleDeclared(d, "agent_amp", "linux"), ["agent_opencode", "agent_hermes"]);
-  // The local model servers can be declared; the cloud providers do not exist.
-  assert.ok(toggleDeclared(d, "ai_lmstudio", "linux").includes("ai_lmstudio"));
-  assert.ok(toggleDeclared(d, "ai_ollama", "linux").includes("ai_ollama"));
+  // A pill that does not exist cannot be declared.
   assert.equal(toggleDeclared(d, "ai_google", "linux"), null);
 });
 
@@ -191,10 +183,10 @@ test("picking a main pill takes it out of the declared ones, and only workspace 
 
 test("pills are ordered main first, then other agents, then the catalog's order", () => {
   const ids = (list) => list.map((t) => t.id);
-  const tasks = ["integration_spotify", "agent_mine", "ai_ollama", "agent_cursor", "integration_claude", "agent_gemini"]
+  const tasks = ["integration_spotify", "agent_mine", "agent_copilot", "agent_cursor", "integration_claude", "agent_gemini"]
     .map((id) => ({ id }));
   assert.deepEqual(ids(orderPills(tasks, "integration_claude")), [
-    "integration_claude", "agent_mine", "agent_cursor", "agent_gemini", "ai_ollama", "integration_spotify",
+    "integration_claude", "agent_mine", "agent_cursor", "agent_gemini", "agent_copilot", "integration_spotify",
   ]);
   assert.deepEqual(ids(orderPills(tasks, "agent_cursor")).slice(0, 3), [
     "agent_cursor", "agent_mine", "integration_claude",
@@ -279,11 +271,11 @@ test("a Claude Code session gets its pill even when it is not loaded", () => {
 test("toggling declares up to four pills and never the main one", () => {
   State.settings.activeIntegrations = [];
   State.loadIntegrationTasks();
-  for (const id of ["agent_opencode", "agent_gemini", "ai_ollama", "agent_amp", "agent_hermes"]) {
+  for (const id of ["agent_opencode", "agent_gemini", "agent_copilot", "agent_amp", "agent_hermes"]) {
     State.toggleIntegration(id);
   }
   assert.deepEqual(State.settings.activeIntegrations, [
-    "agent_opencode", "agent_gemini", "ai_ollama", "agent_amp",
+    "agent_opencode", "agent_gemini", "agent_copilot", "agent_amp",
   ]);
   State.toggleIntegration("integration_claude");
   assert.ok(ids().includes("integration_claude"));

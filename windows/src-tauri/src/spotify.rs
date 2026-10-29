@@ -350,7 +350,7 @@ pub enum ArtSource {
 
 pub fn artwork_source(raw: &str) -> Option<ArtSource> {
     // Only a cover on this computer is shown: nothing is downloaded.
-    let url = reqwest::Url::parse(raw).ok()?;
+    let url = url::Url::parse(raw).ok()?;
     match url.scheme() {
         "file" => {
             if url.host_str().is_some_and(|h| !h.is_empty() && h != "localhost") {
@@ -380,7 +380,27 @@ pub fn sniff_image(bytes: &[u8]) -> Option<&'static str> {
 
 fn data_url(bytes: &[u8]) -> Option<String> {
     let mime = sniff_image(bytes)?;
-    Some(format!("data:{mime};base64,{}", crate::net::base64_for(bytes)))
+    Some(format!("data:{mime};base64,{}", base64_for(bytes)))
+}
+
+/// Small standalone base64 encoder — not worth another dependency.
+/// Used for the data: URLs of cover images and of the images sent to a local model.
+fn base64_for(bytes: &[u8]) -> String {
+    base64(bytes)
+}
+
+fn base64(bytes: &[u8]) -> String {
+    const TABLE: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let mut out = String::with_capacity(bytes.len().div_ceil(3) * 4);
+    for chunk in bytes.chunks(3) {
+        let b = [chunk[0], *chunk.get(1).unwrap_or(&0), *chunk.get(2).unwrap_or(&0)];
+        let n = ((b[0] as u32) << 16) | ((b[1] as u32) << 8) | b[2] as u32;
+        out.push(TABLE[(n >> 18) as usize & 63] as char);
+        out.push(TABLE[(n >> 12) as usize & 63] as char);
+        out.push(if chunk.len() > 1 { TABLE[(n >> 6) as usize & 63] as char } else { '=' });
+        out.push(if chunk.len() > 2 { TABLE[n as usize & 63] as char } else { '=' });
+    }
+    out
 }
 
 #[derive(Serialize, Clone)]

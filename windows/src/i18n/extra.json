@@ -14,19 +14,6 @@
       "de": " · bis {date}",
       "tr": " · {date} tarihine kadar"
     },
-    "(stored)": {
-      "zh-Hans": "（已保存）",
-      "hi": "(सहेजी गई)",
-      "es": "(guardada)",
-      "ar": "(محفوظ)",
-      "fr": "(enregistrée)",
-      "bn": "(সংরক্ষিত)",
-      "pt-BR": "(salva)",
-      "ru": "(сохранён)",
-      "id": "(tersimpan)",
-      "de": "(gespeichert)",
-      "tr": "(kayıtlı)"
-    },
     "+ subagent": {
       "zh-Hans": "+ 子代理",
       "hi": "+ सब-एजेंट",
@@ -53,19 +40,6 @@
       "de": "Eine nicht von Coucou erstellte Hook-Gruppe namens \"coucou\" ist bereits vorhanden — Coucou hat sie nicht verändert.",
       "tr": "Coucou'nun oluşturmadığı \"coucou\" adlı bir hook grubu zaten var — Coucou bunu değiştirmedi."
     },
-    "API key (optional)": {
-      "zh-Hans": "API 密钥（可选）",
-      "hi": "API कुंजी (वैकल्पिक)",
-      "es": "Clave de API (opcional)",
-      "ar": "مفتاح API (اختياري)",
-      "fr": "Clé d'API (facultative)",
-      "bn": "API কী (ঐচ্ছিক)",
-      "pt-BR": "Chave de API (opcional)",
-      "ru": "API-ключ (необязательно)",
-      "id": "Kunci API (opsional)",
-      "de": "API-Schlüssel (optional)",
-      "tr": "API anahtarı (isteğe bağlı)"
-    },
     "Answer in terminal": {
       "zh-Hans": "在终端中回答",
       "hi": "टर्मिनल में जवाब दें",
@@ -91,19 +65,6 @@
       "id": "Jawab di terminal Anda.",
       "de": "Beantworte die Frage in deinem Terminal.",
       "tr": "Terminalinde yanıtla."
-    },
-    "Ask": {
-      "zh-Hans": "提问",
-      "hi": "पूछें",
-      "es": "Preguntar",
-      "ar": "اسأل",
-      "fr": "Demander",
-      "bn": "জিজ্ঞেস করুন",
-      "pt-BR": "Perguntar",
-      "ru": "Спросить",
-      "id": "Tanya",
-      "de": "Fragen",
-      "tr": "Sor"
     },
     "Asking Codex…": {
       "zh-Hans": "正在询问 Codex…",
@@ -248,71 +209,6 @@
       "de": "{path} kann nicht gelesen werden: {error}",
       "tr": "{path} okunamıyor: {error}"
     },
-    "Cannot copy: {error}": {
-      "zh-Hans": "无法复制：{error}",
-      "hi": "कॉपी नहीं हो सका: {error}",
-      "es": "No se puede copiar: {error}",
-      "ar": "تعذّر النسخ: {error}",
-      "fr": "Copie impossible : {error}",
-      "bn": "কপি করা যায়নি: {error}",
-      "pt-BR": "Não é possível copiar: {error}",
-      "ru": "Не удаётся скопировать: {error}",
-      "id": "Tidak dapat menyalin: {error}",
-      "de": "Kopieren nicht möglich: {error}",
-      "tr": "Kopyalanamıyor: {error}"
-    },
-    "Cannot reach {url}. Is the server running?": {
-      "zh-Hans": "无法连接到 {url}。服务器在运行吗？",
-      "hi": "{url} तक नहीं पहुँचा जा सका। क्या सर्वर चल रहा है?",
-      "es": "No se puede contactar con {url}. ¿Está funcionando el servidor?",
-      "ar": "تعذّر الوصول إلى {url}. هل الخادم قيد التشغيل؟",
-      "fr": "Impossible de joindre {url}. Le serveur est-il lancé ?",
-      "bn": "{url}-এ পৌঁছানো যাচ্ছে না। সার্ভার কি চলছে?",
-      "pt-BR": "Não foi possível alcançar {url}. O servidor está rodando?",
-      "ru": "Не удаётся подключиться к {url}. Сервер запущен?",
-      "id": "Tidak dapat menjangkau {url}. Apakah servernya berjalan?",
-      "de": "{url} nicht erreichbar. Läuft der Server?",
-      "tr": "{url} erişilebilir değil. Sunucu çalışıyor mu?"
-    },
-    "Cannot read {path}: {error}": {
-      "zh-Hans": "无法读取 {path}：{error}",
-      "hi": "{path} पढ़ा नहीं जा सकता: {error}",
-      "es": "No se puede leer {path}: {error}",
-      "ar": "تعذّرت قراءة {path}: {error}",
-      "fr": "Impossible de lire {path} : {error}",
-      "bn": "{path} পড়া যাচ্ছে না: {error}",
-      "pt-BR": "Não é possível ler {path}: {error}",
-      "ru": "Не удаётся прочитать {path}: {error}",
-      "id": "Tidak dapat membaca {path}: {error}",
-      "de": "{path} kann nicht gelesen werden: {error}",
-      "tr": "{path} okunamıyor: {error}"
-    },
-    "Chat with a model you run yourself: Ollama or LM Studio (leave the address empty for the usual one on this computer), or any server that speaks the OpenAI API, such as vLLM or llama.cpp. Once connected, pick it above the chat box.": {
-      "zh-Hans": "与你自己运行的模型聊天：Ollama 或 LM Studio（地址留空即使用本机的默认地址），或任何兼容 OpenAI API 的服务器，例如 vLLM 或 llama.cpp。连接后，在聊天框上方选择它。",
-      "hi": "अपने चलाए मॉडल से चैट करें: Ollama या LM Studio (इस कंप्यूटर के सामान्य पते के लिए पता खाली छोड़ें), या OpenAI API बोलने वाला कोई भी सर्वर, जैसे vLLM या llama.cpp। कनेक्ट होने के बाद, उसे चैट बॉक्स के ऊपर चुनें।",
-      "es": "Chatea con un modelo que ejecutas tú mismo: Ollama o LM Studio (deja la dirección vacía para usar la habitual en este equipo), o cualquier servidor compatible con la API de OpenAI, como vLLM o llama.cpp. Una vez conectado, elígelo encima del cuadro de chat.",
-      "ar": "دردش مع نموذج تشغّله بنفسك: Ollama أو LM Studio (اترك العنوان فارغًا لاستخدام العنوان المعتاد على هذا الحاسوب)، أو أي خادم يتحدث واجهة OpenAI API مثل vLLM أو llama.cpp. بعد الاتصال، اختره فوق مربع الدردشة.",
-      "fr": "Discute avec un modèle que tu fais tourner toi-même : Ollama ou LM Studio (laisse l'adresse vide pour celle habituelle sur cet ordinateur), ou tout serveur qui parle l'API d'OpenAI, comme vLLM ou llama.cpp. Une fois connecté, choisis-le au-dessus de la zone de chat.",
-      "bn": "নিজে চালানো মডেলের সঙ্গে চ্যাট করুন: Ollama বা LM Studio (এই কম্পিউটারের সাধারণ ঠিকানার জন্য ঠিকানা ফাঁকা রাখুন), অথবা OpenAI API বোঝে এমন যেকোনো সার্ভার, যেমন vLLM বা llama.cpp। সংযুক্ত হলে চ্যাট বক্সের উপরে সেটি বেছে নিন।",
-      "pt-BR": "Converse com um modelo que você mesmo executa: Ollama ou LM Studio (deixe o endereço vazio para usar o padrão neste computador), ou qualquer servidor compatível com a API da OpenAI, como vLLM ou llama.cpp. Depois de conectado, escolha-o acima da caixa de chat.",
-      "ru": "Общайтесь с моделью, которую запускаете сами: Ollama или LM Studio (оставьте адрес пустым, чтобы использовать обычный адрес на этом компьютере) или любой сервер с API OpenAI, например vLLM или llama.cpp. После подключения выберите его над полем чата.",
-      "id": "Mengobrol dengan model yang Anda jalankan sendiri: Ollama atau LM Studio (kosongkan alamat untuk alamat biasa di komputer ini), atau server apa pun yang mendukung API OpenAI, seperti vLLM atau llama.cpp. Setelah terhubung, pilih di atas kotak obrolan.",
-      "de": "Chatte mit einem selbst betriebenen Modell: Ollama oder LM Studio (für die übliche Adresse auf diesem Computer leer lassen) oder einem OpenAI-API-kompatiblen Server wie vLLM oder llama.cpp. Wähle das Modell nach dem Verbinden über dem Chatfeld aus.",
-      "tr": "Kendin çalıştırdığın bir modelle sohbet et: Ollama veya LM Studio (bu bilgisayardaki varsayılan adres için adresi boş bırak) ya da vLLM veya llama.cpp gibi OpenAI API'siyle uyumlu bir sunucu. Bağlandıktan sonra sohbet kutusunun üstünden seç."
-    },
-    "Choose a model": {
-      "zh-Hans": "选择模型",
-      "hi": "मॉडल चुनें",
-      "es": "Elige un modelo",
-      "ar": "اختر نموذجًا",
-      "fr": "Choisis un modèle",
-      "bn": "একটি মডেল বেছে নিন",
-      "pt-BR": "Escolha um modelo",
-      "ru": "Выберите модель",
-      "id": "Pilih model",
-      "de": "Modell auswählen",
-      "tr": "Model seç"
-    },
     "Claude needs an answer.": {
       "zh-Hans": "Claude 需要一个回答。",
       "hi": "Claude को जवाब चाहिए।",
@@ -352,19 +248,6 @@
       "de": "Insel schließen",
       "tr": "Adayı kapat"
     },
-    "Code": {
-      "zh-Hans": "代码",
-      "hi": "कोड",
-      "es": "Código",
-      "ar": "شيفرة",
-      "fr": "Code",
-      "bn": "কোড",
-      "pt-BR": "Código",
-      "ru": "Код",
-      "id": "Kode",
-      "de": "Code",
-      "tr": "Kod"
-    },
     "Codex plan": {
       "zh-Hans": "Codex 套餐",
       "hi": "Codex प्लान",
@@ -403,19 +286,6 @@
       "id": "Codex hanya menjalankan hooks baru setelah Anda memercayainya: buka Codex dan tinjau sekali dengan /hooks.",
       "de": "Codex führt neue Hooks erst aus, nachdem du ihnen vertraust: Starte Codex und prüfe sie einmal mit /hooks.",
       "tr": "Codex yeni hook'ları ancak güvendiğinde çalıştırır: Codex'i başlat ve /hooks ile bir kez incele."
-    },
-    "Connect {name} in Settings → Local models first.": {
-      "zh-Hans": "请先在“设置 → 本地模型”中连接 {name}。",
-      "hi": "पहले सेटिंग्स → लोकल मॉडल में {name} कनेक्ट करें।",
-      "es": "Conecta primero {name} en Configuración → Modelos locales.",
-      "ar": "اربط {name} أولًا من الإعدادات ← النماذج المحلية.",
-      "fr": "Connecte d'abord {name} dans Réglages → Modèles locaux.",
-      "bn": "আগে সেটিংস → লোকাল মডেল-এ {name} সংযুক্ত করুন।",
-      "pt-BR": "Conecte primeiro o {name} em Configurações → Modelos locais.",
-      "ru": "Сначала подключите {name} в «Настройки → Локальные модели».",
-      "id": "Hubungkan {name} dulu di Pengaturan → Model lokal.",
-      "de": "Verbinde {name} zuerst unter Einstellungen → Lokale Modelle.",
-      "tr": "Önce Ayarlar → Yerel modeller bölümünden {name} bağlantısını kur."
     },
     "Copied — paste it anywhere.": {
       "zh-Hans": "已复制 — 可以粘贴到任何地方。",
@@ -547,19 +417,6 @@
       "de": "Nur Zähler und Projektnamen — keine Befehle, Dateien oder Prompts. Wird 12 Wochen auf diesem Computer aufbewahrt.",
       "tr": "Yalnızca sayılar ve proje adları; komut, dosya veya istem içermez. Bu bilgisayarda 12 hafta tutulur."
     },
-    "Custom server": {
-      "zh-Hans": "自定义服务器",
-      "hi": "कस्टम सर्वर",
-      "es": "Servidor personalizado",
-      "ar": "خادم مخصص",
-      "fr": "Serveur personnalisé",
-      "bn": "কাস্টম সার্ভার",
-      "pt-BR": "Servidor personalizado",
-      "ru": "Свой сервер",
-      "id": "Server kustom",
-      "de": "Eigener Server",
-      "tr": "Özel sunucu"
-    },
     "Display under the cursor": {
       "zh-Hans": "光标所在的显示器",
       "hi": "कर्सर वाला डिस्प्ले",
@@ -572,19 +429,6 @@
       "id": "Layar di bawah kursor",
       "de": "Bildschirm unter dem Mauszeiger",
       "tr": "İşaretçinin bulunduğu ekran"
-    },
-    "Docs": {
-      "zh-Hans": "文档",
-      "hi": "दस्तावेज़",
-      "es": "Documentos",
-      "ar": "مستندات",
-      "fr": "Docs",
-      "bn": "ডকুমেন্ট",
-      "pt-BR": "Docs",
-      "ru": "Документы",
-      "id": "Dokumen",
-      "de": "Dokumentation",
-      "tr": "Belgeler"
     },
     "Done.": {
       "zh-Hans": "完成。",
@@ -663,58 +507,6 @@
       "id": "Selesai. Angkanya muncul setelah balasan berikutnya dari sesi Claude Code.",
       "de": "Fertig. Die Zahlen erscheinen nach der nächsten Antwort einer Claude Code-Sitzung.",
       "tr": "Tamamlandı. Sayılar, bir Claude Code oturumunun sonraki yanıtından sonra görünür."
-    },
-    "Drop": {
-      "zh-Hans": "拖放",
-      "hi": "छोड़ें",
-      "es": "Soltar",
-      "ar": "إفلات",
-      "fr": "Déposer",
-      "bn": "ড্রপ",
-      "pt-BR": "Soltar",
-      "ru": "Перетащить",
-      "id": "Letakkan",
-      "de": "Ablegen",
-      "tr": "Bırak"
-    },
-    "Enter the server address first.": {
-      "zh-Hans": "请先输入服务器地址。",
-      "hi": "पहले सर्वर का पता दर्ज करें।",
-      "es": "Escribe primero la dirección del servidor.",
-      "ar": "أدخل عنوان الخادم أولًا.",
-      "fr": "Saisis d'abord l'adresse du serveur.",
-      "bn": "আগে সার্ভারের ঠিকানা লিখুন।",
-      "pt-BR": "Digite primeiro o endereço do servidor.",
-      "ru": "Сначала введите адрес сервера.",
-      "id": "Masukkan alamat server terlebih dahulu.",
-      "de": "Gib zuerst die Serveradresse ein.",
-      "tr": "Önce sunucu adresini gir."
-    },
-    "File": {
-      "zh-Hans": "文件",
-      "hi": "फ़ाइल",
-      "es": "Archivo",
-      "ar": "ملف",
-      "fr": "Fichier",
-      "bn": "ফাইল",
-      "pt-BR": "Arquivo",
-      "ru": "Файл",
-      "id": "File",
-      "de": "Datei",
-      "tr": "Dosya"
-    },
-    "Folders can't be dropped yet.": {
-      "zh-Hans": "暂时还不能拖放文件夹。",
-      "hi": "फ़ोल्डर अभी नहीं छोड़े जा सकते।",
-      "es": "Todavía no se pueden soltar carpetas.",
-      "ar": "لا يمكن إفلات المجلدات بعد.",
-      "fr": "On ne peut pas encore déposer de dossiers.",
-      "bn": "এখনো ফোল্ডার ড্রপ করা যায় না।",
-      "pt-BR": "Ainda não é possível soltar pastas.",
-      "ru": "Папки пока перетаскивать нельзя.",
-      "id": "Folder belum bisa diletakkan.",
-      "de": "Ordner können noch nicht abgelegt werden.",
-      "tr": "Klasörler henüz bırakılamıyor."
     },
     "Friday": {
       "zh-Hans": "星期五",
@@ -807,19 +599,6 @@
       "de": "Halte dazu Strg, Alt oder die Windows-Taste gedrückt.",
       "tr": "Bununla birlikte Ctrl, Alt veya Windows tuşunu basılı tut."
     },
-    "Images": {
-      "zh-Hans": "图片",
-      "hi": "छवियाँ",
-      "es": "Imágenes",
-      "ar": "صور",
-      "fr": "Images",
-      "bn": "ছবি",
-      "pt-BR": "Imagens",
-      "ru": "Изображения",
-      "id": "Gambar",
-      "de": "Bilder",
-      "tr": "Görseller"
-    },
     "In the open island": {
       "zh-Hans": "在打开的岛中",
       "hi": "खुले आइलैंड में",
@@ -832,19 +611,6 @@
       "id": "Di pulau yang terbuka",
       "de": "In der geöffneten Insel",
       "tr": "Ada açıkken"
-    },
-    "In use": {
-      "zh-Hans": "使用中",
-      "hi": "उपयोग में",
-      "es": "En uso",
-      "ar": "قيد الاستخدام",
-      "fr": "Utilisé",
-      "bn": "ব্যবহৃত হচ্ছে",
-      "pt-BR": "Em uso",
-      "ru": "Используется",
-      "id": "Sedang dipakai",
-      "de": "In Verwendung",
-      "tr": "Kullanımda"
     },
     "In use by another app": {
       "zh-Hans": "已被其他应用占用",
@@ -963,19 +729,6 @@
       "de": "Beim Systemstart öffnen",
       "tr": "Açılışta başlat"
     },
-    "Leave the user name and password out of the address.": {
-      "zh-Hans": "请不要在地址中包含用户名和密码。",
-      "hi": "पते में यूज़रनेम और पासवर्ड न डालें।",
-      "es": "No incluyas el usuario ni la contraseña en la dirección.",
-      "ar": "لا تضع اسم المستخدم وكلمة المرور في العنوان.",
-      "fr": "Ne mets ni nom d'utilisateur ni mot de passe dans l'adresse.",
-      "bn": "ঠিকানায় ইউজারনেম আর পাসওয়ার্ড দেবেন না।",
-      "pt-BR": "Não coloque usuário e senha no endereço.",
-      "ru": "Не указывайте имя пользователя и пароль в адресе.",
-      "id": "Jangan sertakan nama pengguna dan kata sandi di alamat.",
-      "de": "Lass Benutzername und Passwort in der Adresse weg.",
-      "tr": "Adrese kullanıcı adı ve parola ekleme."
-    },
     "Main display": {
       "zh-Hans": "主显示器",
       "hi": "मुख्य डिस्प्ले",
@@ -1040,19 +793,6 @@
       "id": "Bisukan atau bunyikan Mochi",
       "de": "Mochi stummschalten oder einschalten",
       "tr": "Mochi'nin sesini kapat / aç"
-    },
-    "Network error: {error}": {
-      "zh-Hans": "网络错误：{error}",
-      "hi": "नेटवर्क त्रुटि: {error}",
-      "es": "Error de red: {error}",
-      "ar": "خطأ في الشبكة: {error}",
-      "fr": "Erreur réseau : {error}",
-      "bn": "নেটওয়ার্ক ত্রুটি: {error}",
-      "pt-BR": "Erro de rede: {error}",
-      "ru": "Ошибка сети: {error}",
-      "id": "Galat jaringan: {error}",
-      "de": "Netzwerkfehler: {error}",
-      "tr": "Ağ hatası: {error}"
     },
     "Next or previous pill": {
       "zh-Hans": "下一个或上一个标签",
@@ -1132,32 +872,6 @@
       "de": "Keine vorhandene Datei — nichts zu sichern.",
       "tr": "Mevcut dosya yok — yedeklenecek bir şey yok."
     },
-    "No models yet. Download one in {name} first.": {
-      "zh-Hans": "还没有模型。请先在 {name} 中下载一个。",
-      "hi": "अभी कोई मॉडल नहीं। पहले {name} में एक डाउनलोड करें।",
-      "es": "Aún no hay modelos. Descarga uno en {name} primero.",
-      "ar": "لا توجد نماذج بعد. نزّل نموذجًا في {name} أولًا.",
-      "fr": "Pas encore de modèle. Télécharges-en un dans {name} d'abord.",
-      "bn": "এখনো কোনো মডেল নেই। আগে {name}-এ একটি ডাউনলোড করুন।",
-      "pt-BR": "Ainda não há modelos. Baixe um no {name} primeiro.",
-      "ru": "Моделей пока нет. Сначала загрузите модель в {name}.",
-      "id": "Belum ada model. Unduh satu di {name} terlebih dahulu.",
-      "de": "Noch keine Modelle. Lade zuerst eines in {name} herunter.",
-      "tr": "Henüz model yok. Önce {name} içinde bir model indir."
-    },
-    "No response text.": {
-      "zh-Hans": "没有回复内容。",
-      "hi": "जवाब में कोई टेक्स्ट नहीं।",
-      "es": "La respuesta no tiene texto.",
-      "ar": "لا يوجد نص في الرد.",
-      "fr": "La réponse ne contient pas de texte.",
-      "bn": "উত্তরে কোনো লেখা নেই।",
-      "pt-BR": "A resposta não tem texto.",
-      "ru": "В ответе нет текста.",
-      "id": "Tidak ada teks balasan.",
-      "de": "Kein Antworttext.",
-      "tr": "Yanıt metni yok."
-    },
     "No settings.json yet — nothing to back up.": {
       "zh-Hans": "还没有 settings.json — 无需备份。",
       "hi": "अभी कोई settings.json नहीं — बैकअप के लिए कुछ नहीं।",
@@ -1170,32 +884,6 @@
       "id": "Belum ada settings.json — tidak ada yang perlu dicadangkan.",
       "de": "Noch keine settings.json — nichts zu sichern.",
       "tr": "Henüz settings.json yok — yedeklenecek bir şey yok."
-    },
-    "Not a valid address: {address}": {
-      "zh-Hans": "不是有效的地址：{address}",
-      "hi": "मान्य पता नहीं: {address}",
-      "es": "Dirección no válida: {address}",
-      "ar": "عنوان غير صالح: {address}",
-      "fr": "Adresse non valide : {address}",
-      "bn": "বৈধ ঠিকানা নয়: {address}",
-      "pt-BR": "Endereço inválido: {address}",
-      "ru": "Некорректный адрес: {address}",
-      "id": "Alamat tidak valid: {address}",
-      "de": "Ungültige Adresse: {address}",
-      "tr": "Geçersiz adres: {address}"
-    },
-    "Not a valid http:// or https:// address.": {
-      "zh-Hans": "不是有效的 http:// 或 https:// 地址。",
-      "hi": "मान्य http:// या https:// पता नहीं है।",
-      "es": "No es una dirección http:// o https:// válida.",
-      "ar": "ليس عنوان http:// أو https:// صالحًا.",
-      "fr": "Ce n'est pas une adresse http:// ou https:// valide.",
-      "bn": "বৈধ http:// বা https:// ঠিকানা নয়।",
-      "pt-BR": "Não é um endereço http:// ou https:// válido.",
-      "ru": "Это не корректный адрес http:// или https://.",
-      "id": "Bukan alamat http:// atau https:// yang valid.",
-      "de": "Keine gültige http://- oder https://-Adresse.",
-      "tr": "Geçerli bir http:// veya https:// adresi değil."
     },
     "Not a valid shortcut": {
       "zh-Hans": "无效的快捷键",
@@ -1222,32 +910,6 @@
       "id": "Tidak tersedia",
       "de": "Nicht verfügbar",
       "tr": "Kullanılamıyor"
-    },
-    "Nothing leaves your PC: the server runs on this computer.": {
-      "zh-Hans": "数据不会离开你的电脑：服务器运行在这台电脑上。",
-      "hi": "आपके PC से कुछ बाहर नहीं जाता: सर्वर इसी कंप्यूटर पर चलता है।",
-      "es": "Nada sale de tu PC: el servidor funciona en este equipo.",
-      "ar": "لا يغادر أي شيء جهازك: الخادم يعمل على هذا الحاسوب.",
-      "fr": "Rien ne quitte ton PC : le serveur tourne sur cet ordinateur.",
-      "bn": "আপনার PC থেকে কিছুই বাইরে যায় না: সার্ভার এই কম্পিউটারেই চলে।",
-      "pt-BR": "Nada sai do seu PC: o servidor roda neste computador.",
-      "ru": "Ничего не покидает ваш ПК: сервер работает на этом компьютере.",
-      "id": "Tidak ada yang keluar dari PC Anda: server berjalan di komputer ini.",
-      "de": "Nichts verlässt deinen PC: Der Server läuft auf diesem Computer.",
-      "tr": "Hiçbir veri bilgisayarından çıkmaz: sunucu bu bilgisayarda çalışır."
-    },
-    "Only files dropped on the island can be added.": {
-      "zh-Hans": "只能添加拖放到岛上的文件。",
-      "hi": "केवल आइलैंड पर छोड़ी गई फ़ाइलें ही जोड़ी जा सकती हैं।",
-      "es": "Solo se pueden añadir archivos soltados en la isla.",
-      "ar": "يمكن إضافة الملفات المُفلتة على الشريط فقط.",
-      "fr": "Seuls les fichiers déposés sur l'île peuvent être ajoutés.",
-      "bn": "শুধু আইল্যান্ডে ড্রপ করা ফাইলই যোগ করা যায়।",
-      "pt-BR": "Só arquivos soltos na ilha podem ser adicionados.",
-      "ru": "Добавлять можно только файлы, перетащенные на остров.",
-      "id": "Hanya file yang diletakkan di pulau yang bisa ditambahkan.",
-      "de": "Nur auf der Insel abgelegte Dateien können hinzugefügt werden.",
-      "tr": "Yalnızca adaya bırakılan dosyalar eklenebilir."
     },
     "Open in VS Code": {
       "zh-Hans": "在 VS Code 中打开",
@@ -1313,58 +975,6 @@
       "id": "Buka lemari",
       "de": "Garderobe öffnen",
       "tr": "Gardırobu aç"
-    },
-    "OpenAI-compatible": {
-      "zh-Hans": "兼容 OpenAI",
-      "hi": "OpenAI-संगत",
-      "es": "Compatible con OpenAI",
-      "ar": "متوافق مع OpenAI",
-      "fr": "Compatible OpenAI",
-      "bn": "OpenAI-সামঞ্জস্যপূর্ণ",
-      "pt-BR": "Compatível com OpenAI",
-      "ru": "Совместимый с OpenAI",
-      "id": "Kompatibel OpenAI",
-      "de": "OpenAI-kompatibel",
-      "tr": "OpenAI uyumlu"
-    },
-    "OpenAI-compatible server": {
-      "zh-Hans": "兼容 OpenAI 的服务器",
-      "hi": "OpenAI-संगत सर्वर",
-      "es": "Servidor compatible con OpenAI",
-      "ar": "خادم متوافق مع OpenAI",
-      "fr": "Serveur compatible OpenAI",
-      "bn": "OpenAI-সামঞ্জস্যপূর্ণ সার্ভার",
-      "pt-BR": "Servidor compatível com OpenAI",
-      "ru": "Сервер, совместимый с OpenAI",
-      "id": "Server kompatibel OpenAI",
-      "de": "OpenAI-kompatibler Server",
-      "tr": "OpenAI uyumlu sunucu"
-    },
-    "PDF": {
-      "zh-Hans": "PDF",
-      "hi": "PDF",
-      "es": "PDF",
-      "ar": "PDF",
-      "fr": "PDF",
-      "bn": "PDF",
-      "pt-BR": "PDF",
-      "ru": "PDF",
-      "id": "PDF",
-      "de": "PDF",
-      "tr": "PDF"
-    },
-    "Pick a model above the chat box first.": {
-      "zh-Hans": "请先在聊天框上方选择一个模型。",
-      "hi": "पहले चैट बॉक्स के ऊपर एक मॉडल चुनें।",
-      "es": "Elige primero un modelo encima del cuadro de chat.",
-      "ar": "اختر نموذجًا فوق مربع الدردشة أولًا.",
-      "fr": "Choisis d'abord un modèle au-dessus de la zone de chat.",
-      "bn": "আগে চ্যাট বক্সের উপরে একটি মডেল বেছে নিন।",
-      "pt-BR": "Escolha primeiro um modelo acima da caixa de chat.",
-      "ru": "Сначала выберите модель над полем чата.",
-      "id": "Pilih model di atas kotak obrolan terlebih dahulu.",
-      "de": "Wähle zuerst ein Modell über dem Chatfeld aus.",
-      "tr": "Önce sohbet kutusunun üstünden bir model seç."
     },
     "Press keys…": {
       "zh-Hans": "请按键…",
@@ -1509,19 +1119,6 @@
       "de": "Starte OpenCode neu, um das Plugin zu laden.",
       "tr": "Eklentiyi yüklemek için OpenCode'u yeniden başlat."
     },
-    "Result": {
-      "zh-Hans": "结果",
-      "hi": "परिणाम",
-      "es": "Resultado",
-      "ar": "النتيجة",
-      "fr": "Résultat",
-      "bn": "ফলাফল",
-      "pt-BR": "Resultado",
-      "ru": "Результат",
-      "id": "Hasil",
-      "de": "Ergebnis",
-      "tr": "Sonuç"
-    },
     "Saturday": {
       "zh-Hans": "星期六",
       "hi": "शनिवार",
@@ -1586,32 +1183,6 @@
       "id": "Kirim Mochi ke desktop",
       "de": "Mochi auf den Desktop schicken",
       "tr": "Mochi'yi masaüstüne taşı"
-    },
-    "Send the message": {
-      "zh-Hans": "发送消息",
-      "hi": "संदेश भेजें",
-      "es": "Enviar el mensaje",
-      "ar": "إرسال الرسالة",
-      "fr": "Envoyer le message",
-      "bn": "বার্তা পাঠান",
-      "pt-BR": "Enviar a mensagem",
-      "ru": "Отправить сообщение",
-      "id": "Kirim pesan",
-      "de": "Nachricht senden",
-      "tr": "Mesajı gönder"
-    },
-    "Sending by email isn't in this version.": {
-      "zh-Hans": "此版本暂不支持通过邮件发送。",
-      "hi": "ईमेल से भेजना इस संस्करण में नहीं है।",
-      "es": "El envío por correo no está en esta versión.",
-      "ar": "الإرسال بالبريد الإلكتروني غير متاح في هذا الإصدار.",
-      "fr": "L'envoi par e-mail n'est pas dans cette version.",
-      "bn": "ইমেলে পাঠানো এই সংস্করণে নেই।",
-      "pt-BR": "O envio por e-mail não está nesta versão.",
-      "ru": "Отправки по почте в этой версии нет.",
-      "id": "Mengirim lewat email belum ada di versi ini.",
-      "de": "Der E-Mail-Versand ist in dieser Version nicht verfügbar.",
-      "tr": "Bu sürümde e-postayla gönderme yok."
     },
     "Sessions — approvals stay in the agent": {
       "zh-Hans": "会话 — 审批仍在代理中进行",
@@ -1743,19 +1314,6 @@
       "de": "Starte eine neue Muse Code-Sitzung, um die Hooks zu aktivieren.",
       "tr": "Hook'ları kullanmak için yeni bir Muse Code oturumu başlat."
     },
-    "Start a new chat": {
-      "zh-Hans": "开始新聊天",
-      "hi": "नई चैट शुरू करें",
-      "es": "Empezar un chat nuevo",
-      "ar": "بدء دردشة جديدة",
-      "fr": "Commencer un nouveau chat",
-      "bn": "নতুন চ্যাট শুরু করুন",
-      "pt-BR": "Começar um novo chat",
-      "ru": "Начать новый чат",
-      "id": "Mulai obrolan baru",
-      "de": "Neuen Chat starten",
-      "tr": "Yeni sohbet başlat"
-    },
     "Sunday": {
       "zh-Hans": "星期日",
       "hi": "रविवार",
@@ -1769,19 +1327,6 @@
       "de": "Sonntag",
       "tr": "Pazar"
     },
-    "Switch provider or model": {
-      "zh-Hans": "切换服务商或模型",
-      "hi": "प्रदाता या मॉडल बदलें",
-      "es": "Cambiar de proveedor o modelo",
-      "ar": "تبديل المزوّد أو النموذج",
-      "fr": "Changer de fournisseur ou de modèle",
-      "bn": "প্রদানকারী বা মডেল বদলান",
-      "pt-BR": "Trocar de provedor ou modelo",
-      "ru": "Сменить провайдера или модель",
-      "id": "Ganti penyedia atau model",
-      "de": "Anbieter oder Modell wechseln",
-      "tr": "Sağlayıcı veya model değiştir"
-    },
     "That key can't be used in a shortcut.": {
       "zh-Hans": "这个键不能用于快捷键。",
       "hi": "उस कुंजी का शॉर्टकट में उपयोग नहीं हो सकता।",
@@ -1794,19 +1339,6 @@
       "id": "Tombol itu tidak dapat dipakai dalam pintasan.",
       "de": "Diese Taste kann nicht für eine Tastenkombination verwendet werden.",
       "tr": "Bu tuş kısayolda kullanılamaz."
-    },
-    "The address must start with http:// or https://.": {
-      "zh-Hans": "地址必须以 http:// 或 https:// 开头。",
-      "hi": "पता http:// या https:// से शुरू होना चाहिए।",
-      "es": "La dirección debe empezar por http:// o https://.",
-      "ar": "يجب أن يبدأ العنوان بـ http:// أو https://.",
-      "fr": "L'adresse doit commencer par http:// ou https://.",
-      "bn": "ঠিকানাটি http:// বা https:// দিয়ে শুরু হতে হবে।",
-      "pt-BR": "O endereço precisa começar com http:// ou https://.",
-      "ru": "Адрес должен начинаться с http:// или https://.",
-      "id": "Alamat harus diawali http:// atau https://.",
-      "de": "Die Adresse muss mit http:// oder https:// beginnen.",
-      "tr": "Adres http:// veya https:// ile başlamalı."
     },
     "The file is removed.": {
       "zh-Hans": "该文件将被删除。",
@@ -1885,32 +1417,6 @@
       "id": "Relay belum terpasang. Mulai ulang Coucou.",
       "de": "Der Relay ist noch nicht installiert. Starte Coucou neu.",
       "tr": "Aracı henüz kurulu değil. Coucou'yu yeniden başlat."
-    },
-    "The server refused the key. Check it, then connect again.": {
-      "zh-Hans": "服务器拒绝了该密钥。请检查后重新连接。",
-      "hi": "सर्वर ने कुंजी अस्वीकार कर दी। उसे जाँचें, फिर दोबारा कनेक्ट करें।",
-      "es": "El servidor rechazó la clave. Revísala y vuelve a conectar.",
-      "ar": "رفض الخادم المفتاح. تحقّق منه ثم اتصل مجددًا.",
-      "fr": "Le serveur a refusé la clé. Vérifie-la, puis reconnecte-toi.",
-      "bn": "সার্ভার কী প্রত্যাখ্যান করেছে। যাচাই করে আবার সংযুক্ত করুন।",
-      "pt-BR": "O servidor recusou a chave. Verifique-a e conecte de novo.",
-      "ru": "Сервер отклонил ключ. Проверьте его и подключитесь снова.",
-      "id": "Server menolak kunci. Periksa, lalu hubungkan lagi.",
-      "de": "Der Server hat den Schlüssel abgelehnt. Prüfe ihn und verbinde dich erneut.",
-      "tr": "Sunucu anahtarı reddetti. Kontrol edip tekrar bağlan."
-    },
-    "The server's answer is too large.": {
-      "zh-Hans": "服务器的回复过大。",
-      "hi": "सर्वर का जवाब बहुत बड़ा है।",
-      "es": "La respuesta del servidor es demasiado grande.",
-      "ar": "رد الخادم كبير جدًا.",
-      "fr": "La réponse du serveur est trop volumineuse.",
-      "bn": "সার্ভারের উত্তর অনেক বড়।",
-      "pt-BR": "A resposta do servidor é grande demais.",
-      "ru": "Ответ сервера слишком большой.",
-      "id": "Jawaban server terlalu besar.",
-      "de": "Die Serverantwort ist zu groß.",
-      "tr": "Sunucunun yanıtı çok büyük."
     },
     "This agent takes a plugin, not hook entries.": {
       "zh-Hans": "此代理使用插件，而不是 hook 条目。",
@@ -2106,19 +1612,6 @@
       "id": "Agen tidak dikenal “{id}”.",
       "de": "Unbekannter Agent \"{id}\".",
       "tr": "Bilinmeyen ajan \"{id}\"."
-    },
-    "Use in chat": {
-      "zh-Hans": "在聊天中使用",
-      "hi": "चैट में उपयोग करें",
-      "es": "Usar en el chat",
-      "ar": "استخدامه في الدردشة",
-      "fr": "Utiliser dans le chat",
-      "bn": "চ্যাটে ব্যবহার করুন",
-      "pt-BR": "Usar no chat",
-      "ru": "Использовать в чате",
-      "id": "Pakai di obrolan",
-      "de": "Im Chat verwenden",
-      "tr": "Sohbette kullan"
     },
     "Used twice": {
       "zh-Hans": "重复使用",
@@ -2406,56 +1899,6 @@
       "de": "{allowed} zugelassen, {denied} abgelehnt",
       "tr": "{allowed} izin verildi, {denied} reddedildi"
     },
-    "{count} models": {
-      "zh-Hans": {
-        "other": "{count} 个模型"
-      },
-      "hi": {
-        "one": "{count} मॉडल",
-        "other": "{count} मॉडल"
-      },
-      "es": {
-        "one": "{count} modelo",
-        "other": "{count} modelos"
-      },
-      "ar": {
-        "zero": "{count} نموذج",
-        "one": "نموذج واحد",
-        "two": "نموذجان",
-        "few": "{count} نماذج",
-        "many": "{count} نموذجًا",
-        "other": "{count} نموذج"
-      },
-      "fr": {
-        "one": "{count} modèle",
-        "other": "{count} modèles"
-      },
-      "bn": {
-        "one": "{count}টি মডেল",
-        "other": "{count}টি মডেল"
-      },
-      "pt-BR": {
-        "one": "{count} modelo",
-        "other": "{count} modelos"
-      },
-      "ru": {
-        "one": "{count} модель",
-        "few": "{count} модели",
-        "many": "{count} моделей",
-        "other": "{count} модели"
-      },
-      "id": {
-        "other": "{count} model"
-      },
-      "de": {
-        "one": "{count} Modell",
-        "other": "{count} Modelle"
-      },
-      "tr": {
-        "one": "{count} model",
-        "other": "{count} model"
-      }
-    },
     "{file} isn't UTF-8 text — Coucou won't touch it.": {
       "zh-Hans": "{file} 不是 UTF-8 文本 — Coucou 不会修改它。",
       "hi": "{file} UTF-8 टेक्स्ट नहीं है — Coucou इसे नहीं छुएगा।",
@@ -2520,19 +1963,6 @@
       "id": "{keys} mengetik “{char}” di keyboard Anda, jadi tidak bisa menjadi pintasan. Pilih tombol lain.",
       "de": "{keys} gibt auf deiner Tastatur „{char}“ ein und kann daher keine Tastenkombination sein. Wähle andere Tasten.",
       "tr": "{keys} klavyende “{char}” yazıyor, bu yüzden kısayol olamaz. Başka bir tuş seç."
-    },
-    "{model} isn't installed. Pick another model above the chat box.": {
-      "zh-Hans": "{model} 未安装。请在聊天框上方选择其他模型。",
-      "hi": "{model} इंस्टॉल नहीं है। चैट बॉक्स के ऊपर कोई दूसरा मॉडल चुनें।",
-      "es": "{model} no está instalado. Elige otro modelo encima del cuadro de chat.",
-      "ar": "{model} غير مثبَّت. اختر نموذجًا آخر فوق مربع الدردشة.",
-      "fr": "{model} n'est pas installé. Choisis un autre modèle au-dessus de la zone de chat.",
-      "bn": "{model} ইনস্টল করা নেই। চ্যাট বক্সের উপরে অন্য মডেল বেছে নিন।",
-      "pt-BR": "{model} não está instalado. Escolha outro modelo acima da caixa de chat.",
-      "ru": "{model} не установлена. Выберите другую модель над полем чата.",
-      "id": "{model} belum terpasang. Pilih model lain di atas kotak obrolan.",
-      "de": "{model} ist nicht installiert. Wähle ein anderes Modell über dem Chatfeld aus.",
-      "tr": "{model} kurulu değil. Sohbet kutusunun üstünden başka bir model seç."
     },
     "{name} wasn't written by Coucou — Coucou has not touched it.": {
       "zh-Hans": "{name} 不是由 Coucou 写入的 — Coucou 没有修改它。",
@@ -2664,32 +2094,6 @@
       "de": "⚠ fehlgeschlagen",
       "tr": "⚠ başarısız"
     },
-    "A key is only sent over https, or to a server on this computer.": {
-      "zh-Hans": "密钥只会通过 https 发送，或发送到本机上的服务器。",
-      "hi": "कुंजी केवल https पर, या इसी कंप्यूटर के सर्वर को भेजी जाती है।",
-      "es": "La clave solo se envía por https o a un servidor de este ordenador.",
-      "ar": "لا يُرسَل المفتاح إلا عبر https، أو إلى خادم على هذا الحاسوب.",
-      "fr": "La clé n'est envoyée qu'en https, ou à un serveur sur cet ordinateur.",
-      "bn": "কী কেবল https-এর মাধ্যমে, অথবা এই কম্পিউটারের কোনো সার্ভারে পাঠানো হয়।",
-      "pt-BR": "A chave só é enviada por https ou para um servidor neste computador.",
-      "ru": "Ключ отправляется только по https или на сервер на этом компьютере.",
-      "id": "Kunci hanya dikirim lewat https, atau ke server di komputer ini.",
-      "de": "Ein Schlüssel wird nur über HTTPS oder an einen Server auf diesem Computer gesendet.",
-      "tr": "Anahtar yalnızca https üzerinden veya bu bilgisayardaki bir sunucuya gönderilir."
-    },
-    "Only a file dropped on the island can be sent with a question.": {
-      "zh-Hans": "只有拖放到岛上的文件才能随问题一起发送。",
-      "hi": "सवाल के साथ केवल वही फ़ाइल भेजी जा सकती है जो island पर छोड़ी गई हो।",
-      "es": "Solo se puede enviar con una pregunta un archivo soltado en la isla.",
-      "ar": "لا يمكن إرسال ملف مع سؤال إلا إذا أُفلِت على الجزيرة.",
-      "fr": "Seul un fichier déposé sur l'île peut être envoyé avec une question.",
-      "bn": "প্রশ্নের সঙ্গে কেবল আইল্যান্ডে ছাড়া ফাইলই পাঠানো যায়।",
-      "pt-BR": "Só um arquivo solto na ilha pode ser enviado com uma pergunta.",
-      "ru": "С вопросом можно отправить только файл, перетащенный на остров.",
-      "id": "Hanya file yang dijatuhkan ke pulau yang bisa dikirim bersama pertanyaan.",
-      "de": "Nur eine auf der Insel abgelegte Datei kann mit einer Frage gesendet werden.",
-      "tr": "Soruyla birlikte yalnızca adaya bırakılan bir dosya gönderilebilir."
-    },
     "The numbers come from the Claude Code command-line tool. The Claude desktop app does not report them, so the gauge stays empty if you only use the desktop app.": {
       "zh-Hans": "数据来自 Claude Code 命令行工具。Claude 桌面应用不会提供这些数据，因此如果你只使用桌面应用，仪表会一直为空。",
       "hi": "ये आँकड़े Claude Code कमांड-लाइन टूल से आते हैं। Claude डेस्कटॉप ऐप इन्हें नहीं भेजता, इसलिए अगर आप सिर्फ़ डेस्कटॉप ऐप इस्तेमाल करते हैं तो गेज खाली रहेगा।",
@@ -2767,19 +2171,6 @@
       "id": "Tanggal dan jam di tengah pulau saat ringkas.",
       "de": "Datum und Uhrzeit in der Mitte der Insel, wenn sie kompakt ist.",
       "tr": "Ada kompaktken ortasında tarih ve saat."
-    },
-    "Only a server on this computer is allowed.": {
-      "zh-Hans": "只允许使用这台电脑上的服务器。",
-      "hi": "केवल इसी कंप्यूटर का सर्वर अनुमत है।",
-      "es": "Solo se permite un servidor de este equipo.",
-      "ar": "يُسمح فقط بخادم على هذا الحاسوب.",
-      "fr": "Seul un serveur de cet ordinateur est autorisé.",
-      "bn": "শুধু এই কম্পিউটারের সার্ভার অনুমোদিত।",
-      "pt-BR": "Só é permitido um servidor deste computador.",
-      "ru": "Разрешён только сервер на этом компьютере.",
-      "id": "Hanya server di komputer ini yang diizinkan.",
-      "de": "Nur ein Server auf diesem Computer ist erlaubt.",
-      "tr": "Yalnızca bu bilgisayardaki bir sunucuya izin verilir."
     },
     "Pick up to {max} pills to show next to Mochi — {used}/{max} in use.": {
       "zh-Hans": "最多选择 {max} 个标签显示在 Mochi 旁边 — 已用 {used}/{max}。",
@@ -2897,6 +2288,32 @@
       "id": "Izin dan pertanyaan dijawab dari pulau.",
       "de": "Berechtigungen und Fragen beantwortest du auf der Insel.",
       "tr": "İzinler ve sorular ada üzerinden yanıtlanır."
+    },
+    "Keep the island visible": {
+      "zh-Hans": "保持灵动岛可见",
+      "hi": "आइलैंड को दिखाई देता रखें",
+      "es": "Mantener la isla visible",
+      "ar": "إبقاء الجزيرة ظاهرة",
+      "fr": "Garder l'île visible",
+      "bn": "আইল্যান্ড দৃশ্যমান রাখুন",
+      "pt-BR": "Manter a ilha visível",
+      "ru": "Не скрывать остров",
+      "id": "Biarkan pulau terlihat",
+      "de": "Insel sichtbar lassen",
+      "tr": "Adayı görünür tut"
+    },
+    "The compact island stays on screen instead of hiding after a minute.": {
+      "zh-Hans": "紧凑的灵动岛会一直显示，而不是一分钟后隐藏。",
+      "hi": "कॉम्पैक्ट आइलैंड एक मिनट बाद छिपने के बजाय स्क्रीन पर बना रहता है।",
+      "es": "La isla compacta se queda en pantalla en lugar de ocultarse al cabo de un minuto.",
+      "ar": "تبقى الجزيرة المصغّرة على الشاشة بدل أن تختفي بعد دقيقة.",
+      "fr": "L'île compacte reste à l'écran au lieu de se cacher au bout d'une minute.",
+      "bn": "কমপ্যাক্ট আইল্যান্ড এক মিনিট পরে লুকিয়ে না গিয়ে পর্দায় থাকে।",
+      "pt-BR": "A ilha compacta fica na tela em vez de se esconder depois de um minuto.",
+      "ru": "Компактный остров остаётся на экране и не прячется через минуту.",
+      "id": "Pulau ringkas tetap di layar, tidak bersembunyi setelah satu menit.",
+      "de": "Die kompakte Insel bleibt auf dem Bildschirm, statt sich nach einer Minute zu verstecken.",
+      "tr": "Kompakt ada, bir dakika sonra gizlenmek yerine ekranda kalır."
     }
   }
 }

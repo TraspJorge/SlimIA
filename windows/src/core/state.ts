@@ -7,7 +7,6 @@ import {
   toggleDeclared, type HostOs, type PillDefinition,
 } from "./pills";
 import type { CodexPlanUsage, PlanUsage } from "./plan";
-import type { ProviderId } from "./providers";
 import type { FileDiff } from "./diff";
 import type { Bindings } from "./shortcuts";
 import { DEFAULT_OUTFIT, type Outfit } from "../mochi/wardrobe";
@@ -59,28 +58,6 @@ export interface AskedQuestion {
   multiSelect: boolean;
 }
 
-export interface ChatMessage {
-  id: number;
-  role: "user" | "assistant";
-  content: string;
-}
-
-export type PromptContext =
-  | { kind: "window"; appName: string; title: string; url?: string }
-  | { kind: "file"; name: string; path?: string };
-
-export interface ResultItem {
-  label: string;
-  detail: string;
-  url?: string;
-}
-
-export interface SearchResult {
-  title: string;
-  items: ResultItem[];
-  note?: string;
-}
-
 /** A fresh, idle task for a catalog pill, in the colour the user gave it if any. */
 function taskFor(def: PillDefinition, colors: unknown, name = def.name): AgentTask {
   return {
@@ -103,6 +80,8 @@ export interface Settings {
   autoCloseInterval: number;
   /** Hovering the island opens it all the way (off: hovering only peeks). */
   openOnHover: boolean;
+  /** The compact island stays on screen instead of hiding after a minute. */
+  keepVisible: boolean;
   /** Date and time in the middle of the compact island. */
   showClock: boolean;
   absenceInterval: number;
@@ -124,14 +103,6 @@ export interface Settings {
   planRelayInstalled: boolean;
   /** Show the Codex plan pill in the island's header. */
   showCodexPlanInNotch: boolean;
-  /** Who the chat talks to (see core/providers.ts); picked in the chat view. */
-  chatProvider: ProviderId;
-  /** The model picked for each provider, by provider id. */
-  chatModels: Record<string, string>;
-  /** Model server addresses once connected; empty means not connected. */
-  ollamaUrl: string;
-  lmstudioUrl: string;
-  customUrl: string;
   /** Global shortcuts the user changed, by action id (see core/shortcuts.ts). */
   shortcuts: Bindings;
   /**
@@ -162,6 +133,7 @@ export const DEFAULT_SETTINGS: Settings = {
   soundVolume: 0.12,
   autoCloseInterval: 15,
   openOnHover: false,
+  keepVisible: true,
   showClock: false,
   absenceInterval: 180,
   activeIntegrations: [],
@@ -174,11 +146,6 @@ export const DEFAULT_SETTINGS: Settings = {
   showPlanInNotch: false,
   planRelayInstalled: false,
   showCodexPlanInNotch: false,
-  chatProvider: "ollama",
-  chatModels: {},
-  ollamaUrl: "",
-  lmstudioUrl: "",
-  customUrl: "",
   shortcuts: {},
   mochiOutfit: DEFAULT_OUTFIT,
   pillColors: {},
@@ -209,15 +176,6 @@ class AppState {
   isPinned = false;
   paused = false;
 
-  uploadProgress = 0;
-  uploadDuration = 2.4;
-  fileDragOver = false;
-
-  promptContext: PromptContext | null = null;
-  droppedFile: { name: string; path: string } | null = null;
-  noteMessage: string | null = null;
-  searchResult: SearchResult | null = null;
-  chatHistory: ChatMessage[] = [];
   pendingApproval: ApprovalInfo | null = null;
   /** The pill that was in front when the card came up; it comes back after. */
   focusBeforeApproval: string | null = null;

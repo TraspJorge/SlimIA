@@ -19,6 +19,9 @@ pub struct Settings {
     /// Hovering the island opens it all the way, and it folds again shortly
     /// after the pointer leaves (the Mac's "Open on hover"). Off by default.
     pub open_on_hover: bool,
+    /// The compact island stays on screen instead of hiding after a minute: on a desktop
+    /// with a top bar the hidden island is a strip the bar covers, so it cannot be found.
+    pub keep_visible: bool,
     pub absence_interval: f64,
     pub active_integrations: Vec<String>,
     /// The always-on workspace pill (src/core/pills.ts checks it is one).
@@ -40,16 +43,6 @@ pub struct Settings {
     /// Show the Codex plan pill (5 h / weekly limits from `codex app-server`).
     /// Off by default; nothing is installed for it.
     pub show_codex_plan_in_notch: bool,
-    /// Who the chat talks to: a model server of local_chat.rs ("ollama",
-    /// "lmstudio", "custom"), always on this computer. Picked in the chat view.
-    pub chat_provider: String,
-    /// The model picked for each provider, by provider id.
-    pub chat_models: BTreeMap<String, String>,
-    /// Addresses of the model servers once connected; empty means not connected.
-    pub ollama_url: String,
-    pub lmstudio_url: String,
-    /// Any other OpenAI-compatible server; its key, if any, is in the keychain.
-    pub custom_url: String,
     /// Global shortcuts the user changed, by action id; the others keep their
     /// default (see shortcuts.rs).
     pub shortcuts: crate::shortcuts::Bindings,
@@ -97,6 +90,7 @@ impl Default for Settings {
             sound_volume: 0.12,
             auto_close_interval: 15.0,
             open_on_hover: false,
+            keep_visible: true,
             absence_interval: 180.0,
             active_integrations: Vec::new(),
             main_pill: "integration_claude".into(),
@@ -108,11 +102,6 @@ impl Default for Settings {
             show_plan_in_notch: false,
             plan_relay_installed: false,
             show_codex_plan_in_notch: false,
-            chat_provider: crate::chat::DEFAULT_PROVIDER.into(),
-            chat_models: BTreeMap::new(),
-            ollama_url: String::new(),
-            lmstudio_url: String::new(),
-            custom_url: String::new(),
             shortcuts: Default::default(),
             mochi_outfit: "auto".into(),
             pill_colors: BTreeMap::new(),
@@ -381,17 +370,13 @@ mod tests {
   "mainPill": "agent_cursor",
   "screen": "cursor",
   "islandOffsetX": 120,
+  "keepVisible": false,
   "islandOffsetY": 28,
   "autostart": true,
   "hooksInstalled": true,
   "showPlanInNotch": true,
   "planRelayInstalled": true,
   "showCodexPlanInNotch": true,
-  "chatProvider": "ollama",
-  "chatModels": { "ollama": "llama3.2", "openai": "gpt-x" },
-  "ollamaUrl": "http://127.0.0.1:11434",
-  "lmstudioUrl": "http://127.0.0.1:1234",
-  "customUrl": "https://llm.example.com",
   "shortcuts": { "openChat": { "keys": "Ctrl+Shift+K", "enabled": false } },
   "mochiOutfit": "witchHat",
   "pillColors": { "integration_claude": "#2DD4BF" },
@@ -772,6 +757,7 @@ mod tests {
                 "soundVolume",
                 "autoCloseInterval",
                 "openOnHover",
+                "keepVisible",
                 "absenceInterval",
                 "activeIntegrations",
                 "mainPill",
@@ -783,11 +769,6 @@ mod tests {
                 "showPlanInNotch",
                 "planRelayInstalled",
                 "showCodexPlanInNotch",
-                "chatProvider",
-                "chatModels",
-                "ollamaUrl",
-                "lmstudioUrl",
-                "customUrl",
                 "shortcuts",
                 "mochiOutfit",
                 "pillColors",

@@ -8,8 +8,6 @@ import { Ticker } from "./ticker";
 import { State, type AgentTask } from "../core/state";
 import { washRGBA, type IslandViewName, type Wash } from "../core/layout";
 import { createMiniBot, pruneMiniBots } from "../mochi/minibots";
-import { buildPrompt } from "./chat";
-import { buildChoose, buildUpload, buildUploading } from "./upload";
 import { renderIntegrationCard, type IntegrationCardHooks } from "./integrations";
 import { pillDefinition, sessionSubtitle } from "../core/pills";
 import {
@@ -29,7 +27,6 @@ import type { ViewCommand } from "../island/shortcuts";
 export interface ViewActions {
   setView(v: IslandViewName): void;
   /** "Cancel" on a dropped file: forgets it and goes back home. */
-  cancelDrop(): void;
   collapse(): void;
   /** Folds a waiting card to the compact island without answering it. */
   foldApproval(): void;
@@ -46,7 +43,7 @@ export interface ViewActions {
   toggleSound(): void;
   setVolume(v: number): void;
   setAutoClose(seconds: number): void;
-  openSettingsWindow(): void;
+  openSettingsWindow(page?: string): void;
   blip(): void;
   /** Wardrobe click: keeps the outfit ("auto" and "none" included). */
   chooseOutfit(selection: OutfitSelection): void;
@@ -111,8 +108,6 @@ function stack(padLeft: number, padRight: number, ...children: Node[]): HTMLElem
 
 export function buildHeader(actions: ViewActions): ViewHost {
   const tabHome = h("button", { class: "tab", title: tl("Overview"), onclick: () => go("overview") }, svg(ICONS.house, 13));
-  const tabChat = h("button", { class: "tab", title: tl("Ask"), onclick: () => go("prompt") }, svg(ICONS.bubble, 13));
-  const tabDrop = h("button", { class: "tab", title: tl("Drop"), onclick: () => go("upload") }, svg(ICONS.plus, 13));
 
   const gearBtn = h("button", { title: tl("Settings"), onclick: () => go("settings") }, svg(ICONS.gear, 14));
   const soundBtn = h("button", { title: tl("Mute"), onclick: () => actions.toggleSound() }, svg(ICONS.speakerOn, 14));
@@ -129,7 +124,7 @@ export function buildHeader(actions: ViewActions): ViewHost {
   const el = h(
     "div",
     { id: "header" },
-    h("div", { class: "tabs" }, tabHome, tabChat, tabDrop),
+    h("div", { class: "tabs" }, tabHome),
     h("div", { class: "header-actions" }, planPills, gearBtn, soundBtn),
   );
   const headerActions = el.lastElementChild as HTMLElement;
@@ -139,8 +134,6 @@ export function buildHeader(actions: ViewActions): ViewHost {
     sync() {
       const v = State.view;
       tabHome.classList.toggle("on", v === "overview" || v === "empty");
-      tabChat.classList.toggle("on", v === "prompt");
-      tabDrop.classList.toggle("on", v === "upload");
       gearBtn.classList.toggle("on", v === "settings");
       clear(gearBtn);
       gearBtn.append(svg(v === "settings" ? ICONS.gearFill : ICONS.gear, 14));
@@ -469,7 +462,7 @@ function buildEmpty(actions: ViewActions): ViewHost {
       h("div", { class: "sub", text: tl("Drop a file or window, or ask me anything.") }),
     ),
     h("div", { class: "grow" }),
-    btn(tl("Open the chat"), "primary", () => actions.setView("prompt")),
+    btn(tl("Open the chat"), "primary", () => actions.openSettingsWindow("chat")),
   );
   return { el: h("div", { class: "view" }, card(null, body)), sync() {} };
 }
@@ -699,19 +692,6 @@ function buildConfused(): ViewHost {
   return { el: h("div", { class: "view" }, card("pink", body)), sync() {} };
 }
 
-// ── Note ──────────────────────────────────────────────────────────────────────
-
-function buildNote(): ViewHost {
-  const title = h("div", { class: "title" });
-  const el = h("div", { class: "view" }, card(null, h("div", { class: "stack", style: "padding:0 18px 0 98px" }, title)));
-  return {
-    el,
-    sync() {
-      title.textContent = State.noteMessage ?? "";
-    },
-  };
-}
-
 // ── In-island settings ────────────────────────────────────────────────────────
 
 function buildSettings(actions: ViewActions): ViewHost {
@@ -778,21 +758,10 @@ function buildSettings(actions: ViewActions): ViewHost {
 
 // ── Placeholders filled in later stages ───────────────────────────────────────
 
-function buildPlaceholder(title: Msg, sub: string): ViewHost {
-  const body = h(
-    "div",
-    { class: "stack", style: "padding:0 18px 0 118px" },
-    h("div", { class: "title", text: title }),
-    h("div", { class: "sub", text: sub }),
-  );
-  return { el: h("div", { class: "view" }, card(null, body)), sync() {} };
-}
-
 // ── Registry ──────────────────────────────────────────────────────────────────
 
 export function buildViews(
   actions: ViewActions,
-  onChatHeightChange: () => void,
 ): Map<IslandViewName, ViewHost> {
   const map = new Map<IslandViewName, ViewHost>();
   map.set("overview", buildOverview(actions));
@@ -802,17 +771,8 @@ export function buildViews(
   map.set("error", buildError(actions));
   map.set("finished", buildFinished(actions));
   map.set("confused", buildConfused());
-  map.set("note", buildNote());
   map.set("settings", buildSettings(actions));
-  map.set("prompt", buildPrompt(onChatHeightChange));
-  map.set("upload", buildUpload());
-  map.set("uploading", buildUploading());
-  map.set("choose", buildChoose(actions));
   map.set("recap", buildRecap(actions));
   map.set("wardrobe", buildWardrobe(actions));
-  // Not in the Windows v1: sending a file by email, window attach + web result.
-  map.set("mail", buildPlaceholder(tl("Sending by email isn't in this version."), ""));
-  map.set("searching", buildPlaceholder(tl("Claude is searching…"), ""));
-  map.set("result", buildPlaceholder(tl("Result"), ""));
   return map;
 }

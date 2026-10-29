@@ -377,3 +377,18 @@ test("open on hover: an island opened by an alert keeps the normal delay", () =>
   seconds(2);
   assert.equal(fsm.state, "petit");
 });
+
+test("with the island kept visible, the compact island never goes back to hidden", () => {
+  fsm.petitToHiddenDelay = Number.POSITIVE_INFINITY;
+  fsm.launch();
+  fsm.greetComplete();
+  seconds(1);
+  assert.equal(fsm.state, "petit");
+  seconds(3600);
+  assert.equal(fsm.state, "petit");
+  // A hover and a leave do not start the hiding either.
+  fsm.mouseEntered();
+  fsm.mouseLeft();
+  seconds(3600);
+  assert.ok(["petit", "home"].includes(fsm.state));
+});

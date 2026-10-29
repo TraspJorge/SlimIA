@@ -61,8 +61,8 @@ export function runGlobalShortcut(host: ShortcutHost, action: string, resume: ()
       break;
 
     case "openChat":
-      resume();
-      host.alert("prompt");
+      // The Chat page of the Coucou window: what Claude answered.
+      void Bridge.openSettingsWindow("chat");
       break;
 
     case "goToAlert": {
@@ -161,16 +161,6 @@ export function runIslandKey(host: ShortcutHost, action: IslandKeyAction) {
       break;
     case "diff":
       host.viewCommand("toggleDiff");
-      break;
-    case "newChat":
-      // Not while an answer is on its way: it would land in the new chat.
-      if (State.stateOverride === "thinking") return;
-      State.chatHistory = [];
-      State.droppedFile = null;
-      State.promptContext = null;
-      void Bridge.chatReset();
-      Sound.play("blip");
-      host.setView("prompt");
       break;
     case "settings":
       void Bridge.openSettingsWindow();

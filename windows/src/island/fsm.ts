@@ -21,7 +21,7 @@ export class IslandStateMachine {
     this.homeDelay = seconds;
     if (this.state === "home" && this.homeCollapse != null) this.scheduleHomeCollapse();
   }
-  /** petit → hidden delay, seconds. */
+  /** petit → hidden delay, seconds; Infinity keeps the compact island on screen. */
   petitToHiddenDelay = 60;
   /** coucou → petit once the greeting animation ends (no hover). */
   greetAutoCollapseDelay = 0.6;
@@ -161,6 +161,8 @@ export class IslandStateMachine {
     // A card folded away while it waits for an answer keeps the compact island
     // on screen, so it can be reopened (isHeldOpen on macOS).
     if (this.pinned) return;
+    // Kept visible (Settings → General): the compact island never goes back to hidden.
+    if (!Number.isFinite(this.petitToHiddenDelay)) return;
     this.petitHide = window.setTimeout(() => {
       this.petitHide = null;
       if (this.state === "petit" && !this.pinned) this.transition("hidden");

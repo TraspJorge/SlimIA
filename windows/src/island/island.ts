@@ -2,10 +2,10 @@
 // Mirrors IslandRootView.swift + IslandWindowController.swift.
 
 import { Tracked, Spring, clamp } from "../core/anim";
-import { Bridge, IS_TAURI, onDragDrop } from "../core/bridge";
+import { Bridge, IS_TAURI } from "../core/bridge";
 import {
   EXPANDED_CORNER, EXPANDED_W, NOTCH_W, PANEL_H, PANEL_W,
-  ROUNDED_CORNER, VIEW_LAYOUTS, botGlowColor, botGlowOpacity, botPosition, chatPromptHeight,
+  ROUNDED_CORNER, VIEW_LAYOUTS, botGlowColor, botGlowOpacity, botPosition,
   islandSize,
   QUESTION_PICKER_H,
   type BotEmoteName, type IslandMode, type IslandViewName,
@@ -17,8 +17,6 @@ import { BotEngine, hexToRGB } from "../mochi/engine";
 import { Greeting } from "../mochi/greeting";
 import { createMiniBot, pruneMiniBots, syncMiniBotStates, tickMiniBots } from "../mochi/minibots";
 import { SeasonCache, parseOutfit } from "../mochi/wardrobe";
-import { UploadCanvas } from "../upload/canvas";
-import { USC, UploadSeq } from "../upload/sequence";
 import { closePlanCard, openPlanColor, planCardOpen } from "../views/usage";
 import { buildHeader, buildViews, type ViewActions, type ViewHost } from "../views/views";
 import { h } from "../views/dom";
@@ -35,11 +33,7 @@ const BOT_SIDE = 24;
 /** Same margin as the Rust hit test (src-tauri/src/island.rs). */
 const HIT_MARGIN = 14;
 
-/** The three views the drop sequence owns; leaving them stops the engine. */
-const UPLOAD_VIEWS: ReadonlySet<IslandViewName> = new Set(["upload", "uploading", "choose"]);
 
-/** Seconds between the drop and the moment the progress bar starts filling. */
-const PRE_PROGRESS = USC.T_PROG_START - USC.T_DROP;
 
 const modeOrder = (m: IslandMode) => (m === "hidden" ? 0 : m === "compact" ? 1 : 2);
 
@@ -64,7 +58,6 @@ export class Island {
 
   private header!: ViewHost;
   private views!: Map<IslandViewName, ViewHost>;
-  private uploadCanvas!: UploadCanvas;
 
   private width = new Tracked(NOTCH_W);
   private height = new Tracked(0);
@@ -102,7 +95,6 @@ export class Island {
 
   private confusedRecovery: number | null = null;
   private prevViewBeforeConfused: IslandViewName = "overview";
-  private lastSyncedView: IslandViewName | null = null;
 
   /** The launch greeting ended, or the island came out of hidden — two of the
    *  moments the Monday recap may open (see src/recap/recap.ts). */
@@ -116,8 +108,6 @@ export class Island {
   private silentReveal = false;
 
   /** Drop sequence bookkeeping: last tick played, and whether the ✓ has fired. */
-  private uploadTens = 0;
-  private uploadDone = false;
 
   constructor(root: HTMLElement) {
     this.root = root;
@@ -164,7 +154,6 @@ export class Island {
   private build() {
     const actions: ViewActions = {
       setView: (v) => this.setView(v),
-      cancelDrop: () => this.discardDrop(),
       collapse: () => this.collapse(),
       foldApproval: () => this.foldApproval(),
       setFocus: (id) => {
@@ -248,9 +237,8 @@ export class Island {
         State.notify();
       },
       keyboard: (on) => {
-        // The chat view manages the keyboard on its own.
         if (on) void Bridge.focusWindow(true);
-        else if (State.view !== "prompt" && State.mode === "expanded") void Bridge.focusWindow(false);
+        else if (State.mode === "expanded") void Bridge.focusWindow(false);
       },
       holdOpen: (on) => {
         if (this.holdingOpen === on) return;
@@ -274,28 +262,15 @@ export class Island {
     this.countdown = h("div", { id: "countdown" });
 
     this.header = buildHeader(actions);
-    this.views = buildViews(actions, () => this.animateGeometry(false));
+    this.views = buildViews(actions);
     this.viewsEl = h("div", { id: "views" });
     for (const v of this.views.values()) this.viewsEl.append(v.el);
     this.contentEl = h("div", { id: "content" }, this.header.el, this.viewsEl);
-
-    // The drop sequence draws the card, the bar and its own Mochi. It sits under
-    // the header, which stays visible on top of it exactly as on macOS.
-    this.uploadCanvas = new UploadCanvas({
-      ask: () => {
-        State.promptContext = State.droppedFile
-          ? { kind: "file", name: State.droppedFile.name, path: State.droppedFile.path }
-          : null;
-        this.setView("prompt");
-      },
-      cancel: () => this.discardDrop(),
-    });
 
     this.clipEl = h(
       "div",
       { id: "island-clip" },
       this.greetingCanvas,
-      this.uploadCanvas.el,
       this.contentEl,
     );
     this.islandEl = h(
@@ -324,6 +299,7 @@ export class Island {
   private wireFsm() {
     this.fsm.homeToPetitDelay = State.settings.autoCloseInterval;
     this.fsm.openOnHover = State.settings.openOnHover;
+    this.fsm.petitToHiddenDelay = State.settings.keepVisible ? Number.POSITIVE_INFINITY : 60;
     this.fsm.onTransition = (from, to) => {
       // The greeting is over, however it ended: back to his desktop spot.
       if (from === "coucou" && to !== "coucou") this.desktop.launch();
@@ -375,28 +351,13 @@ export class Island {
     if (mode !== "expanded") {
       closePlanCard();
       this.engine.resetMorph();
-      // Nothing can be seen of the sequence once the island is shut, and leaving
-      // it running would keep the frame loop awake — the island must cost
-      // nothing while hidden.
-      UploadSeq.deactivate();
     }
     this.updateWindowCollapsed();
     this.animateGeometry(modeOrder(mode) < modeOrder(prev));
     State.notify();
   }
 
-  /** True while the drop sequence owns the island body. */
-  private get uploadActive(): boolean {
-    return State.mode === "expanded" && UploadSeq.isActive && UPLOAD_VIEWS.has(State.view);
-  }
-
-  /** Navigating out of the drop flow ends the sequence, as on macOS. */
-  private stopSequenceIfLeaving(view: IslandViewName) {
-    if (UploadSeq.isActive && !UPLOAD_VIEWS.has(view)) UploadSeq.deactivate();
-  }
-
   expand(view: IslandViewName) {
-    this.stopSequenceIfLeaving(view);
     if (view !== "overview") closePlanCard();
     State.view = view;
     if (State.mode !== "expanded") this.setMode("expanded");
@@ -406,7 +367,6 @@ export class Island {
   }
 
   setView(view: IslandViewName) {
-    this.stopSequenceIfLeaving(view);
     if (view !== "overview") closePlanCard();
     if (State.mode !== "expanded") {
       this.fsm.forceHome();
@@ -463,7 +423,7 @@ export class Island {
   toggleWardrobe() {
     if (State.paused || State.mode === "hidden") return;
     // The greeting and the drop sequence draw a Mochi of their own.
-    if (State.mode === "expanded" && (State.view === "greeting" || this.uploadActive)) return;
+    if (State.mode === "expanded" && (State.view === "greeting")) return;
     if (State.mode === "expanded" && State.view === "wardrobe") this.setView(State.defaultView());
     else this.setView("wardrobe");
   }
@@ -532,7 +492,7 @@ export class Island {
   flyOutOrHome() {
     // The greeting and the drop sequence draw a Mochi of their own: he stays
     // for them, as he does for a drag (canDragOut).
-    const busy = State.mode === "expanded" && (State.view === "greeting" || this.uploadActive);
+    const busy = State.mode === "expanded" && (State.view === "greeting");
     if (busy && !State.mochiOnDesktop) return;
     this.desktop.flyOutOrHome();
   }
@@ -542,128 +502,10 @@ export class Island {
     this.views.get(State.view)?.command?.(command);
   }
 
-  // ── File drop ───────────────────────────────────────────────────────────────
-
-  private onDragDrop(e: { type: string; paths?: string[] }) {
-    if (e.type !== "over") void Bridge.log(`drag ${e.type} ${e.paths?.length ?? 0} file(s)`);
-    if (State.paused) return;
-    switch (e.type) {
-      case "enter":
-      case "over": {
-        if (State.fileDragOver) return;
-        State.fileDragOver = true;
-        this.engine.animateMorph(1);
-        // enterZone must run before the island expands, so the sequence is
-        // already active by the time the view becomes `upload`.
-        UploadSeq.enterZone(State.mouseInIsland.x, State.mouseInIsland.y);
-        this.alert("upload");
-        break;
-      }
-      case "leave": {
-        if (!State.fileDragOver) return;
-        State.fileDragOver = false;
-        this.engine.animateMorph(0);
-        // The island deliberately stays open: the drag session is still alive.
-        UploadSeq.exitZone();
-        State.notify();
-        break;
-      }
-      case "drop": {
-        State.fileDragOver = false;
-        const path = e.paths?.[0];
-        if (!path) {
-          this.engine.animateMorph(0);
-          this.setView(State.defaultView());
-          return;
-        }
-        this.swallow(path);
-        break;
-      }
-    }
-  }
-
-  /**
-   * Mochi eats the file. Nothing here waits on the file system: the copy into
-   * the inbox runs in the background and swaps the path in when it lands, so a
-   * slow disk can never stall the animation — same as FileDropHandler on macOS.
-   */
-  private swallow(path: string) {
-    const name = path.split(/[\\/]/).pop() || "file";
-    State.droppedFile = { name, path };
-    State.promptContext = { kind: "file", name, path };
-    State.chatHistory = [];
-    void Bridge.chatReset();
-
-    UploadSeq.performDrop(State.uploadDuration);
-    this.uploadTens = 0;
-    this.uploadDone = false;
-
-    this.engine.gulp();
-    Sound.play("approve");
-    this.engine.triggerEmote("happy");
-    this.engine.animateMorph(0);
-
-    State.uploadProgress = 0;
-    this.setView("uploading");
-    this.ensureRunning();
-
-    void Bridge.ingestFile(path)
-      .then((file) => {
-        // Cancelled (or replaced by another drop) while the copy was running.
-        if (State.droppedFile?.path !== path) return;
-        State.droppedFile = { name: file.name, path: file.path };
-        State.promptContext = { kind: "file", name: file.name, path: file.path };
-        State.notify();
-      })
-      .catch((err) => {
-        if (State.droppedFile?.path !== path) return;
-        UploadSeq.deactivate();
-        State.noteMessage = String(err).replace(/^Error:\s*/, "");
-        this.engine.animateMorph(0);
-        this.setView("note");
-        Sound.play("error");
-        window.setTimeout(() => this.setView(State.defaultView()), 2400);
-      });
-  }
-
-  /** "Cancel" on the dropped file: forget it, so the chat does not pick it up. */
-  private discardDrop() {
-    State.droppedFile = null;
-    State.promptContext = null;
-    this.setView(State.defaultView());
-  }
-
-  /**
-   * Sounds and view changes hung off the canvas timeline: a `tick` every 10 %,
-   * the ✓ chime when the bar completes, then `choose` once Mochi has grown back.
-   */
-  private stepSequence() {
-    const since = UploadSeq.sinceDrop();
-    if (since == null) return;
-    const dur = State.uploadDuration;
-    const p = Math.max(0, Math.min(1, (since - PRE_PROGRESS) / dur));
-
-    const tens = Math.floor(p * 10);
-    if (tens > this.uploadTens && tens < 10) {
-      this.uploadTens = tens;
-      Sound.play("tick");
-    }
-
-    if (!this.uploadDone && since >= PRE_PROGRESS + dur) {
-      this.uploadDone = true;
-      Sound.play("approve");
-      this.engine.triggerEmote("happy");
-    }
-    // The extra second is the grow-back, after which the choose card is up.
-    if (since >= PRE_PROGRESS + dur + 1 && State.view === "uploading") {
-      this.setView("choose");
-    }
-  }
-
   // ── Geometry ────────────────────────────────────────────────────────────────
 
   private targetSize(): { w: number; h: number; r: number } {
-    let { w, h } = islandSize(State.mode, State.view, State.chatHistory.length);
+    let { w, h } = islandSize(State.mode, State.view);
     if (State.mode === "expanded" && State.view === "question" && State.pendingApproval?.questions) {
       h = QUESTION_PICKER_H;
     }
@@ -699,7 +541,6 @@ export class Island {
     this.miniGrid.style.top = `${hh / 2 - 14.5}px`;
     this.clockEl.style.height = `${hh}px`;
     this.greetingCanvas.style.left = `${(w - EXPANDED_W) / 2}px`;
-    this.uploadCanvas.el.style.left = `${(w - EXPANDED_W) / 2}px`;
 
     const viewportW = window.innerWidth > 0 ? window.innerWidth : PANEL_W;
     const rect = { x: (viewportW - w) / 2, y: 0, w, h: hh };
@@ -815,7 +656,6 @@ export class Island {
       State.lastActivity = performance.now();
     });
 
-    void onDragDrop((e) => this.onDragDrop(e));
 
     // Outside Tauri (plain browser) drive the cursor from DOM events so the
     // island can be inspected with `npm run dev`.
@@ -859,9 +699,6 @@ export class Island {
 
     // Windows sends no cursor position with an OLE drag, so the drop sequence is
     // fed from the Win32 cursor poll instead — it runs throughout the drag.
-    if (UploadSeq.isActive && !UploadSeq.dropped) {
-      UploadSeq.updateCursor(State.mouseInIsland.x, State.mouseInIsland.y);
-    }
 
     const inIsland =
       x >= rect.x - HIT_MARGIN && x <= rect.x + rect.w + HIT_MARGIN &&
@@ -899,7 +736,7 @@ export class Island {
   /** The greeting and the drop sequence draw a Mochi of their own: not that one. */
   private canDragOut(): boolean {
     if (State.mode === "hidden" || !this.desktop.canPickUp()) return false;
-    return !(State.mode === "expanded" && (State.view === "greeting" || this.uploadActive));
+    return !(State.mode === "expanded" && (State.view === "greeting"));
   }
 
   private isBotHit(x: number, y: number): boolean {
@@ -1005,15 +842,9 @@ export class Island {
       this.drawBot(dt);
     }
 
-    const uploadActive = this.uploadActive;
-    if (uploadActive) this.uploadCanvas.draw(UploadSeq.frame(), nowMs / 1000);
-    this.uploadCanvas.el.classList.toggle("on", uploadActive);
-    this.viewsEl.classList.toggle("hidden-by-upload", uploadActive);
-
     tickMiniBots(dt);
     // A ticker scroll that loses its frames freezes mid-way, rows overlapping.
     const viewAnimating = this.views.get(State.view)?.tick?.(nowMs) === true;
-    if (UploadSeq.isActive) this.stepSequence();
     this.updateCountdown(nowMs);
 
     // Nothing is drawn while the island is hidden, so nothing may keep the loop
@@ -1028,7 +859,7 @@ export class Island {
       ? settling
       : settling ||
         !this.botCx.settled || !this.botCy.settled || !this.botSize.settled ||
-        greetingActive || this.engine.busy || UploadSeq.isActive || viewAnimating;
+        greetingActive || this.engine.busy || viewAnimating;
 
     if (busy) {
       requestAnimationFrame(this.frame);
@@ -1039,7 +870,7 @@ export class Island {
   };
 
   private updateBotTargets() {
-    const p = botPosition(State.mode, State.view, this.height.value, State.uploadProgress);
+    const p = botPosition(State.mode, State.view, this.height.value);
     this.botCx.target = p.cx;
     this.botCy.target = p.cy;
     this.botSize.target = p.diameter / 0.6;
@@ -1048,10 +879,10 @@ export class Island {
     // The drop canvas draws its own Mochi; two of them would overlap. Out on the
     // desktop, he isn't here at all.
     const away = State.mochiOnDesktop;
-    const visible = p.opacity > 0 && !greetingActive && !this.uploadActive && !away;
+    const visible = p.opacity > 0 && !greetingActive && !away;
     this.botCanvas.style.opacity = visible ? "1" : "0";
 
-    if (State.mode === "expanded" && State.view !== "uploading" && !greetingActive && !this.uploadActive && !away) {
+    if (State.mode === "expanded" && !greetingActive && !away) {
       const d = p.diameter;
       const color = botGlowColor(State.effectiveState);
       this.botGlow.style.display = "block";
@@ -1099,7 +930,7 @@ export class Island {
     this.engine.lookX = this.lookX();
     this.engine.lookY = this.lookY();
     if (this.engine.morph > 0.3) {
-      this.engine.slotHTarget = State.fileDragOver ? 0.2 : 0;
+      this.engine.slotHTarget = 0;
     } else {
       this.engine.slotHTarget = 0;
       if (this.engine.morph < 0.05) {
@@ -1171,7 +1002,7 @@ export class Island {
     this.contentEl.style.opacity = live ? "1" : "0";
     // While the drop sequence owns the body its buttons are painted on the canvas
     // underneath, so only the header may keep taking clicks up here.
-    this.contentEl.style.pointerEvents = live && !this.uploadActive ? "auto" : "none";
+    this.contentEl.style.pointerEvents = live ? "auto" : "none";
     this.header.el.style.pointerEvents = live ? "auto" : "none";
     this.greetingCanvas.style.display = greetingActive ? "block" : "none";
 
@@ -1186,19 +1017,6 @@ export class Island {
       const on = name === State.view;
       view.el.classList.toggle("on", on);
       if (on) view.sync();
-    }
-
-    // The chat is the only view with a text field, so it is the only time the
-    // island is allowed to take keyboard focus.
-    if (this.lastSyncedView !== State.view) {
-      const wasChat = this.lastSyncedView === "prompt";
-      this.lastSyncedView = State.view;
-      if (State.view === "prompt") {
-        void Bridge.focusWindow(true);
-        window.setTimeout(() => this.views.get("prompt")?.focus?.(), 120);
-      } else if (wasChat) {
-        void Bridge.focusWindow(false);
-      }
     }
 
     // Compact mini grid
@@ -1241,6 +1059,7 @@ export class Island {
     Sound.setVolume(State.settings.soundVolume);
     this.fsm.homeToPetitDelay = State.settings.autoCloseInterval;
     this.fsm.openOnHover = State.settings.openOnHover;
+    this.fsm.petitToHiddenDelay = State.settings.keepVisible ? Number.POSITIVE_INFINITY : 60;
     State.notify();
     // ponytail: one timer for the life of the window; a minute is the clock's finest tick.
     this.clockTimer ??= window.setInterval(() => this.updateClock(), 10_000);
@@ -1248,9 +1067,5 @@ export class Island {
 
   get panelSize() {
     return { w: PANEL_W, h: PANEL_H };
-  }
-
-  get chatHeight() {
-    return chatPromptHeight(State.chatHistory.length);
   }
 }

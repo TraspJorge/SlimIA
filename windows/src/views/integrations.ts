@@ -1,5 +1,5 @@
 // The card of a pill that has nothing running: whether its hooks are in place,
-// its chat server connected, and what to do next. Services that need the
+// and what to do next. Services that need the
 // network (GitHub, Stripe, Vercel…) are not part of this build.
 
 import { h, clear, dot } from "./dom";
@@ -32,7 +32,6 @@ export function idleStatus(
   // are in place (Mac #183). A session replaces this card; nothing is loading.
   if (def?.connect.kind === "hooks") return configured ? ok(t("Hooks installed")) : missing(t("Hooks not installed"));
   if (def?.connect.kind === "none") return ok(t("Ready · no setup needed"));
-  if (def?.connect.kind === "server") return configured ? ok(t("Connected")) : missing(t("Not connected"));
   return configured ? ok(t("Connected")) : missing(t("Not connected"));
 }
 
