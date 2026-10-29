@@ -82,7 +82,8 @@ GDK_BACKEND=x11 ./target/release/coucou
 0. Abra o app pelo menu da bandeja (**Abrir SlimIA**) para chegar ao Chat e às **Configurações**.
 1. Abra **Configurações → Agentes** e instale o hook do Claude Code (e dos outros agentes que usar).
 2. Em **Configurações → Integrações**, ligue o **Spotify** se quiser os controles.
-3. Para o Mochi na barra superior do Pantheon:
+3. Para o SlimIA aparecer no menu de aplicativos, com o ícone dele: `windows/linux/install-launcher.sh`.
+4. Para o Mochi na barra superior do Pantheon:
 
 ```sh
 cd windows/wingpanel-indicator
