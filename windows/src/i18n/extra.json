@@ -27,18 +27,18 @@
       "de": "+ Unteragent",
       "tr": "+ alt ajan"
     },
-    "A hook group named \"coucou\" that Slimai did not write is already there — Slimai has not touched it.": {
-      "zh-Hans": "已存在一个并非 Slimai 写入的名为“coucou”的 hook 组 — Slimai 没有修改它。",
-      "hi": "“coucou” नाम का एक hook समूह पहले से है जिसे Slimai ने नहीं लिखा — Slimai ने इसे नहीं छुआ।",
-      "es": "Ya existe un grupo de hooks llamado «coucou» que no escribió Slimai — Slimai no lo ha tocado.",
-      "ar": "توجد بالفعل مجموعة hooks باسم «coucou» لم يكتبها Slimai — لم يمسّها Slimai.",
-      "fr": "Un groupe de hooks nommé « coucou » que Slimai n'a pas écrit existe déjà — Slimai n'y a pas touché.",
-      "bn": "“coucou” নামে একটি hook গ্রুপ আগে থেকেই আছে যা Slimai লেখেনি — Slimai এতে হাত দেয়নি।",
-      "pt-BR": "Já existe um grupo de hooks chamado “coucou” que não foi escrito pelo Slimai — o Slimai não mexeu nele.",
-      "ru": "Уже есть группа хуков «coucou», которую написал не Slimai, — Slimai её не трогал.",
-      "id": "Sudah ada grup hook bernama “coucou” yang tidak ditulis Slimai — Slimai tidak menyentuhnya.",
-      "de": "Eine nicht von Slimai erstellte Hook-Gruppe namens \"coucou\" ist bereits vorhanden — Slimai hat sie nicht verändert.",
-      "tr": "Slimai'nun oluşturmadığı \"coucou\" adlı bir hook grubu zaten var — Slimai bunu değiştirmedi."
+    "A hook group named \"coucou\" that SlamIA did not write is already there — SlamIA has not touched it.": {
+      "zh-Hans": "已存在一个并非 SlamIA 写入的名为“coucou”的 hook 组 — SlamIA 没有修改它。",
+      "hi": "“coucou” नाम का एक hook समूह पहले से है जिसे SlamIA ने नहीं लिखा — SlamIA ने इसे नहीं छुआ।",
+      "es": "Ya existe un grupo de hooks llamado «coucou» que no escribió SlamIA — SlamIA no lo ha tocado.",
+      "ar": "توجد بالفعل مجموعة hooks باسم «coucou» لم يكتبها SlamIA — لم يمسّها SlamIA.",
+      "fr": "Un groupe de hooks nommé « coucou » que SlamIA n'a pas écrit existe déjà — SlamIA n'y a pas touché.",
+      "bn": "“coucou” নামে একটি hook গ্রুপ আগে থেকেই আছে যা SlamIA লেখেনি — SlamIA এতে হাত দেয়নি।",
+      "pt-BR": "Já existe um grupo de hooks chamado “coucou” que não foi escrito pelo SlamIA — o SlamIA não mexeu nele.",
+      "ru": "Уже есть группа хуков «coucou», которую написал не SlamIA, — SlamIA её не трогал.",
+      "id": "Sudah ada grup hook bernama “coucou” yang tidak ditulis SlamIA — SlamIA tidak menyentuhnya.",
+      "de": "Eine nicht von SlamIA erstellte Hook-Gruppe namens \"coucou\" ist bereits vorhanden — SlamIA hat sie nicht verändert.",
+      "tr": "SlamIA'nun oluşturmadığı \"coucou\" adlı bir hook grubu zaten var — SlamIA bunu değiştirmedi."
     },
     "Answer in terminal": {
       "zh-Hans": "在终端中回答",
@@ -274,31 +274,31 @@
       "de": "Codex führt neue Hooks erst aus, nachdem du ihnen vertraust: Starte Codex und prüfe sie einmal mit /hooks.",
       "tr": "Codex yeni hook'ları ancak güvendiğinde çalıştırır: Codex'i başlat ve /hooks ile bir kez incele."
     },
-    "Slimai could not list the agents.": {
-      "zh-Hans": "Slimai 无法列出代理。",
-      "hi": "Slimai एजेंटों की सूची नहीं बना सका।",
-      "es": "Slimai no pudo listar los agentes.",
-      "ar": "تعذّر على Slimai سرد الوكلاء.",
-      "fr": "Slimai n'a pas pu lister les agents.",
-      "bn": "Slimai এজেন্টদের তালিকা করতে পারেনি।",
-      "pt-BR": "O Slimai não conseguiu listar os agentes.",
-      "ru": "Slimai не удалось получить список агентов.",
-      "id": "Slimai tidak dapat menampilkan daftar agen.",
-      "de": "Slimai konnte die Agenten nicht auflisten.",
-      "tr": "Slimai ajanları listeleyemedi."
+    "SlamIA could not list the agents.": {
+      "zh-Hans": "SlamIA 无法列出代理。",
+      "hi": "SlamIA एजेंटों की सूची नहीं बना सका।",
+      "es": "SlamIA no pudo listar los agentes.",
+      "ar": "تعذّر على SlamIA سرد الوكلاء.",
+      "fr": "SlamIA n'a pas pu lister les agents.",
+      "bn": "SlamIA এজেন্টদের তালিকা করতে পারেনি।",
+      "pt-BR": "O SlamIA não conseguiu listar os agentes.",
+      "ru": "SlamIA не удалось получить список агентов.",
+      "id": "SlamIA tidak dapat menampilkan daftar agen.",
+      "de": "SlamIA konnte die Agenten nicht auflisten.",
+      "tr": "SlamIA ajanları listeleyemedi."
     },
-    "Slimai is hooked into your Claude Code sessions. Tool calls, questions and permission requests show up in the island, and you can answer them there.": {
-      "zh-Hans": "Slimai 已接入你的 Claude Code 会话。工具调用、问题和权限请求都会显示在岛中，你可以直接在那里回应。",
-      "hi": "Slimai आपके Claude Code सत्रों से जुड़ा है। टूल कॉल, प्रश्न और अनुमति अनुरोध आइलैंड में दिखते हैं, और आप वहीं उनका जवाब दे सकते हैं।",
-      "es": "Slimai está conectado a tus sesiones de Claude Code. Las llamadas a herramientas, las preguntas y las solicitudes de permiso aparecen en la isla y puedes responderlas ahí.",
-      "ar": "Slimai متصل بجلسات Claude Code لديك. تظهر استدعاءات الأدوات والأسئلة وطلبات الإذن في الشريط، ويمكنك الرد عليها من هناك.",
-      "fr": "Slimai est branché sur tes sessions Claude Code. Les appels d'outils, les questions et les demandes de permission s'affichent dans l'île, et tu peux y répondre directement.",
-      "bn": "Slimai আপনার Claude Code সেশনের সঙ্গে যুক্ত। টুল কল, প্রশ্ন আর অনুমতির অনুরোধ আইল্যান্ডে দেখা যায়, এবং আপনি সেখানেই উত্তর দিতে পারেন।",
-      "pt-BR": "O Slimai está conectado às suas sessões do Claude Code. Chamadas de ferramentas, perguntas e pedidos de permissão aparecem na ilha, e você pode respondê-los ali.",
-      "ru": "Slimai подключён к вашим сессиям Claude Code. Вызовы инструментов, вопросы и запросы разрешений появляются в острове, и отвечать можно прямо там.",
-      "id": "Slimai terhubung ke sesi Claude Code Anda. Panggilan alat, pertanyaan, dan permintaan izin muncul di pulau, dan Anda bisa menjawabnya di sana.",
-      "de": "Slimai ist mit deinen Claude Code-Sitzungen verbunden. Werkzeugaufrufe, Fragen und Berechtigungsanfragen erscheinen in der Insel und können dort beantwortet werden.",
-      "tr": "Slimai, Claude Code oturumlarına bağlı. Araç çağrıları, sorular ve izin istekleri adada görünür; bunları oradan yanıtlayabilirsin."
+    "SlamIA is hooked into your Claude Code sessions. Tool calls, questions and permission requests show up in the island, and you can answer them there.": {
+      "zh-Hans": "SlamIA 已接入你的 Claude Code 会话。工具调用、问题和权限请求都会显示在岛中，你可以直接在那里回应。",
+      "hi": "SlamIA आपके Claude Code सत्रों से जुड़ा है। टूल कॉल, प्रश्न और अनुमति अनुरोध आइलैंड में दिखते हैं, और आप वहीं उनका जवाब दे सकते हैं।",
+      "es": "SlamIA está conectado a tus sesiones de Claude Code. Las llamadas a herramientas, las preguntas y las solicitudes de permiso aparecen en la isla y puedes responderlas ahí.",
+      "ar": "SlamIA متصل بجلسات Claude Code لديك. تظهر استدعاءات الأدوات والأسئلة وطلبات الإذن في الشريط، ويمكنك الرد عليها من هناك.",
+      "fr": "SlamIA est branché sur tes sessions Claude Code. Les appels d'outils, les questions et les demandes de permission s'affichent dans l'île, et tu peux y répondre directement.",
+      "bn": "SlamIA আপনার Claude Code সেশনের সঙ্গে যুক্ত। টুল কল, প্রশ্ন আর অনুমতির অনুরোধ আইল্যান্ডে দেখা যায়, এবং আপনি সেখানেই উত্তর দিতে পারেন।",
+      "pt-BR": "O SlamIA está conectado às suas sessões do Claude Code. Chamadas de ferramentas, perguntas e pedidos de permissão aparecem na ilha, e você pode respondê-los ali.",
+      "ru": "SlamIA подключён к вашим сессиям Claude Code. Вызовы инструментов, вопросы и запросы разрешений появляются в острове, и отвечать можно прямо там.",
+      "id": "SlamIA terhubung ke sesi Claude Code Anda. Panggilan alat, pertanyaan, dan permintaan izin muncul di pulau, dan Anda bisa menjawabnya di sana.",
+      "de": "SlamIA ist mit deinen Claude Code-Sitzungen verbunden. Werkzeugaufrufe, Fragen und Berechtigungsanfragen erscheinen in der Insel und können dort beantwortet werden.",
+      "tr": "SlamIA, Claude Code oturumlarına bağlı. Araç çağrıları, sorular ve izin istekleri adada görünür; bunları oradan yanıtlayabilirsin."
     },
     "Could not remove {path}: {error}": {
       "zh-Hans": "无法删除 {path}：{error}",
@@ -781,18 +781,18 @@
       "de": "Sitzungen und Zulassen / Ablehnen aus der Insel",
       "tr": "Oturumlar ve adadan İzin ver / Reddet"
     },
-    "Show other coding agents in the island. Slimai adds its entries to each agent's own config: you see the exact change and where the backup goes before anything is written, and uninstalling removes only what Slimai added.": {
-      "zh-Hans": "在岛中显示其他编程代理。Slimai 会把自己的条目添加到各代理的配置中：写入之前，你会看到确切的改动和备份位置；卸载只会移除 Slimai 添加的内容。",
-      "hi": "दूसरे कोडिंग एजेंटों को आइलैंड में दिखाएँ। Slimai हर एजेंट की अपनी कॉन्फ़िग में अपनी प्रविष्टियाँ जोड़ता है: कुछ भी लिखे जाने से पहले आप सटीक बदलाव और बैकअप की जगह देखते हैं, और अनइंस्टॉल करने पर केवल वही हटता है जो Slimai ने जोड़ा था।",
-      "es": "Muestra otros agentes de programación en la isla. Slimai añade sus entradas a la configuración de cada agente: ves el cambio exacto y dónde va la copia de seguridad antes de que se escriba nada, y al desinstalar solo se quita lo que añadió Slimai.",
-      "ar": "اعرض وكلاء البرمجة الآخرين في الشريط. يضيف Slimai إدخالاته إلى إعدادات كل وكيل: ترى التغيير بالضبط ومكان النسخة الاحتياطية قبل كتابة أي شيء، وإلغاء التثبيت يزيل فقط ما أضافه Slimai.",
-      "fr": "Affiche les autres agents de code dans l'île. Slimai ajoute ses entrées à la configuration de chaque agent : tu vois la modification exacte et l'emplacement de la sauvegarde avant que quoi que ce soit soit écrit, et la désinstallation ne retire que ce que Slimai a ajouté.",
-      "bn": "অন্যান্য কোডিং এজেন্টকে আইল্যান্ডে দেখান। Slimai প্রতিটি এজেন্টের নিজস্ব কনফিগে তার এন্ট্রি যোগ করে: কিছু লেখার আগে আপনি সঠিক পরিবর্তন এবং ব্যাকআপ কোথায় যাবে তা দেখতে পান, আর আনইনস্টল করলে শুধু Slimai যা যোগ করেছিল তা-ই সরানো হয়।",
-      "pt-BR": "Mostre outros agentes de programação na ilha. O Slimai adiciona as próprias entradas à configuração de cada agente: você vê a alteração exata e para onde vai o backup antes de qualquer gravação, e desinstalar remove só o que o Slimai adicionou.",
-      "ru": "Показывайте другие агенты для кода в острове. Slimai добавляет свои записи в конфигурацию каждого агента: до любой записи вы видите точное изменение и куда пойдёт резервная копия, а удаление убирает только то, что добавил Slimai.",
-      "id": "Tampilkan agen coding lain di pulau. Slimai menambahkan entrinya ke konfigurasi masing-masing agen: Anda melihat perubahan persisnya dan lokasi cadangan sebelum apa pun ditulis, dan mencopot pemasangan hanya menghapus yang ditambahkan Slimai.",
-      "de": "Zeige weitere Programmieragenten in der Insel. Slimai ergänzt Einträge in der jeweiligen Agentenkonfiguration: Du siehst die genaue Änderung und den Backup-Pfad, bevor etwas geschrieben wird. Beim Deinstallieren wird nur entfernt, was Slimai hinzugefügt hat.",
-      "tr": "Diğer kodlama ajanlarını adada göster. Slimai kendi girdilerini her ajanın yapılandırmasına ekler: herhangi bir şey yazılmadan önce tam değişikliği ve yedeğin konumunu görürsün. Kaldırıldığında yalnızca Slimai'nun ekledikleri silinir."
+    "Show other coding agents in the island. SlamIA adds its entries to each agent's own config: you see the exact change and where the backup goes before anything is written, and uninstalling removes only what SlamIA added.": {
+      "zh-Hans": "在岛中显示其他编程代理。SlamIA 会把自己的条目添加到各代理的配置中：写入之前，你会看到确切的改动和备份位置；卸载只会移除 SlamIA 添加的内容。",
+      "hi": "दूसरे कोडिंग एजेंटों को आइलैंड में दिखाएँ। SlamIA हर एजेंट की अपनी कॉन्फ़िग में अपनी प्रविष्टियाँ जोड़ता है: कुछ भी लिखे जाने से पहले आप सटीक बदलाव और बैकअप की जगह देखते हैं, और अनइंस्टॉल करने पर केवल वही हटता है जो SlamIA ने जोड़ा था।",
+      "es": "Muestra otros agentes de programación en la isla. SlamIA añade sus entradas a la configuración de cada agente: ves el cambio exacto y dónde va la copia de seguridad antes de que se escriba nada, y al desinstalar solo se quita lo que añadió SlamIA.",
+      "ar": "اعرض وكلاء البرمجة الآخرين في الشريط. يضيف SlamIA إدخالاته إلى إعدادات كل وكيل: ترى التغيير بالضبط ومكان النسخة الاحتياطية قبل كتابة أي شيء، وإلغاء التثبيت يزيل فقط ما أضافه SlamIA.",
+      "fr": "Affiche les autres agents de code dans l'île. SlamIA ajoute ses entrées à la configuration de chaque agent : tu vois la modification exacte et l'emplacement de la sauvegarde avant que quoi que ce soit soit écrit, et la désinstallation ne retire que ce que SlamIA a ajouté.",
+      "bn": "অন্যান্য কোডিং এজেন্টকে আইল্যান্ডে দেখান। SlamIA প্রতিটি এজেন্টের নিজস্ব কনফিগে তার এন্ট্রি যোগ করে: কিছু লেখার আগে আপনি সঠিক পরিবর্তন এবং ব্যাকআপ কোথায় যাবে তা দেখতে পান, আর আনইনস্টল করলে শুধু SlamIA যা যোগ করেছিল তা-ই সরানো হয়।",
+      "pt-BR": "Mostre outros agentes de programação na ilha. O SlamIA adiciona as próprias entradas à configuração de cada agente: você vê a alteração exata e para onde vai o backup antes de qualquer gravação, e desinstalar remove só o que o SlamIA adicionou.",
+      "ru": "Показывайте другие агенты для кода в острове. SlamIA добавляет свои записи в конфигурацию каждого агента: до любой записи вы видите точное изменение и куда пойдёт резервная копия, а удаление убирает только то, что добавил SlamIA.",
+      "id": "Tampilkan agen coding lain di pulau. SlamIA menambahkan entrinya ke konfigurasi masing-masing agen: Anda melihat perubahan persisnya dan lokasi cadangan sebelum apa pun ditulis, dan mencopot pemasangan hanya menghapus yang ditambahkan SlamIA.",
+      "de": "Zeige weitere Programmieragenten in der Insel. SlamIA ergänzt Einträge in der jeweiligen Agentenkonfiguration: Du siehst die genaue Änderung und den Backup-Pfad, bevor etwas geschrieben wird. Beim Deinstallieren wird nur entfernt, was SlamIA hinzugefügt hat.",
+      "tr": "Diğer kodlama ajanlarını adada göster. SlamIA kendi girdilerini her ajanın yapılandırmasına ekler: herhangi bir şey yazılmadan önce tam değişikliği ve yedeğin konumunu görürsün. Kaldırıldığında yalnızca SlamIA'nun ekledikleri silinir."
     },
     "Start a new Antigravity conversation to pick the hooks up.": {
       "zh-Hans": "开启新的 Antigravity 对话即可启用 hooks。",
@@ -885,18 +885,18 @@
       "de": "Der Relay ist noch nicht installiert.",
       "tr": "Aracı henüz kurulu değil."
     },
-    "The relay isn't installed yet. Restart Slimai.": {
-      "zh-Hans": "中继尚未安装。请重启 Slimai。",
-      "hi": "रिले अभी इंस्टॉल नहीं है। Slimai को फिर से शुरू करें।",
-      "es": "El relay aún no está instalado. Reinicia Slimai.",
-      "ar": "المُرحِّل غير مثبَّت بعد. أعد تشغيل Slimai.",
-      "fr": "Le relais n'est pas encore installé. Redémarre Slimai.",
-      "bn": "রিলে এখনো ইনস্টল হয়নি। Slimai আবার চালু করুন।",
-      "pt-BR": "O relay ainda não está instalado. Reinicie o Slimai.",
-      "ru": "Ретранслятор ещё не установлен. Перезапустите Slimai.",
-      "id": "Relay belum terpasang. Mulai ulang Slimai.",
-      "de": "Der Relay ist noch nicht installiert. Starte Slimai neu.",
-      "tr": "Aracı henüz kurulu değil. Slimai'yu yeniden başlat."
+    "The relay isn't installed yet. Restart SlamIA.": {
+      "zh-Hans": "中继尚未安装。请重启 SlamIA。",
+      "hi": "रिले अभी इंस्टॉल नहीं है। SlamIA को फिर से शुरू करें।",
+      "es": "El relay aún no está instalado. Reinicia SlamIA.",
+      "ar": "المُرحِّل غير مثبَّت بعد. أعد تشغيل SlamIA.",
+      "fr": "Le relais n'est pas encore installé. Redémarre SlamIA.",
+      "bn": "রিলে এখনো ইনস্টল হয়নি। SlamIA আবার চালু করুন।",
+      "pt-BR": "O relay ainda não está instalado. Reinicie o SlamIA.",
+      "ru": "Ретранслятор ещё не установлен. Перезапустите SlamIA.",
+      "id": "Relay belum terpasang. Mulai ulang SlamIA.",
+      "de": "Der Relay ist noch nicht installiert. Starte SlamIA neu.",
+      "tr": "Aracı henüz kurulu değil. SlamIA'yu yeniden başlat."
     },
     "This agent takes a plugin, not hook entries.": {
       "zh-Hans": "此代理使用插件，而不是 hook 条目。",
@@ -937,31 +937,31 @@
       "de": "Dies sind die genauen Änderungen in deiner settings.json. Deine eigenen Hooks bleiben unverändert.",
       "tr": "settings.json dosyanda yapılacak değişiklik tam olarak bu. Kendi hook'ların korunur."
     },
-    "This removes Slimai's entries only. Everything else stays.": {
-      "zh-Hans": "这只会移除 Slimai 的条目，其余内容保持不变。",
-      "hi": "यह केवल Slimai की प्रविष्टियाँ हटाता है। बाकी सब वैसा ही रहता है।",
-      "es": "Esto solo quita las entradas de Slimai. Todo lo demás se queda.",
-      "ar": "يزيل هذا إدخالات Slimai فقط. يبقى كل شيء آخر كما هو.",
-      "fr": "Seules les entrées de Slimai sont retirées. Tout le reste est conservé.",
-      "bn": "এটি শুধু Slimai-র এন্ট্রি সরায়। বাকি সব থেকে যায়।",
-      "pt-BR": "Isto remove apenas as entradas do Slimai. O resto continua.",
-      "ru": "Удаляются только записи Slimai. Всё остальное остаётся.",
-      "id": "Ini hanya menghapus entri Slimai. Yang lain tetap ada.",
-      "de": "Entfernt nur Slimais Einträge. Alles andere bleibt erhalten.",
-      "tr": "Yalnızca Slimai'nun girdilerini kaldırır. Diğer her şey korunur."
+    "This removes SlamIA's entries only. Everything else stays.": {
+      "zh-Hans": "这只会移除 SlamIA 的条目，其余内容保持不变。",
+      "hi": "यह केवल SlamIA की प्रविष्टियाँ हटाता है। बाकी सब वैसा ही रहता है।",
+      "es": "Esto solo quita las entradas de SlamIA. Todo lo demás se queda.",
+      "ar": "يزيل هذا إدخالات SlamIA فقط. يبقى كل شيء آخر كما هو.",
+      "fr": "Seules les entrées de SlamIA sont retirées. Tout le reste est conservé.",
+      "bn": "এটি শুধু SlamIA-র এন্ট্রি সরায়। বাকি সব থেকে যায়।",
+      "pt-BR": "Isto remove apenas as entradas do SlamIA. O resto continua.",
+      "ru": "Удаляются только записи SlamIA. Всё остальное остаётся.",
+      "id": "Ini hanya menghapus entri SlamIA. Yang lain tetap ada.",
+      "de": "Entfernt nur SlamIAs Einträge. Alles andere bleibt erhalten.",
+      "tr": "Yalnızca SlamIA'nun girdilerini kaldırır. Diğer her şey korunur."
     },
-    "This removes Slimai's entries only. Your own hooks are left untouched.": {
-      "zh-Hans": "这只会移除 Slimai 的条目。你自己的 hooks 不会被触碰。",
-      "hi": "यह केवल Slimai की प्रविष्टियाँ हटाता है। आपके अपने hooks नहीं छुए जाते।",
-      "es": "Esto solo quita las entradas de Slimai. Tus propios hooks no se tocan.",
-      "ar": "يزيل هذا إدخالات Slimai فقط. لن تُمسّ hooks الخاصة بك.",
-      "fr": "Seules les entrées de Slimai sont retirées. Tes propres hooks ne sont pas touchés.",
-      "bn": "এটি শুধু Slimai-র এন্ট্রি সরায়। আপনার নিজের hooks-এ হাত দেওয়া হয় না।",
-      "pt-BR": "Isto remove apenas as entradas do Slimai. Seus próprios hooks não são alterados.",
-      "ru": "Удаляются только записи Slimai. Ваши собственные хуки не затрагиваются.",
-      "id": "Ini hanya menghapus entri Slimai. Hooks milik Anda tidak disentuh.",
-      "de": "Entfernt nur Slimais Einträge. Deine eigenen Hooks bleiben unverändert.",
-      "tr": "Yalnızca Slimai'nun girdilerini kaldırır. Kendi hook'ların korunur."
+    "This removes SlamIA's entries only. Your own hooks are left untouched.": {
+      "zh-Hans": "这只会移除 SlamIA 的条目。你自己的 hooks 不会被触碰。",
+      "hi": "यह केवल SlamIA की प्रविष्टियाँ हटाता है। आपके अपने hooks नहीं छुए जाते।",
+      "es": "Esto solo quita las entradas de SlamIA. Tus propios hooks no se tocan.",
+      "ar": "يزيل هذا إدخالات SlamIA فقط. لن تُمسّ hooks الخاصة بك.",
+      "fr": "Seules les entrées de SlamIA sont retirées. Tes propres hooks ne sont pas touchés.",
+      "bn": "এটি শুধু SlamIA-র এন্ট্রি সরায়। আপনার নিজের hooks-এ হাত দেওয়া হয় না।",
+      "pt-BR": "Isto remove apenas as entradas do SlamIA. Seus próprios hooks não são alterados.",
+      "ru": "Удаляются только записи SlamIA. Ваши собственные хуки не затрагиваются.",
+      "id": "Ini hanya menghapus entri SlamIA. Hooks milik Anda tidak disentuh.",
+      "de": "Entfernt nur SlamIAs Einträge. Deine eigenen Hooks bleiben unverändert.",
+      "tr": "Yalnızca SlamIA'nun girdilerini kaldırır. Kendi hook'ların korunur."
     },
     "Turn it on once with `hermes plugins enable coucou`, then start a new Hermes session.": {
       "zh-Hans": "先用 `hermes plugins enable coucou` 启用一次，然后开启新的 Hermes 会话。",
@@ -1028,18 +1028,18 @@
       "de": "Schreiben nach {path} fehlgeschlagen: {error}",
       "tr": "{path} dosyasına yazılamadı: {error}"
     },
-    "coucou-hook.exe is not in place yet. Restart Slimai; if it still fails, build it with `cargo build -p coucou-hook`.": {
-      "zh-Hans": "coucou-hook.exe 尚未就位。请重启 Slimai；如果仍然失败，请用 `cargo build -p coucou-hook` 构建它。",
-      "hi": "coucou-hook.exe अभी अपनी जगह पर नहीं है। Slimai फिर से शुरू करें; अगर फिर भी न हो, तो इसे `cargo build -p coucou-hook` से बनाएँ।",
-      "es": "coucou-hook.exe aún no está en su sitio. Reinicia Slimai; si sigue fallando, compílalo con `cargo build -p coucou-hook`.",
-      "ar": "coucou-hook.exe ليس في مكانه بعد. أعد تشغيل Slimai؛ وإن استمر الفشل فابنِه بالأمر `cargo build -p coucou-hook`.",
-      "fr": "coucou-hook.exe n'est pas encore en place. Redémarre Slimai ; si ça échoue encore, compile-le avec `cargo build -p coucou-hook`.",
-      "bn": "coucou-hook.exe এখনো জায়গামতো নেই। Slimai আবার চালু করুন; তবুও না হলে `cargo build -p coucou-hook` দিয়ে এটি বানান।",
-      "pt-BR": "O coucou-hook.exe ainda não está no lugar. Reinicie o Slimai; se continuar falhando, compile-o com `cargo build -p coucou-hook`.",
-      "ru": "coucou-hook.exe ещё не на месте. Перезапустите Slimai; если не поможет, соберите его командой `cargo build -p coucou-hook`.",
-      "id": "coucou-hook.exe belum ada di tempatnya. Mulai ulang Slimai; jika masih gagal, build dengan `cargo build -p coucou-hook`.",
-      "de": "coucou-hook.exe ist noch nicht vorhanden. Starte Slimai neu; falls es weiterhin fehlschlägt, erstelle die Datei mit `cargo build -p coucou-hook`.",
-      "tr": "coucou-hook.exe henüz yerinde değil. Slimai'yu yeniden başlat; sorun sürerse `cargo build -p coucou-hook` ile derle."
+    "coucou-hook.exe is not in place yet. Restart SlamIA; if it still fails, build it with `cargo build -p coucou-hook`.": {
+      "zh-Hans": "coucou-hook.exe 尚未就位。请重启 SlamIA；如果仍然失败，请用 `cargo build -p coucou-hook` 构建它。",
+      "hi": "coucou-hook.exe अभी अपनी जगह पर नहीं है। SlamIA फिर से शुरू करें; अगर फिर भी न हो, तो इसे `cargo build -p coucou-hook` से बनाएँ।",
+      "es": "coucou-hook.exe aún no está en su sitio. Reinicia SlamIA; si sigue fallando, compílalo con `cargo build -p coucou-hook`.",
+      "ar": "coucou-hook.exe ليس في مكانه بعد. أعد تشغيل SlamIA؛ وإن استمر الفشل فابنِه بالأمر `cargo build -p coucou-hook`.",
+      "fr": "coucou-hook.exe n'est pas encore en place. Redémarre SlamIA ; si ça échoue encore, compile-le avec `cargo build -p coucou-hook`.",
+      "bn": "coucou-hook.exe এখনো জায়গামতো নেই। SlamIA আবার চালু করুন; তবুও না হলে `cargo build -p coucou-hook` দিয়ে এটি বানান।",
+      "pt-BR": "O coucou-hook.exe ainda não está no lugar. Reinicie o SlamIA; se continuar falhando, compile-o com `cargo build -p coucou-hook`.",
+      "ru": "coucou-hook.exe ещё не на месте. Перезапустите SlamIA; если не поможет, соберите его командой `cargo build -p coucou-hook`.",
+      "id": "coucou-hook.exe belum ada di tempatnya. Mulai ulang SlamIA; jika masih gagal, build dengan `cargo build -p coucou-hook`.",
+      "de": "coucou-hook.exe ist noch nicht vorhanden. Starte SlamIA neu; falls es weiterhin fehlschlägt, erstelle die Datei mit `cargo build -p coucou-hook`.",
+      "tr": "coucou-hook.exe henüz yerinde değil. SlamIA'yu yeniden başlat; sorun sürerse `cargo build -p coucou-hook` ile derle."
     },
     "finished": {
       "zh-Hans": "已完成",
@@ -1093,70 +1093,70 @@
       "de": "stellt eine Frage",
       "tr": "soru soruyor"
     },
-    "settings.json: {what} has an unexpected type — Slimai has not touched it.": {
-      "zh-Hans": "settings.json：{what} 的类型不符合预期 — Slimai 没有修改它。",
-      "hi": "settings.json: {what} का प्रकार अपेक्षित नहीं है — Slimai ने इसे नहीं छुआ।",
-      "es": "settings.json: {what} tiene un tipo inesperado — Slimai no lo ha tocado.",
-      "ar": "settings.json: {what} من نوع غير متوقع — لم يمسّه Slimai.",
-      "fr": "settings.json : {what} a un type inattendu — Slimai n'y a pas touché.",
-      "bn": "settings.json: {what}-এর ধরন অপ্রত্যাশিত — Slimai এতে হাত দেয়নি।",
-      "pt-BR": "settings.json: {what} tem um tipo inesperado — o Slimai não mexeu nele.",
-      "ru": "settings.json: у {what} неожиданный тип — Slimai его не трогал.",
-      "id": "settings.json: {what} bertipe tak terduga — Slimai tidak menyentuhnya.",
-      "de": "settings.json: {what} hat einen unerwarteten Typ — Slimai hat nichts verändert.",
-      "tr": "settings.json: {what} beklenmeyen bir türde — Slimai bunu değiştirmedi."
+    "settings.json: {what} has an unexpected type — SlamIA has not touched it.": {
+      "zh-Hans": "settings.json：{what} 的类型不符合预期 — SlamIA 没有修改它。",
+      "hi": "settings.json: {what} का प्रकार अपेक्षित नहीं है — SlamIA ने इसे नहीं छुआ।",
+      "es": "settings.json: {what} tiene un tipo inesperado — SlamIA no lo ha tocado.",
+      "ar": "settings.json: {what} من نوع غير متوقع — لم يمسّه SlamIA.",
+      "fr": "settings.json : {what} a un type inattendu — SlamIA n'y a pas touché.",
+      "bn": "settings.json: {what}-এর ধরন অপ্রত্যাশিত — SlamIA এতে হাত দেয়নি।",
+      "pt-BR": "settings.json: {what} tem um tipo inesperado — o SlamIA não mexeu nele.",
+      "ru": "settings.json: у {what} неожиданный тип — SlamIA его не трогал.",
+      "id": "settings.json: {what} bertipe tak terduga — SlamIA tidak menyentuhnya.",
+      "de": "settings.json: {what} hat einen unerwarteten Typ — SlamIA hat nichts verändert.",
+      "tr": "settings.json: {what} beklenmeyen bir türde — SlamIA bunu değiştirmedi."
     },
-    "{file} isn't UTF-8 text — Slimai won't touch it.": {
-      "zh-Hans": "{file} 不是 UTF-8 文本 — Slimai 不会修改它。",
-      "hi": "{file} UTF-8 टेक्स्ट नहीं है — Slimai इसे नहीं छुएगा।",
-      "es": "{file} no es texto UTF-8 — Slimai no lo tocará.",
-      "ar": "{file} ليس نصًا بترميز UTF-8 — لن يمسّه Slimai.",
-      "fr": "{file} n'est pas du texte UTF-8 — Slimai n'y touchera pas.",
-      "bn": "{file} UTF-8 টেক্সট নয় — Slimai এতে হাত দেবে না।",
-      "pt-BR": "{file} não é texto UTF-8 — o Slimai não vai mexer nele.",
-      "ru": "{file} — не текст в UTF-8, Slimai его не тронет.",
-      "id": "{file} bukan teks UTF-8 — Slimai tidak akan menyentuhnya.",
-      "de": "{file} ist kein UTF-8-Text — Slimai verändert die Datei nicht.",
-      "tr": "{file} UTF-8 metni değil — Slimai dosyayı değiştirmeyecek."
+    "{file} isn't UTF-8 text — SlamIA won't touch it.": {
+      "zh-Hans": "{file} 不是 UTF-8 文本 — SlamIA 不会修改它。",
+      "hi": "{file} UTF-8 टेक्स्ट नहीं है — SlamIA इसे नहीं छुएगा।",
+      "es": "{file} no es texto UTF-8 — SlamIA no lo tocará.",
+      "ar": "{file} ليس نصًا بترميز UTF-8 — لن يمسّه SlamIA.",
+      "fr": "{file} n'est pas du texte UTF-8 — SlamIA n'y touchera pas.",
+      "bn": "{file} UTF-8 টেক্সট নয় — SlamIA এতে হাত দেবে না।",
+      "pt-BR": "{file} não é texto UTF-8 — o SlamIA não vai mexer nele.",
+      "ru": "{file} — не текст в UTF-8, SlamIA его не тронет.",
+      "id": "{file} bukan teks UTF-8 — SlamIA tidak akan menyentuhnya.",
+      "de": "{file} ist kein UTF-8-Text — SlamIA verändert die Datei nicht.",
+      "tr": "{file} UTF-8 metni değil — SlamIA dosyayı değiştirmeyecek."
     },
-    "{file} isn't a JSON object — Slimai won't touch it.": {
-      "zh-Hans": "{file} 不是 JSON 对象 — Slimai 不会修改它。",
-      "hi": "{file} JSON ऑब्जेक्ट नहीं है — Slimai इसे नहीं छुएगा।",
-      "es": "{file} no es un objeto JSON — Slimai no lo tocará.",
-      "ar": "{file} ليس كائن JSON — لن يمسّه Slimai.",
-      "fr": "{file} n'est pas un objet JSON — Slimai n'y touchera pas.",
-      "bn": "{file} JSON অবজেক্ট নয় — Slimai এতে হাত দেবে না।",
-      "pt-BR": "{file} não é um objeto JSON — o Slimai não vai mexer nele.",
-      "ru": "{file} — не объект JSON, Slimai его не тронет.",
-      "id": "{file} bukan objek JSON — Slimai tidak akan menyentuhnya.",
-      "de": "{file} ist kein JSON-Objekt — Slimai verändert die Datei nicht.",
-      "tr": "{file} bir JSON nesnesi değil — Slimai dosyayı değiştirmeyecek."
+    "{file} isn't a JSON object — SlamIA won't touch it.": {
+      "zh-Hans": "{file} 不是 JSON 对象 — SlamIA 不会修改它。",
+      "hi": "{file} JSON ऑब्जेक्ट नहीं है — SlamIA इसे नहीं छुएगा।",
+      "es": "{file} no es un objeto JSON — SlamIA no lo tocará.",
+      "ar": "{file} ليس كائن JSON — لن يمسّه SlamIA.",
+      "fr": "{file} n'est pas un objet JSON — SlamIA n'y touchera pas.",
+      "bn": "{file} JSON অবজেক্ট নয় — SlamIA এতে হাত দেবে না।",
+      "pt-BR": "{file} não é um objeto JSON — o SlamIA não vai mexer nele.",
+      "ru": "{file} — не объект JSON, SlamIA его не тронет.",
+      "id": "{file} bukan objek JSON — SlamIA tidak akan menyentuhnya.",
+      "de": "{file} ist kein JSON-Objekt — SlamIA verändert die Datei nicht.",
+      "tr": "{file} bir JSON nesnesi değil — SlamIA dosyayı değiştirmeyecek."
     },
-    "{file} isn't valid JSON ({error}). Fix or move it, then try again — Slimai won't overwrite it.": {
-      "zh-Hans": "{file} 不是有效的 JSON（{error}）。请修复或移走它后重试 — Slimai 不会覆盖它。",
-      "hi": "{file} मान्य JSON नहीं है ({error})। इसे ठीक करें या हटाएँ, फिर दोबारा कोशिश करें — Slimai इसे ओवरराइट नहीं करेगा।",
-      "es": "{file} no es un JSON válido ({error}). Corrígelo o muévelo y vuelve a intentarlo — Slimai no lo sobrescribirá.",
-      "ar": "{file} ليس JSON صالحًا ({error}). أصلحه أو انقله ثم حاول مجددًا — لن يكتب Slimai فوقه.",
-      "fr": "{file} n'est pas un JSON valide ({error}). Corrige-le ou déplace-le, puis réessaie — Slimai ne l'écrasera pas.",
-      "bn": "{file} বৈধ JSON নয় ({error})। এটি ঠিক করুন বা সরান, তারপর আবার চেষ্টা করুন — Slimai এটি ওভাররাইট করবে না।",
-      "pt-BR": "{file} não é um JSON válido ({error}). Corrija ou mova o arquivo e tente de novo — o Slimai não vai sobrescrevê-lo.",
-      "ru": "{file} — некорректный JSON ({error}). Исправьте или переместите его и попробуйте снова — Slimai не будет его перезаписывать.",
-      "id": "{file} bukan JSON yang valid ({error}). Perbaiki atau pindahkan, lalu coba lagi — Slimai tidak akan menimpanya.",
-      "de": "{file} ist kein gültiges JSON ({error}). Korrigiere oder verschiebe die Datei und versuche es erneut — Slimai überschreibt sie nicht.",
-      "tr": "{file} geçerli JSON değil ({error}). Düzelt veya taşı, ardından tekrar dene — Slimai üzerine yazmayacak."
+    "{file} isn't valid JSON ({error}). Fix or move it, then try again — SlamIA won't overwrite it.": {
+      "zh-Hans": "{file} 不是有效的 JSON（{error}）。请修复或移走它后重试 — SlamIA 不会覆盖它。",
+      "hi": "{file} मान्य JSON नहीं है ({error})। इसे ठीक करें या हटाएँ, फिर दोबारा कोशिश करें — SlamIA इसे ओवरराइट नहीं करेगा।",
+      "es": "{file} no es un JSON válido ({error}). Corrígelo o muévelo y vuelve a intentarlo — SlamIA no lo sobrescribirá.",
+      "ar": "{file} ليس JSON صالحًا ({error}). أصلحه أو انقله ثم حاول مجددًا — لن يكتب SlamIA فوقه.",
+      "fr": "{file} n'est pas un JSON valide ({error}). Corrige-le ou déplace-le, puis réessaie — SlamIA ne l'écrasera pas.",
+      "bn": "{file} বৈধ JSON নয় ({error})। এটি ঠিক করুন বা সরান, তারপর আবার চেষ্টা করুন — SlamIA এটি ওভাররাইট করবে না।",
+      "pt-BR": "{file} não é um JSON válido ({error}). Corrija ou mova o arquivo e tente de novo — o SlamIA não vai sobrescrevê-lo.",
+      "ru": "{file} — некорректный JSON ({error}). Исправьте или переместите его и попробуйте снова — SlamIA не будет его перезаписывать.",
+      "id": "{file} bukan JSON yang valid ({error}). Perbaiki atau pindahkan, lalu coba lagi — SlamIA tidak akan menimpanya.",
+      "de": "{file} ist kein gültiges JSON ({error}). Korrigiere oder verschiebe die Datei und versuche es erneut — SlamIA überschreibt sie nicht.",
+      "tr": "{file} geçerli JSON değil ({error}). Düzelt veya taşı, ardından tekrar dene — SlamIA üzerine yazmayacak."
     },
-    "{name} wasn't written by Slimai — Slimai has not touched it.": {
-      "zh-Hans": "{name} 不是由 Slimai 写入的 — Slimai 没有修改它。",
-      "hi": "{name} Slimai ने नहीं लिखा था — Slimai ने इसे नहीं छुआ।",
-      "es": "{name} no lo escribió Slimai — Slimai no lo ha tocado.",
-      "ar": "لم يكتب Slimai الملف {name} — لم يمسّه Slimai.",
-      "fr": "{name} n'a pas été écrit par Slimai — Slimai n'y a pas touché.",
-      "bn": "{name} Slimai লেখেনি — Slimai এতে হাত দেয়নি।",
-      "pt-BR": "{name} não foi escrito pelo Slimai — o Slimai não mexeu nele.",
-      "ru": "{name} записан не Slimai — Slimai его не трогал.",
-      "id": "{name} tidak ditulis oleh Slimai — Slimai tidak menyentuhnya.",
-      "de": "{name} wurde nicht von Slimai erstellt — Slimai hat nichts verändert.",
-      "tr": "{name} Slimai tarafından oluşturulmadı — Slimai bunu değiştirmedi."
+    "{name} wasn't written by SlamIA — SlamIA has not touched it.": {
+      "zh-Hans": "{name} 不是由 SlamIA 写入的 — SlamIA 没有修改它。",
+      "hi": "{name} SlamIA ने नहीं लिखा था — SlamIA ने इसे नहीं छुआ।",
+      "es": "{name} no lo escribió SlamIA — SlamIA no lo ha tocado.",
+      "ar": "لم يكتب SlamIA الملف {name} — لم يمسّه SlamIA.",
+      "fr": "{name} n'a pas été écrit par SlamIA — SlamIA n'y a pas touché.",
+      "bn": "{name} SlamIA লেখেনি — SlamIA এতে হাত দেয়নি।",
+      "pt-BR": "{name} não foi escrito pelo SlamIA — o SlamIA não mexeu nele.",
+      "ru": "{name} записан не SlamIA — SlamIA его не трогал.",
+      "id": "{name} tidak ditulis oleh SlamIA — SlamIA tidak menyentuhnya.",
+      "de": "{name} wurde nicht von SlamIA erstellt — SlamIA hat nichts verändert.",
+      "tr": "{name} SlamIA tarafından oluşturulmadı — SlamIA bunu değiştirmedi."
     },
     "{name} — {width}×{height} at {x},{y}": {
       "zh-Hans": "{name} — {width}×{height}，位于 {x},{y}",
@@ -1197,18 +1197,18 @@
       "de": "{path} wurde seit der Vorschau verändert. Nichts wurde geschrieben — prüfe den neuen Diff.",
       "tr": "{path} önizlemeden sonra değişti. Hiçbir şey yazılmadı — yeni değişiklikleri incele."
     },
-    "{what} has an unexpected type — Slimai has not touched it.": {
-      "zh-Hans": "{what} 的类型不符合预期 — Slimai 没有修改它。",
-      "hi": "{what} का प्रकार अपेक्षित नहीं है — Slimai ने इसे नहीं छुआ।",
-      "es": "{what} tiene un tipo inesperado — Slimai no lo ha tocado.",
-      "ar": "{what} من نوع غير متوقع — لم يمسّه Slimai.",
-      "fr": "{what} a un type inattendu — Slimai n'y a pas touché.",
-      "bn": "{what}-এর ধরন অপ্রত্যাশিত — Slimai এতে হাত দেয়নি।",
-      "pt-BR": "{what} tem um tipo inesperado — o Slimai não mexeu nele.",
-      "ru": "У {what} неожиданный тип — Slimai его не трогал.",
-      "id": "{what} bertipe tak terduga — Slimai tidak menyentuhnya.",
-      "de": "{what} hat einen unerwarteten Typ — Slimai hat nichts verändert.",
-      "tr": "{what} beklenmeyen bir türde — Slimai bunu değiştirmedi."
+    "{what} has an unexpected type — SlamIA has not touched it.": {
+      "zh-Hans": "{what} 的类型不符合预期 — SlamIA 没有修改它。",
+      "hi": "{what} का प्रकार अपेक्षित नहीं है — SlamIA ने इसे नहीं छुआ।",
+      "es": "{what} tiene un tipo inesperado — SlamIA no lo ha tocado.",
+      "ar": "{what} من نوع غير متوقع — لم يمسّه SlamIA.",
+      "fr": "{what} a un type inattendu — SlamIA n'y a pas touché.",
+      "bn": "{what}-এর ধরন অপ্রত্যাশিত — SlamIA এতে হাত দেয়নি।",
+      "pt-BR": "{what} tem um tipo inesperado — o SlamIA não mexeu nele.",
+      "ru": "У {what} неожиданный тип — SlamIA его не трогал.",
+      "id": "{what} bertipe tak terduga — SlamIA tidak menyentuhnya.",
+      "de": "{what} hat einen unerwarteten Typ — SlamIA hat nichts verändert.",
+      "tr": "{what} beklenmeyen bir türde — SlamIA bunu değiştirmedi."
     },
     "• subagent done": {
       "zh-Hans": "• 子代理完成",
@@ -1249,18 +1249,18 @@
       "de": "Wähle bis zu {max} Pills neben Mochi — {used}/{max} belegt.",
       "tr": "Mochi'nin yanında gösterilecek en fazla {max} araç seç — {used}/{max} kullanımda."
     },
-    "Nothing leaves this computer: Slimai only talks to servers on this PC.": {
-      "zh-Hans": "没有任何内容会离开这台电脑：Slimai 只与这台电脑上的服务器通信。",
-      "hi": "कुछ भी इस कंप्यूटर से बाहर नहीं जाता: Slimai केवल इसी पीसी के सर्वरों से बात करता है।",
-      "es": "Nada sale de este equipo: Slimai solo habla con servidores de este PC.",
-      "ar": "لا شيء يغادر هذا الحاسوب: يتحدث Slimai فقط مع خوادم على هذا الجهاز.",
-      "fr": "Rien ne quitte cet ordinateur : Slimai ne parle qu'à des serveurs de ce PC.",
-      "bn": "কিছুই এই কম্পিউটার ছেড়ে যায় না: Slimai শুধু এই পিসির সার্ভারের সাথে কথা বলে।",
-      "pt-BR": "Nada sai deste computador: o Slimai só fala com servidores deste PC.",
-      "ru": "Ничто не покидает этот компьютер: Slimai общается только с серверами на этом ПК.",
-      "id": "Tidak ada yang keluar dari komputer ini: Slimai hanya berbicara dengan server di PC ini.",
-      "de": "Nichts verlässt diesen Computer: Slimai spricht nur mit Servern auf diesem PC.",
-      "tr": "Hiçbir şey bu bilgisayardan çıkmaz: Slimai yalnızca bu bilgisayardaki sunucularla konuşur."
+    "Nothing leaves this computer: SlamIA only talks to servers on this PC.": {
+      "zh-Hans": "没有任何内容会离开这台电脑：SlamIA 只与这台电脑上的服务器通信。",
+      "hi": "कुछ भी इस कंप्यूटर से बाहर नहीं जाता: SlamIA केवल इसी पीसी के सर्वरों से बात करता है।",
+      "es": "Nada sale de este equipo: SlamIA solo habla con servidores de este PC.",
+      "ar": "لا شيء يغادر هذا الحاسوب: يتحدث SlamIA فقط مع خوادم على هذا الجهاز.",
+      "fr": "Rien ne quitte cet ordinateur : SlamIA ne parle qu'à des serveurs de ce PC.",
+      "bn": "কিছুই এই কম্পিউটার ছেড়ে যায় না: SlamIA শুধু এই পিসির সার্ভারের সাথে কথা বলে।",
+      "pt-BR": "Nada sai deste computador: o SlamIA só fala com servidores deste PC.",
+      "ru": "Ничто не покидает этот компьютер: SlamIA общается только с серверами на этом ПК.",
+      "id": "Tidak ada yang keluar dari komputer ini: SlamIA hanya berbicara dengan server di PC ini.",
+      "de": "Nichts verlässt diesen Computer: SlamIA spricht nur mit Servern auf diesem PC.",
+      "tr": "Hiçbir şey bu bilgisayardan çıkmaz: SlamIA yalnızca bu bilgisayardaki sunucularla konuşur."
     },
     "What Claude answered in your conversations, read from this computer.": {
       "zh-Hans": "你的对话中 Claude 的回答，直接从这台电脑读取。",
@@ -1327,18 +1327,18 @@
       "de": "Spotify, für die Steuerung in der Leiste.",
       "tr": "Spotify, çubuktaki kontroller için."
     },
-    "Open Slimai": {
-      "zh-Hans": "打开 Slimai",
-      "hi": "Slimai खोलें",
-      "es": "Abrir Slimai",
-      "ar": "فتح Slimai",
-      "fr": "Ouvrir Slimai",
-      "bn": "Slimai খুলুন",
-      "pt-BR": "Abrir o Slimai",
-      "ru": "Открыть Slimai",
-      "id": "Buka Slimai",
-      "de": "Slimai öffnen",
-      "tr": "Slimai'yi aç"
+    "Open SlamIA": {
+      "zh-Hans": "打开 SlamIA",
+      "hi": "SlamIA खोलें",
+      "es": "Abrir SlamIA",
+      "ar": "فتح SlamIA",
+      "fr": "Ouvrir SlamIA",
+      "bn": "SlamIA খুলুন",
+      "pt-BR": "Abrir o SlamIA",
+      "ru": "Открыть SlamIA",
+      "id": "Buka SlamIA",
+      "de": "SlamIA öffnen",
+      "tr": "SlamIA'yi aç"
     },
     "Clear list": {
       "zh-Hans": "清空列表",
@@ -1378,6 +1378,19 @@
       "id": "Izinkan atau tolak dari bilah atas; jawab pertanyaan di terminal.",
       "de": "Erlaube oder verweigere in der oberen Leiste; beantworte Fragen im Terminal.",
       "tr": "Üst çubuktan izin verin veya reddedin; soruları terminalde yanıtlayın."
+    },
+    "List cleared — new conversations show up here, or press Show all.": {
+      "zh-Hans": "列表已清空——新的对话会显示在这里，或点击“显示全部”。",
+      "hi": "सूची साफ़ हो गई — नई बातचीत यहाँ दिखेंगी, या “सभी दिखाएँ” दबाएँ।",
+      "es": "Lista limpia: las nuevas conversaciones aparecerán aquí, o pulsa Mostrar todo.",
+      "ar": "تم مسح القائمة — ستظهر المحادثات الجديدة هنا، أو اضغط «عرض الكل».",
+      "fr": "Liste vidée : les nouvelles conversations apparaîtront ici, ou appuyez sur Tout afficher.",
+      "bn": "তালিকা মুছে ফেলা হয়েছে — নতুন কথোপকথন এখানে দেখা যাবে, অথবা “সব দেখান” চাপুন।",
+      "pt-BR": "Lista limpa — as novas conversas aparecem aqui, ou toque em Mostrar tudo.",
+      "ru": "Список очищен — новые разговоры появятся здесь, или нажмите «Показать все».",
+      "id": "Daftar dibersihkan — percakapan baru muncul di sini, atau tekan Tampilkan semua.",
+      "de": "Liste geleert – neue Unterhaltungen erscheinen hier, oder drücke Alle anzeigen.",
+      "tr": "Liste temizlendi — yeni konuşmalar burada görünür, veya Tümünü göster'e basın."
     }
   }
 }

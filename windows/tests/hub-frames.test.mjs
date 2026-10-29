@@ -1,4 +1,4 @@
-// When the Slimai window draws its canvases (src/hub/frames.ts): only while it
+// When the SlamIA window draws its canvases (src/hub/frames.ts): only while it
 // is on screen, and only the canvases in sight. Issue #792: a hidden window
 // kept a WebKitWebProcess busy on Linux.
 

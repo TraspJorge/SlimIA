@@ -3,7 +3,7 @@
 // The rule from CLAUDE.md is strict and is followed to the letter:
 // read %USERPROFILE%\.claude\settings.json, take a dated backup, merge without
 // touching anybody else's hooks, show the diff, and write only after an explicit
-// click. Uninstall removes Slimai's entries and nothing else.
+// click. Uninstall removes SlamIA's entries and nothing else.
 //
 // The command is only the quoted exe path in forward slashes plus the event name:
 // on Windows Claude Code runs hook commands through Git Bash, and anything with
@@ -38,14 +38,14 @@ pub const HOOK_EVENTS: &[(&str, u64)] = &[
     ("SubagentStop", 10),
 ];
 
-/// Marker that identifies a Slimai entry inside settings.json.
+/// Marker that identifies a SlamIA entry inside settings.json.
 const MARKER: &str = "coucou-hook";
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HookStatus {
     pub installed: bool,
-    /// Slimai's status line relay (plan usage) is the one in settings.json.
+    /// SlamIA's status line relay (plan usage) is the one in settings.json.
     pub plan_relay_installed: bool,
     pub settings_path: String,
     pub hook_path: String,
@@ -98,13 +98,13 @@ fn entry_is_ours(entry: &Value) -> bool {
         .unwrap_or(false)
 }
 
-/// The status line in settings.json is Slimai's relay (old installs wrote
+/// The status line in settings.json is SlamIA's relay (old installs wrote
 /// `coucou-hook StatusLine`, new ones `coucou-hook --statusline`; both match).
 fn status_line_is_ours(v: &Value) -> bool {
     v.get("command").and_then(Value::as_str).is_some_and(|c| c.contains(MARKER))
 }
 
-/// Settings with Slimai's hooks added; everything else is left untouched. A
+/// Settings with SlamIA's hooks added; everything else is left untouched. A
 /// `hooks` (or one of its events) that is not what Claude Code documents is
 /// refused rather than replaced.
 fn merged(existing: &Value) -> Result<Value, String> {
@@ -137,10 +137,10 @@ fn merged(existing: &Value) -> Result<Value, String> {
 }
 
 fn unexpected(what: &str) -> String {
-    crate::i18n::tf("settings.json: {what} has an unexpected type — Slimai has not touched it.", &[("what", what)])
+    crate::i18n::tf("settings.json: {what} has an unexpected type — SlamIA has not touched it.", &[("what", what)])
 }
 
-/// Settings with every Slimai entry removed, and nothing else changed.
+/// Settings with every SlamIA entry removed, and nothing else changed.
 fn without_ours(existing: &Value) -> Result<Value, String> {
     let mut root = existing.as_object().cloned().unwrap_or_default();
     let hooks = match root.get("hooks") {
@@ -230,7 +230,7 @@ pub fn write(install: bool, fingerprint: &str) -> Result<String, String> {
 
 // ── Status line (plan usage) ──────────────────────────────────────────────────
 //
-// Claude Code runs one `statusLine` command and hands it the plan limits. Slimai
+// Claude Code runs one `statusLine` command and hands it the plan limits. SlamIA
 // puts its relay there; a status line the user already had is kept in
 // statusline-previous.json beside the relay, and the relay still runs it, so it
 // keeps working. Installing and removing it is separate from the hooks, and
@@ -247,7 +247,7 @@ fn read_status_line_previous() -> Option<Value> {
     serde_json::from_slice::<Value>(&bytes).ok().filter(Value::is_object)
 }
 
-/// True when the `statusLine` in settings.json is Slimai's relay.
+/// True when the `statusLine` in settings.json is SlamIA's relay.
 pub fn plan_relay_installed(settings: &Value) -> bool {
     settings.get("statusLine").is_some_and(status_line_is_ours)
 }

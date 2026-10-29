@@ -154,7 +154,7 @@ export async function returnsPage(page: HTMLElement, ctx: HubContext) {
     drawList();
     if (!picked) {
       clear(log);
-      log.append(emptyState(t("No Claude Code conversation found yet.")));
+      log.append(emptyState(clearedAt() > 0 ? t("List cleared — new conversations show up here, or press Show all.") : t("No Claude Code conversation found yet.")));
       return;
     }
     await load(false);

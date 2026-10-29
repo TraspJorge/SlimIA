@@ -1,20 +1,20 @@
-# Blocks Slimai's network from the system's side, whatever the code does.
+# Blocks SlamIA's network from the system's side, whatever the code does.
 # Run in an elevated PowerShell (Run as administrator):
 #
 #   .\block-network.ps1                       # add the rules
 #   .\block-network.ps1 -Remove                # take them off again
-#   .\block-network.ps1 -Program "D:\Slimai\coucou.exe"
+#   .\block-network.ps1 -Program "D:\SlamIA\coucou.exe"
 #
-# Windows Firewall does not filter the loopback interface, so Slimai can still
+# Windows Firewall does not filter the loopback interface, so SlamIA can still
 # reach a model server on this PC (Ollama, LM Studio on 127.0.0.1).
 
 param(
-    [string[]]$Program = @("$env:LOCALAPPDATA\Slimai\coucou.exe", "$env:LOCALAPPDATA\Slimai\coucou-hook.exe"),
+    [string[]]$Program = @("$env:LOCALAPPDATA\SlamIA\coucou.exe", "$env:LOCALAPPDATA\SlamIA\coucou-hook.exe"),
     [switch]$Remove
 )
 
 $ErrorActionPreference = "Stop"
-$prefix = "Slimai: no network"
+$prefix = "SlamIA: no network"
 
 if ($Remove) {
     Get-NetFirewallRule -DisplayName "$prefix*" -ErrorAction SilentlyContinue | Remove-NetFirewallRule

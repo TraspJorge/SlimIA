@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="src-tauri/icons/128x128.png" width="96" alt="Slimai icon">
+<img src="src-tauri/icons/128x128.png" width="96" alt="SlamIA icon">
 
-# Slimai for Windows
+# SlamIA for Windows
 
 **Mochi doesn't get a notch on a PC — so it lives at the top of your screen instead.**
 
@@ -52,7 +52,7 @@ There is no ready-made installer for this copy: [build it yourself](#build-it-yo
 | Drag a file onto the island | Mochi turns into a box, swallows it, then offers to answer questions about it |
 | Click a file in the session ticker | Its diff opens in the island; ↗ opens the file in VS Code, ‹ or `Esc` goes back |
 | `Esc` | Closes the island |
-| Put a file named like one of Mochi's sounds (`finish.wav`, `approval.mp3`, `greet.m4a`…) in the sounds folder | It replaces that sound after **Settings → General → Reload sounds**. **Open sounds folder** shows the folder: `~/.config/coucou/sounds` on Linux, `%APPDATA%\Slimai\sounds` on Windows |
+| Put a file named like one of Mochi's sounds (`finish.wav`, `approval.mp3`, `greet.m4a`…) in the sounds folder | It replaces that sound after **Settings → General → Reload sounds**. **Open sounds folder** shows the folder: `~/.config/coucou/sounds` on Linux, `%APPDATA%\SlamIA\sounds` on Windows |
 | Tray icon | Open, Weekly recap, Wardrobe…, Settings…, Pause, Quit |
 | `Ctrl+Alt+Space` | Opens the chat, from any app |
 | `Ctrl+Alt+A` | Jumps to the waiting permission or question |
@@ -71,8 +71,8 @@ There is no ready-made installer for this copy: [build it yourself](#build-it-yo
 
 Every global shortcut can be changed or turned off in **Settings… → Shortcuts**:
 click it and press the new keys. A combination another app already holds is
-flagged *In use*, and two Slimai shortcuts on the same keys are flagged *Used
-twice*. While you record a new one, Slimai lets go of its own so the keys reach
+flagged *In use*, and two SlamIA shortcuts on the same keys are flagged *Used
+twice*. While you record a new one, SlamIA lets go of its own so the keys reach
 the recorder.
 
 The defaults are not the Mac's `⌃⌥` letters. On Windows, `Ctrl+Alt` is `AltGr`,
@@ -80,7 +80,7 @@ so a global `Ctrl+Alt+E` would swallow every `€` typed on a French or German
 keyboard. The defaults were checked against the AltGr layer of the French,
 German, Spanish, Italian, Portuguese and Brazilian (ABNT2) layouts — that is why
 pill switching uses the arrows rather than `[` `]`, and mute is `S` rather than
-`M` (`AltGr+M` is `µ` in German). On top of that, Slimai asks Windows what each
+`M` (`AltGr+M` is `µ` in German). On top of that, SlamIA asks Windows what each
 `Ctrl+Alt` combination types on the layouts you have installed and leaves any
 that types a character unregistered, flagged *Types “ą”* in Settings: Polish,
 for one, puts `ą` on `AltGr+A` and `ś` on `AltGr+S`. The recorder refuses such
@@ -120,7 +120,7 @@ answer on one line, still, until the next prompt.
 
 ## The Chat page
 
-Slimai has its own window (tray → Open, or launch Slimai again). Its first page,
+SlamIA has its own window (tray → Open, or launch SlamIA again). Its first page,
 **Chat**, shows what Claude answered, read from the conversations Claude Code
 keeps on this computer (`~/.claude/projects/<project>/<session>.jsonl`, or
 `$CLAUDE_CONFIG_DIR`). On the left, your recent conversations (the VS Code
@@ -150,13 +150,13 @@ declare still shows up, for as long as it runs.
 Open **Settings… → Claude Code → Install hooks…**. You get the exact diff of what
 will change in `%USERPROFILE%\.claude\settings.json`, the path of the dated backup
 that will be taken, and nothing is written until you click. Your own hooks are
-never touched, and uninstalling removes only Slimai's entries.
+never touched, and uninstalling removes only SlamIA's entries.
 
 The relay is a tiny executable, `coucou-hook.exe`, copied to
-`%LOCALAPPDATA%\Slimai\bin\` at launch. It is given 300 ms to reach Slimai and
+`%LOCALAPPDATA%\SlamIA\bin\` at launch. It is given 300 ms to reach SlamIA and
 exits cleanly if the app is closed, slow or crashed — **a Claude Code session is
-never blocked or slowed down by Slimai.** If nobody answers a permission request
-in time, Slimai stays quiet and Claude Code asks in the terminal as usual.
+never blocked or slowed down by SlamIA.** If nobody answers a permission request
+in time, SlamIA stays quiet and Claude Code asks in the terminal as usual.
 
 It works from any terminal — Windows Terminal, PowerShell, VS Code, Git Bash.
 
@@ -208,8 +208,8 @@ ships in the app.
 workflow publishes:
 
 ```
-Slimai-Windows-X.Y.Z-setup.exe    the versioned installer
-Slimai-Windows-setup.exe          the same file under the rolling name
+SlamIA-Windows-X.Y.Z-setup.exe    the versioned installer
+SlamIA-Windows-setup.exe          the same file under the rolling name
 ```
 
 Installing is optional — `target/release/coucou.exe` runs on its own. There is no
@@ -243,7 +243,7 @@ windows/
 
 ### Log
 
-`%LOCALAPPDATA%\Slimai\coucou.log` — hook events, permission decisions, poller
+`%LOCALAPPDATA%\SlamIA\coucou.log` — hook events, permission decisions, poller
 problems. It stays on your machine. The weekly recap's history sits beside it in
 `recap.json`.
 
@@ -251,7 +251,7 @@ problems. It stays on your machine. The weekly recap's history sits beside it in
 
 Every agent below is installed from **Settings → Agents** with the same steps as
 Claude Code: the exact diff, the path of the dated backup, nothing written until
-you click, and uninstalling removes only Slimai's entries. A config Slimai cannot
+you click, and uninstalling removes only SlamIA's entries. A config SlamIA cannot
 read, or where it finds something it does not expect, is left alone and the
 reason is shown. Each agent gets its own pill (`agent_<name>`, the Mac's ids and
 colours). The files are the Mac's, under `%USERPROFILE%` on Windows and `~` on
@@ -277,11 +277,11 @@ CLI's `BeforeTool`, Copilot's `preToolUse`, Cursor's `beforeSubmitPrompt`…), a
 answers each agent the way it expects. It never lets anything through on its
 own: with no click it prints no decision at all (`{}` for the agents that need
 JSON, `"ask"` for Copilot, which is fail-closed), so the agent asks in its own
-terminal exactly as without Slimai — including when Slimai is closed.
+terminal exactly as without SlamIA — including when SlamIA is closed.
 
 The plugins start the relay directly, with no shell in between, and never wait
 for it. Amp's steps appear as each tool finishes: its "before" hook must return
-a verdict, and Slimai never gives one.
+a verdict, and SlamIA never gives one.
 
 **How each agent runs the relay on Windows.** Hook commands are written for the
 shell that runs them: Git Bash for Claude Code (quoted, forward slashes),
@@ -291,10 +291,10 @@ path is written bare when it has no space or special character — which works i
 cmd, PowerShell and when started directly — and in double quotes otherwise.
 These three are untested on Windows.
 
-A pill is **connected** when Slimai finds its own entries in the files above —
+A pill is **connected** when SlamIA finds its own entries in the files above —
 the same check as Settings → Agents (for Claude Code: a SessionStart hook
-running Slimai's relay; the Cursor pill also counts Claude Code's hooks).
-Slimai only reads these files, each time the island opens. Permission requests
+running SlamIA's relay; the Cursor pill also counts Claude Code's hooks).
+SlamIA only reads these files, each time the island opens. Permission requests
 get the island's card for Claude Code (in any terminal, and in Cursor's),
 Codex, Copilot CLI and Muse Code; other agents and Claude Desktop ask in their
 own window.
@@ -334,7 +334,7 @@ own window.
 - Cal.com shows the next bookings as a list rather than the Mac's calendar.
 - The Cursor pill carries both Cursor Agent's own hooks and Claude Code running
   in Cursor's terminal.
-- Hermes: Slimai writes the plugin but does not run the `hermes` CLI, so it is
+- Hermes: SlamIA writes the plugin but does not run the `hermes` CLI, so it is
   turned on once by hand. Hermes runs natively on Linux; on Windows it is
   untested.
 - Plan usage: the user's previous status line runs through Git Bash on Windows
@@ -383,7 +383,7 @@ own window.
   its global shortcut (`Ctrl+Alt+G` by default). In the compact island a tall hat
   is cut by the top edge of the screen, as it is by the notch on a Mac.
 - Languages: chosen in Settings, independently of the system, and applied
-  without a restart (the Mac's **Restart Slimai** isn't needed). Arabic turns
+  without a restart (the Mac's **Restart SlamIA** isn't needed). Arabic turns
   the island's text right to left but not its layout: Mochi and the pills keep
   their sides.
 - Mochi on the desktop dances to Spotify. While he dances he stays awake (the
@@ -423,7 +423,7 @@ What changes on Linux:
 - **The island** is a gtk-layer-shell overlay anchored to the top edge, over any
   top panel, on compositors that support it: COSMIC, KDE Plasma, Hyprland, Sway
   and other wlroots compositors. GNOME has no layer-shell and ignores where a
-  Wayland window asks to go, so there Slimai runs through XWayland as a dock
+  Wayland window asks to go, so there SlamIA runs through XWayland as a dock
   window: top centre, on every workspace, still there after Super+D.
   `COUCOU_X11=0` keeps the native Wayland window, `COUCOU_DOCK=0` makes it a
   utility window instead of a dock. `COUCOU_LAYER_SHELL=0` forces the regular
@@ -450,7 +450,7 @@ What changes on Linux:
   On X11, AltGr is a modifier of its own and never clashes with `Ctrl+Alt`;
   combinations the desktop already uses (GNOME's `Ctrl+Alt+T` terminal and
   `Ctrl+Alt+←`/`→` workspace switching) show up as *In use*.
-  Wayland has no key grabs, so there Slimai hands its shortcuts to the desktop
+  Wayland has no key grabs, so there SlamIA hands its shortcuts to the desktop
   through the XDG **GlobalShortcuts portal** (`xdg-desktop-portal`, with a
   backend that has it: KDE Plasma 6, GNOME 48+, Hyprland, COSMIC…). Each
   shortcut goes with its description and your keys as the preferred trigger;
@@ -459,8 +459,8 @@ What changes on Linux:
   given there, and you change them in the desktop's own shortcut settings.
   **Settings → Shortcuts** says the shortcuts are registered with the desktop,
   shows next to each one the keys the desktop reports (*Desktop: …*), and flags
-  one it left out. Changing or turning off a shortcut in Slimai binds the new
-  set in a new portal session. Slimai names itself `fr.louisraille.coucou` to
+  one it left out. Changing or turning off a shortcut in SlamIA binds the new
+  set in a new portal session. SlamIA names itself `fr.louisraille.coucou` to
   the portal where the portal allows it (`xdg-desktop-portal` 1.19+); a
   desktop that wants an app name may otherwise refuse.
   Where there is no such portal, or the desktop refuses, nothing is registered
@@ -468,7 +468,7 @@ What changes on Linux:
   desktop's own keyboard settings instead (they are shown with the portal too,
   for any shortcut that doesn't work):
   `coucou --shortcut openChat` (or the AppImage's path) runs the action in the
-  Slimai that is already open. The ids are `toggleIsland`, `openChat`,
+  SlamIA that is already open. The ids are `toggleIsland`, `openChat`,
   `goToAlert`, `jumpToTerminal`, `nextPill`, `prevPill`, `muteToggle`,
   `desktopToggle` and `wardrobeToggle`.
 - **Keys** live in the Secret Service (GNOME Keyring, KWallet).
@@ -497,7 +497,7 @@ What changes on Linux:
   `recap.json`. A saved recap image goes to the pictures folder named in
   `~/.config/user-dirs.dirs`, else `~/Pictures`, else `~/Downloads`.
 - **Languages**: Hindi, Bengali, Chinese and Arabic need fonts that carry those
-  scripts; Slimai asks for the Noto families (`fonts-noto-core` and
+  scripts; SlamIA asks for the Noto families (`fonts-noto-core` and
   `fonts-noto-cjk` on Debian and Ubuntu, `noto-fonts` and `noto-fonts-cjk` on
   Arch). **System** reads the language from the webview, which follows
   `LANGUAGE` / `LANG`.

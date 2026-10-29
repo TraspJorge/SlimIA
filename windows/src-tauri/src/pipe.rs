@@ -113,11 +113,11 @@ pub fn start(app: AppHandle) {
             return;
         };
         // A socket file left behind by a crash answers nothing and can go. One
-        // that answers belongs to a Slimai that is still running: like
+        // that answers belongs to a SlamIA that is still running: like
         // first_pipe_instance on Windows, we refuse to serve on top of it.
         if path.exists() {
             if std::os::unix::net::UnixStream::connect(&path).is_ok() {
-                log::line("another Slimai already serves the relay socket");
+                log::line("another SlamIA already serves the relay socket");
                 return;
             }
             let _ = std::fs::remove_file(&path);
@@ -245,7 +245,7 @@ async fn handle(app: AppHandle, mut pipe: impl Relay) {
     crate::status::resolve(&id, decision.is_some());
 
     // No decision: say nothing at all. coucou-hook then writes nothing to stdout
-    // and Claude Code asks in the terminal, exactly as if Slimai were closed.
+    // and Claude Code asks in the terminal, exactly as if SlamIA were closed.
     if let Some(d) = decision {
         let _ = pipe.write_all(format!("{d}\n").as_bytes()).await;
         let _ = pipe.flush().await;

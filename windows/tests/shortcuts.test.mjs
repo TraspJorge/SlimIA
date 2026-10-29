@@ -308,7 +308,7 @@ beforeEach(() => {
   State.loadIntegrationTasks();
 });
 
-test("the chat shortcut opens the Chat page of the Slimai window, not the island", () => {
+test("the chat shortcut opens the Chat page of the SlamIA window, not the island", () => {
   emit("shortcut", "openChat");
   assert.deepEqual(did, []);
   assert.deepEqual(sent("open_settings_window"), [{ page: "chat" }]);

@@ -89,7 +89,7 @@ pub fn description(id: &str) -> &'static str {
         "prevPill" => n_("Previous pill"),
         "muteToggle" => n_("Mute or unmute Mochi"),
         "desktopToggle" => n_("Send Mochi to the desktop"),
-        _ => "Slimai",
+        _ => "SlamIA",
     }
 }
 
@@ -130,7 +130,7 @@ pub enum Status {
     Off,
     /// Another app already holds this combination.
     InUse,
-    /// Another Slimai shortcut has the same combination.
+    /// Another SlamIA shortcut has the same combination.
     Duplicate,
     /// Not a combination the OS can register.
     Invalid,
@@ -170,7 +170,7 @@ pub struct ActionStatus {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub typed: Option<String>,
     /// Wayland: the keys the desktop says run it, in its own words. It may
-    /// let the user pick other keys than the ones Slimai asked for.
+    /// let the user pick other keys than the ones SlamIA asked for.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub trigger: Option<String>,
 }
@@ -322,7 +322,7 @@ pub fn dispatch<R: Runtime>(app: &AppHandle<R>, action: &str) {
     let _ = app.emit_to(WINDOW_LABEL, "shortcut", action.to_string());
 }
 
-/// Unregisters everything Slimai holds.
+/// Unregisters everything SlamIA holds.
 fn release<R: Runtime>(app: &AppHandle<R>) {
     if let Some(gs) = app.try_state::<GlobalShortcut<R>>() {
         if let Err(err) = gs.unregister_all() {
@@ -388,7 +388,7 @@ pub fn apply<R: Runtime>(app: &AppHandle<R>, stored: &Bindings) {
 }
 
 /// Lets go of every shortcut while a new one is being recorded in Settings,
-/// so pressing a combination Slimai already holds records it instead of
+/// so pressing a combination SlamIA already holds records it instead of
 /// running it.
 pub fn suspend<R: Runtime>(app: &AppHandle<R>) {
     release(app);
@@ -671,7 +671,7 @@ mod wayland {
         #[test]
         fn every_action_has_a_description() {
             for def in ACTIONS {
-                assert_ne!(description(def.id), "Slimai", "{}", def.id);
+                assert_ne!(description(def.id), "SlamIA", "{}", def.id);
             }
         }
     }

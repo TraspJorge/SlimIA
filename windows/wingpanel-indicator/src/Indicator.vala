@@ -1,18 +1,18 @@
-// Slimai in the top bar: the island, in the panel.
+// SlamIA in the top bar: the island, in the panel.
 //
 // A black capsule with Mochi (the one of the pill in front) and a small Mochi for
-// each of the other pills, as on Slimai's compact island. Mochi has the island's
+// each of the other pills, as on SlamIA's compact island. Mochi has the island's
 // moods (thinking, working, asking, waiting for a permission, rate limit, error,
 // finished, asleep), dances to Spotify, and the panel is the open island: the pill
 // in front on the left, the others on the right, a click brings one to the front.
 //
-// It does not talk to Slimai: it reads ~/.local/share/coucou/status.json, which the
-// Slimai app rewrites on every hook event and every Spotify change
+// It does not talk to SlamIA: it reads ~/.local/share/coucou/status.json, which the
+// SlamIA app rewrites on every hook event and every Spotify change
 // (src-tauri/src/status.rs). It opens no connection. The only things it runs are
-// Slimai's own `--shortcut openChat` and `--spotify playPause|next|previous`.
-// If Slimai is not running Mochi is grey.
+// SlamIA's own `--shortcut openChat` and `--spotify playPause|next|previous`.
+// If SlamIA is not running Mochi is grey.
 
-namespace Slimai {
+namespace SlamIA {
     // The moods of BOT_STATES (src/mochi/engine.ts) a hook can cause.
     public enum Mood {
         OFF, SLEEPING, IDLE, FINISHED, THINKING, WORKING, RATELIMIT, ERROR, QUESTION, APPROVAL;
@@ -96,7 +96,7 @@ namespace Slimai {
             case Mood.FINISHED: return tr ("Finished", "Terminou");
             case Mood.ERROR: return tr ("Something went wrong", "Algo deu errado");
             case Mood.SLEEPING: return tr ("Sleeping", "Dormindo");
-            case Mood.OFF: return tr ("Slimai is not running", "O Slimai não está aberto");
+            case Mood.OFF: return tr ("SlamIA is not running", "O SlamIA não está aberto");
             default: return tr ("Nothing running", "Nada rodando");
         }
     }
@@ -477,7 +477,7 @@ namespace Slimai {
             if (big_mochi != null) big_mochi.queue_draw ();
         }
 
-        // ── Commands to Slimai ───────────────────────────────────────────────
+        // ── Commands to SlamIA ───────────────────────────────────────────────
 
         private void run_coucou (string[] args) {
             if (exe == "") {
@@ -510,7 +510,7 @@ namespace Slimai {
 
         private void open_chat () {
             close ();
-            // A second launch only brings the running Slimai forward (single instance).
+            // A second launch only brings the running SlamIA forward (single instance).
             run_coucou ({ "--shortcut", "openChat" });
         }
 
@@ -779,7 +779,7 @@ namespace Slimai {
 
         // ── Drawing ──────────────────────────────────────────────────────────
         //
-        // The same look as Slimai's island: a soft grey body with a highlight, two
+        // The same look as SlamIA's island: a soft grey body with a highlight, two
         // dark eyes that blink, the colour of the mood rising from the bottom, a badge
         // when something needs you. Flat-coloured for the pills that are not workspace
         // tools, as the island does.
@@ -1451,7 +1451,7 @@ namespace Slimai {
                 add_player (main);
             } else {
                 if (f != null && f.mood.alerts ()) {
-                    main.pack_start (label (tr ("Answer in the Slimai island.", "Responda na ilha do Slimai."), "coucou-dim"), false, false, 0);
+                    main.pack_start (label (tr ("Answer in the SlamIA island.", "Responda na ilha do SlamIA."), "coucou-dim"), false, false, 0);
                 }
                 add_answer (main, f);
             }
@@ -1591,5 +1591,5 @@ public Wingpanel.Indicator? get_indicator (Module module, Wingpanel.IndicatorMan
     if (server_type != Wingpanel.IndicatorManager.ServerType.SESSION) {
         return null;
     }
-    return new Slimai.Indicator ();
+    return new SlamIA.Indicator ();
 }

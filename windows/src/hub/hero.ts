@@ -1,4 +1,4 @@
-// The coloured band on top of each page of the Slimai window: a deep black
+// The coloured band on top of each page of the SlamIA window: a deep black
 // with the page's colour breathing in a corner, particles that drift all the
 // time and move away from the pointer, and the page's little Mochis walking on
 // its floor — they hop, look around, wave, and react when poked. Also the
@@ -25,7 +25,7 @@ const live = new Set<Animated>();
 let frame: number | null = null;
 let last = performance.now();
 const start = performance.now();
-/** The Slimai window is on screen, as Rust last said (`setWindowShown`). */
+/** The SlamIA window is on screen, as Rust last said (`setWindowShown`). */
 let windowShown = true;
 
 function running(): boolean {

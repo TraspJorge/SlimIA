@@ -1,4 +1,4 @@
-// Small append-only log at %LOCALAPPDATA%\Slimai\coucou.log (Windows) or
+// Small append-only log at %LOCALAPPDATA%\SlamIA\coucou.log (Windows) or
 // ~/.local/share/coucou/coucou.log (Linux) — the equivalent of nbLog() in
 // HookServer.swift. Nothing leaves the machine.
 
