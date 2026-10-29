@@ -92,8 +92,12 @@ export async function returnsPage(page: HTMLElement, ctx: HubContext) {
       class: "link-btn",
       text: t("Clear list"),
       onclick: () => {
-        setClearedAt(Date.now());
-        void refresh();
+        // Everything older goes; the latest conversation stays, with its last message.
+        void Bridge.returnsSessions().then((all) => {
+          const newest = (all ?? []).reduce((m, x) => Math.max(m, x.updatedAt), 0);
+          setClearedAt(newest > 0 ? newest - 1 : Date.now());
+          void refresh();
+        });
       },
     }));
     if (clearedAt() > 0) {
