@@ -1,18 +1,9 @@
-// The Flow pages of the Coucou window, by id (shell.ts draws the Notch ones
-// from the island's settings).
+// The pages of the Coucou window drawn by the window itself, by id (shell.ts
+// draws the others from the island's settings).
 
-import type { FlowPageRenderer, PageId } from "./shell";
-import { dictationPage } from "./pages/dictation";
-import { notesPage } from "./pages/notes";
-import { insightsPage } from "./pages/insights";
-import { dictionaryPage, snippetsPage } from "./pages/words";
-import { flowSettingsPage } from "./pages/flowsettings";
+import type { PageId, PageRenderer } from "./shell";
+import { returnsPage } from "./pages/returns";
 
-export const FLOW_PAGE_RENDERERS: Partial<Record<PageId, FlowPageRenderer>> = {
-  dictation: dictationPage,
-  notes: notesPage,
-  insights: insightsPage,
-  dictionary: dictionaryPage,
-  snippets: snippetsPage,
-  flowsettings: flowSettingsPage,
+export const PAGE_RENDERERS: Partial<Record<PageId, PageRenderer>> = {
+  chat: returnsPage,
 };

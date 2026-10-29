@@ -18,7 +18,7 @@ import {
 } from "../core/pills";
 import { h, clear } from "../views/dom";
 import { startHub, type PageId } from "../hub/shell";
-import { FLOW_PAGE_RENDERERS } from "../hub/pages";
+import { PAGE_RENDERERS } from "../hub/pages";
 import { agentsSection } from "./agents";
 import { colorDot } from "./colors";
 import { renderDiff, statusDot } from "./parts";
@@ -711,6 +711,19 @@ function generalSection(): HTMLElement {
     void save();
   });
 
+  const offsetYValue = h("span", { class: "hint", style: "min-width:48px", text: `${settings.islandOffsetY ?? 0} px` });
+  const offsetY = h("input", {
+    type: "range", min: "0", max: "120", step: "2",
+    value: String(settings.islandOffsetY ?? 0), style: "flex:1 1 auto;min-width:0",
+  }) as HTMLInputElement;
+  offsetY.addEventListener("input", () => {
+    offsetYValue.textContent = `${offsetY.value} px`;
+  });
+  offsetY.addEventListener("change", () => {
+    settings.islandOffsetY = Number(offsetY.value);
+    void save();
+  });
+
   return h(
     "section",
     {},
@@ -745,6 +758,11 @@ function generalSection(): HTMLElement {
       h("label", { text: t("Island position") }),
       offset,
       offsetValue,
+    ),
+    h("div", { class: "row" },
+      h("label", { text: t("Distance from the top") }),
+      offsetY,
+      offsetYValue,
     ),
     h("div", { class: "hint", text: t("Moves the island along the top edge: left is negative, right is positive. Beside a centred system clock, try about 120.") }),
     h("div", { class: "row" },
@@ -1064,7 +1082,7 @@ async function main() {
   applyDirection();
   hub = await startHub(windowRoot, {
     version,
-    flowPages: FLOW_PAGE_RENDERERS,
+    pages: PAGE_RENDERERS,
     renderNotch: async (page, container) => {
       notchPage = page;
       root = container;

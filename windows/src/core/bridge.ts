@@ -22,6 +22,21 @@ async function call<T>(cmd: string, args?: Record<string, unknown>): Promise<T |
   }
 }
 
+/** A Claude Code conversation in the Chat page's list (src-tauri/src/returns.rs). */
+export interface ReturnSession {
+  id: string;
+  cwd: string;
+  title: string;
+  updatedAt: number;
+}
+
+/** One line of a conversation: what you asked, what Claude said, or a tool it used. */
+export interface ReturnEntry {
+  kind: "user" | "assistant" | "step";
+  text: string;
+  at: number;
+}
+
 export interface BootInfo {
   settings: Settings;
   /** Logical screen rect of the monitor the island lives on. */
@@ -140,6 +155,10 @@ export const Bridge = {
 
   /** "Nobody can act on this" — Claude Code asks in the terminal right away. */
   approvalDecline: (requestId: string) => call<void>("approval_decline", { requestId }),
+
+  // ── Chat page: Claude Code's conversations, read from this computer ──────
+  returnsSessions: () => call<ReturnSession[]>("returns_sessions"),
+  returnsRead: (id: string, limit?: number) => call<ReturnEntry[]>("returns_read", { id, limit: limit ?? null }),
 
   // ── Chat, files, secrets ──────────────────────────────────────────────────
   /** One chat turn, answered by a model on this computer. File bytes never leave Rust. */

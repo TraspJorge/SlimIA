@@ -2,8 +2,6 @@
 // switches, segmented controls. Same look as the Mac's (FlowHub.swift).
 
 import { h } from "../views/dom";
-import { t } from "../i18n/i18n";
-import type { FlowKey } from "../core/flow";
 
 /** Stroke icons on a 24×24 grid, standing in for the Mac's SF Symbols. */
 export const HUB_ICONS: Record<string, string> = {
@@ -114,29 +112,6 @@ export function select<T extends string>(options: [T, string][], value: T, onCha
   el.value = value;
   el.addEventListener("change", () => onChange(el.value as T));
   return el;
-}
-
-/** "Right Ctrl", "Ctrl + Win"… */
-export function keyLabel(key: FlowKey | "wayland" | "", platform: "windows" | "linux" = "windows"): string {
-  switch (key) {
-    case "right_alt":
-      return t("Right {0}", { 0: "Alt" });
-    case "right_shift":
-      return t("Right {0}", { 0: "Shift" });
-    case "left_ctrl_super":
-      return platform === "windows" ? "Ctrl + Win" : "Ctrl + Super";
-    case "wayland":
-      // Held by the desktop (GlobalShortcuts portal): the keys Coucou suggests.
-      return "Ctrl+Alt+V";
-    default:
-      return t("Right {0}", { 0: "Ctrl" });
-  }
-}
-
-/** The key written as keycaps: "Right Ctrl" twice for hands-free. */
-export function keyKeycap(key: FlowKey | "wayland" | "", platform: "windows" | "linux", twice = false): HTMLElement {
-  const label = keyLabel(key, platform);
-  return keycap(twice ? `${label} ${label}` : label);
 }
 
 /** A number written the way the language writes it. */

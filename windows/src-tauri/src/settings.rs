@@ -28,7 +28,8 @@ pub struct Settings {
     /// How far the island is moved along the top edge from the centre, in logical
     /// pixels: negative to the left, positive to the right (beside a centred clock).
     pub island_offset_x: i32,
-    pub autostart: bool,
+    /// How far below the top edge the island sits, in logical pixels (to clear a top panel).
+    pub island_offset_y: i32,    pub autostart: bool,
     pub hooks_installed: bool,
     /// Show the Claude plan pill (5 h and weekly limits) in the island's header.
     /// Off until the user turns it on, so the header stays as it shipped.
@@ -101,6 +102,7 @@ impl Default for Settings {
             main_pill: "integration_claude".into(),
             screen: "primary".into(),
             island_offset_x: 0,
+            island_offset_y: 0,
             autostart: false,
             hooks_installed: false,
             show_plan_in_notch: false,
@@ -379,6 +381,7 @@ mod tests {
   "mainPill": "agent_cursor",
   "screen": "cursor",
   "islandOffsetX": 120,
+  "islandOffsetY": 28,
   "autostart": true,
   "hooksInstalled": true,
   "showPlanInNotch": true,
@@ -774,6 +777,7 @@ mod tests {
                 "mainPill",
                 "screen",
                 "islandOffsetX",
+                "islandOffsetY",
                 "autostart",
                 "hooksInstalled",
                 "showPlanInNotch",

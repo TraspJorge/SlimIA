@@ -921,3 +921,26 @@ button.hub-icon svg {
 .hub-note-detail > button {
   align-self: flex-start;
 }
+
+/* ── Chat page: Claude's answers (hub/pages/returns.ts) ─────────────────────── */
+.ret-wrap { display: flex; gap: 14px; height: calc(100vh - 210px); min-height: 360px; }
+.ret-list { flex: 0 0 230px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-inline-end: 4px; }
+.ret-item { text-align: start; background: var(--hub-card, rgba(255,255,255,.04)); border: 1px solid transparent; border-radius: 10px; padding: 9px 11px; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 3px; }
+.ret-item:hover { background: rgba(255,255,255,.07); }
+.ret-item.on { border-color: rgba(59,158,255,.7); background: rgba(59,158,255,.1); }
+.ret-item-top { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; }
+.ret-item-top span { opacity: .55; font-size: 11.5px; white-space: nowrap; }
+.ret-item-title { font-size: 12px; opacity: .65; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.ret-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.ret-log { flex: 1 1 auto; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-inline-end: 6px; user-select: text; }
+.ret-msg { max-width: 88%; border-radius: 12px; padding: 9px 12px; font-size: 13.5px; line-height: 1.5; }
+.ret-msg.user { align-self: flex-end; background: rgba(59,158,255,.16); }
+.ret-msg.assistant { align-self: flex-start; background: rgba(255,255,255,.06); }
+.ret-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+.ret-md { overflow-wrap: anywhere; }
+.ret-md p { margin: 0 0 8px; }
+.ret-md p:last-child { margin-bottom: 0; }
+.ret-md pre { margin: 6px 0; overflow-x: auto; }
+.ret-time { margin-top: 4px; font-size: 10.5px; opacity: .45; text-align: end; }
+.ret-step { align-self: flex-start; font-size: 11.5px; opacity: .55; padding: 1px 4px 1px 10px; border-inline-start: 2px solid rgba(255,255,255,.18); font-family: ui-monospace, monospace; overflow-wrap: anywhere; }
+.ret-foot { flex: 0 0 auto; }

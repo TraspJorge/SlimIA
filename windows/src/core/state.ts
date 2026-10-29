@@ -114,6 +114,8 @@ export interface Settings {
   screen: string;
   /** Pixels along the top edge from the centre: negative to the left, positive to the right. */
   islandOffsetX: number;
+  /** Pixels below the top edge, to clear a top panel. */
+  islandOffsetY: number;
   autostart: boolean;
   hooksInstalled: boolean;
   /** Show the Claude plan pill (5 h and weekly limits) in the island's header. */
@@ -166,6 +168,7 @@ export const DEFAULT_SETTINGS: Settings = {
   mainPill: DEFAULT_MAIN_PILL,
   screen: "primary",
   islandOffsetX: 0,
+  islandOffsetY: 0,
   autostart: false,
   hooksInstalled: false,
   showPlanInNotch: false,

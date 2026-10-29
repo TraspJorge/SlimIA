@@ -6,7 +6,6 @@ mod chat;
 mod config_file;
 mod desktop;
 mod files;
-mod flow;
 mod hooks;
 mod i18n;
 mod identity;
@@ -14,18 +13,17 @@ mod island;
 mod local_chat;
 mod log;
 mod net;
-mod notes;
 mod pipe;
 mod platform;
 #[cfg(target_os = "linux")]
 mod portal;
 mod recap;
+mod returns;
 mod secrets;
 mod session_window;
 mod settings;
 mod shortcuts;
 mod sounds;
-mod speech;
 mod spotify;
 mod tray;
 #[cfg(windows)]
@@ -84,7 +82,8 @@ fn boot(app: AppHandle, shared: State<Shared>) -> BootInfo {
 fn save_settings(app: AppHandle, shared: State<Shared>, settings: Settings) {
     let (screen_changed, autostart_changed, shortcuts_changed) = {
         let mut current = shared.settings.lock().unwrap();
-        let screen_changed = current.screen != settings.screen || current.island_offset_x != settings.island_offset_x;
+        let screen_changed = current.screen != settings.screen || current.island_offset_x != settings.island_offset_x
+            || current.island_offset_y != settings.island_offset_y;
         let autostart_changed = current.autostart != settings.autostart;
         let shortcuts_changed = current.shortcuts != settings.shortcuts;
         // Where Mochi sits on the desktop is desktop.rs's to say, not a webview's.
@@ -727,6 +726,8 @@ pub fn run() {
             open_settings_window,
             shortcuts_status,
             shortcuts_suspend,
+            returns::returns_sessions,
+            returns::returns_read,
             recap::recap_history,
             recap::recap_prefs,
             recap::recap_set_enabled,
@@ -753,36 +754,6 @@ pub fn run() {
             spotify::spotify_control,
             spotify::spotify_open,
             spotify::spotify_installed,
-            flow::flow_status,
-            flow::flow_set_prefs,
-            flow::flow_history,
-            flow::flow_delete,
-            flow::flow_clear,
-            flow::flow_stats,
-            flow::flow_words,
-            flow::flow_set_words,
-            flow::flow_snippets,
-            flow::flow_set_snippets,
-            flow::flow_styles,
-            flow::flow_set_styles,
-            flow::flow_running_apps,
-            flow::flow_copy,
-            flow::flow_paste_again,
-            flow::flow_models_remove,
-            flow::pill_state,
-            flow::pill_hot,
-            flow::pill_hover,
-            flow::pill_action,
-            notes::notes_state,
-            notes::notes_start,
-            notes::notes_stop,
-            notes::notes_rename,
-            notes::notes_rename_speaker,
-            notes::notes_toggle_todo,
-            notes::notes_delete,
-            notes::notes_retry,
-            notes::notes_markdown,
-            notes::notes_export,
         ])
         .setup(move |app| {
             let handle = app.handle().clone();
@@ -791,8 +762,6 @@ pub fn run() {
             create_settings_window(&handle);
             // Same rule for Mochi's desktop window and the dictation pill.
             desktop::setup(&handle);
-            flow::setup(&handle);
-            notes::setup(&handle);
 
             if let Some(win) = island::window(&handle) {
                 // Where Tauri takes the drop itself (Linux), its paths are the
@@ -828,19 +797,14 @@ pub fn run() {
                 // writing it again adds it, so the window stays hidden at login.
                 let _ = handle.autolaunch().enable();
             }
-            let open_window = flow::get(&handle).map(|f| f.store.lock().unwrap().prefs.open_at_launch).unwrap_or(true);
-            if open_window && !launched_at_login() {
+            if !launched_at_login() {
                 show_hub(&handle, None);
             }
             Ok(())
         })
         .build(tauri::generate_context!())
         .expect("error while building Coucou")
-        .run(|app, event| {
-            if let tauri::RunEvent::Exit = event {
-                notes::shutdown(app);
-            }
-        });
+        .run(|_app, _event| {});
 }
 
 #[cfg(test)]

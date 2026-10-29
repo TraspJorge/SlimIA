@@ -364,14 +364,17 @@ pub fn apply_geometry(app: &AppHandle, pref: &str, collapsed: bool) {
     let ph = (lh * scale).round().max(1.0) as u32;
     // Centred, then moved along the edge by the user's offset (to sit beside a
     // centred system clock), and kept on the display.
-    let offset = app
+    let (offset, offset_y) = app
         .try_state::<crate::Shared>()
-        .map(|s| s.settings.lock().unwrap().island_offset_x)
-        .unwrap_or(0);
+        .map(|s| {
+            let s = s.settings.lock().unwrap();
+            (s.island_offset_x, s.island_offset_y)
+        })
+        .unwrap_or((0, 0));
     let centred = mp.x + (ms.width as i32 - pw as i32) / 2;
     let shifted = centred + (offset as f64 * scale).round() as i32;
     let x = shifted.clamp(mp.x, (mp.x + ms.width as i32 - pw as i32).max(mp.x));
-    let y = mp.y;
+    let y = (mp.y + (offset_y as f64 * scale).round() as i32).clamp(mp.y, (mp.y + ms.height as i32 - ph as i32).max(mp.y));
 
     // GTK never sizes a non-resizable window below its natural size (200 px
     // here), so on Linux the 6 px wake strip would stay a 200 px block. tao
