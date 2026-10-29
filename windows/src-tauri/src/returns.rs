@@ -142,7 +142,7 @@ fn user_text(content: &Value) -> Option<String> {
 }
 
 /// A tool Claude used, in one short line.
-fn step_text(name: &str, input: &Value) -> String {
+pub(crate) fn step_text(name: &str, input: &Value) -> String {
     let field = |k: &str| input.get(k).and_then(Value::as_str).unwrap_or("");
     let detail = match name {
         "Bash" => clip(field("command"), 160),
@@ -277,6 +277,14 @@ fn list_sessions() -> Vec<SessionInfo> {
         .collect()
 }
 
+/// Claude's last answer in a conversation and when it was given, for the indicator in
+/// the top bar (status.rs).
+pub(crate) fn last_answer(id: &str) -> Option<(String, u64)> {
+    let path = session_file(id)?;
+    let entries = read_tail(&path, 60).ok()?;
+    entries.into_iter().rev().find(|e| e.kind == "assistant").map(|e| (e.text, e.at))
+}
+
 /// The recent conversations, newest first.
 #[tauri::command]
 pub async fn returns_sessions() -> Vec<SessionInfo> {
@@ -358,6 +366,24 @@ mod tests {
         assert_eq!(got[0].text, "explica isso");
         let only_context = r#"{"type":"user","message":{"role":"user","content":[{"type":"text","text":"<browser_instruction>x</browser_instruction>"}]}}"#;
         assert!(entries_of_line(only_context).is_empty());
+    }
+
+    #[test]
+    fn the_last_answer_is_the_last_thing_claude_said() {
+        let dir = std::env::temp_dir().join(format!("coucou-last-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let file = dir.join("s.jsonl");
+        std::fs::write(&file, concat!(
+            r#"{"type":"user","message":{"role":"user","content":"oi"}}"#, "\n",
+            r#"{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"primeira"}]}}"#, "\n",
+            r#"{"type":"assistant","message":{"role":"assistant","content":[{"type":"tool_use","name":"Bash","input":{"command":"ls"}}]}}"#, "\n",
+            r#"{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"a ultima"}]}}"#, "\n",
+            r#"{"type":"user","message":{"role":"user","content":[{"type":"tool_result","content":"x"}]}}"#, "\n",
+        )).unwrap();
+        let entries = read_tail(&file, 60).unwrap();
+        let last = entries.into_iter().rev().find(|e| e.kind == "assistant").unwrap();
+        assert_eq!(last.text, "a ultima");
+        let _ = std::fs::remove_dir_all(&dir);
     }
 
     #[test]

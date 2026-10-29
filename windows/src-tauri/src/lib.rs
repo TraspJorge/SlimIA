@@ -19,6 +19,7 @@ mod settings;
 mod shortcuts;
 mod sounds;
 mod spotify;
+mod status;
 mod tray;
 
 use std::process::Command;
@@ -690,6 +691,7 @@ pub fn run() {
 
             log::line(format!("--- Coucou {} started ---", env!("CARGO_PKG_VERSION")));
             hooks::ensure_hook_exe(&handle);
+            status::reset();
             pipe::start(handle.clone());
             spotify::sync(&handle, &loaded.active_integrations);
             shortcuts::apply(&handle, &loaded.shortcuts);

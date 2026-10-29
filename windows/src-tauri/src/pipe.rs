@@ -215,6 +215,8 @@ async fn handle(app: AppHandle, mut pipe: impl Relay) {
     note_session_window(&pipe, &payload, &event);
     // Counts for the weekly recap — never the command, path or prompt itself.
     crate::recap::observe(&app, &payload);
+    // What the bar's indicator shows (status.rs).
+    crate::status::observe(&payload, &event);
 
     if event != "PermissionRequest" {
         // The status line relay calls in with every Claude Code update: not log-worthy.

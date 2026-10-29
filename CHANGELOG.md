@@ -8,6 +8,7 @@
   - The Settings pages for all of this, their commands, settings, keystore entries, translations and tests are gone, and so are the dependencies (`rustls`, `rcgen`, `qrcode`, `mdns-sd`, `tokio-tungstenite`, `ring`).
   - New: [firewall scripts](windows/firewall/README.md) to block the network from the system's side too.
   - Later: the dictation, the Notetaker and the voice model are gone too (no voice), and so is the local-model chat with its HTTP client, keystore and file drop. The **Chat** page of the Coucou window now shows what Claude answered, read from `~/.claude/projects`. New settings: *Island position*, *Distance from the top* and *Keep the island visible*.
+  - New: an **indicator for the top bar** of elementary OS (`windows/wingpanel-indicator`): a Mochi in the panel that shows what the agents are doing, with a panel for the sessions and Claude's last answer. It reads `status.json`, written by the app on every hook event.
 - **Trimmed to Windows and Linux** — the macOS, iPhone and Android apps are not part of this branch. The entries below are upstream's history and still describe them.
 
 ## Windows and Linux 0.5.3 — October 22, 2026
