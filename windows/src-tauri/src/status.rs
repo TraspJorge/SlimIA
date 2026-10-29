@@ -350,6 +350,14 @@ fn flush(force: bool) {
 pub fn reset() {
     *TRACKER.lock().unwrap() = Some(Tracker::default());
     flush(true);
+    // The last answer survives a restart: it is read again from the newest conversation.
+    std::thread::spawn(|| {
+        let Some(newest) = crate::returns::list_sessions().into_iter().next() else { return };
+        if let Some((text, at)) = crate::returns::last_answer(&newest.id) {
+            TRACKER.lock().unwrap().get_or_insert_with(Tracker::default).set_answer(&basename(&newest.cwd), &text, at);
+            flush(true);
+        }
+    });
 }
 
 /// The Spotify player changed (src-tauri/src/spotify.rs): the indicator shows the

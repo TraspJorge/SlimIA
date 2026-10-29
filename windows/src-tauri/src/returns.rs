@@ -244,7 +244,7 @@ fn read_head(path: &Path) -> (String, String) {
     (cwd, title)
 }
 
-fn list_sessions() -> Vec<SessionInfo> {
+pub(crate) fn list_sessions() -> Vec<SessionInfo> {
     let now = SystemTime::now();
     let mut found: Vec<(SystemTime, PathBuf)> = Vec::new();
     let Ok(projects) = std::fs::read_dir(projects_dir()) else { return Vec::new() };

@@ -1576,7 +1576,8 @@ namespace SlimIA {
         }
 
         private void add_answer (Gtk.Box main, Pill? f) {
-            if (answer_body == "" || f == null || (answer_project != f.label && f.label != "")) {
+            // Always the last message, of whichever project spoke last (its name is in the header).
+            if (answer_body == "" || f == null) {
                 return;
             }
             var when = clock (answer_at);
