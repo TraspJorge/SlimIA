@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **Local only (this branch: Windows and Linux)** — the phone link is removed: no TLS server, no mDNS announcement, no relay, no pairing, and nothing is approved, answered or chatted from a phone. The WhatsApp integration is removed too. The app accepts nothing from outside; only the agents' local hook pipe listens. The "Android phone" settings page, its commands, settings, keystore entries and translations are gone, and so are their dependencies (`rustls`, `rcgen`, `qrcode`, `mdns-sd`, `tokio-tungstenite`).
+- **Trimmed to Windows and Linux** — the macOS, iPhone and Android apps are not part of this branch. The entries below are upstream's history and still describe them.
+
 - **Mac: WhatsApp statuses aren't chats** — a contact's WhatsApp Status and channel posts no longer show up as a conversation in the WhatsApp pill (#901, same fix as #910)
 
 ## Windows and Linux 0.5.3 — October 22, 2026

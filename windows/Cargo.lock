@@ -727,7 +727,6 @@ dependencies = [
  "gtk",
  "keyring",
  "libc",
- "miniz_oxide 0.8.9",
  "reqwest 0.12.28",
  "serde",
  "serde_json",

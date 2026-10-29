@@ -92,7 +92,7 @@ export class Island {
   private collapsed = false;
   private collapseTimer: number | null = null;
   private wasInIsland = false;
-  /** A reply is being typed in a card (WhatsApp): the island stays open. */
+  /** A reply is being typed in a card (a card's reply field): the island stays open. */
   private holdingOpen = false;
   /** Last shape handed to Rust for the click-through test. */
   private pushedRect = { x: -1, y: -1, w: -1, h: -1 };
@@ -195,8 +195,6 @@ export class Island {
           integration_stripe: "https://dashboard.stripe.com/payments",
           integration_notion: "https://notion.so",
           integration_calcom: "https://app.cal.com/bookings",
-          // No WhatsApp app to bring forward here as on the Mac: WhatsApp Web, in the browser.
-          integration_whatsapp: "https://web.whatsapp.com",
         };
         if (task.id === CLAUDE_DESKTOP_ID) void Bridge.openClaudeDesktop();
         else if (task.id === "integration_claude" || task.sessionId) {

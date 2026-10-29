@@ -5,37 +5,6 @@
       "version": "0.5.3",
       "items": [
         {
-          "icon": "chat",
-          "title": {
-            "en": "WhatsApp in the island",
-            "zh-Hans": "岛中的 WhatsApp",
-            "hi": "आइलैंड में WhatsApp",
-            "es": "WhatsApp en la isla",
-            "ar": "واتساب في الشريط",
-            "fr": "WhatsApp dans l’île",
-            "bn": "আইল্যান্ডে WhatsApp",
-            "pt-BR": "WhatsApp na ilha",
-            "ru": "WhatsApp на острове",
-            "id": "WhatsApp di pulau",
-            "de": "WhatsApp in der Insel",
-            "tr": "Adada WhatsApp"
-          },
-          "detail": {
-            "en": "Your chats in the island, and replies without opening WhatsApp. Experimental.",
-            "zh-Hans": "在岛中查看聊天，不打开 WhatsApp 也能回复。实验性功能。",
-            "hi": "आइलैंड में आपकी चैट, और WhatsApp खोले बिना जवाब। प्रायोगिक।",
-            "es": "Tus chats en la isla y respuestas sin abrir WhatsApp. Experimental.",
-            "ar": "محادثاتك في الشريط، والرد دون فتح واتساب. تجريبي.",
-            "fr": "Tes conversations dans l’île, et tes réponses sans ouvrir WhatsApp. Expérimental.",
-            "bn": "আইল্যান্ডে আপনার চ্যাট, আর WhatsApp না খুলেই উত্তর। পরীক্ষামূলক।",
-            "pt-BR": "Suas conversas na ilha e respostas sem abrir o WhatsApp. Experimental.",
-            "ru": "Чаты на острове и ответы без открытия WhatsApp. Экспериментально.",
-            "id": "Obrolanmu di pulau, dan balas tanpa membuka WhatsApp. Eksperimental.",
-            "de": "Deine Chats in der Insel und Antworten, ohne WhatsApp zu öffnen. Experimentell.",
-            "tr": "Sohbetlerin adada; WhatsApp’ı açmadan yanıtla. Deneysel."
-          }
-        },
-        {
           "icon": "download",
           "title": {
             "en": "Set up in one click",
@@ -193,37 +162,6 @@
             "id": "Dua pil baru berisi aktivitas proyekmu, seperti pil GitHub.",
             "de": "Zwei neue Pills mit der Aktivität deiner Projekte, wie bei GitHub.",
             "tr": "Projelerinin etkinliğini gösteren iki yeni araç, GitHub’ınki gibi."
-          }
-        },
-        {
-          "icon": "phone",
-          "title": {
-            "en": "Weekly recap on Android",
-            "zh-Hans": "Android 上的每周回顾",
-            "hi": "Android पर साप्ताहिक रीकैप",
-            "es": "Resumen semanal en Android",
-            "ar": "ملخص الأسبوع على Android",
-            "fr": "Le récap de la semaine sur Android",
-            "bn": "Android-এ সাপ্তাহিক রিক্যাপ",
-            "pt-BR": "Resumo semanal no Android",
-            "ru": "Итоги недели на Android",
-            "id": "Rekap mingguan di Android",
-            "de": "Wochenrückblick auf Android",
-            "tr": "Android’de haftalık özet"
-          },
-          "detail": {
-            "en": "Last week’s numbers on your Android phone, if you turn it on.",
-            "zh-Hans": "上周的数据显示在你的 Android 手机上（需开启）。",
-            "hi": "पिछले हफ़्ते के आँकड़े आपके Android फ़ोन पर, अगर आप चालू करें।",
-            "es": "Las cifras de la semana pasada en tu Android, si lo activas.",
-            "ar": "أرقام الأسبوع الماضي على هاتف Android، إن فعّلت ذلك.",
-            "fr": "Les chiffres de la semaine passée sur ton téléphone Android, si tu l’actives.",
-            "bn": "গত সপ্তাহের সংখ্যা আপনার Android ফোনে, চালু করলে।",
-            "pt-BR": "Os números da semana passada no seu Android, se você ativar.",
-            "ru": "Цифры прошлой недели на вашем Android, если включите.",
-            "id": "Angka minggu lalu di ponsel Android-mu, kalau kamu nyalakan.",
-            "de": "Die Zahlen der letzten Woche auf deinem Android-Handy, wenn du es einschaltest.",
-            "tr": "Geçen haftanın sayıları Android telefonunda, açarsan."
           }
         }
       ]

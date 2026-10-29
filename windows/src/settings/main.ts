@@ -21,8 +21,6 @@ import { h, clear } from "../views/dom";
 import { startHub, type PageId } from "../hub/shell";
 import { FLOW_PAGE_RENDERERS } from "../hub/pages";
 import { agentsSection } from "./agents";
-import { whatsappSection } from "./whatsapp";
-import { WHATSAPP_ID } from "../core/whatsapp";
 import { updateRows, updatesListener } from "./updates";
 import { colorDot } from "./colors";
 import { renderDiff, statusDot } from "./parts";
@@ -893,27 +891,6 @@ function integrationsSection(present: Record<string, boolean>): HTMLElement {
   return h("section", {}, h("h2", {}, h("span", { text: t("Integrations") })), note, list);
 }
 
-/** WhatsApp (experimental), under the other integrations: its pill is turned on from its own switch. */
-function whatsappSections(): HTMLElement[] {
-  if (!availablePills().some((p) => p.id === WHATSAPP_ID)) return [];
-  return [whatsappSection({
-    toggle,
-    maxPills: MAX_ACTIVE,
-    pillActive: () => settings.activeIntegrations.includes(WHATSAPP_ID),
-    setPill: (on) => {
-      const has = settings.activeIntegrations.includes(WHATSAPP_ID);
-      if (on && !has && settings.activeIntegrations.length < MAX_ACTIVE) {
-        settings.activeIntegrations = [...settings.activeIntegrations, WHATSAPP_ID];
-      } else if (!on && has) {
-        settings.activeIntegrations = settings.activeIntegrations.filter((x) => x !== WHATSAPP_ID);
-      } else {
-        return;
-      }
-      declaredChanged();
-    },
-  })];
-}
-
 // ── General section ───────────────────────────────────────────────────────────
 
 function generalSection(): HTMLElement {
@@ -1401,7 +1378,7 @@ async function render() {
     pills: () => [activePillsSection(connected)],
     agents: () => [claudeSection(status), agentsSection(agents), planSection(status)],
     chat: () => [apiSection(hasKey), chatProvidersSection(chatKeys, keyChanged), localSection(customKey)],
-    integrations: () => [integrationsSection(present), ...whatsappSections()],
+    integrations: () => [integrationsSection(present)],
     shortcuts: () => [shortcutsSection(shortcutReport)],
   };
   root.append(...(sections[notchPage]?.() ?? []));
