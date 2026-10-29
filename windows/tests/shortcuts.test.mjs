@@ -315,7 +315,7 @@ test("the wardrobe shortcut's own event opens the wardrobe", () => {
   assert.deepEqual(did, ["resume", "wardrobe"]);
 });
 
-test("the chat shortcut opens the Chat page of the Coucou window, not the island", () => {
+test("the chat shortcut opens the Chat page of the Slimai window, not the island", () => {
   emit("shortcut", "openChat");
   assert.deepEqual(did, []);
   assert.deepEqual(sent("open_settings_window"), [{ page: "chat" }]);

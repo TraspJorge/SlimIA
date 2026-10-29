@@ -1,7 +1,7 @@
 // What the agents are doing right now, written to a small file for the
 // indicator in the desktop's top bar (windows/wingpanel-indicator): the
 // indicator is a separate program inside the panel, so it reads this file
-// instead of talking to Coucou.
+// instead of talking to Slimai.
 //
 //   ~/.local/share/coucou/status.json
 //
@@ -98,7 +98,7 @@ pub struct Snapshot {
     pub version: u32,
     /// The process that wrote it: the indicator shows "off" when it is gone.
     pub pid: u32,
-    /// How to bring Coucou up (`<exe> --shortcut openChat`).
+    /// How to bring Slimai up (`<exe> --shortcut openChat`).
     pub exe: String,
     pub state: State,
     pub updated_at: u64,

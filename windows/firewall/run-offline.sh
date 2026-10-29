@@ -1,5 +1,5 @@
 #!/bin/sh
-# Runs Coucou on Linux with every network address denied except this computer
+# Runs Slimai on Linux with every network address denied except this computer
 # (127.0.0.0/8 and ::1), enforced by the kernel through systemd's cgroup
 # filter. A model server on 127.0.0.1 (Ollama, LM Studio) still works.
 #

@@ -61,7 +61,7 @@ export function runGlobalShortcut(host: ShortcutHost, action: string, resume: ()
       break;
 
     case "openChat":
-      // The Chat page of the Coucou window: what Claude answered.
+      // The Chat page of the Slimai window: what Claude answered.
       void Bridge.openSettingsWindow("chat");
       break;
 

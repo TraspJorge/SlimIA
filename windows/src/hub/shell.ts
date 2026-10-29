@@ -1,4 +1,4 @@
-// The Coucou window: a sidebar with the Chat page (what Claude answered) and the
+// The Slimai window: a sidebar with the Chat page (what Claude answered) and the
 // island's settings, and the page on the right, under its coloured band.
 // Port of FlowHub.swift, without the dictation pages: this build has no voice.
 
@@ -9,7 +9,7 @@ import { onEvent } from "../core/bridge";
 import { hero, liveMochi, setWindowShown } from "./hero";
 import { icon } from "./ui";
 
-export type PageId = "chat" | "general" | "pills" | "agents" | "integrations" | "shortcuts";
+export type PageId = "chat" | "general" | "agents" | "integrations";
 
 interface PageDef {
   id: PageId;
@@ -21,11 +21,9 @@ interface PageDef {
 
 export const PAGES: PageDef[] = [
   { id: "chat", icon: "chat", title: () => t("Chat") },
-  { id: "general", icon: "gear", title: () => t("General"), subtitle: () => t("Mochi, his sounds and how the island behaves.") },
-  { id: "pills", icon: "grid", title: () => t("Active pills"), subtitle: () => t("The pills shown in the island, their order and their colours.") },
+  { id: "general", icon: "gear", title: () => t("General"), subtitle: () => t("Mochi and his sounds.") },
   { id: "agents", icon: "terminal", title: () => t("Agents"), subtitle: () => t("Claude Code, Codex and the other agents Mochi follows.") },
-  { id: "integrations", icon: "puzzle", title: () => t("Integrations"), subtitle: () => t("The pills shown in the island, their order and their colours.") },
-  { id: "shortcuts", icon: "keyboard", title: () => t("Shortcuts"), subtitle: () => t("The keys that open the island and its actions.") },
+  { id: "integrations", icon: "puzzle", title: () => t("Integrations"), subtitle: () => t("Spotify, for the controls on the bar.") },
 ];
 
 /** What a page gets to draw itself and reach the rest of the window. */
@@ -87,7 +85,7 @@ export async function startHub(root: HTMLElement, opts: HubOptions) {
   // ── The sidebar ──
   const side = h("nav", { class: "hub-side" });
   const logo = h("canvas", {});
-  side.append(h("div", { class: "hub-brand" }, logo, h("span", { text: "Coucou" })));
+  side.append(h("div", { class: "hub-brand" }, logo, h("span", { text: "Slimai" })));
   liveMochi(logo as HTMLCanvasElement);
   for (const p of PAGES) {
     const b = h("button", { class: "hub-item", onclick: () => void show(p.id) });
@@ -95,7 +93,7 @@ export async function startHub(root: HTMLElement, opts: HubOptions) {
     items.set(p.id, b);
     side.append(b);
   }
-  side.append(h("div", { class: "spacer" }), h("div", { class: "hub-version", text: `Coucou ${opts.version}` }));
+  side.append(h("div", { class: "spacer" }), h("div", { class: "hub-version", text: `Slimai ${opts.version}` }));
 
   clear(root);
   root.append(side, h("main", { class: "hub-panel" }, scroll));

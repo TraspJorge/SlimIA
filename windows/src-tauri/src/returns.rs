@@ -1,4 +1,4 @@
-// The "Chat" page of the Coucou window: what Claude Code answered, read from the
+// The "Chat" page of the Slimai window: what Claude Code answered, read from the
 // conversations it keeps on this computer (`~/.claude/projects/<project>/<session>.jsonl`).
 //
 // Read only, and only inside that folder: a session is named by its id, which

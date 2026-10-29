@@ -1216,7 +1216,7 @@ export class BotEngine {
         }
       }
     } else if (badge.kind === "arrow") {
-      // The "!" badge's ring and disc, with a white up-arrow: a new Coucou is out.
+      // The "!" badge's ring and disc, with a white up-arrow: a new Slimai is out.
       x.fillStyle = "#000";
       x.beginPath();
       x.arc(0, 0, R * 0.3, 0, Math.PI * 2);

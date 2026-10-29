@@ -27,18 +27,18 @@
       "de": "+ Unteragent",
       "tr": "+ alt ajan"
     },
-    "A hook group named \"coucou\" that Coucou did not write is already there — Coucou has not touched it.": {
-      "zh-Hans": "已存在一个并非 Coucou 写入的名为“coucou”的 hook 组 — Coucou 没有修改它。",
-      "hi": "“coucou” नाम का एक hook समूह पहले से है जिसे Coucou ने नहीं लिखा — Coucou ने इसे नहीं छुआ।",
-      "es": "Ya existe un grupo de hooks llamado «coucou» que no escribió Coucou — Coucou no lo ha tocado.",
-      "ar": "توجد بالفعل مجموعة hooks باسم «coucou» لم يكتبها Coucou — لم يمسّها Coucou.",
-      "fr": "Un groupe de hooks nommé « coucou » que Coucou n'a pas écrit existe déjà — Coucou n'y a pas touché.",
-      "bn": "“coucou” নামে একটি hook গ্রুপ আগে থেকেই আছে যা Coucou লেখেনি — Coucou এতে হাত দেয়নি।",
-      "pt-BR": "Já existe um grupo de hooks chamado “coucou” que não foi escrito pelo Coucou — o Coucou não mexeu nele.",
-      "ru": "Уже есть группа хуков «coucou», которую написал не Coucou, — Coucou её не трогал.",
-      "id": "Sudah ada grup hook bernama “coucou” yang tidak ditulis Coucou — Coucou tidak menyentuhnya.",
-      "de": "Eine nicht von Coucou erstellte Hook-Gruppe namens \"coucou\" ist bereits vorhanden — Coucou hat sie nicht verändert.",
-      "tr": "Coucou'nun oluşturmadığı \"coucou\" adlı bir hook grubu zaten var — Coucou bunu değiştirmedi."
+    "A hook group named \"coucou\" that Slimai did not write is already there — Slimai has not touched it.": {
+      "zh-Hans": "已存在一个并非 Slimai 写入的名为“coucou”的 hook 组 — Slimai 没有修改它。",
+      "hi": "“coucou” नाम का एक hook समूह पहले से है जिसे Slimai ने नहीं लिखा — Slimai ने इसे नहीं छुआ।",
+      "es": "Ya existe un grupo de hooks llamado «coucou» que no escribió Slimai — Slimai no lo ha tocado.",
+      "ar": "توجد بالفعل مجموعة hooks باسم «coucou» لم يكتبها Slimai — لم يمسّها Slimai.",
+      "fr": "Un groupe de hooks nommé « coucou » que Slimai n'a pas écrit existe déjà — Slimai n'y a pas touché.",
+      "bn": "“coucou” নামে একটি hook গ্রুপ আগে থেকেই আছে যা Slimai লেখেনি — Slimai এতে হাত দেয়নি।",
+      "pt-BR": "Já existe um grupo de hooks chamado “coucou” que não foi escrito pelo Slimai — o Slimai não mexeu nele.",
+      "ru": "Уже есть группа хуков «coucou», которую написал не Slimai, — Slimai её не трогал.",
+      "id": "Sudah ada grup hook bernama “coucou” yang tidak ditulis Slimai — Slimai tidak menyentuhnya.",
+      "de": "Eine nicht von Slimai erstellte Hook-Gruppe namens \"coucou\" ist bereits vorhanden — Slimai hat sie nicht verändert.",
+      "tr": "Slimai'nun oluşturmadığı \"coucou\" adlı bir hook grubu zaten var — Slimai bunu değiştirmedi."
     },
     "Answer in terminal": {
       "zh-Hans": "在终端中回答",
@@ -117,19 +117,6 @@
       "id": "Otomatis · {outfit}",
       "de": "Automatisch · {outfit}",
       "tr": "Otomatik · {outfit}"
-    },
-    "Auto-close": {
-      "zh-Hans": "自动关闭",
-      "hi": "अपने आप बंद",
-      "es": "Cierre automático",
-      "ar": "الإغلاق التلقائي",
-      "fr": "Fermeture auto",
-      "bn": "স্বয়ংক্রিয় বন্ধ",
-      "pt-BR": "Fechar sozinho",
-      "ru": "Автозакрытие",
-      "id": "Tutup otomatis",
-      "de": "Automatisch schließen",
-      "tr": "Otomatik kapanma"
     },
     "Back": {
       "zh-Hans": "返回",
@@ -313,44 +300,44 @@
       "de": "Bilder können hier nicht kopiert werden — verwende Bild speichern.",
       "tr": "Burada görsel kopyalanamıyor — Görseli kaydet seçeneğini kullan."
     },
-    "Coucou could not list the agents.": {
-      "zh-Hans": "Coucou 无法列出代理。",
-      "hi": "Coucou एजेंटों की सूची नहीं बना सका।",
-      "es": "Coucou no pudo listar los agentes.",
-      "ar": "تعذّر على Coucou سرد الوكلاء.",
-      "fr": "Coucou n'a pas pu lister les agents.",
-      "bn": "Coucou এজেন্টদের তালিকা করতে পারেনি।",
-      "pt-BR": "O Coucou não conseguiu listar os agentes.",
-      "ru": "Coucou не удалось получить список агентов.",
-      "id": "Coucou tidak dapat menampilkan daftar agen.",
-      "de": "Coucou konnte die Agenten nicht auflisten.",
-      "tr": "Coucou ajanları listeleyemedi."
+    "Slimai could not list the agents.": {
+      "zh-Hans": "Slimai 无法列出代理。",
+      "hi": "Slimai एजेंटों की सूची नहीं बना सका।",
+      "es": "Slimai no pudo listar los agentes.",
+      "ar": "تعذّر على Slimai سرد الوكلاء.",
+      "fr": "Slimai n'a pas pu lister les agents.",
+      "bn": "Slimai এজেন্টদের তালিকা করতে পারেনি।",
+      "pt-BR": "O Slimai não conseguiu listar os agentes.",
+      "ru": "Slimai не удалось получить список агентов.",
+      "id": "Slimai tidak dapat menampilkan daftar agen.",
+      "de": "Slimai konnte die Agenten nicht auflisten.",
+      "tr": "Slimai ajanları listeleyemedi."
     },
-    "Coucou counts your agent sessions as they happen — check back next Monday.": {
-      "zh-Hans": "Coucou 会实时统计你的代理会话 — 下周一再来看看吧。",
-      "hi": "Coucou आपके एजेंट सत्रों को होते-होते गिनता है — अगले सोमवार फिर देखें।",
-      "es": "Coucou cuenta tus sesiones de agentes a medida que ocurren — vuelve el próximo lunes.",
-      "ar": "يحسب Coucou جلسات وكلائك أثناء حدوثها — عُد يوم الاثنين القادم.",
-      "fr": "Coucou compte tes sessions d'agents au fil de l'eau — reviens lundi prochain.",
-      "bn": "Coucou আপনার এজেন্ট সেশন ঘটার সঙ্গে সঙ্গে গোনে — পরের সোমবার আবার দেখুন।",
-      "pt-BR": "O Coucou conta suas sessões de agentes conforme acontecem — volte na próxima segunda-feira.",
-      "ru": "Coucou считает ваши сессии агентов по ходу дела — загляните в следующий понедельник.",
-      "id": "Coucou menghitung sesi agen Anda saat berlangsung — cek lagi Senin depan.",
-      "de": "Coucou zählt deine Agentensitzungen mit — schau nächsten Montag wieder vorbei.",
-      "tr": "Coucou ajan oturumlarını gerçekleştiği sırada sayar — gelecek pazartesi tekrar bak."
+    "Slimai counts your agent sessions as they happen — check back next Monday.": {
+      "zh-Hans": "Slimai 会实时统计你的代理会话 — 下周一再来看看吧。",
+      "hi": "Slimai आपके एजेंट सत्रों को होते-होते गिनता है — अगले सोमवार फिर देखें।",
+      "es": "Slimai cuenta tus sesiones de agentes a medida que ocurren — vuelve el próximo lunes.",
+      "ar": "يحسب Slimai جلسات وكلائك أثناء حدوثها — عُد يوم الاثنين القادم.",
+      "fr": "Slimai compte tes sessions d'agents au fil de l'eau — reviens lundi prochain.",
+      "bn": "Slimai আপনার এজেন্ট সেশন ঘটার সঙ্গে সঙ্গে গোনে — পরের সোমবার আবার দেখুন।",
+      "pt-BR": "O Slimai conta suas sessões de agentes conforme acontecem — volte na próxima segunda-feira.",
+      "ru": "Slimai считает ваши сессии агентов по ходу дела — загляните в следующий понедельник.",
+      "id": "Slimai menghitung sesi agen Anda saat berlangsung — cek lagi Senin depan.",
+      "de": "Slimai zählt deine Agentensitzungen mit — schau nächsten Montag wieder vorbei.",
+      "tr": "Slimai ajan oturumlarını gerçekleştiği sırada sayar — gelecek pazartesi tekrar bak."
     },
-    "Coucou is hooked into your Claude Code sessions. Tool calls, questions and permission requests show up in the island, and you can answer them there.": {
-      "zh-Hans": "Coucou 已接入你的 Claude Code 会话。工具调用、问题和权限请求都会显示在岛中，你可以直接在那里回应。",
-      "hi": "Coucou आपके Claude Code सत्रों से जुड़ा है। टूल कॉल, प्रश्न और अनुमति अनुरोध आइलैंड में दिखते हैं, और आप वहीं उनका जवाब दे सकते हैं।",
-      "es": "Coucou está conectado a tus sesiones de Claude Code. Las llamadas a herramientas, las preguntas y las solicitudes de permiso aparecen en la isla y puedes responderlas ahí.",
-      "ar": "Coucou متصل بجلسات Claude Code لديك. تظهر استدعاءات الأدوات والأسئلة وطلبات الإذن في الشريط، ويمكنك الرد عليها من هناك.",
-      "fr": "Coucou est branché sur tes sessions Claude Code. Les appels d'outils, les questions et les demandes de permission s'affichent dans l'île, et tu peux y répondre directement.",
-      "bn": "Coucou আপনার Claude Code সেশনের সঙ্গে যুক্ত। টুল কল, প্রশ্ন আর অনুমতির অনুরোধ আইল্যান্ডে দেখা যায়, এবং আপনি সেখানেই উত্তর দিতে পারেন।",
-      "pt-BR": "O Coucou está conectado às suas sessões do Claude Code. Chamadas de ferramentas, perguntas e pedidos de permissão aparecem na ilha, e você pode respondê-los ali.",
-      "ru": "Coucou подключён к вашим сессиям Claude Code. Вызовы инструментов, вопросы и запросы разрешений появляются в острове, и отвечать можно прямо там.",
-      "id": "Coucou terhubung ke sesi Claude Code Anda. Panggilan alat, pertanyaan, dan permintaan izin muncul di pulau, dan Anda bisa menjawabnya di sana.",
-      "de": "Coucou ist mit deinen Claude Code-Sitzungen verbunden. Werkzeugaufrufe, Fragen und Berechtigungsanfragen erscheinen in der Insel und können dort beantwortet werden.",
-      "tr": "Coucou, Claude Code oturumlarına bağlı. Araç çağrıları, sorular ve izin istekleri adada görünür; bunları oradan yanıtlayabilirsin."
+    "Slimai is hooked into your Claude Code sessions. Tool calls, questions and permission requests show up in the island, and you can answer them there.": {
+      "zh-Hans": "Slimai 已接入你的 Claude Code 会话。工具调用、问题和权限请求都会显示在岛中，你可以直接在那里回应。",
+      "hi": "Slimai आपके Claude Code सत्रों से जुड़ा है। टूल कॉल, प्रश्न और अनुमति अनुरोध आइलैंड में दिखते हैं, और आप वहीं उनका जवाब दे सकते हैं।",
+      "es": "Slimai está conectado a tus sesiones de Claude Code. Las llamadas a herramientas, las preguntas y las solicitudes de permiso aparecen en la isla y puedes responderlas ahí.",
+      "ar": "Slimai متصل بجلسات Claude Code لديك. تظهر استدعاءات الأدوات والأسئلة وطلبات الإذن في الشريط، ويمكنك الرد عليها من هناك.",
+      "fr": "Slimai est branché sur tes sessions Claude Code. Les appels d'outils, les questions et les demandes de permission s'affichent dans l'île, et tu peux y répondre directement.",
+      "bn": "Slimai আপনার Claude Code সেশনের সঙ্গে যুক্ত। টুল কল, প্রশ্ন আর অনুমতির অনুরোধ আইল্যান্ডে দেখা যায়, এবং আপনি সেখানেই উত্তর দিতে পারেন।",
+      "pt-BR": "O Slimai está conectado às suas sessões do Claude Code. Chamadas de ferramentas, perguntas e pedidos de permissão aparecem na ilha, e você pode respondê-los ali.",
+      "ru": "Slimai подключён к вашим сессиям Claude Code. Вызовы инструментов, вопросы и запросы разрешений появляются в острове, и отвечать можно прямо там.",
+      "id": "Slimai terhubung ke sesi Claude Code Anda. Panggilan alat, pertanyaan, dan permintaan izin muncul di pulau, dan Anda bisa menjawabnya di sana.",
+      "de": "Slimai ist mit deinen Claude Code-Sitzungen verbunden. Werkzeugaufrufe, Fragen und Berechtigungsanfragen erscheinen in der Insel und können dort beantwortet werden.",
+      "tr": "Slimai, Claude Code oturumlarına bağlı. Araç çağrıları, sorular ve izin istekleri adada görünür; bunları oradan yanıtlayabilirsin."
     },
     "Could not remove {path}: {error}": {
       "zh-Hans": "无法删除 {path}：{error}",
@@ -404,32 +391,6 @@
       "de": "Schreiben fehlgeschlagen: {error}",
       "tr": "Yazılamadı: {error}"
     },
-    "Counts and project names only — never commands, files or prompts. Kept on this computer for 12 weeks.": {
-      "zh-Hans": "仅保存计数和项目名称 — 绝不保存命令、文件或提示词。在这台电脑上保留 12 周。",
-      "hi": "केवल गिनती और प्रोजेक्ट के नाम — कभी कमांड, फ़ाइलें या प्रॉम्प्ट नहीं। इस कंप्यूटर पर 12 सप्ताह तक रखा जाता है।",
-      "es": "Solo recuentos y nombres de proyecto — nunca comandos, archivos ni prompts. Se guarda en este equipo durante 12 semanas.",
-      "ar": "أعداد وأسماء مشاريع فقط — لا أوامر ولا ملفات ولا مطالبات أبدًا. يُحتفظ بها على هذا الحاسوب لمدة 12 أسبوعًا.",
-      "fr": "Uniquement des compteurs et des noms de projet — jamais de commandes, de fichiers ni de prompts. Conservé sur cet ordinateur pendant 12 semaines.",
-      "bn": "শুধু গণনা আর প্রজেক্টের নাম — কখনো কমান্ড, ফাইল বা প্রম্পট নয়। এই কম্পিউটারে ১২ সপ্তাহ রাখা হয়।",
-      "pt-BR": "Somente contagens e nomes de projeto — nunca comandos, arquivos ou prompts. Mantido neste computador por 12 semanas.",
-      "ru": "Только счётчики и названия проектов — никогда команды, файлы или промпты. Хранится на этом компьютере 12 недель.",
-      "id": "Hanya hitungan dan nama proyek — tidak pernah perintah, file, atau prompt. Disimpan di komputer ini selama 12 minggu.",
-      "de": "Nur Zähler und Projektnamen — keine Befehle, Dateien oder Prompts. Wird 12 Wochen auf diesem Computer aufbewahrt.",
-      "tr": "Yalnızca sayılar ve proje adları; komut, dosya veya istem içermez. Bu bilgisayarda 12 hafta tutulur."
-    },
-    "Display under the cursor": {
-      "zh-Hans": "光标所在的显示器",
-      "hi": "कर्सर वाला डिस्प्ले",
-      "es": "Pantalla bajo el cursor",
-      "ar": "الشاشة التي عليها المؤشر",
-      "fr": "Écran sous le curseur",
-      "bn": "কার্সর যে ডিসপ্লেতে আছে",
-      "pt-BR": "Tela sob o cursor",
-      "ru": "Дисплей под курсором",
-      "id": "Layar di bawah kursor",
-      "de": "Bildschirm unter dem Mauszeiger",
-      "tr": "İşaretçinin bulunduğu ekran"
-    },
     "Done.": {
       "zh-Hans": "完成。",
       "hi": "हो गया।",
@@ -469,19 +430,6 @@
       "de": "Fertig. Bisherige Einstellungen unter {backup} gesichert. Öffne eine neue Claude Code-Sitzung, um die Hooks zu aktivieren.",
       "tr": "Tamamlandı. Önceki ayarlar {backup} olarak kaydedildi. Hook'ları kullanmak için yeni bir Claude Code oturumu aç."
     },
-    "Done. Previous settings saved as {backup}. The numbers appear after the next reply of a Claude Code session.": {
-      "zh-Hans": "完成。旧设置已保存为 {backup}。数字会在 Claude Code 会话的下一次回复后出现。",
-      "hi": "हो गया। पिछली सेटिंग्स {backup} के रूप में सहेजी गईं। संख्याएँ Claude Code सत्र के अगले जवाब के बाद दिखेंगी।",
-      "es": "Listo. La configuración anterior se guardó como {backup}. Las cifras aparecen tras la próxima respuesta de una sesión de Claude Code.",
-      "ar": "تم. حُفظت الإعدادات السابقة باسم {backup}. تظهر الأرقام بعد الرد التالي في جلسة Claude Code.",
-      "fr": "C'est fait. Les anciens réglages sont enregistrés sous {backup}. Les chiffres apparaissent après la prochaine réponse d'une session Claude Code.",
-      "bn": "হয়ে গেছে। আগের সেটিংস {backup} নামে সংরক্ষিত। Claude Code সেশনের পরের উত্তরের পর সংখ্যাগুলো দেখা যাবে।",
-      "pt-BR": "Pronto. As configurações anteriores foram salvas como {backup}. Os números aparecem após a próxima resposta de uma sessão do Claude Code.",
-      "ru": "Готово. Предыдущие настройки сохранены как {backup}. Цифры появятся после следующего ответа в сессии Claude Code.",
-      "id": "Selesai. Pengaturan sebelumnya disimpan sebagai {backup}. Angkanya muncul setelah balasan berikutnya dari sesi Claude Code.",
-      "de": "Fertig. Bisherige Einstellungen unter {backup} gesichert. Die Zahlen erscheinen nach der nächsten Antwort einer Claude Code-Sitzung.",
-      "tr": "Tamamlandı. Önceki ayarlar {backup} olarak kaydedildi. Sayılar, bir Claude Code oturumunun sonraki yanıtından sonra görünür."
-    },
     "Done. Previous version saved as {paths}.": {
       "zh-Hans": "完成。旧版本已保存为 {paths}。",
       "hi": "हो गया। पिछला संस्करण {paths} के रूप में सहेजा गया।",
@@ -495,19 +443,6 @@
       "de": "Fertig. Vorherige Version unter {paths} gesichert.",
       "tr": "Tamamlandı. Önceki sürüm {paths} olarak kaydedildi."
     },
-    "Done. The numbers appear after the next reply of a Claude Code session.": {
-      "zh-Hans": "完成。数字会在 Claude Code 会话的下一次回复后出现。",
-      "hi": "हो गया। संख्याएँ Claude Code सत्र के अगले जवाब के बाद दिखेंगी।",
-      "es": "Listo. Las cifras aparecen tras la próxima respuesta de una sesión de Claude Code.",
-      "ar": "تم. تظهر الأرقام بعد الرد التالي في جلسة Claude Code.",
-      "fr": "C'est fait. Les chiffres apparaissent après la prochaine réponse d'une session Claude Code.",
-      "bn": "হয়ে গেছে। Claude Code সেশনের পরের উত্তরের পর সংখ্যাগুলো দেখা যাবে।",
-      "pt-BR": "Pronto. Os números aparecem após a próxima resposta de uma sessão do Claude Code.",
-      "ru": "Готово. Цифры появятся после следующего ответа в сессии Claude Code.",
-      "id": "Selesai. Angkanya muncul setelah balasan berikutnya dari sesi Claude Code.",
-      "de": "Fertig. Die Zahlen erscheinen nach der nächsten Antwort einer Claude Code-Sitzung.",
-      "tr": "Tamamlandı. Sayılar, bir Claude Code oturumunun sonraki yanıtından sonra görünür."
-    },
     "Friday": {
       "zh-Hans": "星期五",
       "hi": "शुक्रवार",
@@ -520,19 +455,6 @@
       "id": "Jumat",
       "de": "Freitag",
       "tr": "Cuma"
-    },
-    "From anywhere": {
-      "zh-Hans": "全局",
-      "hi": "कहीं से भी",
-      "es": "Desde cualquier lugar",
-      "ar": "من أي مكان",
-      "fr": "De partout",
-      "bn": "যেকোনো জায়গা থেকে",
-      "pt-BR": "De qualquer lugar",
-      "ru": "Отовсюду",
-      "id": "Dari mana saja",
-      "de": "Überall",
-      "tr": "Her yerden"
     },
     "Go to pill 1 to 9": {
       "zh-Hans": "前往第 1 至 9 个标签",
@@ -573,58 +495,6 @@
       "de": "Projektnamen ausblenden",
       "tr": "Proje adlarını gizle"
     },
-    "History cleared.": {
-      "zh-Hans": "历史记录已清除。",
-      "hi": "इतिहास साफ़ कर दिया गया।",
-      "es": "Historial borrado.",
-      "ar": "مُسح السجل.",
-      "fr": "Historique effacé.",
-      "bn": "ইতিহাস মুছে ফেলা হয়েছে।",
-      "pt-BR": "Histórico apagado.",
-      "ru": "История очищена.",
-      "id": "Riwayat dihapus.",
-      "de": "Verlauf gelöscht.",
-      "tr": "Geçmiş temizlendi."
-    },
-    "Hold Ctrl, Alt or the Windows key with it.": {
-      "zh-Hans": "同时按住 Ctrl、Alt 或 Windows 键。",
-      "hi": "इसके साथ Ctrl, Alt या Windows कुंजी दबाए रखें।",
-      "es": "Mantén pulsada Ctrl, Alt o la tecla Windows a la vez.",
-      "ar": "اضغط معه باستمرار على Ctrl أو Alt أو مفتاح Windows.",
-      "fr": "Maintiens Ctrl, Alt ou la touche Windows en même temps.",
-      "bn": "সঙ্গে Ctrl, Alt বা Windows কী চেপে ধরুন।",
-      "pt-BR": "Segure Ctrl, Alt ou a tecla Windows junto.",
-      "ru": "Удерживайте вместе с ней Ctrl, Alt или клавишу Windows.",
-      "id": "Tahan Ctrl, Alt, atau tombol Windows bersamaan.",
-      "de": "Halte dazu Strg, Alt oder die Windows-Taste gedrückt.",
-      "tr": "Bununla birlikte Ctrl, Alt veya Windows tuşunu basılı tut."
-    },
-    "In the open island": {
-      "zh-Hans": "在打开的岛中",
-      "hi": "खुले आइलैंड में",
-      "es": "En la isla abierta",
-      "ar": "في الشريط المفتوح",
-      "fr": "Dans l'île ouverte",
-      "bn": "খোলা আইল্যান্ডে",
-      "pt-BR": "Na ilha aberta",
-      "ru": "В открытом острове",
-      "id": "Di pulau yang terbuka",
-      "de": "In der geöffneten Insel",
-      "tr": "Ada açıkken"
-    },
-    "In use by another app": {
-      "zh-Hans": "已被其他应用占用",
-      "hi": "किसी दूसरे ऐप द्वारा उपयोग में",
-      "es": "En uso por otra app",
-      "ar": "مستخدم من تطبيق آخر",
-      "fr": "Utilisé par une autre app",
-      "bn": "অন্য অ্যাপ ব্যবহার করছে",
-      "pt-BR": "Em uso por outro app",
-      "ru": "Занято другим приложением",
-      "id": "Dipakai aplikasi lain",
-      "de": "Von einer anderen App verwendet",
-      "tr": "Başka bir uygulama kullanıyor"
-    },
     "Install hooks…": {
       "zh-Hans": "安装 hooks…",
       "hi": "hooks इंस्टॉल करें…",
@@ -637,19 +507,6 @@
       "id": "Pasang hooks…",
       "de": "Hooks installieren…",
       "tr": "Hook'ları kur…"
-    },
-    "Install relay…": {
-      "zh-Hans": "安装中继…",
-      "hi": "रिले इंस्टॉल करें…",
-      "es": "Instalar relay…",
-      "ar": "تثبيت المُرحِّل…",
-      "fr": "Installer le relais…",
-      "bn": "রিলে ইনস্টল করুন…",
-      "pt-BR": "Instalar relay…",
-      "ru": "Установить ретранслятор…",
-      "id": "Pasang relay…",
-      "de": "Relay installieren…",
-      "tr": "Aracıyı kur…"
     },
     "Install the hooks to see your Claude Code sessions in the island and approve permissions without leaving what you are doing.": {
       "zh-Hans": "安装 hooks，即可在岛中查看 Claude Code 会话，并在不打断手头工作的情况下批准权限。",
@@ -676,19 +533,6 @@
       "id": "Pasang…",
       "de": "Installieren…",
       "tr": "Kur…"
-    },
-    "Island lives on": {
-      "zh-Hans": "岛所在位置",
-      "hi": "आइलैंड कहाँ रहे",
-      "es": "La isla vive en",
-      "ar": "مكان الشريط",
-      "fr": "L'île vit sur",
-      "bn": "আইল্যান্ড থাকবে",
-      "pt-BR": "A ilha fica na",
-      "ru": "Остров на",
-      "id": "Pulau berada di",
-      "de": "Insel anzeigen auf",
-      "tr": "Adanın bulunduğu ekran"
     },
     "Keep the island open": {
       "zh-Hans": "保持岛打开",
@@ -728,32 +572,6 @@
       "id": "Jalankan saat startup",
       "de": "Beim Systemstart öffnen",
       "tr": "Açılışta başlat"
-    },
-    "Main display": {
-      "zh-Hans": "主显示器",
-      "hi": "मुख्य डिस्प्ले",
-      "es": "Pantalla principal",
-      "ar": "الشاشة الرئيسية",
-      "fr": "Écran principal",
-      "bn": "প্রধান ডিসপ্লে",
-      "pt-BR": "Tela principal",
-      "ru": "Основной дисплей",
-      "id": "Layar utama",
-      "de": "Hauptbildschirm",
-      "tr": "Ana ekran"
-    },
-    "Main tool": {
-      "zh-Hans": "主要工具",
-      "hi": "मुख्य टूल",
-      "es": "Herramienta principal",
-      "ar": "الأداة الرئيسية",
-      "fr": "Outil principal",
-      "bn": "প্রধান টুল",
-      "pt-BR": "Ferramenta principal",
-      "ru": "Основной инструмент",
-      "id": "Alat utama",
-      "de": "Hauptwerkzeug",
-      "tr": "Ana araç"
     },
     "Monday": {
       "zh-Hans": "星期一",
@@ -846,19 +664,6 @@
       "de": "Keine Änderung.",
       "tr": "Değişiklik yok."
     },
-    "No display server was found, so global shortcuts are off.": {
-      "zh-Hans": "未找到显示服务器，因此全局快捷键已关闭。",
-      "hi": "कोई डिस्प्ले सर्वर नहीं मिला, इसलिए ग्लोबल शॉर्टकट बंद हैं।",
-      "es": "No se encontró ningún servidor gráfico, así que los atajos globales están desactivados.",
-      "ar": "لم يُعثر على خادم عرض، لذا الاختصارات العامة معطّلة.",
-      "fr": "Aucun serveur d'affichage trouvé, les raccourcis globaux sont donc désactivés.",
-      "bn": "কোনো ডিসপ্লে সার্ভার পাওয়া যায়নি, তাই গ্লোবাল শর্টকাট বন্ধ।",
-      "pt-BR": "Nenhum servidor gráfico foi encontrado, então os atalhos globais estão desativados.",
-      "ru": "Дисплейный сервер не найден, поэтому глобальные сочетания отключены.",
-      "id": "Server tampilan tidak ditemukan, jadi pintasan global dimatikan.",
-      "de": "Kein Displayserver gefunden; globale Tastenkombinationen sind deaktiviert.",
-      "tr": "Görüntü sunucusu bulunamadığından genel kısayollar kapalı."
-    },
     "No existing file — nothing to back up.": {
       "zh-Hans": "没有现有文件 — 无需备份。",
       "hi": "कोई मौजूदा फ़ाइल नहीं — बैकअप के लिए कुछ नहीं।",
@@ -884,32 +689,6 @@
       "id": "Belum ada settings.json — tidak ada yang perlu dicadangkan.",
       "de": "Noch keine settings.json — nichts zu sichern.",
       "tr": "Henüz settings.json yok — yedeklenecek bir şey yok."
-    },
-    "Not a valid shortcut": {
-      "zh-Hans": "无效的快捷键",
-      "hi": "मान्य शॉर्टकट नहीं",
-      "es": "No es un atajo válido",
-      "ar": "ليس اختصارًا صالحًا",
-      "fr": "Raccourci non valide",
-      "bn": "বৈধ শর্টকাট নয়",
-      "pt-BR": "Atalho inválido",
-      "ru": "Недопустимое сочетание",
-      "id": "Pintasan tidak valid",
-      "de": "Keine gültige Tastenkombination",
-      "tr": "Geçerli bir kısayol değil"
-    },
-    "Not available": {
-      "zh-Hans": "不可用",
-      "hi": "उपलब्ध नहीं",
-      "es": "No disponible",
-      "ar": "غير متاح",
-      "fr": "Indisponible",
-      "bn": "উপলব্ধ নয়",
-      "pt-BR": "Indisponível",
-      "ru": "Недоступно",
-      "id": "Tidak tersedia",
-      "de": "Nicht verfügbar",
-      "tr": "Kullanılamıyor"
     },
     "Open in VS Code": {
       "zh-Hans": "在 VS Code 中打开",
@@ -976,19 +755,6 @@
       "de": "Garderobe öffnen",
       "tr": "Gardırobu aç"
     },
-    "Press keys…": {
-      "zh-Hans": "请按键…",
-      "hi": "कुंजियाँ दबाएँ…",
-      "es": "Pulsa las teclas…",
-      "ar": "اضغط المفاتيح…",
-      "fr": "Appuie sur les touches…",
-      "bn": "কী চাপুন…",
-      "pt-BR": "Pressione as teclas…",
-      "ru": "Нажмите клавиши…",
-      "id": "Tekan tombol…",
-      "de": "Tasten drücken…",
-      "tr": "Tuşlara bas…"
-    },
     "Previous pill": {
       "zh-Hans": "上一个标签",
       "hi": "पिछला टैब",
@@ -1053,19 +819,6 @@
       "id": "Relay",
       "de": "Relay",
       "tr": "Aracı"
-    },
-    "Reset to defaults": {
-      "zh-Hans": "恢复默认",
-      "hi": "डिफ़ॉल्ट पर रीसेट करें",
-      "es": "Restablecer valores predeterminados",
-      "ar": "استعادة الإعدادات الافتراضية",
-      "fr": "Rétablir les valeurs par défaut",
-      "bn": "ডিফল্টে ফেরান",
-      "pt-BR": "Restaurar padrões",
-      "ru": "Сбросить по умолчанию",
-      "id": "Kembalikan ke bawaan",
-      "de": "Auf Standard zurücksetzen",
-      "tr": "Varsayılana sıfırla"
     },
     "Resets": {
       "zh-Hans": "重置",
@@ -1236,31 +989,18 @@
       "de": "Im Ordner anzeigen",
       "tr": "Klasörde göster"
     },
-    "Show other coding agents in the island. Coucou adds its entries to each agent's own config: you see the exact change and where the backup goes before anything is written, and uninstalling removes only what Coucou added.": {
-      "zh-Hans": "在岛中显示其他编程代理。Coucou 会把自己的条目添加到各代理的配置中：写入之前，你会看到确切的改动和备份位置；卸载只会移除 Coucou 添加的内容。",
-      "hi": "दूसरे कोडिंग एजेंटों को आइलैंड में दिखाएँ। Coucou हर एजेंट की अपनी कॉन्फ़िग में अपनी प्रविष्टियाँ जोड़ता है: कुछ भी लिखे जाने से पहले आप सटीक बदलाव और बैकअप की जगह देखते हैं, और अनइंस्टॉल करने पर केवल वही हटता है जो Coucou ने जोड़ा था।",
-      "es": "Muestra otros agentes de programación en la isla. Coucou añade sus entradas a la configuración de cada agente: ves el cambio exacto y dónde va la copia de seguridad antes de que se escriba nada, y al desinstalar solo se quita lo que añadió Coucou.",
-      "ar": "اعرض وكلاء البرمجة الآخرين في الشريط. يضيف Coucou إدخالاته إلى إعدادات كل وكيل: ترى التغيير بالضبط ومكان النسخة الاحتياطية قبل كتابة أي شيء، وإلغاء التثبيت يزيل فقط ما أضافه Coucou.",
-      "fr": "Affiche les autres agents de code dans l'île. Coucou ajoute ses entrées à la configuration de chaque agent : tu vois la modification exacte et l'emplacement de la sauvegarde avant que quoi que ce soit soit écrit, et la désinstallation ne retire que ce que Coucou a ajouté.",
-      "bn": "অন্যান্য কোডিং এজেন্টকে আইল্যান্ডে দেখান। Coucou প্রতিটি এজেন্টের নিজস্ব কনফিগে তার এন্ট্রি যোগ করে: কিছু লেখার আগে আপনি সঠিক পরিবর্তন এবং ব্যাকআপ কোথায় যাবে তা দেখতে পান, আর আনইনস্টল করলে শুধু Coucou যা যোগ করেছিল তা-ই সরানো হয়।",
-      "pt-BR": "Mostre outros agentes de programação na ilha. O Coucou adiciona as próprias entradas à configuração de cada agente: você vê a alteração exata e para onde vai o backup antes de qualquer gravação, e desinstalar remove só o que o Coucou adicionou.",
-      "ru": "Показывайте другие агенты для кода в острове. Coucou добавляет свои записи в конфигурацию каждого агента: до любой записи вы видите точное изменение и куда пойдёт резервная копия, а удаление убирает только то, что добавил Coucou.",
-      "id": "Tampilkan agen coding lain di pulau. Coucou menambahkan entrinya ke konfigurasi masing-masing agen: Anda melihat perubahan persisnya dan lokasi cadangan sebelum apa pun ditulis, dan mencopot pemasangan hanya menghapus yang ditambahkan Coucou.",
-      "de": "Zeige weitere Programmieragenten in der Insel. Coucou ergänzt Einträge in der jeweiligen Agentenkonfiguration: Du siehst die genaue Änderung und den Backup-Pfad, bevor etwas geschrieben wird. Beim Deinstallieren wird nur entfernt, was Coucou hinzugefügt hat.",
-      "tr": "Diğer kodlama ajanlarını adada göster. Coucou kendi girdilerini her ajanın yapılandırmasına ekler: herhangi bir şey yazılmadan önce tam değişikliği ve yedeğin konumunu görürsün. Kaldırıldığında yalnızca Coucou'nun ekledikleri silinir."
-    },
-    "Shows your Claude plan usage (5-hour and weekly limits) in the island's header. Coucou adds a status line relay in ~/.claude/settings.json. If you already have a status line, it keeps working as before. Pro and Max plans only.": {
-      "zh-Hans": "在岛的顶栏显示你的 Claude 套餐用量（5 小时和每周限额）。Coucou 会在 ~/.claude/settings.json 中添加一个状态栏中继。如果你已有状态栏，它会照常工作。仅限 Pro 和 Max 套餐。",
-      "hi": "आइलैंड के हेडर में आपके Claude प्लान का उपयोग (5 घंटे और साप्ताहिक सीमा) दिखाता है। Coucou ~/.claude/settings.json में एक स्टेटस लाइन रिले जोड़ता है। अगर आपके पास पहले से स्टेटस लाइन है, तो वह पहले की तरह चलती रहेगी। केवल Pro और Max प्लान।",
-      "es": "Muestra el uso de tu plan de Claude (límites de 5 horas y semanal) en la cabecera de la isla. Coucou añade un relay de línea de estado en ~/.claude/settings.json. Si ya tienes una línea de estado, sigue funcionando como antes. Solo planes Pro y Max.",
-      "ar": "يعرض استخدام خطة Claude (حدّا الخمس ساعات والأسبوع) في رأس الشريط. يضيف Coucou مُرحِّلًا لسطر الحالة في ~/.claude/settings.json. إن كان لديك سطر حالة فسيستمر في العمل كما كان. لخطتَي Pro وMax فقط.",
-      "fr": "Affiche l'utilisation de ton forfait Claude (limites sur 5 heures et à la semaine) dans l'en-tête de l'île. Coucou ajoute un relais de ligne d'état dans ~/.claude/settings.json. Si tu as déjà une ligne d'état, elle continue de fonctionner comme avant. Forfaits Pro et Max uniquement.",
-      "bn": "আইল্যান্ডের হেডারে আপনার Claude প্ল্যানের ব্যবহার (৫ ঘণ্টা ও সাপ্তাহিক সীমা) দেখায়। Coucou ~/.claude/settings.json-এ একটি স্ট্যাটাস লাইন রিলে যোগ করে। আপনার আগে থেকে স্ট্যাটাস লাইন থাকলে সেটি আগের মতোই চলবে। শুধু Pro ও Max প্ল্যান।",
-      "pt-BR": "Mostra o uso do seu plano Claude (limites de 5 horas e semanal) no cabeçalho da ilha. O Coucou adiciona um relay de linha de status em ~/.claude/settings.json. Se você já tem uma linha de status, ela continua funcionando como antes. Apenas planos Pro e Max.",
-      "ru": "Показывает использование тарифа Claude (лимиты на 5 часов и на неделю) в заголовке острова. Coucou добавляет ретранслятор строки состояния в ~/.claude/settings.json. Если у вас уже есть строка состояния, она работает как прежде. Только тарифы Pro и Max.",
-      "id": "Menampilkan pemakaian paket Claude Anda (batas 5 jam dan mingguan) di header pulau. Coucou menambahkan relay baris status di ~/.claude/settings.json. Jika Anda sudah punya baris status, baris itu tetap berjalan seperti biasa. Khusus paket Pro dan Max.",
-      "de": "Zeigt deine Claude-Tarifnutzung (5-Stunden- und Wochenlimits) im Insel-Kopfbereich. Coucou ergänzt einen Statuszeilen-Relay in ~/.claude/settings.json. Eine bestehende Statuszeile funktioniert wie bisher. Nur für Pro- und Max-Tarife.",
-      "tr": "Claude plan kullanımını (5 saatlik ve haftalık sınırlar) adanın başlığında gösterir. Coucou, ~/.claude/settings.json içine bir durum satırı aracısı ekler. Mevcut durum satırın varsa eskisi gibi çalışmaya devam eder. Yalnızca Pro ve Max planları için."
+    "Show other coding agents in the island. Slimai adds its entries to each agent's own config: you see the exact change and where the backup goes before anything is written, and uninstalling removes only what Slimai added.": {
+      "zh-Hans": "在岛中显示其他编程代理。Slimai 会把自己的条目添加到各代理的配置中：写入之前，你会看到确切的改动和备份位置；卸载只会移除 Slimai 添加的内容。",
+      "hi": "दूसरे कोडिंग एजेंटों को आइलैंड में दिखाएँ। Slimai हर एजेंट की अपनी कॉन्फ़िग में अपनी प्रविष्टियाँ जोड़ता है: कुछ भी लिखे जाने से पहले आप सटीक बदलाव और बैकअप की जगह देखते हैं, और अनइंस्टॉल करने पर केवल वही हटता है जो Slimai ने जोड़ा था।",
+      "es": "Muestra otros agentes de programación en la isla. Slimai añade sus entradas a la configuración de cada agente: ves el cambio exacto y dónde va la copia de seguridad antes de que se escriba nada, y al desinstalar solo se quita lo que añadió Slimai.",
+      "ar": "اعرض وكلاء البرمجة الآخرين في الشريط. يضيف Slimai إدخالاته إلى إعدادات كل وكيل: ترى التغيير بالضبط ومكان النسخة الاحتياطية قبل كتابة أي شيء، وإلغاء التثبيت يزيل فقط ما أضافه Slimai.",
+      "fr": "Affiche les autres agents de code dans l'île. Slimai ajoute ses entrées à la configuration de chaque agent : tu vois la modification exacte et l'emplacement de la sauvegarde avant que quoi que ce soit soit écrit, et la désinstallation ne retire que ce que Slimai a ajouté.",
+      "bn": "অন্যান্য কোডিং এজেন্টকে আইল্যান্ডে দেখান। Slimai প্রতিটি এজেন্টের নিজস্ব কনফিগে তার এন্ট্রি যোগ করে: কিছু লেখার আগে আপনি সঠিক পরিবর্তন এবং ব্যাকআপ কোথায় যাবে তা দেখতে পান, আর আনইনস্টল করলে শুধু Slimai যা যোগ করেছিল তা-ই সরানো হয়।",
+      "pt-BR": "Mostre outros agentes de programação na ilha. O Slimai adiciona as próprias entradas à configuração de cada agente: você vê a alteração exata e para onde vai o backup antes de qualquer gravação, e desinstalar remove só o que o Slimai adicionou.",
+      "ru": "Показывайте другие агенты для кода в острове. Slimai добавляет свои записи в конфигурацию каждого агента: до любой записи вы видите точное изменение и куда пойдёт резервная копия, а удаление убирает только то, что добавил Slimai.",
+      "id": "Tampilkan agen coding lain di pulau. Slimai menambahkan entrinya ke konfigurasi masing-masing agen: Anda melihat perubahan persisnya dan lokasi cadangan sebelum apa pun ditulis, dan mencopot pemasangan hanya menghapus yang ditambahkan Slimai.",
+      "de": "Zeige weitere Programmieragenten in der Insel. Slimai ergänzt Einträge in der jeweiligen Agentenkonfiguration: Du siehst die genaue Änderung und den Backup-Pfad, bevor etwas geschrieben wird. Beim Deinstallieren wird nur entfernt, was Slimai hinzugefügt hat.",
+      "tr": "Diğer kodlama ajanlarını adada göster. Slimai kendi girdilerini her ajanın yapılandırmasına ekler: herhangi bir şey yazılmadan önce tam değişikliği ve yedeğin konumunu görürsün. Kaldırıldığında yalnızca Slimai'nun ekledikleri silinir."
     },
     "Start a new Antigravity conversation to pick the hooks up.": {
       "zh-Hans": "开启新的 Antigravity 对话即可启用 hooks。",
@@ -1327,19 +1067,6 @@
       "de": "Sonntag",
       "tr": "Pazar"
     },
-    "That key can't be used in a shortcut.": {
-      "zh-Hans": "这个键不能用于快捷键。",
-      "hi": "उस कुंजी का शॉर्टकट में उपयोग नहीं हो सकता।",
-      "es": "Esa tecla no se puede usar en un atajo.",
-      "ar": "لا يمكن استخدام هذا المفتاح في اختصار.",
-      "fr": "Cette touche ne peut pas servir dans un raccourci.",
-      "bn": "সেই কী শর্টকাটে ব্যবহার করা যায় না।",
-      "pt-BR": "Essa tecla não pode ser usada num atalho.",
-      "ru": "Эту клавишу нельзя использовать в сочетании.",
-      "id": "Tombol itu tidak dapat dipakai dalam pintasan.",
-      "de": "Diese Taste kann nicht für eine Tastenkombination verwendet werden.",
-      "tr": "Bu tuş kısayolda kullanılamaz."
-    },
     "The file is removed.": {
       "zh-Hans": "该文件将被删除。",
       "hi": "फ़ाइल हटा दी जाती है।",
@@ -1405,18 +1132,18 @@
       "de": "Der Relay ist noch nicht installiert.",
       "tr": "Aracı henüz kurulu değil."
     },
-    "The relay isn't installed yet. Restart Coucou.": {
-      "zh-Hans": "中继尚未安装。请重启 Coucou。",
-      "hi": "रिले अभी इंस्टॉल नहीं है। Coucou को फिर से शुरू करें।",
-      "es": "El relay aún no está instalado. Reinicia Coucou.",
-      "ar": "المُرحِّل غير مثبَّت بعد. أعد تشغيل Coucou.",
-      "fr": "Le relais n'est pas encore installé. Redémarre Coucou.",
-      "bn": "রিলে এখনো ইনস্টল হয়নি। Coucou আবার চালু করুন।",
-      "pt-BR": "O relay ainda não está instalado. Reinicie o Coucou.",
-      "ru": "Ретранслятор ещё не установлен. Перезапустите Coucou.",
-      "id": "Relay belum terpasang. Mulai ulang Coucou.",
-      "de": "Der Relay ist noch nicht installiert. Starte Coucou neu.",
-      "tr": "Aracı henüz kurulu değil. Coucou'yu yeniden başlat."
+    "The relay isn't installed yet. Restart Slimai.": {
+      "zh-Hans": "中继尚未安装。请重启 Slimai。",
+      "hi": "रिले अभी इंस्टॉल नहीं है। Slimai को फिर से शुरू करें।",
+      "es": "El relay aún no está instalado. Reinicia Slimai.",
+      "ar": "المُرحِّل غير مثبَّت بعد. أعد تشغيل Slimai.",
+      "fr": "Le relais n'est pas encore installé. Redémarre Slimai.",
+      "bn": "রিলে এখনো ইনস্টল হয়নি। Slimai আবার চালু করুন।",
+      "pt-BR": "O relay ainda não está instalado. Reinicie o Slimai.",
+      "ru": "Ретранслятор ещё не установлен. Перезапустите Slimai.",
+      "id": "Relay belum terpasang. Mulai ulang Slimai.",
+      "de": "Der Relay ist noch nicht installiert. Starte Slimai neu.",
+      "tr": "Aracı henüz kurulu değil. Slimai'yu yeniden başlat."
     },
     "This agent takes a plugin, not hook entries.": {
       "zh-Hans": "此代理使用插件，而不是 hook 条目。",
@@ -1457,57 +1184,31 @@
       "de": "Dies sind die genauen Änderungen in deiner settings.json. Deine eigenen Hooks bleiben unverändert.",
       "tr": "settings.json dosyanda yapılacak değişiklik tam olarak bu. Kendi hook'ların korunur."
     },
-    "This is exactly what will change: only the status line. If you already have one it keeps working, Coucou's relay runs it for you.": {
-      "zh-Hans": "这正是将发生的改动：只涉及状态栏。如果你已有状态栏，它会照常工作，由 Coucou 的中继替你运行。",
-      "hi": "ठीक यही बदलेगा: केवल स्टेटस लाइन। अगर आपके पास पहले से एक है तो वह चलती रहेगी, Coucou का रिले उसे आपके लिए चलाता है।",
-      "es": "Esto es exactamente lo que cambiará: solo la línea de estado. Si ya tienes una, sigue funcionando: el relay de Coucou la ejecuta por ti.",
-      "ar": "هذا بالضبط ما سيتغيّر: سطر الحالة فقط. إن كان لديك سطر حالة فسيستمر في العمل، إذ يشغّله مُرحِّل Coucou نيابةً عنك.",
-      "fr": "Voici exactement ce qui va changer : seulement la ligne d'état. Si tu en as déjà une, elle continue de fonctionner, le relais de Coucou la lance pour toi.",
-      "bn": "ঠিক এটাই বদলাবে: শুধু স্ট্যাটাস লাইন। আপনার আগে থেকে একটি থাকলে সেটি চলতেই থাকবে, Coucou-র রিলে আপনার হয়ে সেটি চালায়।",
-      "pt-BR": "Isto é exatamente o que vai mudar: apenas a linha de status. Se você já tem uma, ela continua funcionando: o relay do Coucou a executa para você.",
-      "ru": "Вот что именно изменится: только строка состояния. Если она у вас уже есть, она продолжит работать — её запускает ретранслятор Coucou.",
-      "id": "Inilah persisnya yang akan berubah: hanya baris status. Jika Anda sudah punya, baris itu tetap berjalan, relay Coucou menjalankannya untuk Anda.",
-      "de": "Dies wird geändert: nur die Statuszeile. Eine vorhandene Statuszeile funktioniert weiterhin; Coucous Relay führt sie für dich aus.",
-      "tr": "Yapılacak değişiklik tam olarak bu: yalnızca durum satırı. Mevcut bir durum satırın varsa çalışmaya devam eder; Coucou'nun aracısı onu senin için çalıştırır."
+    "This removes Slimai's entries only. Everything else stays.": {
+      "zh-Hans": "这只会移除 Slimai 的条目，其余内容保持不变。",
+      "hi": "यह केवल Slimai की प्रविष्टियाँ हटाता है। बाकी सब वैसा ही रहता है।",
+      "es": "Esto solo quita las entradas de Slimai. Todo lo demás se queda.",
+      "ar": "يزيل هذا إدخالات Slimai فقط. يبقى كل شيء آخر كما هو.",
+      "fr": "Seules les entrées de Slimai sont retirées. Tout le reste est conservé.",
+      "bn": "এটি শুধু Slimai-র এন্ট্রি সরায়। বাকি সব থেকে যায়।",
+      "pt-BR": "Isto remove apenas as entradas do Slimai. O resto continua.",
+      "ru": "Удаляются только записи Slimai. Всё остальное остаётся.",
+      "id": "Ini hanya menghapus entri Slimai. Yang lain tetap ada.",
+      "de": "Entfernt nur Slimais Einträge. Alles andere bleibt erhalten.",
+      "tr": "Yalnızca Slimai'nun girdilerini kaldırır. Diğer her şey korunur."
     },
-    "This puts your previous status line back, or removes the entry if there was none.": {
-      "zh-Hans": "这会恢复你之前的状态栏；如果之前没有，则移除该条目。",
-      "hi": "यह आपकी पिछली स्टेटस लाइन वापस लगाता है, या अगर कोई नहीं थी तो प्रविष्टि हटा देता है।",
-      "es": "Esto devuelve tu línea de estado anterior, o quita la entrada si no había ninguna.",
-      "ar": "يعيد هذا سطر الحالة السابق، أو يزيل الإدخال إن لم يكن هناك سطر.",
-      "fr": "Ta ligne d'état précédente est remise en place, ou l'entrée est retirée s'il n'y en avait pas.",
-      "bn": "এটি আপনার আগের স্ট্যাটাস লাইন ফিরিয়ে আনে, অথবা আগে না থাকলে এন্ট্রিটি সরিয়ে দেয়।",
-      "pt-BR": "Isto restaura sua linha de status anterior, ou remove a entrada se não havia nenhuma.",
-      "ru": "Возвращается ваша прежняя строка состояния, а если её не было — запись удаляется.",
-      "id": "Ini mengembalikan baris status Anda sebelumnya, atau menghapus entri jika sebelumnya tidak ada.",
-      "de": "Stellt deine vorherige Statuszeile wieder her oder entfernt den Eintrag, falls es vorher keinen gab.",
-      "tr": "Önceki durum satırını geri yükler veya önceden yoksa girdiyi kaldırır."
-    },
-    "This removes Coucou's entries only. Everything else stays.": {
-      "zh-Hans": "这只会移除 Coucou 的条目，其余内容保持不变。",
-      "hi": "यह केवल Coucou की प्रविष्टियाँ हटाता है। बाकी सब वैसा ही रहता है।",
-      "es": "Esto solo quita las entradas de Coucou. Todo lo demás se queda.",
-      "ar": "يزيل هذا إدخالات Coucou فقط. يبقى كل شيء آخر كما هو.",
-      "fr": "Seules les entrées de Coucou sont retirées. Tout le reste est conservé.",
-      "bn": "এটি শুধু Coucou-র এন্ট্রি সরায়। বাকি সব থেকে যায়।",
-      "pt-BR": "Isto remove apenas as entradas do Coucou. O resto continua.",
-      "ru": "Удаляются только записи Coucou. Всё остальное остаётся.",
-      "id": "Ini hanya menghapus entri Coucou. Yang lain tetap ada.",
-      "de": "Entfernt nur Coucous Einträge. Alles andere bleibt erhalten.",
-      "tr": "Yalnızca Coucou'nun girdilerini kaldırır. Diğer her şey korunur."
-    },
-    "This removes Coucou's entries only. Your own hooks are left untouched.": {
-      "zh-Hans": "这只会移除 Coucou 的条目。你自己的 hooks 不会被触碰。",
-      "hi": "यह केवल Coucou की प्रविष्टियाँ हटाता है। आपके अपने hooks नहीं छुए जाते।",
-      "es": "Esto solo quita las entradas de Coucou. Tus propios hooks no se tocan.",
-      "ar": "يزيل هذا إدخالات Coucou فقط. لن تُمسّ hooks الخاصة بك.",
-      "fr": "Seules les entrées de Coucou sont retirées. Tes propres hooks ne sont pas touchés.",
-      "bn": "এটি শুধু Coucou-র এন্ট্রি সরায়। আপনার নিজের hooks-এ হাত দেওয়া হয় না।",
-      "pt-BR": "Isto remove apenas as entradas do Coucou. Seus próprios hooks não são alterados.",
-      "ru": "Удаляются только записи Coucou. Ваши собственные хуки не затрагиваются.",
-      "id": "Ini hanya menghapus entri Coucou. Hooks milik Anda tidak disentuh.",
-      "de": "Entfernt nur Coucous Einträge. Deine eigenen Hooks bleiben unverändert.",
-      "tr": "Yalnızca Coucou'nun girdilerini kaldırır. Kendi hook'ların korunur."
+    "This removes Slimai's entries only. Your own hooks are left untouched.": {
+      "zh-Hans": "这只会移除 Slimai 的条目。你自己的 hooks 不会被触碰。",
+      "hi": "यह केवल Slimai की प्रविष्टियाँ हटाता है। आपके अपने hooks नहीं छुए जाते।",
+      "es": "Esto solo quita las entradas de Slimai. Tus propios hooks no se tocan.",
+      "ar": "يزيل هذا إدخالات Slimai فقط. لن تُمسّ hooks الخاصة بك.",
+      "fr": "Seules les entrées de Slimai sont retirées. Tes propres hooks ne sont pas touchés.",
+      "bn": "এটি শুধু Slimai-র এন্ট্রি সরায়। আপনার নিজের hooks-এ হাত দেওয়া হয় না।",
+      "pt-BR": "Isto remove apenas as entradas do Slimai. Seus próprios hooks não são alterados.",
+      "ru": "Удаляются только записи Slimai. Ваши собственные хуки не затрагиваются.",
+      "id": "Ini hanya menghapus entri Slimai. Hooks milik Anda tidak disentuh.",
+      "de": "Entfernt nur Slimais Einträge. Deine eigenen Hooks bleiben unverändert.",
+      "tr": "Yalnızca Slimai'nun girdilerini kaldırır. Kendi hook'ların korunur."
     },
     "Thursday": {
       "zh-Hans": "星期四",
@@ -1548,19 +1249,6 @@
       "de": "Aktiviere es einmal mit `hermes plugins enable coucou` und starte dann eine neue Hermes-Sitzung.",
       "tr": "Bir kez `hermes plugins enable coucou` ile etkinleştir, ardından yeni bir Hermes oturumu başlat."
     },
-    "Types “{char}”": {
-      "zh-Hans": "输入“{char}”",
-      "hi": "“{char}” टाइप करता है",
-      "es": "Escribe «{char}»",
-      "ar": "يكتب «{char}»",
-      "fr": "Tape « {char} »",
-      "bn": "“{char}” টাইপ করে",
-      "pt-BR": "Digita “{char}”",
-      "ru": "Вводит «{char}»",
-      "id": "Mengetik “{char}”",
-      "de": "Gibt „{char}“ ein",
-      "tr": "“{char}” yazıyor"
-    },
     "Uninstall hooks…": {
       "zh-Hans": "卸载 hooks…",
       "hi": "hooks अनइंस्टॉल करें…",
@@ -1573,19 +1261,6 @@
       "id": "Copot hooks…",
       "de": "Hooks deinstallieren…",
       "tr": "Hook'ları kaldır…"
-    },
-    "Uninstall relay…": {
-      "zh-Hans": "卸载中继…",
-      "hi": "रिले अनइंस्टॉल करें…",
-      "es": "Desinstalar relay…",
-      "ar": "إلغاء تثبيت المُرحِّل…",
-      "fr": "Désinstaller le relais…",
-      "bn": "রিলে আনইনস্টল করুন…",
-      "pt-BR": "Desinstalar relay…",
-      "ru": "Удалить ретранслятор…",
-      "id": "Copot relay…",
-      "de": "Relay deinstallieren…",
-      "tr": "Aracıyı kaldır…"
     },
     "Uninstall…": {
       "zh-Hans": "卸载…",
@@ -1613,32 +1288,6 @@
       "de": "Unbekannter Agent \"{id}\".",
       "tr": "Bilinmeyen ajan \"{id}\"."
     },
-    "Used twice": {
-      "zh-Hans": "重复使用",
-      "hi": "दो बार उपयोग",
-      "es": "Usado dos veces",
-      "ar": "مستخدم مرتين",
-      "fr": "Utilisé deux fois",
-      "bn": "দুবার ব্যবহৃত",
-      "pt-BR": "Usado duas vezes",
-      "ru": "Используется дважды",
-      "id": "Dipakai dua kali",
-      "de": "Doppelt belegt",
-      "tr": "İki kez kullanılmış"
-    },
-    "Wardrobe…": {
-      "zh-Hans": "衣橱…",
-      "hi": "अलमारी…",
-      "es": "Guardarropa…",
-      "ar": "خزانة الملابس…",
-      "fr": "Garde-robe…",
-      "bn": "পোশাক ঘর…",
-      "pt-BR": "Guarda-roupa…",
-      "ru": "Гардероб…",
-      "id": "Lemari…",
-      "de": "Garderobe…",
-      "tr": "Gardırop…"
-    },
     "Wednesday": {
       "zh-Hans": "星期三",
       "hi": "बुधवार",
@@ -1651,19 +1300,6 @@
       "id": "Rabu",
       "de": "Mittwoch",
       "tr": "Çarşamba"
-    },
-    "Work from any app. Click a shortcut to change it, then press the new keys — Esc cancels, Backspace removes it.": {
-      "zh-Hans": "在任何应用中都可使用。点击某个快捷键即可修改，然后按下新的按键 — Esc 取消，Backspace 删除。",
-      "hi": "किसी भी ऐप से काम करते हैं। शॉर्टकट बदलने के लिए उस पर क्लिक करें, फिर नई कुंजियाँ दबाएँ — Esc रद्द करता है, Backspace उसे हटाता है।",
-      "es": "Funcionan desde cualquier app. Haz clic en un atajo para cambiarlo y pulsa las nuevas teclas — Esc cancela, Backspace lo quita.",
-      "ar": "تعمل من أي تطبيق. انقر على اختصار لتغييره، ثم اضغط المفاتيح الجديدة — Esc يلغي، وBackspace يزيله.",
-      "fr": "Ils marchent depuis n'importe quelle app. Clique sur un raccourci pour le changer, puis appuie sur les nouvelles touches — Esc annule, Backspace le retire.",
-      "bn": "যেকোনো অ্যাপ থেকে কাজ করে। বদলাতে একটি শর্টকাটে ক্লিক করুন, তারপর নতুন কী চাপুন — Esc বাতিল করে, Backspace সেটি সরায়।",
-      "pt-BR": "Funcionam em qualquer app. Clique num atalho para alterá-lo e pressione as novas teclas — Esc cancela, Backspace remove.",
-      "ru": "Работают из любого приложения. Нажмите на сочетание, чтобы изменить его, затем нажмите новые клавиши — Esc отменяет, Backspace удаляет.",
-      "id": "Berfungsi dari aplikasi apa pun. Klik pintasan untuk mengubahnya, lalu tekan tombol baru — Esc membatalkan, Backspace menghapusnya.",
-      "de": "Arbeite in jeder App. Klicke auf eine Tastenkombination und drücke die neuen Tasten — Esc bricht ab, die Rücktaste entfernt sie.",
-      "tr": "Her uygulamada çalışır. Değiştirmek için bir kısayola tıkla, ardından yeni tuşlara bas — Esc iptal eder, Backspace kaldırır."
     },
     "Write to {path} failed: {error}": {
       "zh-Hans": "写入 {path} 失败：{error}",
@@ -1678,96 +1314,18 @@
       "de": "Schreiben nach {path} fehlgeschlagen: {error}",
       "tr": "{path} dosyasına yazılamadı: {error}"
     },
-    "Your Wayland desktop doesn't let apps listen for keys outside their own windows. Add the shortcuts in your system's keyboard settings instead, with these commands:": {
-      "zh-Hans": "你的 Wayland 桌面不允许应用监听自身窗口之外的按键。请改为在系统的键盘设置中添加快捷键，使用以下命令：",
-      "hi": "आपका Wayland डेस्कटॉप ऐप्स को उनकी अपनी विंडो के बाहर कुंजियाँ सुनने नहीं देता। इसके बजाय इन कमांड के साथ अपने सिस्टम की कीबोर्ड सेटिंग्स में शॉर्टकट जोड़ें:",
-      "es": "Tu escritorio Wayland no deja que las apps escuchen teclas fuera de sus propias ventanas. Añade los atajos en la configuración de teclado del sistema, con estos comandos:",
-      "ar": "لا يسمح سطح مكتب Wayland لديك للتطبيقات بالتقاط المفاتيح خارج نوافذها. أضف الاختصارات من إعدادات لوحة المفاتيح في نظامك بدلًا من ذلك، بهذه الأوامر:",
-      "fr": "Ton bureau Wayland ne laisse pas les apps écouter les touches en dehors de leurs propres fenêtres. Ajoute plutôt les raccourcis dans les réglages clavier de ton système, avec ces commandes :",
-      "bn": "আপনার Wayland ডেস্কটপ অ্যাপকে নিজের উইন্ডোর বাইরে কী শুনতে দেয় না। এর বদলে এই কমান্ডগুলো দিয়ে সিস্টেমের কিবোর্ড সেটিংসে শর্টকাট যোগ করুন:",
-      "pt-BR": "Seu desktop Wayland não deixa os apps ouvirem teclas fora das próprias janelas. Em vez disso, adicione os atalhos nas configurações de teclado do sistema, com estes comandos:",
-      "ru": "Ваш рабочий стол Wayland не позволяет приложениям слушать клавиши вне своих окон. Добавьте сочетания в настройках клавиатуры системы с такими командами:",
-      "id": "Desktop Wayland Anda tidak mengizinkan aplikasi mendengarkan tombol di luar jendelanya sendiri. Tambahkan pintasan di pengaturan keyboard sistem Anda, dengan perintah berikut:",
-      "de": "Dein Wayland-Desktop erlaubt Apps nicht, Tastendrücke außerhalb ihrer eigenen Fenster zu erkennen. Füge die Tastenkombinationen stattdessen mit diesen Befehlen in den Tastatureinstellungen deines Systems hinzu:",
-      "tr": "Wayland masaüstün, uygulamaların kendi pencereleri dışındaki tuşları dinlemesine izin vermiyor. Bunun yerine kısayolları sistemin klavye ayarlarından şu komutlarla ekle:"
-    },
-    "Desktop: {keys}": {
-      "zh-Hans": "桌面：{keys}",
-      "hi": "डेस्कटॉप: {keys}",
-      "es": "Escritorio: {keys}",
-      "ar": "سطح المكتب: {keys}",
-      "fr": "Bureau : {keys}",
-      "bn": "ডেস্কটপ: {keys}",
-      "pt-BR": "Desktop: {keys}",
-      "ru": "Рабочий стол: {keys}",
-      "id": "Desktop: {keys}",
-      "de": "Desktop: {keys}",
-      "tr": "Masaüstü: {keys}"
-    },
-    "Not set by your desktop": {
-      "zh-Hans": "桌面未设置",
-      "hi": "आपके डेस्कटॉप ने सेट नहीं किया",
-      "es": "Tu escritorio no lo activó",
-      "ar": "لم يضبطه سطح المكتب",
-      "fr": "Non activé par ton bureau",
-      "bn": "আপনার ডেস্কটপ সেট করেনি",
-      "pt-BR": "Não ativado pelo seu desktop",
-      "ru": "Не назначено рабочим столом",
-      "id": "Tidak diatur oleh desktop Anda",
-      "de": "Nicht vom Desktop festgelegt",
-      "tr": "Masaüstün tarafından ayarlanmadı"
-    },
-    "These shortcuts are registered with your desktop. It may ask you to confirm them or to pick other keys; when it says which keys it uses, they show next to each shortcut.": {
-      "zh-Hans": "这些快捷键已在你的桌面注册。桌面可能会请你确认，或选择其他按键；如果它告知所用的按键，会显示在每个快捷键旁边。",
-      "hi": "ये शॉर्टकट आपके डेस्कटॉप के साथ पंजीकृत हैं। वह आपसे इनकी पुष्टि करने या दूसरी कुंजियाँ चुनने को कह सकता है; जब वह बताता है कि कौन-सी कुंजियाँ इस्तेमाल होती हैं, तो वे हर शॉर्टकट के आगे दिखती हैं।",
-      "es": "Estos atajos están registrados en tu escritorio. Puede pedirte que los confirmes o que elijas otras teclas; cuando indica qué teclas usa, aparecen junto a cada atajo.",
-      "ar": "هذه الاختصارات مسجّلة لدى سطح المكتب. قد يطلب منك تأكيدها أو اختيار مفاتيح أخرى؛ وعندما يذكر المفاتيح التي يستخدمها، تظهر بجانب كل اختصار.",
-      "fr": "Ces raccourcis sont enregistrés auprès de ton bureau. Il peut te demander de les confirmer ou de choisir d'autres touches ; quand il indique les touches qu'il utilise, elles s'affichent à côté de chaque raccourci.",
-      "bn": "এই শর্টকাটগুলো আপনার ডেস্কটপে নিবন্ধিত। এটি আপনাকে সেগুলো নিশ্চিত করতে বা অন্য কী বেছে নিতে বলতে পারে; কোন কী ব্যবহার করছে তা জানালে সেগুলো প্রতিটি শর্টকাটের পাশে দেখা যায়।",
-      "pt-BR": "Estes atalhos estão registrados no seu desktop. Ele pode pedir que você os confirme ou escolha outras teclas; quando informa quais teclas usa, elas aparecem ao lado de cada atalho.",
-      "ru": "Эти сочетания зарегистрированы в вашем рабочем столе. Он может попросить подтвердить их или выбрать другие клавиши; если он сообщает, какие клавиши использует, они показаны рядом с каждым сочетанием.",
-      "id": "Pintasan ini terdaftar di desktop Anda. Desktop mungkin meminta Anda mengonfirmasinya atau memilih tombol lain; jika desktop menyebutkan tombol yang dipakainya, tombol itu tampil di samping setiap pintasan.",
-      "de": "Diese Tastenkombinationen sind bei deinem Desktop registriert. Er kann dich bitten, sie zu bestätigen oder andere Tasten zu wählen. Sobald er die verwendeten Tasten meldet, erscheinen sie neben der jeweiligen Tastenkombination.",
-      "tr": "Bu kısayollar masaüstüne kaydedilir. Masaüstün bunları onaylamanı veya başka tuşlar seçmeni isteyebilir; kullandığı tuşları bildirdiğinde bunlar ilgili kısayolun yanında görünür."
-    },
-    "Asking your desktop to register the shortcuts. It may show its own window to confirm them.": {
-      "zh-Hans": "正在请求桌面注册这些快捷键。桌面可能会显示自己的窗口让你确认。",
-      "hi": "आपके डेस्कटॉप से शॉर्टकट पंजीकृत करने को कहा जा रहा है। पुष्टि के लिए वह अपनी विंडो दिखा सकता है।",
-      "es": "Pidiendo a tu escritorio que registre los atajos. Puede mostrar su propia ventana para confirmarlos.",
-      "ar": "جارٍ طلب تسجيل الاختصارات من سطح المكتب. قد يعرض نافذته الخاصة لتأكيدها.",
-      "fr": "Demande en cours à ton bureau pour enregistrer les raccourcis. Il peut afficher sa propre fenêtre pour les confirmer.",
-      "bn": "আপনার ডেস্কটপকে শর্টকাটগুলো নিবন্ধন করতে বলা হচ্ছে। নিশ্চিত করার জন্য এটি নিজের উইন্ডো দেখাতে পারে।",
-      "pt-BR": "Pedindo ao seu desktop para registrar os atalhos. Ele pode mostrar a própria janela para confirmá-los.",
-      "ru": "Запрашиваем регистрацию сочетаний у рабочего стола. Он может показать своё окно для подтверждения.",
-      "id": "Meminta desktop Anda mendaftarkan pintasan. Desktop mungkin menampilkan jendelanya sendiri untuk konfirmasi.",
-      "de": "Der Desktop wird gebeten, die Tastenkombinationen zu registrieren. Möglicherweise zeigt er ein eigenes Bestätigungsfenster.",
-      "tr": "Masaüstünden kısayolları kaydetmesi isteniyor. Onaylamak için kendi penceresini gösterebilir."
-    },
-    "If one doesn't work, you can also add it in your system's keyboard settings with these commands:": {
-      "zh-Hans": "如果某个快捷键不起作用，也可以使用以下命令在系统的键盘设置中添加：",
-      "hi": "अगर कोई काम न करे, तो आप इन कमांड के साथ उसे अपने सिस्टम की कीबोर्ड सेटिंग्स में भी जोड़ सकते हैं:",
-      "es": "Si alguno no funciona, también puedes añadirlo en la configuración de teclado del sistema con estos comandos:",
-      "ar": "إذا لم يعمل أحدها، يمكنك أيضًا إضافته من إعدادات لوحة المفاتيح في نظامك بهذه الأوامر:",
-      "fr": "Si l'un d'eux ne marche pas, tu peux aussi l'ajouter dans les réglages clavier de ton système, avec ces commandes :",
-      "bn": "কোনোটি কাজ না করলে, এই কমান্ডগুলো দিয়ে সিস্টেমের কিবোর্ড সেটিংসেও সেটি যোগ করতে পারেন:",
-      "pt-BR": "Se algum não funcionar, você também pode adicioná-lo nas configurações de teclado do sistema, com estes comandos:",
-      "ru": "Если какое-то не работает, его можно добавить и в настройках клавиатуры системы с такими командами:",
-      "id": "Jika salah satunya tidak berfungsi, Anda juga bisa menambahkannya di pengaturan keyboard sistem dengan perintah berikut:",
-      "de": "Falls eine nicht funktioniert, kannst du sie mit diesen Befehlen auch in den Tastatureinstellungen deines Systems hinzufügen:",
-      "tr": "Bir kısayol çalışmazsa sistemin klavye ayarlarından şu komutlarla da ekleyebilirsin:"
-    },
-    "coucou-hook.exe is not in place yet. Restart Coucou; if it still fails, build it with `cargo build -p coucou-hook`.": {
-      "zh-Hans": "coucou-hook.exe 尚未就位。请重启 Coucou；如果仍然失败，请用 `cargo build -p coucou-hook` 构建它。",
-      "hi": "coucou-hook.exe अभी अपनी जगह पर नहीं है। Coucou फिर से शुरू करें; अगर फिर भी न हो, तो इसे `cargo build -p coucou-hook` से बनाएँ।",
-      "es": "coucou-hook.exe aún no está en su sitio. Reinicia Coucou; si sigue fallando, compílalo con `cargo build -p coucou-hook`.",
-      "ar": "coucou-hook.exe ليس في مكانه بعد. أعد تشغيل Coucou؛ وإن استمر الفشل فابنِه بالأمر `cargo build -p coucou-hook`.",
-      "fr": "coucou-hook.exe n'est pas encore en place. Redémarre Coucou ; si ça échoue encore, compile-le avec `cargo build -p coucou-hook`.",
-      "bn": "coucou-hook.exe এখনো জায়গামতো নেই। Coucou আবার চালু করুন; তবুও না হলে `cargo build -p coucou-hook` দিয়ে এটি বানান।",
-      "pt-BR": "O coucou-hook.exe ainda não está no lugar. Reinicie o Coucou; se continuar falhando, compile-o com `cargo build -p coucou-hook`.",
-      "ru": "coucou-hook.exe ещё не на месте. Перезапустите Coucou; если не поможет, соберите его командой `cargo build -p coucou-hook`.",
-      "id": "coucou-hook.exe belum ada di tempatnya. Mulai ulang Coucou; jika masih gagal, build dengan `cargo build -p coucou-hook`.",
-      "de": "coucou-hook.exe ist noch nicht vorhanden. Starte Coucou neu; falls es weiterhin fehlschlägt, erstelle die Datei mit `cargo build -p coucou-hook`.",
-      "tr": "coucou-hook.exe henüz yerinde değil. Coucou'yu yeniden başlat; sorun sürerse `cargo build -p coucou-hook` ile derle."
+    "coucou-hook.exe is not in place yet. Restart Slimai; if it still fails, build it with `cargo build -p coucou-hook`.": {
+      "zh-Hans": "coucou-hook.exe 尚未就位。请重启 Slimai；如果仍然失败，请用 `cargo build -p coucou-hook` 构建它。",
+      "hi": "coucou-hook.exe अभी अपनी जगह पर नहीं है। Slimai फिर से शुरू करें; अगर फिर भी न हो, तो इसे `cargo build -p coucou-hook` से बनाएँ।",
+      "es": "coucou-hook.exe aún no está en su sitio. Reinicia Slimai; si sigue fallando, compílalo con `cargo build -p coucou-hook`.",
+      "ar": "coucou-hook.exe ليس في مكانه بعد. أعد تشغيل Slimai؛ وإن استمر الفشل فابنِه بالأمر `cargo build -p coucou-hook`.",
+      "fr": "coucou-hook.exe n'est pas encore en place. Redémarre Slimai ; si ça échoue encore, compile-le avec `cargo build -p coucou-hook`.",
+      "bn": "coucou-hook.exe এখনো জায়গামতো নেই। Slimai আবার চালু করুন; তবুও না হলে `cargo build -p coucou-hook` দিয়ে এটি বানান।",
+      "pt-BR": "O coucou-hook.exe ainda não está no lugar. Reinicie o Slimai; se continuar falhando, compile-o com `cargo build -p coucou-hook`.",
+      "ru": "coucou-hook.exe ещё не на месте. Перезапустите Slimai; если не поможет, соберите его командой `cargo build -p coucou-hook`.",
+      "id": "coucou-hook.exe belum ada di tempatnya. Mulai ulang Slimai; jika masih gagal, build dengan `cargo build -p coucou-hook`.",
+      "de": "coucou-hook.exe ist noch nicht vorhanden. Starte Slimai neu; falls es weiterhin fehlschlägt, erstelle die Datei mit `cargo build -p coucou-hook`.",
+      "tr": "coucou-hook.exe henüz yerinde değil. Slimai'yu yeniden başlat; sorun sürerse `cargo build -p coucou-hook` ile derle."
     },
     "finished": {
       "zh-Hans": "已完成",
@@ -1781,19 +1339,6 @@
       "id": "selesai",
       "de": "beendet",
       "tr": "tamamlandı"
-    },
-    "installed": {
-      "zh-Hans": "已安装",
-      "hi": "इंस्टॉल है",
-      "es": "instalado",
-      "ar": "مثبَّت",
-      "fr": "installé",
-      "bn": "ইনস্টল আছে",
-      "pt-BR": "instalado",
-      "ru": "установлен",
-      "id": "terpasang",
-      "de": "installiert",
-      "tr": "kurulu"
     },
     "is asking": {
       "zh-Hans": "在提问",
@@ -1847,44 +1392,18 @@
       "de": "Zeilen",
       "tr": "satır"
     },
-    "not installed": {
-      "zh-Hans": "未安装",
-      "hi": "इंस्टॉल नहीं है",
-      "es": "no instalado",
-      "ar": "غير مثبَّت",
-      "fr": "non installé",
-      "bn": "ইনস্টল নেই",
-      "pt-BR": "não instalado",
-      "ru": "не установлен",
-      "id": "belum terpasang",
-      "de": "nicht installiert",
-      "tr": "kurulu değil"
-    },
-    "seconds after you leave the island": {
-      "zh-Hans": "鼠标离开岛后的秒数",
-      "hi": "आइलैंड छोड़ने के बाद सेकंड",
-      "es": "segundos después de salir de la isla",
-      "ar": "ثانية بعد مغادرة الشريط",
-      "fr": "secondes après avoir quitté l'île",
-      "bn": "আইল্যান্ড ছাড়ার পর সেকেন্ড",
-      "pt-BR": "segundos depois de sair da ilha",
-      "ru": "секунд после ухода с острова",
-      "id": "detik setelah Anda meninggalkan pulau",
-      "de": "Sekunden nach dem Verlassen der Insel",
-      "tr": "adadan ayrıldıktan sonraki saniye"
-    },
-    "settings.json: {what} has an unexpected type — Coucou has not touched it.": {
-      "zh-Hans": "settings.json：{what} 的类型不符合预期 — Coucou 没有修改它。",
-      "hi": "settings.json: {what} का प्रकार अपेक्षित नहीं है — Coucou ने इसे नहीं छुआ।",
-      "es": "settings.json: {what} tiene un tipo inesperado — Coucou no lo ha tocado.",
-      "ar": "settings.json: {what} من نوع غير متوقع — لم يمسّه Coucou.",
-      "fr": "settings.json : {what} a un type inattendu — Coucou n'y a pas touché.",
-      "bn": "settings.json: {what}-এর ধরন অপ্রত্যাশিত — Coucou এতে হাত দেয়নি।",
-      "pt-BR": "settings.json: {what} tem um tipo inesperado — o Coucou não mexeu nele.",
-      "ru": "settings.json: у {what} неожиданный тип — Coucou его не трогал.",
-      "id": "settings.json: {what} bertipe tak terduga — Coucou tidak menyentuhnya.",
-      "de": "settings.json: {what} hat einen unerwarteten Typ — Coucou hat nichts verändert.",
-      "tr": "settings.json: {what} beklenmeyen bir türde — Coucou bunu değiştirmedi."
+    "settings.json: {what} has an unexpected type — Slimai has not touched it.": {
+      "zh-Hans": "settings.json：{what} 的类型不符合预期 — Slimai 没有修改它。",
+      "hi": "settings.json: {what} का प्रकार अपेक्षित नहीं है — Slimai ने इसे नहीं छुआ।",
+      "es": "settings.json: {what} tiene un tipo inesperado — Slimai no lo ha tocado.",
+      "ar": "settings.json: {what} من نوع غير متوقع — لم يمسّه Slimai.",
+      "fr": "settings.json : {what} a un type inattendu — Slimai n'y a pas touché.",
+      "bn": "settings.json: {what}-এর ধরন অপ্রত্যাশিত — Slimai এতে হাত দেয়নি।",
+      "pt-BR": "settings.json: {what} tem um tipo inesperado — o Slimai não mexeu nele.",
+      "ru": "settings.json: у {what} неожиданный тип — Slimai его не трогал.",
+      "id": "settings.json: {what} bertipe tak terduga — Slimai tidak menyentuhnya.",
+      "de": "settings.json: {what} hat einen unerwarteten Typ — Slimai hat nichts verändert.",
+      "tr": "settings.json: {what} beklenmeyen bir türde — Slimai bunu değiştirmedi."
     },
     "{allowed} allowed, {denied} denied": {
       "zh-Hans": "允许 {allowed} 次，拒绝 {denied} 次",
@@ -1899,44 +1418,44 @@
       "de": "{allowed} zugelassen, {denied} abgelehnt",
       "tr": "{allowed} izin verildi, {denied} reddedildi"
     },
-    "{file} isn't UTF-8 text — Coucou won't touch it.": {
-      "zh-Hans": "{file} 不是 UTF-8 文本 — Coucou 不会修改它。",
-      "hi": "{file} UTF-8 टेक्स्ट नहीं है — Coucou इसे नहीं छुएगा।",
-      "es": "{file} no es texto UTF-8 — Coucou no lo tocará.",
-      "ar": "{file} ليس نصًا بترميز UTF-8 — لن يمسّه Coucou.",
-      "fr": "{file} n'est pas du texte UTF-8 — Coucou n'y touchera pas.",
-      "bn": "{file} UTF-8 টেক্সট নয় — Coucou এতে হাত দেবে না।",
-      "pt-BR": "{file} não é texto UTF-8 — o Coucou não vai mexer nele.",
-      "ru": "{file} — не текст в UTF-8, Coucou его не тронет.",
-      "id": "{file} bukan teks UTF-8 — Coucou tidak akan menyentuhnya.",
-      "de": "{file} ist kein UTF-8-Text — Coucou verändert die Datei nicht.",
-      "tr": "{file} UTF-8 metni değil — Coucou dosyayı değiştirmeyecek."
+    "{file} isn't UTF-8 text — Slimai won't touch it.": {
+      "zh-Hans": "{file} 不是 UTF-8 文本 — Slimai 不会修改它。",
+      "hi": "{file} UTF-8 टेक्स्ट नहीं है — Slimai इसे नहीं छुएगा।",
+      "es": "{file} no es texto UTF-8 — Slimai no lo tocará.",
+      "ar": "{file} ليس نصًا بترميز UTF-8 — لن يمسّه Slimai.",
+      "fr": "{file} n'est pas du texte UTF-8 — Slimai n'y touchera pas.",
+      "bn": "{file} UTF-8 টেক্সট নয় — Slimai এতে হাত দেবে না।",
+      "pt-BR": "{file} não é texto UTF-8 — o Slimai não vai mexer nele.",
+      "ru": "{file} — не текст в UTF-8, Slimai его не тронет.",
+      "id": "{file} bukan teks UTF-8 — Slimai tidak akan menyentuhnya.",
+      "de": "{file} ist kein UTF-8-Text — Slimai verändert die Datei nicht.",
+      "tr": "{file} UTF-8 metni değil — Slimai dosyayı değiştirmeyecek."
     },
-    "{file} isn't a JSON object — Coucou won't touch it.": {
-      "zh-Hans": "{file} 不是 JSON 对象 — Coucou 不会修改它。",
-      "hi": "{file} JSON ऑब्जेक्ट नहीं है — Coucou इसे नहीं छुएगा।",
-      "es": "{file} no es un objeto JSON — Coucou no lo tocará.",
-      "ar": "{file} ليس كائن JSON — لن يمسّه Coucou.",
-      "fr": "{file} n'est pas un objet JSON — Coucou n'y touchera pas.",
-      "bn": "{file} JSON অবজেক্ট নয় — Coucou এতে হাত দেবে না।",
-      "pt-BR": "{file} não é um objeto JSON — o Coucou não vai mexer nele.",
-      "ru": "{file} — не объект JSON, Coucou его не тронет.",
-      "id": "{file} bukan objek JSON — Coucou tidak akan menyentuhnya.",
-      "de": "{file} ist kein JSON-Objekt — Coucou verändert die Datei nicht.",
-      "tr": "{file} bir JSON nesnesi değil — Coucou dosyayı değiştirmeyecek."
+    "{file} isn't a JSON object — Slimai won't touch it.": {
+      "zh-Hans": "{file} 不是 JSON 对象 — Slimai 不会修改它。",
+      "hi": "{file} JSON ऑब्जेक्ट नहीं है — Slimai इसे नहीं छुएगा।",
+      "es": "{file} no es un objeto JSON — Slimai no lo tocará.",
+      "ar": "{file} ليس كائن JSON — لن يمسّه Slimai.",
+      "fr": "{file} n'est pas un objet JSON — Slimai n'y touchera pas.",
+      "bn": "{file} JSON অবজেক্ট নয় — Slimai এতে হাত দেবে না।",
+      "pt-BR": "{file} não é um objeto JSON — o Slimai não vai mexer nele.",
+      "ru": "{file} — не объект JSON, Slimai его не тронет.",
+      "id": "{file} bukan objek JSON — Slimai tidak akan menyentuhnya.",
+      "de": "{file} ist kein JSON-Objekt — Slimai verändert die Datei nicht.",
+      "tr": "{file} bir JSON nesnesi değil — Slimai dosyayı değiştirmeyecek."
     },
-    "{file} isn't valid JSON ({error}). Fix or move it, then try again — Coucou won't overwrite it.": {
-      "zh-Hans": "{file} 不是有效的 JSON（{error}）。请修复或移走它后重试 — Coucou 不会覆盖它。",
-      "hi": "{file} मान्य JSON नहीं है ({error})। इसे ठीक करें या हटाएँ, फिर दोबारा कोशिश करें — Coucou इसे ओवरराइट नहीं करेगा।",
-      "es": "{file} no es un JSON válido ({error}). Corrígelo o muévelo y vuelve a intentarlo — Coucou no lo sobrescribirá.",
-      "ar": "{file} ليس JSON صالحًا ({error}). أصلحه أو انقله ثم حاول مجددًا — لن يكتب Coucou فوقه.",
-      "fr": "{file} n'est pas un JSON valide ({error}). Corrige-le ou déplace-le, puis réessaie — Coucou ne l'écrasera pas.",
-      "bn": "{file} বৈধ JSON নয় ({error})। এটি ঠিক করুন বা সরান, তারপর আবার চেষ্টা করুন — Coucou এটি ওভাররাইট করবে না।",
-      "pt-BR": "{file} não é um JSON válido ({error}). Corrija ou mova o arquivo e tente de novo — o Coucou não vai sobrescrevê-lo.",
-      "ru": "{file} — некорректный JSON ({error}). Исправьте или переместите его и попробуйте снова — Coucou не будет его перезаписывать.",
-      "id": "{file} bukan JSON yang valid ({error}). Perbaiki atau pindahkan, lalu coba lagi — Coucou tidak akan menimpanya.",
-      "de": "{file} ist kein gültiges JSON ({error}). Korrigiere oder verschiebe die Datei und versuche es erneut — Coucou überschreibt sie nicht.",
-      "tr": "{file} geçerli JSON değil ({error}). Düzelt veya taşı, ardından tekrar dene — Coucou üzerine yazmayacak."
+    "{file} isn't valid JSON ({error}). Fix or move it, then try again — Slimai won't overwrite it.": {
+      "zh-Hans": "{file} 不是有效的 JSON（{error}）。请修复或移走它后重试 — Slimai 不会覆盖它。",
+      "hi": "{file} मान्य JSON नहीं है ({error})। इसे ठीक करें या हटाएँ, फिर दोबारा कोशिश करें — Slimai इसे ओवरराइट नहीं करेगा।",
+      "es": "{file} no es un JSON válido ({error}). Corrígelo o muévelo y vuelve a intentarlo — Slimai no lo sobrescribirá.",
+      "ar": "{file} ليس JSON صالحًا ({error}). أصلحه أو انقله ثم حاول مجددًا — لن يكتب Slimai فوقه.",
+      "fr": "{file} n'est pas un JSON valide ({error}). Corrige-le ou déplace-le, puis réessaie — Slimai ne l'écrasera pas.",
+      "bn": "{file} বৈধ JSON নয় ({error})। এটি ঠিক করুন বা সরান, তারপর আবার চেষ্টা করুন — Slimai এটি ওভাররাইট করবে না।",
+      "pt-BR": "{file} não é um JSON válido ({error}). Corrija ou mova o arquivo e tente de novo — o Slimai não vai sobrescrevê-lo.",
+      "ru": "{file} — некорректный JSON ({error}). Исправьте или переместите его и попробуйте снова — Slimai не будет его перезаписывать.",
+      "id": "{file} bukan JSON yang valid ({error}). Perbaiki atau pindahkan, lalu coba lagi — Slimai tidak akan menimpanya.",
+      "de": "{file} ist kein gültiges JSON ({error}). Korrigiere oder verschiebe die Datei und versuche es erneut — Slimai überschreibt sie nicht.",
+      "tr": "{file} geçerli JSON değil ({error}). Düzelt veya taşı, ardından tekrar dene — Slimai üzerine yazmayacak."
     },
     "{h}h {m}m": {
       "zh-Hans": "{h} 小时 {m} 分钟",
@@ -1951,31 +1470,18 @@
       "de": "{h} Std. {m} Min.",
       "tr": "{h} sa {m} dk"
     },
-    "{keys} types “{char}” on your keyboard, so it can't be a shortcut. Pick another key.": {
-      "zh-Hans": "{keys} 在你的键盘上会输入“{char}”，所以不能用作快捷键。请换一个键。",
-      "hi": "{keys} आपके कीबोर्ड पर “{char}” टाइप करता है, इसलिए यह शॉर्टकट नहीं हो सकता। कोई दूसरी कुंजी चुनें।",
-      "es": "{keys} escribe «{char}» en tu teclado, así que no puede ser un atajo. Elige otra tecla.",
-      "ar": "{keys} يكتب «{char}» على لوحة مفاتيحك، لذا لا يمكن أن يكون اختصارًا. اختر مفتاحًا آخر.",
-      "fr": "{keys} tape « {char} » sur ton clavier, ce ne peut donc pas être un raccourci. Choisis une autre touche.",
-      "bn": "{keys} আপনার কিবোর্ডে “{char}” টাইপ করে, তাই এটি শর্টকাট হতে পারে না। অন্য একটি কী বেছে নিন।",
-      "pt-BR": "{keys} digita “{char}” no seu teclado, então não pode ser um atalho. Escolha outra tecla.",
-      "ru": "{keys} вводит «{char}» на вашей клавиатуре, поэтому не может быть сочетанием. Выберите другую клавишу.",
-      "id": "{keys} mengetik “{char}” di keyboard Anda, jadi tidak bisa menjadi pintasan. Pilih tombol lain.",
-      "de": "{keys} gibt auf deiner Tastatur „{char}“ ein und kann daher keine Tastenkombination sein. Wähle andere Tasten.",
-      "tr": "{keys} klavyende “{char}” yazıyor, bu yüzden kısayol olamaz. Başka bir tuş seç."
-    },
-    "{name} wasn't written by Coucou — Coucou has not touched it.": {
-      "zh-Hans": "{name} 不是由 Coucou 写入的 — Coucou 没有修改它。",
-      "hi": "{name} Coucou ने नहीं लिखा था — Coucou ने इसे नहीं छुआ।",
-      "es": "{name} no lo escribió Coucou — Coucou no lo ha tocado.",
-      "ar": "لم يكتب Coucou الملف {name} — لم يمسّه Coucou.",
-      "fr": "{name} n'a pas été écrit par Coucou — Coucou n'y a pas touché.",
-      "bn": "{name} Coucou লেখেনি — Coucou এতে হাত দেয়নি।",
-      "pt-BR": "{name} não foi escrito pelo Coucou — o Coucou não mexeu nele.",
-      "ru": "{name} записан не Coucou — Coucou его не трогал.",
-      "id": "{name} tidak ditulis oleh Coucou — Coucou tidak menyentuhnya.",
-      "de": "{name} wurde nicht von Coucou erstellt — Coucou hat nichts verändert.",
-      "tr": "{name} Coucou tarafından oluşturulmadı — Coucou bunu değiştirmedi."
+    "{name} wasn't written by Slimai — Slimai has not touched it.": {
+      "zh-Hans": "{name} 不是由 Slimai 写入的 — Slimai 没有修改它。",
+      "hi": "{name} Slimai ने नहीं लिखा था — Slimai ने इसे नहीं छुआ।",
+      "es": "{name} no lo escribió Slimai — Slimai no lo ha tocado.",
+      "ar": "لم يكتب Slimai الملف {name} — لم يمسّه Slimai.",
+      "fr": "{name} n'a pas été écrit par Slimai — Slimai n'y a pas touché.",
+      "bn": "{name} Slimai লেখেনি — Slimai এতে হাত দেয়নি।",
+      "pt-BR": "{name} não foi escrito pelo Slimai — o Slimai não mexeu nele.",
+      "ru": "{name} записан не Slimai — Slimai его не трогал.",
+      "id": "{name} tidak ditulis oleh Slimai — Slimai tidak menyentuhnya.",
+      "de": "{name} wurde nicht von Slimai erstellt — Slimai hat nichts verändert.",
+      "tr": "{name} Slimai tarafından oluşturulmadı — Slimai bunu değiştirmedi."
     },
     "{name} — {width}×{height} at {x},{y}": {
       "zh-Hans": "{name} — {width}×{height}，位于 {x},{y}",
@@ -2042,31 +1548,18 @@
       "de": "{path} wurde seit der Vorschau verändert. Nichts wurde geschrieben — prüfe den neuen Diff.",
       "tr": "{path} önizlemeden sonra değişti. Hiçbir şey yazılmadı — yeni değişiklikleri incele."
     },
-    "{used}/{max} slots in use — the main tool doesn't take one.": {
-      "zh-Hans": "已用 {used}/{max} 个位置 — 主要工具不占位置。",
-      "hi": "{used}/{max} स्लॉट उपयोग में — मुख्य टूल कोई स्लॉट नहीं लेता।",
-      "es": "{used}/{max} espacios en uso — la herramienta principal no ocupa ninguno.",
-      "ar": "{used}/{max} من الخانات مستخدمة — الأداة الرئيسية لا تشغل خانة.",
-      "fr": "{used}/{max} emplacements utilisés — l'outil principal n'en prend pas.",
-      "bn": "{used}/{max} স্লট ব্যবহৃত — প্রধান টুল কোনো স্লট নেয় না।",
-      "pt-BR": "{used}/{max} espaços em uso — a ferramenta principal não ocupa nenhum.",
-      "ru": "Занято мест: {used}/{max} — основной инструмент место не занимает.",
-      "id": "{used}/{max} slot terpakai — alat utama tidak memakai slot.",
-      "de": "{used}/{max} Plätze belegt — das Hauptwerkzeug belegt keinen.",
-      "tr": "{used}/{max} yuva kullanımda — ana araç yuva kullanmaz."
-    },
-    "{what} has an unexpected type — Coucou has not touched it.": {
-      "zh-Hans": "{what} 的类型不符合预期 — Coucou 没有修改它。",
-      "hi": "{what} का प्रकार अपेक्षित नहीं है — Coucou ने इसे नहीं छुआ।",
-      "es": "{what} tiene un tipo inesperado — Coucou no lo ha tocado.",
-      "ar": "{what} من نوع غير متوقع — لم يمسّه Coucou.",
-      "fr": "{what} a un type inattendu — Coucou n'y a pas touché.",
-      "bn": "{what}-এর ধরন অপ্রত্যাশিত — Coucou এতে হাত দেয়নি।",
-      "pt-BR": "{what} tem um tipo inesperado — o Coucou não mexeu nele.",
-      "ru": "У {what} неожиданный тип — Coucou его не трогал.",
-      "id": "{what} bertipe tak terduga — Coucou tidak menyentuhnya.",
-      "de": "{what} hat einen unerwarteten Typ — Coucou hat nichts verändert.",
-      "tr": "{what} beklenmeyen bir türde — Coucou bunu değiştirmedi."
+    "{what} has an unexpected type — Slimai has not touched it.": {
+      "zh-Hans": "{what} 的类型不符合预期 — Slimai 没有修改它。",
+      "hi": "{what} का प्रकार अपेक्षित नहीं है — Slimai ने इसे नहीं छुआ।",
+      "es": "{what} tiene un tipo inesperado — Slimai no lo ha tocado.",
+      "ar": "{what} من نوع غير متوقع — لم يمسّه Slimai.",
+      "fr": "{what} a un type inattendu — Slimai n'y a pas touché.",
+      "bn": "{what}-এর ধরন অপ্রত্যাশিত — Slimai এতে হাত দেয়নি।",
+      "pt-BR": "{what} tem um tipo inesperado — o Slimai não mexeu nele.",
+      "ru": "У {what} неожиданный тип — Slimai его не трогал.",
+      "id": "{what} bertipe tak terduga — Slimai tidak menyentuhnya.",
+      "de": "{what} hat einen unerwarteten Typ — Slimai hat nichts verändert.",
+      "tr": "{what} beklenmeyen bir türde — Slimai bunu değiştirmedi."
     },
     "• subagent done": {
       "zh-Hans": "• 子代理完成",
@@ -2094,84 +1587,6 @@
       "de": "⚠ fehlgeschlagen",
       "tr": "⚠ başarısız"
     },
-    "The numbers come from the Claude Code command-line tool. The Claude desktop app does not report them, so the gauge stays empty if you only use the desktop app.": {
-      "zh-Hans": "数据来自 Claude Code 命令行工具。Claude 桌面应用不会提供这些数据，因此如果你只使用桌面应用，仪表会一直为空。",
-      "hi": "ये आँकड़े Claude Code कमांड-लाइन टूल से आते हैं। Claude डेस्कटॉप ऐप इन्हें नहीं भेजता, इसलिए अगर आप सिर्फ़ डेस्कटॉप ऐप इस्तेमाल करते हैं तो गेज खाली रहेगा।",
-      "es": "Los datos vienen de la herramienta de línea de comandos de Claude Code. La app de escritorio de Claude no los envía, así que el indicador queda vacío si solo usas la app de escritorio.",
-      "ar": "تأتي الأرقام من أداة سطر الأوامر Claude Code. لا يرسلها تطبيق Claude لسطح المكتب، لذلك يبقى المؤشر فارغًا إذا كنت تستخدم تطبيق سطح المكتب فقط.",
-      "fr": "Les chiffres viennent de l'outil en ligne de commande Claude Code. L'app de bureau Claude ne les transmet pas : si tu n'utilises que l'app de bureau, la jauge reste vide.",
-      "bn": "এই সংখ্যাগুলো Claude Code কমান্ড-লাইন টুল থেকে আসে। Claude ডেস্কটপ অ্যাপ এগুলো পাঠায় না, তাই শুধু ডেস্কটপ অ্যাপ ব্যবহার করলে গেজ খালি থাকবে।",
-      "pt-BR": "Os números vêm da ferramenta de linha de comando do Claude Code. O app Claude para desktop não os envia, então o medidor fica vazio se você usa só o app para desktop.",
-      "ru": "Данные приходят из консольного инструмента Claude Code. Настольное приложение Claude их не передаёт, поэтому индикатор останется пустым, если вы пользуетесь только им.",
-      "id": "Angka-angka ini berasal dari alat baris perintah Claude Code. Aplikasi desktop Claude tidak mengirimkannya, jadi pengukur tetap kosong jika Anda hanya memakai aplikasi desktop.",
-      "de": "Die Zahlen stammen aus dem Kommandozeilenprogramm Claude Code. Die Claude-Desktop-App meldet sie nicht; wenn du nur die Desktop-App nutzt, bleibt die Anzeige leer.",
-      "tr": "Sayılar Claude Code komut satırı aracından gelir. Claude masaüstü uygulaması bunları bildirmez; yalnızca masaüstü uygulamasını kullanıyorsan gösterge boş kalır."
-    },
-    "Mochi, his sounds and how the island behaves.": {
-      "zh-Hans": "Mochi、它的声音以及岛的行为方式。",
-      "hi": "Mochi, उसकी आवाज़ें और आइलैंड कैसे काम करता है।",
-      "es": "Mochi, sus sonidos y cómo se comporta la isla.",
-      "ar": "Mochi وأصواته وطريقة عمل الجزيرة.",
-      "fr": "Mochi, ses sons et le comportement de l'île.",
-      "bn": "Mochi, তার শব্দ আর আইল্যান্ড কেমন আচরণ করে।",
-      "pt-BR": "Mochi, seus sons e como a ilha se comporta.",
-      "ru": "Mochi, его звуки и поведение острова.",
-      "id": "Mochi, suaranya, dan cara pulau berperilaku.",
-      "de": "Mochi, seine Klänge und das Verhalten der Insel.",
-      "tr": "Mochi, sesleri ve adanın davranışı."
-    },
-    "The pills shown in the island, their order and their colours.": {
-      "zh-Hans": "岛中显示的胶囊、它们的顺序和颜色。",
-      "hi": "आइलैंड में दिखने वाली पिल्स, उनका क्रम और उनके रंग।",
-      "es": "Las píldoras que muestra la isla, su orden y sus colores.",
-      "ar": "الكبسولات المعروضة في الجزيرة وترتيبها وألوانها.",
-      "fr": "Les pilules affichées dans l'île, leur ordre et leurs couleurs.",
-      "bn": "আইল্যান্ডে দেখানো পিলগুলো, তাদের ক্রম আর রং।",
-      "pt-BR": "As pílulas mostradas na ilha, sua ordem e suas cores.",
-      "ru": "Пилюли на острове, их порядок и цвета.",
-      "id": "Pil yang ditampilkan di pulau, urutannya, dan warnanya.",
-      "de": "Die in der Insel angezeigten Kapseln, ihre Reihenfolge und Farben.",
-      "tr": "Adada gösterilen araçlar, sıraları ve renkleri."
-    },
-    "The keys that open the island and its actions.": {
-      "zh-Hans": "打开岛及其操作的按键。",
-      "hi": "वे कुंजियाँ जो आइलैंड और उसकी क्रियाएँ खोलती हैं।",
-      "es": "Las teclas que abren la isla y sus acciones.",
-      "ar": "المفاتيح التي تفتح الجزيرة وإجراءاتها.",
-      "fr": "Les touches qui ouvrent l'île et ses actions.",
-      "bn": "যে কী-গুলো আইল্যান্ড আর এর কাজগুলো খোলে।",
-      "pt-BR": "As teclas que abrem a ilha e suas ações.",
-      "ru": "Клавиши, открывающие остров и его действия.",
-      "id": "Tombol yang membuka pulau dan tindakannya.",
-      "de": "Die Tasten für die Insel und ihre Aktionen.",
-      "tr": "Adayı ve işlemlerini açan tuşlar."
-    },
-    "Show clock in the island": {
-      "zh-Hans": "在灵动岛中显示时钟",
-      "hi": "आइलैंड में घड़ी दिखाएँ",
-      "es": "Mostrar el reloj en la isla",
-      "ar": "إظهار الساعة في الجزيرة",
-      "fr": "Afficher l'horloge dans l'îlot",
-      "bn": "আইল্যান্ডে ঘড়ি দেখান",
-      "pt-BR": "Mostrar relógio na ilha",
-      "ru": "Показывать часы в острове",
-      "id": "Tampilkan jam di pulau",
-      "de": "Uhr in der Insel anzeigen",
-      "tr": "Adada saati göster"
-    },
-    "The date and the time in the middle of the island when it is compact.": {
-      "zh-Hans": "岛收起时，在中间显示日期和时间。",
-      "hi": "आइलैंड के छोटे होने पर बीच में तारीख़ और समय दिखता है।",
-      "es": "La fecha y la hora en el centro de la isla cuando está compacta.",
-      "ar": "التاريخ والوقت في وسط الجزيرة عندما تكون مصغّرة.",
-      "fr": "La date et l'heure au milieu de l'îlot quand il est compact.",
-      "bn": "আইল্যান্ড ছোট থাকলে মাঝখানে তারিখ ও সময় দেখায়।",
-      "pt-BR": "A data e a hora no meio da ilha quando ela está compacta.",
-      "ru": "Дата и время в середине острова, когда он свёрнут.",
-      "id": "Tanggal dan jam di tengah pulau saat ringkas.",
-      "de": "Datum und Uhrzeit in der Mitte der Insel, wenn sie kompakt ist.",
-      "tr": "Ada kompaktken ortasında tarih ve saat."
-    },
     "Pick up to {max} pills to show next to Mochi — {used}/{max} in use.": {
       "zh-Hans": "最多选择 {max} 个标签显示在 Mochi 旁边 — 已用 {used}/{max}。",
       "hi": "Mochi के बगल में दिखाने के लिए अधिकतम {max} टैब चुनें — {used}/{max} उपयोग में।",
@@ -2185,57 +1600,18 @@
       "de": "Wähle bis zu {max} Pills neben Mochi — {used}/{max} belegt.",
       "tr": "Mochi'nin yanında gösterilecek en fazla {max} araç seç — {used}/{max} kullanımda."
     },
-    "Nothing leaves this computer: Coucou only talks to servers on this PC.": {
-      "zh-Hans": "没有任何内容会离开这台电脑：Coucou 只与这台电脑上的服务器通信。",
-      "hi": "कुछ भी इस कंप्यूटर से बाहर नहीं जाता: Coucou केवल इसी पीसी के सर्वरों से बात करता है।",
-      "es": "Nada sale de este equipo: Coucou solo habla con servidores de este PC.",
-      "ar": "لا شيء يغادر هذا الحاسوب: يتحدث Coucou فقط مع خوادم على هذا الجهاز.",
-      "fr": "Rien ne quitte cet ordinateur : Coucou ne parle qu'à des serveurs de ce PC.",
-      "bn": "কিছুই এই কম্পিউটার ছেড়ে যায় না: Coucou শুধু এই পিসির সার্ভারের সাথে কথা বলে।",
-      "pt-BR": "Nada sai deste computador: o Coucou só fala com servidores deste PC.",
-      "ru": "Ничто не покидает этот компьютер: Coucou общается только с серверами на этом ПК.",
-      "id": "Tidak ada yang keluar dari komputer ini: Coucou hanya berbicara dengan server di PC ini.",
-      "de": "Nichts verlässt diesen Computer: Coucou spricht nur mit Servern auf diesem PC.",
-      "tr": "Hiçbir şey bu bilgisayardan çıkmaz: Coucou yalnızca bu bilgisayardaki sunucularla konuşur."
-    },
-    "Island position": {
-      "zh-Hans": "岛的位置",
-      "hi": "आइलैंड की स्थिति",
-      "es": "Posición de la isla",
-      "ar": "موضع الجزيرة",
-      "fr": "Position de l'île",
-      "bn": "আইল্যান্ডের অবস্থান",
-      "pt-BR": "Posição da ilha",
-      "ru": "Положение острова",
-      "id": "Posisi pulau",
-      "de": "Position der Insel",
-      "tr": "Ada konumu"
-    },
-    "Moves the island along the top edge: left is negative, right is positive. Beside a centred system clock, try about 120.": {
-      "zh-Hans": "沿顶部边缘移动岛：负数向左，正数向右。若要靠在居中的系统时钟旁边，可试试 120 左右。",
-      "hi": "आइलैंड को ऊपरी किनारे पर खिसकाता है: बाएँ के लिए ऋणात्मक, दाएँ के लिए धनात्मक। बीच में लगी सिस्टम घड़ी के बगल में रखने के लिए लगभग 120 आज़माएँ।",
-      "es": "Mueve la isla a lo largo del borde superior: negativo a la izquierda, positivo a la derecha. Junto a un reloj del sistema centrado, prueba con unos 120.",
-      "ar": "يحرّك الجزيرة على الحافة العلوية: القيمة السالبة لليسار والموجبة لليمين. بجانب ساعة النظام في المنتصف جرّب نحو 120.",
-      "fr": "Déplace l'île le long du bord supérieur : négatif vers la gauche, positif vers la droite. À côté d'une horloge système centrée, essaie environ 120.",
-      "bn": "আইল্যান্ডকে ওপরের কিনারা বরাবর সরায়: ঋণাত্মক মানে বাঁয়ে, ধনাত্মক মানে ডানে। মাঝখানের সিস্টেম ঘড়ির পাশে রাখতে প্রায় ১২০ চেষ্টা করুন।",
-      "pt-BR": "Move a ilha ao longo da borda superior: negativo para a esquerda, positivo para a direita. Ao lado de um relógio do sistema centralizado, tente cerca de 120.",
-      "ru": "Сдвигает остров вдоль верхнего края: отрицательное значение — влево, положительное — вправо. Рядом с системными часами по центру попробуйте около 120.",
-      "id": "Menggeser pulau di sepanjang tepi atas: negatif ke kiri, positif ke kanan. Di samping jam sistem yang berada di tengah, coba sekitar 120.",
-      "de": "Verschiebt die Insel entlang der oberen Kante: negativ nach links, positiv nach rechts. Neben einer zentrierten Systemuhr probiere etwa 120.",
-      "tr": "Adayı üst kenar boyunca kaydırır: negatif sola, pozitif sağa. Ortalanmış sistem saatinin yanı için yaklaşık 120 deneyin."
-    },
-    "Distance from the top": {
-      "zh-Hans": "与顶部的距离",
-      "hi": "ऊपर से दूरी",
-      "es": "Distancia desde arriba",
-      "ar": "المسافة من الأعلى",
-      "fr": "Distance depuis le haut",
-      "bn": "উপর থেকে দূরত্ব",
-      "pt-BR": "Distância do topo",
-      "ru": "Расстояние от верха",
-      "id": "Jarak dari atas",
-      "de": "Abstand von oben",
-      "tr": "Üstten uzaklık"
+    "Nothing leaves this computer: Slimai only talks to servers on this PC.": {
+      "zh-Hans": "没有任何内容会离开这台电脑：Slimai 只与这台电脑上的服务器通信。",
+      "hi": "कुछ भी इस कंप्यूटर से बाहर नहीं जाता: Slimai केवल इसी पीसी के सर्वरों से बात करता है।",
+      "es": "Nada sale de este equipo: Slimai solo habla con servidores de este PC.",
+      "ar": "لا شيء يغادر هذا الحاسوب: يتحدث Slimai فقط مع خوادم على هذا الجهاز.",
+      "fr": "Rien ne quitte cet ordinateur : Slimai ne parle qu'à des serveurs de ce PC.",
+      "bn": "কিছুই এই কম্পিউটার ছেড়ে যায় না: Slimai শুধু এই পিসির সার্ভারের সাথে কথা বলে।",
+      "pt-BR": "Nada sai deste computador: o Slimai só fala com servidores deste PC.",
+      "ru": "Ничто не покидает этот компьютер: Slimai общается только с серверами на этом ПК.",
+      "id": "Tidak ada yang keluar dari komputer ini: Slimai hanya berbicara dengan server di PC ini.",
+      "de": "Nichts verlässt diesen Computer: Slimai spricht nur mit Servern auf diesem PC.",
+      "tr": "Hiçbir şey bu bilgisayardan çıkmaz: Slimai yalnızca bu bilgisayardaki sunucularla konuşur."
     },
     "What Claude answered in your conversations, read from this computer.": {
       "zh-Hans": "你的对话中 Claude 的回答，直接从这台电脑读取。",
@@ -2289,31 +1665,44 @@
       "de": "Berechtigungen und Fragen beantwortest du auf der Insel.",
       "tr": "İzinler ve sorular ada üzerinden yanıtlanır."
     },
-    "Keep the island visible": {
-      "zh-Hans": "保持灵动岛可见",
-      "hi": "आइलैंड को दिखाई देता रखें",
-      "es": "Mantener la isla visible",
-      "ar": "إبقاء الجزيرة ظاهرة",
-      "fr": "Garder l'île visible",
-      "bn": "আইল্যান্ড দৃশ্যমান রাখুন",
-      "pt-BR": "Manter a ilha visível",
-      "ru": "Не скрывать остров",
-      "id": "Biarkan pulau terlihat",
-      "de": "Insel sichtbar lassen",
-      "tr": "Adayı görünür tut"
+    "Mochi and his sounds.": {
+      "zh-Hans": "Mochi 和他的声音。",
+      "hi": "Mochi और उसकी आवाज़ें।",
+      "es": "Mochi y sus sonidos.",
+      "ar": "Mochi وأصواته.",
+      "fr": "Mochi et ses sons.",
+      "bn": "Mochi এবং তার শব্দ।",
+      "pt-BR": "O Mochi e os sons dele.",
+      "ru": "Mochi и его звуки.",
+      "id": "Mochi dan suaranya.",
+      "de": "Mochi und seine Töne.",
+      "tr": "Mochi ve sesleri."
     },
-    "The compact island stays on screen instead of hiding after a minute.": {
-      "zh-Hans": "紧凑的灵动岛会一直显示，而不是一分钟后隐藏。",
-      "hi": "कॉम्पैक्ट आइलैंड एक मिनट बाद छिपने के बजाय स्क्रीन पर बना रहता है।",
-      "es": "La isla compacta se queda en pantalla en lugar de ocultarse al cabo de un minuto.",
-      "ar": "تبقى الجزيرة المصغّرة على الشاشة بدل أن تختفي بعد دقيقة.",
-      "fr": "L'île compacte reste à l'écran au lieu de se cacher au bout d'une minute.",
-      "bn": "কমপ্যাক্ট আইল্যান্ড এক মিনিট পরে লুকিয়ে না গিয়ে পর্দায় থাকে।",
-      "pt-BR": "A ilha compacta fica na tela em vez de se esconder depois de um minuto.",
-      "ru": "Компактный остров остаётся на экране и не прячется через минуту.",
-      "id": "Pulau ringkas tetap di layar, tidak bersembunyi setelah satu menit.",
-      "de": "Die kompakte Insel bleibt auf dem Bildschirm, statt sich nach einer Minute zu verstecken.",
-      "tr": "Kompakt ada, bir dakika sonra gizlenmek yerine ekranda kalır."
+    "Spotify, for the controls on the bar.": {
+      "zh-Hans": "Spotify，用于顶栏上的控制。",
+      "hi": "Spotify, बार के नियंत्रण के लिए।",
+      "es": "Spotify, para los controles de la barra.",
+      "ar": "Spotify، لأزرار التحكم في الشريط.",
+      "fr": "Spotify, pour les commandes de la barre.",
+      "bn": "Spotify, বারের নিয়ন্ত্রণের জন্য।",
+      "pt-BR": "Spotify, para os controles da barra.",
+      "ru": "Spotify — для управления с панели.",
+      "id": "Spotify, untuk kontrol di bilah.",
+      "de": "Spotify, für die Steuerung in der Leiste.",
+      "tr": "Spotify, çubuktaki kontroller için."
+    },
+    "Open Slimai": {
+      "zh-Hans": "打开 Slimai",
+      "hi": "Slimai खोलें",
+      "es": "Abrir Slimai",
+      "ar": "فتح Slimai",
+      "fr": "Ouvrir Slimai",
+      "bn": "Slimai খুলুন",
+      "pt-BR": "Abrir o Slimai",
+      "ru": "Открыть Slimai",
+      "id": "Buka Slimai",
+      "de": "Slimai öffnen",
+      "tr": "Slimai'yi aç"
     }
   }
 }

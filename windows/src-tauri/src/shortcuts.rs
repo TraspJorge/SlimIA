@@ -92,7 +92,7 @@ pub fn description(id: &str) -> &'static str {
         "muteToggle" => n_("Mute or unmute Mochi"),
         "desktopToggle" => n_("Send Mochi to the desktop"),
         "wardrobeToggle" => n_("Open the wardrobe"),
-        _ => "Coucou",
+        _ => "Slimai",
     }
 }
 
@@ -133,7 +133,7 @@ pub enum Status {
     Off,
     /// Another app already holds this combination.
     InUse,
-    /// Another Coucou shortcut has the same combination.
+    /// Another Slimai shortcut has the same combination.
     Duplicate,
     /// Not a combination the OS can register.
     Invalid,
@@ -173,7 +173,7 @@ pub struct ActionStatus {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub typed: Option<String>,
     /// Wayland: the keys the desktop says run it, in its own words. It may
-    /// let the user pick other keys than the ones Coucou asked for.
+    /// let the user pick other keys than the ones Slimai asked for.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub trigger: Option<String>,
 }
@@ -329,7 +329,7 @@ pub fn dispatch<R: Runtime>(app: &AppHandle<R>, action: &str) {
     }
 }
 
-/// Unregisters everything Coucou holds.
+/// Unregisters everything Slimai holds.
 fn release<R: Runtime>(app: &AppHandle<R>) {
     if let Some(gs) = app.try_state::<GlobalShortcut<R>>() {
         if let Err(err) = gs.unregister_all() {
@@ -395,7 +395,7 @@ pub fn apply<R: Runtime>(app: &AppHandle<R>, stored: &Bindings) {
 }
 
 /// Lets go of every shortcut while a new one is being recorded in Settings,
-/// so pressing a combination Coucou already holds records it instead of
+/// so pressing a combination Slimai already holds records it instead of
 /// running it.
 pub fn suspend<R: Runtime>(app: &AppHandle<R>) {
     release(app);
@@ -678,7 +678,7 @@ mod wayland {
         #[test]
         fn every_action_has_a_description() {
             for def in ACTIONS {
-                assert_ne!(description(def.id), "Coucou", "{}", def.id);
+                assert_ne!(description(def.id), "Slimai", "{}", def.id);
             }
         }
     }

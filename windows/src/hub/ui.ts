@@ -1,4 +1,4 @@
-// Small pieces the Coucou window's pages are drawn with: icons, rows, cards,
+// Small pieces the Slimai window's pages are drawn with: icons, rows, cards,
 // switches, segmented controls. Same look as the Mac's (FlowHub.swift).
 
 import { h } from "../views/dom";

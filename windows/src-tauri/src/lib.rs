@@ -1,4 +1,4 @@
-// Coucou for Windows — app wiring and the commands the island calls.
+// Slimai for Windows — app wiring and the commands the island calls.
 
 mod agent_hooks;
 mod agents;
@@ -123,7 +123,7 @@ fn set_system_languages(app: AppHandle, languages: Vec<String>) {
 fn language_changed(app: &AppHandle) {
     tray::retitle(app);
     if let Some(window) = app.get_webview_window(HUB_LABEL) {
-        let _ = window.set_title("Coucou");
+        let _ = window.set_title("Slimai");
     }
 }
 
@@ -309,7 +309,7 @@ fn hooks_status() -> HookStatus {
     hooks::status()
 }
 
-/// Pill ID → whether that agent's hooks reach Coucou. Read-only.
+/// Pill ID → whether that agent's hooks reach Slimai. Read-only.
 #[tauri::command]
 fn agent_hooks_status() -> std::collections::HashMap<String, bool> {
     agent_hooks::status()
@@ -482,11 +482,11 @@ fn settings_page_url(app: &AppHandle) -> WebviewUrl {
     WebviewUrl::App("settings.html".into())
 }
 
-/// The Coucou window (Flow dictation, the Notetaker and every setting of the
+/// The Slimai window (Flow dictation, the Notetaker and every setting of the
 /// island), labelled "settings" since it grew out of the settings window.
 pub const HUB_LABEL: &str = "settings";
 
-/// The Coucou window is created hidden at launch and only ever shown and
+/// The Slimai window is created hidden at launch and only ever shown and
 /// hidden afterwards. A WebView2 window created later — on the main thread or
 /// not — silently comes up blank in this app, so the window that works is the
 /// one that exists before the island's webview does.
@@ -494,7 +494,7 @@ fn create_settings_window(app: &AppHandle) {
     let url = settings_page_url(app);
     match WebviewWindowBuilder::new(app, HUB_LABEL, url)
         .additional_browser_args(BROWSER_ARGS)
-        .title("Coucou")
+        .title("Slimai")
         .inner_size(1100.0, 720.0)
         .min_inner_size(820.0, 560.0)
         .resizable(true)
@@ -519,11 +519,11 @@ fn create_settings_window(app: &AppHandle) {
                 _ => {}
             });
         }
-        Err(err) => log::line(format!("Coucou window failed: {err}")),
+        Err(err) => log::line(format!("Slimai window failed: {err}")),
     }
 }
 
-/// Whether the Coucou window is on screen (shown and not minimised). Its page
+/// Whether the Slimai window is on screen (shown and not minimised). Its page
 /// animates its canvases only then (hub/hero.ts): WebKitGTK can keep
 /// `document.visibilityState` at "visible" for a hidden window, and its
 /// animation loop then kept a core busy with the window closed (#792).
@@ -550,11 +550,11 @@ pub fn show_settings_window(app: &AppHandle) {
     show_hub(app, Some("general"));
 }
 
-/// Shows the Coucou window, on `page` when given ("dictation", "notes",
+/// Shows the Slimai window, on `page` when given ("dictation", "notes",
 /// "settings", "general", "shortcuts"…).
 pub fn show_hub(app: &AppHandle, page: Option<&str>) {
     let Some(win) = app.get_webview_window(HUB_LABEL) else {
-        log::line("Coucou window missing");
+        log::line("Slimai window missing");
         return;
     };
     if let Some(page) = page {
@@ -566,10 +566,10 @@ pub fn show_hub(app: &AppHandle, page: Option<&str>) {
     set_hub_shown(&win, true);
 }
 
-/// The argument the login item starts Coucou with.
+/// The argument the login item starts Slimai with.
 const AUTOSTART_ARG: &str = "--autostart";
 
-/// Coucou started with the computer, not opened by the user: the window stays hidden.
+/// Slimai started with the computer, not opened by the user: the window stays hidden.
 pub fn launched_at_login() -> bool {
     std::env::args().any(|a| a == AUTOSTART_ARG)
 }
@@ -631,7 +631,7 @@ pub fn run() {
             }
             match shortcuts::from_args(&argv) {
                 Some(action) => shortcuts::dispatch(app, action),
-                // Opening Coucou again (its shortcut, the Start menu) shows its window.
+                // Opening Slimai again (its shortcut, the Start menu) shows its window.
                 None => show_hub(app, None),
             }
         }))
@@ -741,7 +741,7 @@ pub fn run() {
             gate.set_active(true);
             island::spawn_cursor_poll(handle.clone(), gate.clone());
 
-            log::line(format!("--- Coucou {} started ---", env!("CARGO_PKG_VERSION")));
+            log::line(format!("--- Slimai {} started ---", env!("CARGO_PKG_VERSION")));
             hooks::ensure_hook_exe(&handle);
             status::reset();
             pipe::start(handle.clone());
@@ -749,7 +749,7 @@ pub fn run() {
             shortcuts::apply(&handle, &loaded.shortcuts);
             // New versions: nothing goes to GitHub until the user agrees (update.rs).
             if loaded.autostart {
-                // Login items written before 0.5 start Coucou without --autostart:
+                // Login items written before 0.5 start Slimai without --autostart:
                 // writing it again adds it, so the window stays hidden at login.
                 let _ = handle.autolaunch().enable();
             }
@@ -759,7 +759,7 @@ pub fn run() {
             Ok(())
         })
         .build(tauri::generate_context!())
-        .expect("error while building Coucou")
+        .expect("error while building Slimai")
         .run(|_app, _event| {});
 }
 

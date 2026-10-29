@@ -100,7 +100,7 @@ test("labels() tables and dates read in the current language", () => {
 
 // ── Choosing the language ─────────────────────────────────────────────────────
 
-test("System follows the system's language when Coucou has it, else English", () => {
+test("System follows the system's language when Slimai has it, else English", () => {
   assert.equal(resolveLanguage("", ["fr-FR", "en-US"]), "fr");
   assert.equal(resolveLanguage("", ["it-IT", "es-MX"]), "es");
   assert.equal(resolveLanguage("", ["pt-PT"]), "pt-BR");
@@ -362,7 +362,7 @@ function usedKeys() {
 
 test("every string the code shows is translated in every language", () => {
   const keys = usedKeys();
-  assert.ok(keys.size > 300, `only ${keys.size} keys found — has the scan broken?`);
+  assert.ok(keys.size > 150, `only ${keys.size} keys found — has the scan broken?`);
   const missing = [...keys].filter(([key]) => !isComplete(key)).map(([key, path]) => `${path}: ${JSON.stringify(key)}`);
   assert.deepEqual(missing, []);
   // And the hand-written table carries nothing the code no longer uses.
