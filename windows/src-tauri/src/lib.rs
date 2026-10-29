@@ -616,6 +616,11 @@ pub fn run() {
                 });
                 return;
             }
+            // `--ack`: the capsule was clicked, what blinked can stop.
+            if argv.iter().any(|a| a == "--ack") {
+                status::acknowledge();
+                return;
+            }
             if let Some((decision, request)) = bar_decision(&argv) {
                 let _ = app.emit_to(
                     island::WINDOW_LABEL,

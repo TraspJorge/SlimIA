@@ -138,6 +138,8 @@ namespace SlimIA {
         public int64 updated_at = 0;
         // The permission request waiting on the island: the bar can answer it.
         public string request = "";
+        // The capsule was clicked since this state began.
+        public bool seen = false;
     }
 
     public class Indicator : Wingpanel.Indicator {
@@ -244,6 +246,8 @@ namespace SlimIA {
                 capsule.button_press_event.connect ((ev) => {
                     pop_at = now_s ();
                     js (cap_view, "coucou.click()");
+                    // The click is the "seen" of whatever was blinking.
+                    run_coucou ({ "--ack" });
                     ensure_tick ();
                     if (ev.button == 2 && music_playing ()) {
                         // Middle click: play/pause without opening anything.
@@ -444,10 +448,10 @@ namespace SlimIA {
         }
 
         private static string pill_json (Pill p, Mood mood, bool dancing) {
-            return "{\"id\":\"%s\",\"state\":\"%s\",\"color\":\"#%02x%02x%02x\",\"flat\":%s,\"dancing\":%s}".printf (
+            return "{\"id\":\"%s\",\"state\":\"%s\",\"color\":\"#%02x%02x%02x\",\"flat\":%s,\"dancing\":%s,\"seen\":%s}".printf (
                 p.id.replace ("\\", "").replace ("\"", ""), mood_key (mood),
                 (int) Math.round (p.r * 255), (int) Math.round (p.g * 255), (int) Math.round (p.b * 255),
-                p.flat ? "true" : "false", dancing ? "true" : "false");
+                p.flat ? "true" : "false", dancing ? "true" : "false", p.seen ? "true" : "false");
         }
 
         // What the page draws: the pill in front, and the others as minis.
@@ -610,12 +614,13 @@ namespace SlimIA {
                     p.label = s.get_string_member_with_default ("project", "");
                     p.detail = s.get_string_member_with_default ("detail", "");
                     p.request = s.get_string_member_with_default ("request", "");
+                    p.seen = s.get_boolean_member_with_default ("seen", false);
                     p.mood = Mood.parse (s.get_string_member_with_default ("state", "idle"));
                     // An idle or finished session that nobody touched for two minutes is not shown
                     // (the file only changes when something happens).
                     int64 age = GLib.get_real_time () / 1000 - s.get_int_member_with_default ("updatedAt", 0);
-                    // Finished and failed rest after two minutes: the light around the capsule stops.
-                    if ((p.mood == Mood.FINISHED || p.mood == Mood.ERROR) && age > 2 * 60 * 1000) {
+                    // Finished and failed, once seen, rest after two minutes.
+                    if ((p.mood == Mood.FINISHED || p.mood == Mood.ERROR) && p.seen && age > 2 * 60 * 1000) {
                         p.mood = Mood.IDLE;
                     }
                     bool quiet = p.mood == Mood.IDLE && age > 2 * 60 * 1000;

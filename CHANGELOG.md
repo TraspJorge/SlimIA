@@ -10,8 +10,9 @@
 - `status.json` v2 (agente, cor, pedido pendente e música); `--spotify <ação>` e `--decide allow|deny <pedido>`.
 - Com o indicador instalado, a janela da ilha não é mostrada: o app segue por trás.
 - Popup: a última resposta aparece inteira, em markdown e com rolagem (antes era cortada em 700 caracteres).
-- Barra: ao terminar, uma luz verde dá a volta na borda junto com o giro do Mochi; a borda pulsa enquanto
-  uma permissão ou pergunta espera.
+- Barra: a borda da cápsula pisca na cor do estado (terminou, erro, pergunta, limite de uso) **até você clicar**
+  nela; a permissão pisca até ser respondida. O Claude Code mais recente fica sempre online; os outros agentes
+  parados saem da lista em 2 minutos.
 - Chat: **Limpar lista** (só filtra a tela, não apaga nada).
 - Menu enxuto: bandeja com Abrir, Configurações e Sair; janela com Chat, Geral, Agentes e Integrações.
 - Removidos: resumo semanal, guarda-roupa, atalhos e pílulas da ilha, ditado e notas por voz, chats com IA,

@@ -36,11 +36,11 @@ abre ao clicar nela, com **Negar** e **Permitir**:
 | Parado | Mochi neutro, piscando de tempos em tempos |
 | Pensando | Roxo, olhando para cima, três pontinhos no badge |
 | Trabalhando | Azul, olhos varrendo de um lado a outro |
-| Pergunta | Ciano, cabeça inclinada, "?" e a borda pulsando |
-| Permissão | Laranja, pulando, "!" e a borda pulsando **até você decidir** |
-| Limite de uso | Laranja, olhos cansados e gota de suor |
-| Erro | Vermelho, tremor curto, olhos em traço |
-| Terminou | Verde, volta de 360°, uma luz percorre a borda, faíscas e som |
+| Pergunta | Ciano, cabeça inclinada, "?"; a borda pisca até você clicar |
+| Permissão | Laranja, pulando, "!"; a borda pisca **até você permitir ou negar** |
+| Limite de uso | Laranja, olhos cansados e gota de suor; a borda pisca até você clicar |
+| Erro | Vermelho, tremor curto, olhos em traço; a borda pisca até você clicar |
+| Terminou | Verde, volta de 360°, faíscas e som; a borda pisca até você clicar na cápsula |
 | Dormindo | Depois de 5 minutos parado e sem música: respira e solta "z" |
 | Dançando | Com o Spotify tocando, no ritmo de 112 BPM |
 

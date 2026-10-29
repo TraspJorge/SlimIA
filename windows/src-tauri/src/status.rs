@@ -83,6 +83,9 @@ pub struct SessionStatus {
     /// The permission request waiting for an answer, when the state is `approval`.
     #[serde(skip_serializing_if = "String::is_empty")]
     pub request: String,
+    /// You clicked the capsule since this state began: it stops blinking.
+    #[serde(skip_serializing_if = "std::ops::Not::not")]
+    pub seen: bool,
     pub updated_at: u64,
 }
 
@@ -202,11 +205,16 @@ impl Tracker {
             detail: String::new(),
             steps: Vec::new(),
             request: String::new(),
+            seen: false,
             updated_at: now,
         });
         // A tool finishing keeps the line of the tool that ran; only a new one replaces it.
         let keep_detail = detail.is_empty() && matches!(state, State::Working | State::Thinking) && matches!(entry.state, State::Working | State::Thinking);
         let changed = entry.state != state || (!keep_detail && entry.detail != detail);
+        if changed {
+            // A new state blinks again until it is seen.
+            entry.seen = false;
+        }
         entry.state = state;
         entry.request = match state {
             State::Approval => payload.get("request_id").and_then(Value::as_str).unwrap_or("").to_string(),
@@ -253,13 +261,15 @@ impl Tracker {
             if keep.as_deref() == Some(id.as_str()) {
                 return true;
             }
-            let limit = if matches!(s.state, State::Idle | State::Finished | State::Error) { INACTIVE_FOR_MS } else { FORGET_AFTER_MS };
+            // A finished or failed turn nobody has looked at stays; once seen it rests like an idle one.
+            let rests = s.state == State::Idle || (matches!(s.state, State::Finished | State::Error) && s.seen);
+            let limit = if rests { INACTIVE_FOR_MS } else { FORGET_AFTER_MS };
             now.saturating_sub(s.updated_at) < limit
         });
         let mut sessions: Vec<SessionStatus> = self.sessions.values().cloned().collect();
         // A finished or failed session rests after a while.
         for s in &mut sessions {
-            if matches!(s.state, State::Finished | State::Error) && now.saturating_sub(s.updated_at) > FINISHED_FOR_MS {
+            if matches!(s.state, State::Finished | State::Error) && s.seen && now.saturating_sub(s.updated_at) > FINISHED_FOR_MS {
                 s.state = State::Idle;
             }
         }
@@ -360,6 +370,28 @@ pub fn music(state: &impl Serialize) {
     }
 }
 
+/// The capsule was clicked: what blinked for being finished, failed, asking or rate limited stops.
+/// (A permission request keeps blinking until it is answered.)
+pub fn acknowledge() {
+    let changed = {
+        let mut guard = TRACKER.lock().unwrap();
+        let t = guard.get_or_insert_with(Tracker::default);
+        let now = now_ms();
+        let mut any = false;
+        for s in t.sessions.values_mut() {
+            if !s.seen && matches!(s.state, State::Finished | State::Error | State::Question | State::Ratelimit) {
+                s.seen = true;
+                s.updated_at = now;
+                any = true;
+            }
+        }
+        any
+    };
+    if changed {
+        flush(true);
+    }
+}
+
 /// A permission request was answered (from the island or the bar): its buttons go away.
 /// Answered: Claude goes on working. Not answered (timed out, or handed to the terminal):
 /// the buttons go but the alert stays until the next event, because it still waits for you.
@@ -430,11 +462,23 @@ mod tests {
     }
 
     #[test]
-    fn finished_rests_after_a_while() {
+    fn finished_stays_until_seen_then_rests_after_a_while() {
         let mut t = Tracker::default();
         ev(&mut t, "Stop", "a", 1000);
-        assert_eq!(t.snapshot(1000 + FINISHED_FOR_MS - 1).state, State::Finished);
-        assert_eq!(t.snapshot(1000 + FINISHED_FOR_MS + 1).state, State::Idle);
+        // Nobody looked: it is still finished, and blinking, long after.
+        let late = t.snapshot(1000 + FINISHED_FOR_MS * 5);
+        assert_eq!((late.state, late.sessions[0].seen), (State::Finished, false));
+        // Seen at 10 000: it rests two minutes later.
+        for s in t.sessions.values_mut() {
+            s.seen = true;
+            s.updated_at = 10_000;
+        }
+        assert_eq!(t.snapshot(10_000 + FINISHED_FOR_MS - 1).state, State::Finished);
+        assert_eq!(t.snapshot(10_000 + FINISHED_FOR_MS + 1).state, State::Idle);
+        // A new state blinks again.
+        ev(&mut t, "UserPromptSubmit", "a", 20_000);
+        ev(&mut t, "Stop", "a", 30_000);
+        assert!(!t.snapshot(30_001).sessions[0].seen);
     }
 
     #[test]
@@ -508,6 +552,11 @@ mod tests {
             v
         };
         assert_eq!(ids(&mut t, 1000), ["busy", "done", "idle"]);
+        // A finished turn nobody has looked at stays; the idle one leaves.
+        assert_eq!(ids(&mut t, 1 + INACTIVE_FOR_MS + 1), ["busy", "done"]);
+        for s in t.sessions.values_mut() {
+            s.seen = true;
+        }
         assert_eq!(ids(&mut t, 1 + INACTIVE_FOR_MS + 1), ["busy"]);
     }
 
@@ -517,7 +566,7 @@ mod tests {
         ev(&mut t, "SessionStart", "old", 1);
         ev(&mut t, "Stop", "claude-new", 50);
         t.apply("Stop", &json!({ "session_id": "gemini", "cwd": "/x/y", "coucou_agent": "gemini" }), 60);
-        let later = 1 + FORGET_AFTER_MS + 10;
+        let later = 60 + FORGET_AFTER_MS + 10;
         let ids: Vec<String> = t.snapshot(later).sessions.into_iter().map(|s| s.id).collect();
         assert_eq!(ids, ["claude-new"]);
     }

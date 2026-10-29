@@ -15,6 +15,7 @@ interface PillIn {
   color: string;
   flat: boolean;
   dancing: boolean;
+  seen: boolean;
 }
 
 interface Scene {
@@ -120,7 +121,9 @@ function pill(x: CanvasRenderingContext2D, X: number, Y: number, W: number, H: n
   x.strokeStyle = "rgba(255,255,255,0.1)";
   x.lineWidth = 1;
   x.stroke();
-  const rim = scene.front ? ALERT_RIM[scene.front.state] : undefined;
+  // It blinks until you click the capsule (a permission, until you answer it).
+  const f = scene.front;
+  const rim = f && (!f.seen || f.state === "approval") ? ALERT_RIM[f.state] : undefined;
   if (rim) {
     // About 1.2 blinks a second: on, off, on, with soft edges.
     const k = Math.max(0, Math.min(1, 0.5 + 0.9 * Math.sin(nowMs / 1000 * 5.2)));
