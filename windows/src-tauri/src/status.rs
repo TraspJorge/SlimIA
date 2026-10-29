@@ -246,14 +246,20 @@ impl Tracker {
     }
 
     fn snapshot(&mut self, now: u64) -> Snapshot {
-        self.sessions.retain(|_, s| {
-            let limit = if matches!(s.state, State::Idle | State::Finished) { INACTIVE_FOR_MS } else { FORGET_AFTER_MS };
+        // Claude Code always keeps one pill online: the one that spoke last stays, idle or not,
+        // until its session ends. The other agents leave when they have nothing going on.
+        let keep = self.sessions.values().filter(|s| s.agent == "claude").max_by_key(|s| s.updated_at).map(|s| s.id.clone());
+        self.sessions.retain(|id, s| {
+            if keep.as_deref() == Some(id.as_str()) {
+                return true;
+            }
+            let limit = if matches!(s.state, State::Idle | State::Finished | State::Error) { INACTIVE_FOR_MS } else { FORGET_AFTER_MS };
             now.saturating_sub(s.updated_at) < limit
         });
         let mut sessions: Vec<SessionStatus> = self.sessions.values().cloned().collect();
-        // A finished session rests after a while.
+        // A finished or failed session rests after a while.
         for s in &mut sessions {
-            if s.state == State::Finished && now.saturating_sub(s.updated_at) > FINISHED_FOR_MS {
+            if matches!(s.state, State::Finished | State::Error) && now.saturating_sub(s.updated_at) > FINISHED_FOR_MS {
                 s.state = State::Idle;
             }
         }
@@ -493,9 +499,9 @@ mod tests {
     #[test]
     fn an_idle_or_finished_session_leaves_the_list_but_a_busy_one_stays() {
         let mut t = Tracker::default();
-        ev(&mut t, "UserPromptSubmit", "busy", 1);
-        ev(&mut t, "Stop", "done", 1);
         ev(&mut t, "SessionStart", "idle", 1);
+        ev(&mut t, "Stop", "done", 2);
+        ev(&mut t, "UserPromptSubmit", "busy", 3);
         let ids = |t: &mut Tracker, now| {
             let mut v: Vec<String> = t.snapshot(now).sessions.into_iter().map(|s| s.id).collect();
             v.sort();
@@ -506,9 +512,20 @@ mod tests {
     }
 
     #[test]
+    fn the_newest_claude_session_stays_online_and_the_other_agents_leave() {
+        let mut t = Tracker::default();
+        ev(&mut t, "SessionStart", "old", 1);
+        ev(&mut t, "Stop", "claude-new", 50);
+        t.apply("Stop", &json!({ "session_id": "gemini", "cwd": "/x/y", "coucou_agent": "gemini" }), 60);
+        let later = 1 + FORGET_AFTER_MS + 10;
+        let ids: Vec<String> = t.snapshot(later).sessions.into_iter().map(|s| s.id).collect();
+        assert_eq!(ids, ["claude-new"]);
+    }
+
+    #[test]
     fn old_sessions_are_forgotten_and_unknown_events_do_nothing() {
         let mut t = Tracker::default();
-        ev(&mut t, "UserPromptSubmit", "a", 1);
+        t.apply("UserPromptSubmit", &json!({ "session_id": "a", "cwd": "/x/y", "coucou_agent": "gemini" }), 1);
         assert!(!ev(&mut t, "StatusLine", "a", 2));
         assert!(!ev(&mut t, "Notification", "a", 2));
         assert!(t.snapshot(1 + FORGET_AFTER_MS + 1).sessions.is_empty());

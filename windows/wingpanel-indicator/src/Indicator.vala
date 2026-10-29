@@ -593,6 +593,16 @@ namespace SlimIA {
             pills = new GLib.List<Pill> ();
             if (root.has_member ("sessions")) {
                 var arr = root.get_array_member ("sessions");
+                string newest_claude = "";
+                int64 newest_at = -1;
+                for (uint k = 0; k < arr.get_length (); k++) {
+                    var c = arr.get_object_element (k);
+                    int64 at = c.get_int_member_with_default ("updatedAt", 0);
+                    if (c.get_string_member_with_default ("agent", "claude") == "claude" && at > newest_at) {
+                        newest_at = at;
+                        newest_claude = c.get_string_member_with_default ("id", "");
+                    }
+                }
                 for (uint i = 0; i < arr.get_length (); i++) {
                     var s = arr.get_object_element (i);
                     var p = new Pill ();
@@ -604,7 +614,14 @@ namespace SlimIA {
                     // An idle or finished session that nobody touched for two minutes is not shown
                     // (the file only changes when something happens).
                     int64 age = GLib.get_real_time () / 1000 - s.get_int_member_with_default ("updatedAt", 0);
-                    if ((p.mood == Mood.IDLE || p.mood == Mood.FINISHED) && age > 2 * 60 * 1000) {
+                    // Finished and failed rest after two minutes: the light around the capsule stops.
+                    if ((p.mood == Mood.FINISHED || p.mood == Mood.ERROR) && age > 2 * 60 * 1000) {
+                        p.mood = Mood.IDLE;
+                    }
+                    bool quiet = p.mood == Mood.IDLE && age > 2 * 60 * 1000;
+                    // The newest Claude Code pill stays online, whatever it is doing.
+                    if (quiet && !(s.get_string_member_with_default ("agent", "claude") == "claude"
+                                   && s.get_string_member_with_default ("id", "") == newest_claude)) {
                         continue;
                     }
                     parse_hex (s.get_string_member_with_default ("color", "#F5F6F8"), out p.r, out p.g, out p.b);
