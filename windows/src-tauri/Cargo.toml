@@ -21,7 +21,8 @@ tauri-plugin-global-shortcut = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["preserve_order"] }
 tokio = { version = "1", features = ["net", "io-util", "sync", "time", "rt", "macros"] }
-reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+# HTTP only to servers on this computer (net.rs): no TLS feature on purpose, so an https address cannot even be tried.
+reqwest = { version = "0.12", default-features = false, features = ["json"] }
 # Flow dictation and the Notetaker (flow/, notes/, speech/). Speech to text runs
 # on this computer: sherpa-onnx (Apache-2.0) with NVIDIA's Parakeet, linked
 # statically (onnxruntime included), the models downloaded on the user's click.

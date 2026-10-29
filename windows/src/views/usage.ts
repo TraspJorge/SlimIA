@@ -9,10 +9,9 @@
 // Mochi wears the plan's colour while it is open. It closes when the view, the
 // mode or the focused pill changes.
 
-import { Bridge } from "../core/bridge";
 import {
-  PLAN_TEXT, claudeSubtitle, codexIsStale, codexResetsLabel, codexSubtitle, dominantPct,
-  effectivePct, parseCodexPlan, pillLabel, planColor, resetLabel,
+  PLAN_TEXT, claudeSubtitle, codexResetsLabel, codexSubtitle, dominantPct,
+  effectivePct, pillLabel, planColor, resetLabel,
   type CodexPlanUsage, type PlanUsage, type PlanWindow,
 } from "../core/plan";
 import { State } from "../core/state";
@@ -26,9 +25,13 @@ export function claudePillVisible(): boolean {
   return State.view === "overview" && s.showPlanInNotch && s.planRelayInstalled;
 }
 
-/** The Codex pill is in the header: overview, turned on (nothing to install). */
+/**
+ * The Codex pill is never in the header here: its numbers came from `codex
+ * app-server`, which talks to Codex's own service, and this build does not
+ * start anything that reaches the network.
+ */
 export function codexPillVisible(): boolean {
-  return State.view === "overview" && State.settings.showCodexPlanInNotch;
+  return false;
 }
 
 /** A plan card is open and its pill is still there. */
@@ -80,31 +83,6 @@ export function storedClaudePlanUsage(): string | null {
   }
 }
 
-// ── Codex numbers ─────────────────────────────────────────────────────────────
-
-let codexInFlight = false;
-
-/**
- * Asks Codex again when the numbers are missing or older than a minute. Only
- * from the pill (shown or clicked), never on a timer, and never while paused:
- * `codex app-server` talks to Codex's own service.
- */
-export function refreshCodexPlanUsage(): void {
-  if (codexInFlight || State.paused || !codexIsStale(State.codexPlanUsage)) return;
-  codexInFlight = true;
-  void Bridge.codexPlanUsage()
-    .then((result) => {
-      const usage = parseCodexPlan(result);
-      if (usage) {
-        State.codexPlanUsage = usage;
-        State.notify();
-      }
-    })
-    .finally(() => {
-      codexInFlight = false;
-    });
-}
-
 // ── Pill ──────────────────────────────────────────────────────────────────────
 
 export interface PlanPill {
@@ -124,7 +102,6 @@ export function buildPlanPill(codex: boolean): PlanPill {
       const open = isOpen();
       State.planDetailIsCodex = codex;
       State.showingPlanDetail = !open;
-      if (codex) refreshCodexPlanUsage();
       State.notify();
     },
   }, dotEl, label);

@@ -3,23 +3,18 @@
 mod agent_hooks;
 mod agents;
 mod chat;
-mod claude;
-mod codex_plan;
 mod config_file;
 mod desktop;
 mod files;
 mod flow;
-mod github;
 mod hooks;
 mod i18n;
 mod identity;
-mod integrations;
 mod island;
 mod local_chat;
 mod log;
 mod net;
 mod notes;
-mod openai_compat;
 mod pipe;
 mod platform;
 #[cfg(target_os = "linux")]
@@ -33,8 +28,6 @@ mod sounds;
 mod speech;
 mod spotify;
 mod tray;
-mod update;
-mod voice;
 #[cfg(windows)]
 mod webview_drop;
 
@@ -115,7 +108,6 @@ fn save_settings(app: AppHandle, shared: State<Shared>, settings: Settings) {
         let collapsed = shared.gate.collapsed.load(Ordering::Relaxed);
         island::apply_geometry(&app, &settings.screen, collapsed);
     }
-    integrations::settings_saved(&app, &settings.active_integrations);
     spotify::sync(&app, &settings.active_integrations);
     if shortcuts_changed {
         shortcuts::apply(&app, &settings.shortcuts);
@@ -216,47 +208,6 @@ fn open_url(url: String) {
         return;
     }
     platform::open_url(&url);
-}
-
-/// Opens a GitLab link only when it belongs to the configured instance. This
-/// also covers self-hosted installations without exposing their token.
-#[tauri::command]
-fn open_gitlab_url(url: String) {
-    let base = secrets::get("gitlab-url").unwrap_or_else(|| "https://gitlab.com".into());
-    let (Ok(target), Ok(instance)) = (reqwest::Url::parse(&url), reqwest::Url::parse(base.trim())) else { return };
-    if is_forge_instance_url(&target, &instance) {
-        open_url(url);
-    }
-}
-
-fn is_forge_instance_url(target: &reqwest::Url, instance: &reqwest::Url) -> bool {
-    if !matches!(target.scheme(), "http" | "https")
-        || target.scheme() != instance.scheme()
-        || target.host_str() != instance.host_str()
-        || target.port_or_known_default() != instance.port_or_known_default()
-    {
-        return false;
-    }
-    let base = instance.path().trim_end_matches('/');
-    base.is_empty() || target.path() == base || target.path().starts_with(&format!("{base}/"))
-}
-
-/// The configured Gitea address is a credential-store value, so the island
-/// asks Rust to open it instead of ever receiving it.
-#[tauri::command]
-fn open_gitea() {
-    if let Some(url) = secrets::get("gitea-url") {
-        open_url(url);
-    }
-}
-
-#[tauri::command]
-fn open_gitea_url(url: String) {
-    let (Ok(target), Some(base)) = (reqwest::Url::parse(&url), secrets::get("gitea-url")) else { return };
-    let Ok(instance) = reqwest::Url::parse(&base) else { return };
-    if is_forge_instance_url(&target, &instance) {
-        open_url(url);
-    }
 }
 
 /// "Open terminal" opens the working folder in VS Code when `code` is on PATH,
@@ -361,13 +312,6 @@ fn quit_app(app: AppHandle) {
     app.exit(0);
 }
 
-/// Tray → Pause. Paused means paused: the pollers stop talking to the network,
-/// not just the island stopping showing things.
-#[tauri::command]
-fn set_paused(paused: bool) {
-    integrations::set_paused(paused);
-}
-
 // ── Claude Code hooks ─────────────────────────────────────────────────────────
 
 #[tauri::command]
@@ -467,13 +411,6 @@ fn status_line_apply(
     Ok(backup)
 }
 
-/// Codex plan usage, asked of the Codex CLI (`codex app-server`) when its pill
-/// shows. Off the main thread: it can take a few seconds.
-#[tauri::command]
-async fn codex_plan_usage() -> Option<serde_json::Value> {
-    tauri::async_runtime::spawn_blocking(codex_plan::read).await.ok().flatten()
-}
-
 #[tauri::command]
 fn approval_decision(app: AppHandle, request_id: String, decision: String) {
     recap::record_decision(&app, &request_id, &decision);
@@ -563,62 +500,18 @@ fn secret_present(key: String) -> bool {
 }
 
 #[tauri::command]
-fn secret_set(app: AppHandle, key: String, value: String) -> Result<(), String> {
+fn secret_set(key: String, value: String) -> Result<(), String> {
     // Bound to its server's address: only local_set_key may store it.
     if key == local_chat::CUSTOM_KEY {
         return Err("use local_set_key".into());
     }
-    let before = (key == "github-token").then(|| secrets::get(&key));
-    secrets::set(&key, &value)?;
-    if key == claude::KEY {
-        voice::sync(&app);
-    }
-    if let Some(before) = before {
-        if secrets::get(&key) != before {
-            integrations::github_token_changed(&app);
-        }
-    }
-    if key == "gitea-token" || key == "gitea-url" {
-        integrations::gitea_credentials_changed(&app);
-    }
-    Ok(())
+    secrets::set(&key, &value)
+
 }
 
 #[tauri::command]
-fn secret_clear(app: AppHandle, key: String) -> Result<(), String> {
-    let had = key == "github-token" && secrets::present(&key);
-    secrets::clear(&key)?;
-    if key == claude::KEY {
-        voice::sync(&app);
-    }
-    if had {
-        integrations::github_token_changed(&app);
-    }
-    if key == "gitea-token" || key == "gitea-url" {
-        integrations::gitea_credentials_changed(&app);
-    }
-    Ok(())
-}
-
-/// Opens the configured n8n instance — the URL lives in the Credential Manager.
-#[tauri::command]
-fn open_n8n() {
-    if let Some(url) = secrets::get("n8n-url") {
-        open_url(url);
-    }
-}
-
-/// Refresh buttons in the integration cards.
-#[tauri::command]
-async fn refresh_integration(app: AppHandle, id: String) {
-    integrations::poll_once(app, &id).await;
-}
-
-/// The GitHub card was opened: refetch its `section` ("pulse" or "activity")
-/// if it is stale. The pollers still decline while the pill is off or paused.
-#[tauri::command]
-fn github_refresh(section: String) {
-    integrations::github_refresh_if_stale(&section);
+fn secret_clear(key: String) -> Result<(), String> {
+    secrets::clear(&key)
 }
 
 /// Lets the island write to the same log as the Rust side.
@@ -803,9 +696,6 @@ pub fn run() {
             hub_shown,
             list_monitors,
             open_url,
-            open_gitlab_url,
-            open_gitea,
-            open_gitea_url,
             open_in_vscode,
             open_session,
             open_claude_desktop,
@@ -820,7 +710,6 @@ pub fn run() {
             agent_hooks_apply,
             status_line_preview,
             status_line_apply,
-            codex_plan_usage,
             approval_decision,
             approval_answer,
             approval_ack,
@@ -835,11 +724,7 @@ pub fn run() {
             secret_present,
             secret_set,
             secret_clear,
-            refresh_integration,
-            github_refresh,
-            open_n8n,
             open_settings_window,
-            set_paused,
             shortcuts_status,
             shortcuts_suspend,
             recap::recap_history,
@@ -883,7 +768,6 @@ pub fn run() {
             flow::flow_running_apps,
             flow::flow_copy,
             flow::flow_paste_again,
-            flow::flow_models_download,
             flow::flow_models_remove,
             flow::pill_state,
             flow::pill_hot,
@@ -896,22 +780,9 @@ pub fn run() {
             notes::notes_rename_speaker,
             notes::notes_toggle_todo,
             notes::notes_delete,
-            notes::notes_summarize,
             notes::notes_retry,
             notes::notes_markdown,
             notes::notes_export,
-            voice::voice_done,
-            voice::voice_say_native,
-            update::update_status,
-            update::update_set_consent,
-            update::update_check,
-            update::update_shown,
-            update::update_show,
-            update::update_later,
-            tray::tray_update_hint,
-            update::update_dismiss,
-            update::update_install,
-            update::update_open_page,
         ])
         .setup(move |app| {
             let handle = app.handle().clone();
@@ -949,11 +820,9 @@ pub fn run() {
             log::line(format!("--- Coucou {} started ---", env!("CARGO_PKG_VERSION")));
             hooks::ensure_hook_exe(&handle);
             pipe::start(handle.clone());
-            integrations::start(handle.clone());
             spotify::sync(&handle, &loaded.active_integrations);
             shortcuts::apply(&handle, &loaded.shortcuts);
             // New versions: nothing goes to GitHub until the user agrees (update.rs).
-            update::start(handle.clone());
             if loaded.autostart {
                 // Login items written before 0.5 start Coucou without --autostart:
                 // writing it again adds it, so the window stays hidden at login.
@@ -976,24 +845,7 @@ pub fn run() {
 
 #[cfg(test)]
 mod tests {
-    use super::{diff_file, is_forge_instance_url};
-
-    #[test]
-    fn forge_links_stay_on_the_configured_instance() {
-        let instance = reqwest::Url::parse("https://git.example.com/team/").unwrap();
-        assert!(is_forge_instance_url(
-            &reqwest::Url::parse("https://git.example.com/team/me/project").unwrap(),
-            &instance,
-        ));
-        assert!(!is_forge_instance_url(
-            &reqwest::Url::parse("https://git.example.com/other/project").unwrap(),
-            &instance,
-        ));
-        assert!(!is_forge_instance_url(
-            &reqwest::Url::parse("https://evil.example/team/me/project").unwrap(),
-            &instance,
-        ));
-    }
+    use super::diff_file;
 
     #[test]
     fn only_an_existing_file_by_its_full_path_reaches_the_editor() {

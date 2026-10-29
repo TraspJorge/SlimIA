@@ -6,7 +6,9 @@
 
 **Mochi doesn't get a notch on a PC — so it lives at the top of your screen instead.**
 
-Approve Claude Code permissions, watch your session work, drop a file, chat with Claude, keep an eye on your services — without leaving what you're doing.
+Approve Claude Code permissions, watch your session work, drop a file, chat with a model that runs on your own PC — without leaving what you're doing.
+
+**This copy never goes to the network.** It opens no port, takes no command from outside, and talks only to servers on this computer (a local model such as Ollama, if you connect one). See [Local only](#local-only).
 
 ![Windows 10/11](https://img.shields.io/badge/Windows-10%2F11-0078D4?logo=windows)
 ![Tauri 2](https://img.shields.io/badge/Tauri-2-FFC131?logo=tauri&logoColor=black)
@@ -19,33 +21,23 @@ Approve Claude Code permissions, watch your session work, drop a file, chat with
 
 ---
 
-## Install
+## Local only
 
-Download **[Coucou-Windows.msi](https://github.com/Louis-CFM/coucou/releases/download/windows-latest/Coucou-Windows.msi)**
-(Windows Installer) or **[Coucou-Windows-setup.exe](https://github.com/Louis-CFM/coucou/releases/download/windows-latest/Coucou-Windows-setup.exe)**,
-always the newest version, and run it. The .exe installs for the current user only, with no admin prompt; the .msi may ask for admin rights.
+This copy is built to stay on your PC:
 
-**Windows will show a warning the first time — that's expected.** The installer isn't code-signed yet, so SmartScreen doesn't know the publisher:
+- **Nothing comes in.** No phone link, no WhatsApp, no port is opened. Only the local pipe the agents' hooks use listens, on this computer.
+- **Nothing goes out.** There are no updates, no cloud AI, no services (GitHub, Stripe, Vercel…), no downloads. The one HTTP client (`src-tauri/src/net.rs`) refuses any address that is not this computer, and it is built without TLS, so `https://` cannot even be tried. The windows' content security policy allows no outside address either.
+- **The voice model is copied by hand.** Coucou never downloads it: put the files in the folder Coucou → Settings shows (`Models` in the data folder).
+- To make sure, run it with [the firewall scripts](firewall/README.md), which block everything but this computer from the system's side.
 
-1. A **"Windows protected your PC"** screen appears, with *Publisher: Unknown publisher*.
-2. Click **More info** (*Informations complémentaires* in French). This reveals a **Run anyway** button.
-3. Click **Run anyway** (*Exécuter quand même*). The installer starts normally.
-
-This is only because the app isn't signed with a paid certificate yet. Coucou is open source, and Microsoft Defender scans the installer as clean.
-
-Microsoft Defender once flagged the installer by mistake (`Trojan:Win32/Wacatac.H!ml`,
-a machine-learning false positive); Microsoft reviewed it and removed the detection.
-If Defender still blocks it on your PC, update its definitions (`Update-MpSignature`
-in PowerShell) and try again.
-
-You can also [build it yourself](#build-it-yourself).
+There is no ready-made installer for this copy: [build it yourself](#build-it-yourself).
 
 ## Using it
 
 <img src="screenshots/compact.png" width="292" alt="The compact island, with the integration pills as mini Mochis">
 <img src="screenshots/overview.png" width="640" alt="The overview: the focused integration on the left, the other pills on the right">
 <img src="screenshots/approval.png" width="640" alt="A Claude Code permission request, with Deny and Allow">
-<img src="screenshots/chat.png" width="640" alt="Chatting with Claude from the island">
+<img src="screenshots/chat.png" width="640" alt="Chatting from the island">
 <img src="screenshots/drop.png" width="640" alt="Mochi turned into a box, waiting for a file">
 
 | What you do | What happens |
@@ -61,7 +53,7 @@ You can also [build it yourself](#build-it-yourself).
 | Click a file in the session ticker | Its diff opens in the island; ↗ opens the file in VS Code, ‹ or `Esc` goes back |
 | `Esc` | Closes the island |
 | Put a file named like one of Mochi's sounds (`finish.wav`, `approval.mp3`, `greet.m4a`…) in the sounds folder | It replaces that sound after **Settings → General → Reload sounds**. **Open sounds folder** shows the folder: `~/.config/coucou/sounds` on Linux, `%APPDATA%\Coucou\sounds` on Windows |
-| Tray icon | Open, Weekly recap, Wardrobe…, Settings…, Pause, Quit — and **Update Coucou to X…** while a new version is out |
+| Tray icon | Open, Weekly recap, Wardrobe…, Settings…, Pause, Quit |
 | `Ctrl+Alt+Space` | Opens the chat, from any app |
 | `Ctrl+Alt+A` | Jumps to the waiting permission or question |
 | `Ctrl+Alt+T` | Brings the session's window forward ("Open terminal") |
@@ -71,7 +63,6 @@ You can also [build it yourself](#build-it-yourself).
 | `Ctrl+Alt+D` | Sends Mochi to the desktop, or brings him home |
 | `Ctrl+Alt+N` | Opens and closes the island (off until you turn it on) |
 | In the open island: `Ctrl+→` `Ctrl+←`, `Ctrl+1`–`Ctrl+9` | Switch pills |
-| In the open island: `Ctrl+↓` `Ctrl+↑`, `Ctrl+O` | Walk the open GitHub list, open the highlighted row |
 | In the open island: `Ctrl+E` | Opens the latest edit's diff, or closes the diff |
 | In the open island: `Ctrl+Enter`, `Ctrl+K` | Send, start a new chat |
 | In the open island: `Ctrl+,`, `Ctrl+P` | Settings, keep the island open |
@@ -127,28 +118,24 @@ session, and they are forgotten an hour after the last edit or when the session
 ends. When Claude finishes, the card keeps the first paragraph of its final
 answer on one line, still, until the next prompt.
 
-## Flow, the Notetaker and « OK Coucou »
+## Flow and the Notetaker
 
 Coucou has its own window (tray → Open, or launch Coucou again): **Flow** on the
-left (Dictation, Notetaker, Statistics, Dictionary, Snippets, Styles, Settings),
+left (Dictation, Notetaker, Statistics, Dictionary, Snippets, Settings),
 then **Notch**, the island's settings. Everything below runs on
 [Parakeet](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3) through
 [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx), on your CPU and offline;
-nothing is downloaded until you click **Download** (about 700 MB, once, checked
-against its SHA-256, kept in Coucou's data folder under `Models`).
+the model files (about 700 MB) are copied by hand into Coucou's data folder under
+`Models`; nothing is downloaded.
 
 | What you do | What happens |
 |---|---|
 | Hold **right Ctrl** anywhere, speak, let go | Your words are pasted where you type. Pick another key in Flow → Settings: right Alt, right Shift, Ctrl + Win (Ctrl + Super on Linux) |
 | Tap the key twice | Hands-free: speak as long as you like, tap once to paste. `Esc` cancels |
 | Hover the pill at the bottom of the screen | Dictate, record a call, open Coucou. Put the pill on the left or right edge in Flow → Settings |
-| Click **Record a call** | Your microphone and what the computer plays, transcribed live, then written person by person with a summary and to-dos by Claude (your key). The audio is deleted once the transcript is written |
-| Say **« OK Coucou »**, then ask | Claude (your key) answers in the pill and out loud: pills, Spotify, your services' numbers, your agents, web search, open an app, an email prepared in your mail app. Turn it on in Notch → OK Coucou |
+| Click **Record a call** | Your microphone and what the computer plays, transcribed live, then written person by person. The audio is deleted once the transcript is written |
 
-Your voice never leaves the computer. With Claude's clean-up (Flow → Styles),
-a call's summary or « OK Coucou », the text — never the audio — goes to
-Anthropic with your key; an ElevenLabs voice for the answers sends them to
-ElevenLabs with yours.
+Your voice never leaves the computer, and neither does the text.
 
 ## Your pills
 
@@ -156,8 +143,8 @@ ElevenLabs with yours.
 the Mac app. Pick your **main tool** — VS Code, Cursor, Codex or Antigravity —
 which is always there and doesn't take a slot, then declare up to four more:
 agents (Gemini CLI, Copilot CLI, Muse Code, OpenCode, Amp, Hermes, Claude
-Desktop), the chat providers (Anthropic, Google AI, OpenAI, Ollama, LM Studio),
-and the services under **Integrations**. A pill fed by hooks says whether its
+Desktop), the local model servers (Ollama, LM Studio) and Spotify under
+**Integrations**. A pill fed by hooks says whether its
 hooks are installed, never asks for a key; a local model server's pill says
 whether the chat is connected to it. A session on a pill you didn't
 declare still shows up, for as long as it runs.
@@ -181,10 +168,10 @@ It works from any terminal — Windows Terminal, PowerShell, VS Code, Git Bash.
 
 ### Plan usage
 
-As on the Mac, the island's header can show your plan limits: a small pill
+As on the Mac, the island's header can show your Claude plan limits: a small pill
 ("Claude 73%", green below 50 %, orange up to 80 %, red above) for the 5-hour and
-weekly Claude limits, and another for Codex. Click one for the details and the
-reset times. Both are off by default; turn them on in **Settings… → Plan usage**.
+weekly Claude limits. Click it for the details and the reset times. It is off by
+default; turn it on in **Settings… → Plan usage**.
 
 - **Claude** (Pro and Max plans): the numbers come from Claude Code's own status
   line. **Show in notch** first shows you the diff of the `statusLine` change in
@@ -199,153 +186,31 @@ reset times. Both are off by default; turn them on in **Settings… → Plan usa
   numbers arrive with Claude Code's replies. They come from the Claude Code
   command-line tool only: the Claude desktop app does not run the status line, so
   if you only use the desktop app the Claude gauge stays on "—".
-- **Codex**: nothing is installed. When the pill shows (or is clicked, at most
-  once a minute) Coucou starts `codex app-server` and asks it
-  `account/rateLimits/read`, as Codex's `/status` does, then stops it (15 s at
-  most, never while paused). Codex must be signed in with ChatGPT.
 
-## Weekly recap
+The Codex gauge of the Mac and of upstream is not here: its numbers came from
+`codex app-server`, which talks to Codex's own service.
 
-On Monday from 8 am, the first time Coucou starts, an agent starts working or
-you wake the island, a card sums up the past week: time spent, sessions, files
-and lines changed, commands run, permissions and questions, your top agent,
-top project, busiest day and longest session. **Tray → Weekly recap** opens it
-any day.
+## Chat
 
-**Share image** turns it into a 1080 × 1920 picture with Mochi. **Save image**
-writes it to your Pictures folder (Downloads if there is none) as
-`Coucou weekly recap YYYY-MM-DD.png`, never over an existing file; **Copy** puts
-it on the clipboard. **Hide project names** leaves the project out of the image.
+The chat talks to a model that runs on this PC: **Settings… → Local models**
+connects **Ollama** or **LM Studio** (leave the address empty for the usual one
+on this PC; Ollama's `OLLAMA_HOST` is honoured) or any server that speaks the
+OpenAI API (vLLM, llama.cpp…) on this computer, with an optional key kept in the
+credential store. An address that is another machine is refused. Click the model
+name above the chat box to switch server and model. Answers stream in as they are
+written, and the `<think>` blocks of reasoning models stay hidden. A text file you
+dropped goes along inline (24 000 characters at most); images and PDFs by name
+only.
 
-The history is `recap.json` next to the log, a 12-week rolling window: counts,
-the agent and the project folder's name — never a command, a file path, file
-contents or a prompt. It never leaves your machine. **Settings → General →
-Weekly recap** turns it off or clears it.
+Answers are shown as **Markdown**: headings, lists, bold, inline code, quotes, and
+code blocks with a copy button. It is built from text nodes, never parsed as
+HTML, and only `http`/`https` links open (in your browser, when you click them).
+Mochi greets you by your first name when your account has one (the Windows
+display name or the Linux GECOS full name; a bare login name is not used).
 
-## Languages
-
-Coucou speaks twelve of the Mac app's languages: English, 简体中文, हिन्दी,
-Español, العربية, Français, বাংলা, Português (Brasil), Русский, Bahasa
-Indonesia, Deutsch and Türkçe (Traditional Chinese and Thai are on the Mac
-only for now). **Settings… → General → Language** picks one; **System** (the
-default) follows your system's language when it is one of these, English
-otherwise. The island, the settings window and the tray menu switch at once —
-nothing restarts, and the island keeps its sessions, steps and chat.
-
-In Arabic the island's cards read right to left; Mochi, the pills and the
-header stay where they are, and commands, code and file paths stay left to
-right. Steps already in a session's ticker keep the language they were written
-in, as on the Mac.
-
-The translations are the Mac's own (`NotchBuddy/Resources/Localizable.xcstrings`,
-turned into `src/i18n/strings.json` by `node scripts/gen-strings.mjs`), plus
-`src/i18n/extra.json` for what only Windows and Linux show. Both are keyed by
-the English text; a string missing in a language shows in English. The Rust
-side (tray, errors) embeds the same two files.
-
-## Chat and keys
-
-**Settings… → Claude** takes your Anthropic API key. Keys live in the **Windows
-Credential Manager**, never on disk and never in the interface — the island can
-only ask whether a key exists. Same for every integration key.
-
-The chat also talks to **Google AI (Gemini)**, **OpenAI** and **OpenRouter**:
-add their keys in **Settings… → Chat providers**, then click the model name
-above the chat box to switch provider and model, as on the Mac. The model list
-is fetched from the provider only once you pick it and it has a key. Switching
-mid-conversation carries the conversation over as plain text, so nothing in one
-provider's format is ever sent to another. These providers get no web search
-and no tools — they answer, they never act on your PC.
-
-**Local models**: **Settings… → Local models** connects **Ollama** or **LM
-Studio** (leave the address empty for the usual one on this PC; Ollama's
-`OLLAMA_HOST` is honoured) or any server that speaks the OpenAI API (vLLM,
-llama.cpp…), with an optional key kept in the credential store. Answers stream
-in as they are written, and the `<think>` blocks of reasoning models stay
-hidden. A text file you dropped goes along inline (24 000 characters at most);
-images and PDFs by name only. Settings tells you whether the address is this
-PC — nothing leaves it then — and warns before a key would travel over plain
-`http://` to another machine.
-
-Answers from every provider are shown as **Markdown**: headings, lists, bold,
-inline code, quotes, and code blocks with a copy button. It is built from text
-nodes, never parsed as HTML, and only `http`/`https` links open. Mochi greets
-you by your first name when your account has one (the Windows display name or
-the Linux GECOS full name; a bare login name is not used).
-
-To send the Claude chat through an Anthropic-compatible gateway, set
-`COUCOU_ANTHROPIC_BASE_URL` (for example `https://gateway.example.com`;
-`/v1/messages` is added). It must be `https://`, or `http://` to this PC only.
-Claude Code's own `ANTHROPIC_BASE_URL` is deliberately ignored: your key only
-goes where you told Coucou to send it. The gateway's host is written to the log
-once; the key never is.
-
-No telemetry. The only network requests Coucou makes are to the services you
-configure yourself, and — once you agree — to GitHub's releases API, to tell you
-about new versions (see [New versions](#new-versions)).
-
-## GitHub
-
-With a token in **Settings… → Integrations → GitHub** — a classic token with
-the `repo` scope, or a fine-grained one with read access to Pull requests,
-Commit statuses and Actions — the GitHub pill shows:
-
-- **My PRs**: your open pull requests and their CI status.
-- **To review**: the pull requests waiting for your review.
-- **Default branch CI**: the CI of the default branch of your 10 most recently
-  pushed repositories.
-- Your stars and the **last 7 days of contributions** in the card header; click
-  them for the past 23 weeks, and hover or click a day for its count.
-
-Click a row for the list, then an item to open it on github.com. The pill gets
-a badge and a sound when the CI of one of your pull requests turns red or green
-(fast runs between two checks included), when a default branch breaks, or when
-someone requests your review. Pull requests are checked every 5 minutes, every
-minute while a CI is running, and as soon as you open the card on data older
-than a minute; contributions every 30 minutes. Nothing is fetched while the pill
-is off or Coucou is paused.
-
-## New versions
-
-Coucou can tell you when a new version is out, and on Windows install it in one
-click. Nothing goes to GitHub before you agree: about 30 seconds after launch the
-island asks once, **Get new versions from the island?** (asked again a day later
-at most if you leave the card unanswered, never over a permission or a question).
-**Settings → General → Updates** has the same switch, and **Check now**, which
-looks once even with the switch off.
-
-Once allowed, Coucou asks GitHub at launch and every 6 hours:
-`GET https://api.github.com/repos/Louis-CFM/coucou/releases?per_page=30`,
-unauthenticated, no cookies, nothing about you. It keeps the published
-`windows-vX.Y.Z` releases (`linux-vX.Y.Z` on Linux — never the rolling
-`windows-latest` / `linux-latest`, drafts or prereleases) and takes the highest.
-When it is newer than yours, the island opens on it once a day at most, with
-Mochi surprised: **Coucou X is out**, the first line of its *What's new*, and the
-version you have; **Update now · What's new · Later**. The tray menu offers
-**Update Coucou to X…** for as long as it is out.
-
-**Update now** (Windows) uses the installer this copy came from:
-
-- the per-user `setup.exe` (Coucou in `%LOCALAPPDATA%\Coucou`, with its
-  `uninstall.exe`): `Coucou-Windows-X.Y.Z-setup.exe /P /UPDATE /R` — passive,
-  no "reinstall or uninstall?" step, the old uninstaller never runs, your
-  shortcuts and settings stay, and the installer starts Coucou again;
-- the per-machine `.msi` (Coucou in `Program Files\Coucou`):
-  `msiexec /i Coucou-Windows-X.Y.Z.msi /passive AUTOLAUNCHAPP=True`, which asks
-  for admin rights as installing it by hand does, then starts Coucou again;
-- anything else — the portable exe, a build — gets **Get it on GitHub**, the
-  release page, instead.
-
-The installer is downloaded into a temporary folder, following redirects only to
-`github.com`, `api.github.com` and `*.githubusercontent.com`, and checked
-against the SHA-256 GitHub publishes for that file (the asset's `digest`). No
-checksum, or one that doesn't match, and nothing is installed. Then it runs and
-Coucou quits. The checksum proves the file is exactly the one on the release
-page; like a download by hand, it doesn't prove who uploaded it (the installer
-isn't code-signed yet).
-
-On Linux the card and the tray item point to the release page: AppImage, .deb,
-.rpm and the Arch package are updated the way you installed them.
+Keys (only the optional one of your own server) live in the **Windows Credential
+Manager** or the Linux Secret Service, never on disk and never in the interface —
+the island can only ask whether a key exists. No telemetry.
 
 ## Build it yourself
 
@@ -480,14 +345,6 @@ own window.
   [pyannote](https://github.com/pyannote/pyannote-audio)'s segmentation and
   3D-Speaker's voice prints, also on the CPU. Summaries are Claude's only:
   there is no Apple Intelligence here.
-- **« OK Coucou »** listens with a small energy detector and Parakeet instead of
-  the Mac's speech recognizer, so it understands Parakeet's 25 languages.
-  Emails open in your default mail app through a `mailto:` link, with no
-  contact lookup and no attachment; « play » something on Spotify opens its
-  search rather than starting a track; apps open from the Start menu's
-  shortcuts or Linux's `.desktop` entries. The system voice is the webview's;
-  where WebKitGTK has none, `spd-say` (speech-dispatcher) or `espeak-ng`
-  speaks if installed.
 - No notch, so the island lives at the top centre of the screen and retracts into
   the top edge instead of hiding in a notch.
 - Permission approval works from **any** terminal; the Mac build only listens to
@@ -512,17 +369,12 @@ own window.
   thread waits for the session's change events while the pill is declared.
   The volume is Spotify's own in the Windows mixer. Works with the installer
   from spotify.com and the Microsoft Store app; **Open Spotify** goes through
-  its `spotify:` link, and without Spotify **Get Spotify** opens its download
-  page. Windows gives no Spotify link for the track, so an ad is told apart by
+  its `spotify:` link, and without Spotify nothing opens. Windows gives no Spotify link for the track, so an ad is told apart by
   having a title and no artist or album.
 - Not in this version: sending a dropped file by email and dragging Mochi onto
   a window to attach it as context. On the Mac, email goes through Resend or
   Apple Mail's scripting; neither has a safe equivalent that attaches a file
   here, and the drop card would need a third button it doesn't have.
-- New versions: the Mac checks the downloaded app's Developer ID signature and
-  notarization; the Windows installer isn't code-signed yet, so it is checked
-  against the SHA-256 GitHub publishes for it, and the installer (not Coucou)
-  replaces the app and starts it again.
 - Cal.com shows the next bookings as a list rather than the Mac's calendar.
 - The Cursor pill carries both Cursor Agent's own hooks and Claude Code running
   in Cursor's terminal.
@@ -549,9 +401,7 @@ own window.
   Mac uses `⌘` inside the island. "Bring the terminal forward" is "Open
   terminal" here. Not in this version: attaching the front window (its id is
   kept for later). The island only reads its own shortcuts while it has the
-  keyboard: in the chat, or after a global shortcut opened it. `Ctrl+↓`
-  `Ctrl+↑` `Ctrl+O` walk the GitHub lists, as on the Mac, and the highlighted
-  row scrolls into view where the Mac's three-row list doesn't follow it; in the
+  keyboard: in the chat, or after a global shortcut opened it. In the
   chat field `Ctrl+↑` `Ctrl+↓` keep moving the cursor. **Go to alert** brings
   up any agent's waiting card on its own pill; **Toggle the island** folds a
   waiting card rather than dropping it, like `Esc` in the island. **Send Mochi
@@ -674,9 +524,8 @@ What changes on Linux:
   and on the desktop. Nothing is polled: one thread waits on the bus for
   Spotify's own signals while the pill is declared, and stops when it isn't.
   **Open Spotify** brings it forward or starts `spotify` from your `PATH`,
-  else the Flatpak (`com.spotify.Client`) or the Snap; without one, **Get
-  Spotify** opens its download page. Covers come from Spotify's image CDN
-  (or a local track's file) and are fetched by Coucou itself, not the page.
+  else the Flatpak (`com.spotify.Client`) or the Snap. Only the cover of a local
+  track's file is shown: nothing is downloaded.
   Spotify builds that don't report the position over MPRIS show the bar
   from where the track started; the Mac's Automation prompt has no
   equivalent here.
@@ -700,9 +549,6 @@ What changes on Linux:
   where it is missing, the island says so and Save still works.
 - What the Windows build leaves out, this one does too: sending a file by
   email and dragging Mochi onto a window.
-- **New versions** are announced (once you agree), but **Update now** opens
-  the release page: update the AppImage, .deb, .rpm or Arch package the way
-  you installed it.
 - **Open terminal** walks up from the relay through `/proc` (stopping at
   systemd, logins, ssh, session managers and panels, and at any process of
   another user) to the terminal or editor the session runs in, then brings its

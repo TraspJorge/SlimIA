@@ -8,7 +8,6 @@ import { getCurrentWebview } from "@tauri-apps/api/webview";
 import type { Settings } from "./state";
 import type { RecapHistory, RecapPrefs } from "../recap/summary";
 import type { SpotifyState } from "./spotify";
-import type { UpdateStatus } from "./update";
 
 export const IS_TAURI =
   typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
@@ -69,12 +68,6 @@ export const Bridge = {
   listMonitors: () => call<{ key: string; label: string }[]>("list_monitors"),
 
   openUrl: (url: string) => call<void>("open_url", { url }),
-  /** Opens a GitLab link only when it belongs to the configured instance. */
-  openGitLabUrl: (url: string) => call<void>("open_gitlab_url", { url }),
-  /** Opens the configured Gitea instance without exposing its URL to the page. */
-  openGitea: () => call<void>("open_gitea"),
-  /** Opens a Gitea link only if it belongs to the configured instance. */
-  openGiteaUrl: (url: string) => call<void>("open_gitea_url", { url }),
 
   /** Which of these sounds have a file of the user's own in the sounds folder. */
   customSounds: (names: readonly string[]) => call<string[]>("custom_sounds", { names }),
@@ -137,13 +130,6 @@ export const Bridge = {
   /** Same rules as hooksApply: an explicit click, and only for the diff that was shown. */
   statusLineApply: (install: boolean, fingerprint: string) =>
     callOrThrow<string>("status_line_apply", { install, fingerprint }),
-  /**
-   * Asks the Codex CLI (`codex app-server`) for its plan limits, as Codex's
-   * /status does. The raw `account/rateLimits/read` result, or null when Codex
-   * is missing, not signed in or slow (15 s).
-   */
-  codexPlanUsage: () => call<unknown>("codex_plan_usage"),
-
   approvalDecision: (requestId: string, decision: "allow" | "deny") =>
     call<void>("approval_decision", { requestId, decision }),
   /** "The card is up" — until this lands the relay only waits a moment. */
@@ -156,7 +142,7 @@ export const Bridge = {
   approvalDecline: (requestId: string) => call<void>("approval_decline", { requestId }),
 
   // ── Chat, files, secrets ──────────────────────────────────────────────────
-  /** One chat turn. The API key and any file bytes never leave Rust. */
+  /** One chat turn, answered by a model on this computer. File bytes never leave Rust. */
   chatSend: (query: string, context: ChatContext | null) =>
     callOrThrow<{ text: string }>("chat_send", { query, context }),
   chatReset: () => call<void>("chat_reset"),
@@ -177,16 +163,6 @@ export const Bridge = {
   secretPresent: (key: string) => call<boolean>("secret_present", { key }),
   secretSet: (key: string, value: string) => callOrThrow<void>("secret_set", { key, value }),
   secretClear: (key: string) => callOrThrow<void>("secret_clear", { key }),
-
-  // ── Integrations ──────────────────────────────────────────────────────────
-  refreshIntegration: (id: string) => call<void>("refresh_integration", { id }),
-  /** The GitHub card is on screen: refetch that part if it is stale. */
-  githubRefresh: (section: "pulse" | "activity") => call<void>("github_refresh", { section }),
-  /** Opens the configured n8n instance in the browser. */
-  openN8n: () => call<void>("open_n8n"),
-
-  /** Tray → Pause. Stops the integration pollers, not just the island. */
-  setPaused: (paused: boolean) => call<void>("set_paused", { paused }),
 
   // ── Global shortcuts ──────────────────────────────────────────────────────
   /** How each global shortcut went when Rust last registered them. */
@@ -240,24 +216,6 @@ export const Bridge = {
   spotifyInstalled: () => call<boolean>("spotify_installed"),
 
 
-  // ── New versions (src-tauri/src/update.rs) ────────────────────────────────
-  updateStatus: () => call<UpdateStatus>("update_status"),
-  /** The island's question or Settings' toggle: may Coucou look at GitHub on its own? */
-  updateSetConsent: (allowed: boolean) => call<void>("update_set_consent", { allowed }),
-  /** "Check now": one look at GitHub, the toggle on or off. */
-  updateCheck: () => call<UpdateStatus>("update_check"),
-  /** The island opened the card Rust offered ("ask" or "announce"). */
-  updateShown: (kind: "ask" | "announce") => call<void>("update_shown", { kind }),
-  /** Settings → Install X: opens the island's update card. */
-  updateShow: () => call<void>("update_show"),
-  updateLater: () => call<void>("update_later"),
-  /** Blue Mochi in the tray while a new version waits (tray.rs). */
-  trayUpdateHint: (on: boolean) => call<void>("tray_update_hint", { on }),
-  updateDismiss: () => call<void>("update_dismiss"),
-  /** "Update now" (Windows): download, check the SHA-256, run the installer, quit. */
-  updateInstall: () => call<void>("update_install"),
-  /** The release's page on github.com. */
-  updateOpenPage: () => call<void>("update_open_page"),
 };
 
 export type SpotifyAction = "playPause" | "next" | "previous" | "seek" | "shuffle" | "repeat" | "volume";
@@ -296,13 +254,6 @@ export async function emitToWindow(label: string, event: string, payload?: unkno
   } catch (err) {
     console.error(`[coucou] emit ${event} failed`, err);
   }
-}
-
-export interface IntegrationUpdate {
-  id: string;
-  data: Record<string, unknown>;
-  error: string | null;
-  event: { success: boolean; label: string; detail: string | null } | null;
 }
 
 export type ChatContext =

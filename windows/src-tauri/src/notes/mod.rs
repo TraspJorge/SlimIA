@@ -17,7 +17,7 @@ use std::time::Duration;
 use serde::{Deserialize, Serialize};
 use tauri::{AppHandle, Emitter, Manager, State};
 
-use crate::flow::{pill, store::SummaryEngine};
+use crate::flow::pill;
 use crate::i18n::{t, tf};
 use crate::speech::{self, audio};
 use builder::{Line, Speaker, TimedWord, Todo};
@@ -433,10 +433,6 @@ fn process(app: &AppHandle, id: &str) {
     }
     taker.working.lock().unwrap().retain(|w| w != id);
     if result.is_ok() {
-        let engine = crate::flow::get(app).map(|f| f.store.lock().unwrap().prefs.summary_engine).unwrap_or_default();
-        if engine == SummaryEngine::Claude && crate::flow::cleanup::has_key() {
-            summarize(app, id);
-        }
         let title = taker.note(id).map(|n| n.title).unwrap_or_default();
         pill::announce(
             app,
@@ -488,66 +484,6 @@ fn transcript(app: &AppHandle, taker: &Arc<NoteTaker>, id: &str) -> Result<(), S
     let _ = std::fs::remove_file(&system_path);
     crate::log::line(format!("notes: transcript of {count} lines"));
     Ok(())
-}
-
-fn plain_transcript(note: &Note) -> String {
-    note.lines
-        .iter()
-        .map(|l| {
-            let name = note.speakers.iter().find(|s| s.id == l.speaker).map(|s| s.name.clone()).unwrap_or_else(|| l.speaker.clone());
-            format!("{name}: {}", l.text)
-        })
-        .collect::<Vec<_>>()
-        .join("\n")
-}
-
-/// Writes (or writes again) the summary, key points and to-dos of a note.
-fn summarize(app: &AppHandle, id: &str) {
-    let Some(taker) = get(app) else { return };
-    let Some(note) = taker.note(id) else { return };
-    if note.lines.is_empty() {
-        return;
-    }
-    taker.working.lock().unwrap().push(id.to_string());
-    let _ = app.emit_to(crate::HUB_LABEL, "notes-changed", id);
-    let model = app
-        .try_state::<crate::Shared>()
-        .map(|s| s.settings.lock().unwrap().model.clone())
-        .filter(|m| !m.is_empty())
-        .unwrap_or_else(|| crate::claude::DEFAULT_MODEL.to_string());
-    let mut transcript = plain_transcript(&note);
-    if transcript.len() > 400_000 {
-        let mut cut = 400_000;
-        while !transcript.is_char_boundary(cut) {
-            cut -= 1;
-        }
-        transcript.truncate(cut);
-    }
-    let user = format!("<transcript>\n{transcript}\n</transcript>");
-    let reply = tauri::async_runtime::block_on(async {
-        match crate::claude::complete(&model, builder::SUMMARY_INSTRUCTIONS, &user, 2048, Duration::from_secs(120)).await {
-            Ok(text) => Some(text),
-            Err(_) => crate::claude::complete(crate::flow::cleanup::MODEL, builder::SUMMARY_INSTRUCTIONS, &user, 2048, Duration::from_secs(120))
-                .await
-                .ok(),
-        }
-    });
-    taker.working.lock().unwrap().retain(|w| w != id);
-    let Some(reply) = reply else {
-        let _ = app.emit_to(crate::HUB_LABEL, "notes-changed", id);
-        return;
-    };
-    taker.change(app, id, |n| match builder::parse_summary(&reply) {
-        Some(parsed) => {
-            if let Some(title) = parsed.title.filter(|_| !n.title_edited) {
-                n.title = title;
-            }
-            n.summary = Some(parsed.summary);
-            n.key_points = parsed.key_points;
-            n.todos = parsed.todos;
-        }
-        None => n.summary = Some(reply.trim().to_string()),
-    });
 }
 
 /// The note as Markdown: title, date, summary, key points, to-dos, then the transcript.
@@ -675,11 +611,6 @@ pub fn notes_delete(app: AppHandle, taker: State<Arc<NoteTaker>>, id: String) {
     taker.notes.lock().unwrap().retain(|n| n.id != id);
     let _ = std::fs::remove_dir_all(note_dir(&id));
     let _ = app.emit_to(crate::HUB_LABEL, "notes-changed", &id);
-}
-
-#[tauri::command]
-pub fn notes_summarize(app: AppHandle, id: String) {
-    std::thread::spawn(move || summarize(&app, &id));
 }
 
 #[tauri::command]

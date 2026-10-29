@@ -63,25 +63,24 @@ test("placeholders are filled in every language, unknown ones are left as they a
 });
 
 test("plurals follow each language's rules", () => {
-  const files = (n) => tn("{count} repo", "{count} repos", n);
-  assert.equal(files(1), "1 repo");
-  assert.equal(files(3), "3 repos");
+  const models = (n) => tn("✓ Connected · {count} model", "✓ Connected · {count} models", n);
+  assert.equal(models(1), "✓ Connected · 1 model");
+  assert.equal(models(3), "✓ Connected · 3 models");
   inLanguage("fr", () => {
-    assert.equal(files(1), "1 dépôt");
-    assert.equal(files(0), "0 dépôt"); // French: 0 and 1 are singular
-    assert.equal(files(5), "5 dépôts");
+    assert.equal(models(1), "✓ Connecté · 1 modèle");
+    assert.equal(models(0), "✓ Connecté · 0 modèle"); // French: 0 and 1 are singular
+    assert.equal(models(5), "✓ Connecté · 5 modèles");
   });
   inLanguage("ru", () => {
-    assert.equal(files(1), "1 репозиторий");
-    assert.equal(files(3), "3 репозитория");
-    assert.equal(files(5), "5 репозиториев");
-    assert.equal(files(21), "21 репозиторий");
+    assert.equal(models(1), "✓ Подключено · 1 модель");
+    assert.equal(models(21), "✓ Подключено · 21 модель");
+    assert.equal(models(3), "✓ Подключено · 3 модели");
   });
-  inLanguage("zh-Hans", () => assert.equal(files(7), "7 个仓库"));
+  inLanguage("zh-Hans", () => assert.equal(models(7), "✓ 已连接 · 7 个模型"));
   // The Mac's plural entry: Spanish one/other.
   inLanguage("es", () => {
-    assert.equal(tn("✓ Connected · {count} model", "✓ Connected · {count} models", 1), "✓ Conectado · 1 modelo");
-    assert.equal(tn("✓ Connected · {count} model", "✓ Connected · {count} models", 2), "✓ Conectado · 2 modelos");
+    assert.equal(models(1), "✓ Conectado · 1 modelo");
+    assert.equal(models(2), "✓ Conectado · 2 modelos");
   });
 });
 
@@ -128,7 +127,6 @@ test("German translates both tables, fills placeholders and falls back to Englis
     assert.equal(t("Deny"), "Ablehnen");
     assert.equal(t("Open the chat"), "Chat öffnen");
     assert.equal(t("Uploading {name}", { name: "Grüße.pdf" }), "Grüße.pdf wird hochgeladen");
-    assert.equal(t("API error {code}", { code: 401 }), "API-Fehler 401");
     assert.equal(t("A string nobody translated"), "A string nobody translated");
     assert.match(monthShort(9), /^Okt/);
     assert.match(weekdayShort(1), /^Mo/);
@@ -136,13 +134,9 @@ test("German translates both tables, fills placeholders and falls back to Englis
   });
 });
 
-test("German selects singular only for one in both plural catalogs", () => {
+test("German selects singular only for one in the plural catalog", () => {
   inLanguage("de", () => {
     for (const count of [0, 1, 2, 21]) {
-      assert.equal(tn("{count} repo", "{count} repos", count),
-        `${count} ${count === 1 ? "Repository" : "Repositorys"}`);
-      assert.equal(tn("{count} contribution", "{count} contributions", count),
-        `${count} ${count === 1 ? "Beitrag" : "Beiträge"}`);
       assert.equal(tn("✓ Connected · {count} model", "✓ Connected · {count} models", count),
         `✓ Verbunden · ${count} ${count === 1 ? "Modell" : "Modelle"}`);
     }
@@ -214,10 +208,9 @@ test("Turkish translates both tables, interpolates and falls back to English", (
   });
 });
 
-test("Turkish keeps nouns singular after counts in both tables", () => {
+test("Turkish keeps nouns singular after counts", () => {
   inLanguage("tr", () => {
     for (const count of [0, 1, 2, 21]) {
-      assert.equal(tn("{count} repo", "{count} repos", count), `${count} depo`);
       assert.equal(tn("✓ Connected · {count} model", "✓ Connected · {count} models", count),
         `✓ Bağlı · ${count} model`);
     }
@@ -380,7 +373,7 @@ test("every string the code shows is translated in every language", () => {
 test("lookup() answers from the merged tables", () => {
   assert.equal(lookup("Allow", "en"), undefined);
   assert.equal(lookup("Allow", "pt-BR"), "Permitir");
-  assert.equal(typeof lookup("{count} repos", "ru"), "object");
+  assert.equal(typeof lookup("✓ Connected · {count} models", "ru"), "object");
 });
 
 // ── No English left outside t() ───────────────────────────────────────────────

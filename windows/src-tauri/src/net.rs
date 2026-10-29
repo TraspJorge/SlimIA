@@ -80,45 +80,20 @@ pub fn join(base: &Url, tail: &str) -> String {
     format!("{}/{}", base.as_str().trim_end_matches('/'), tail.trim_start_matches('/'))
 }
 
-/// The Messages endpoint for an Anthropic-compatible gateway given in
-/// COUCOU_ANTHROPIC_BASE_URL. A base URL (`https://gw.example.com`,
-/// `…/v1`) gets `/v1/messages` added; a full endpoint is kept. The key goes
-/// wherever this points, so it must be https — plain http only to this machine.
-pub fn anthropic_endpoint(raw: &str) -> Result<Url, String> {
-    const VAR: &str = "COUCOU_ANTHROPIC_BASE_URL";
-    let mut url = Url::parse(raw.trim()).map_err(|_| format!("{VAR} is not a valid URL."))?;
-    match url.scheme() {
-        "https" => {}
-        "http" if is_loopback_url(&url) => {}
-        "http" => return Err(format!("{VAR} must use https:// (plain http only to this computer).")),
-        _ => return Err(format!("{VAR} must start with https://.")),
-    }
-    if !url.username().is_empty() || url.password().is_some() || url.host_str().is_none() {
-        return Err(format!("{VAR} must not carry a user name or password."));
-    }
-    let path = url.path().trim_end_matches('/').to_string();
-    let path = if path.ends_with("/v1/messages") {
-        path
-    } else if path.ends_with("/v1") {
-        format!("{path}/messages")
-    } else {
-        format!("{path}/v1/messages")
-    };
-    url.set_path(&path);
-    url.set_fragment(None);
-    Ok(url)
-}
-
-/// A client for `url`: requests to this machine skip any system proxy, which
-/// would otherwise see (and usually fail) a loopback address.
+/// The one way out of this program: a client for a server on this computer.
+/// Any other address is refused here, so nothing reaches another machine even if
+/// a setting or a caller asks for it. The system proxy is never used, and this
+/// build has no TLS, so an `https://` address could not be reached anyway.
 pub fn client(url: &Url, timeout: Duration) -> Result<reqwest::Client, String> {
-    let mut builder = reqwest::Client::builder()
-        .connect_timeout(Duration::from_secs(10).min(timeout))
-        .timeout(timeout);
-    if is_loopback_url(url) {
-        builder = builder.no_proxy();
+    if !is_loopback_url(url) {
+        return Err("Coucou only talks to servers on this computer.".to_string());
     }
-    builder.build().map_err(|e| e.to_string())
+    reqwest::Client::builder()
+        .connect_timeout(Duration::from_secs(10).min(timeout))
+        .timeout(timeout)
+        .no_proxy()
+        .build()
+        .map_err(|e| e.to_string())
 }
 
 /// The body of `response`, refused past `limit` bytes.
@@ -158,13 +133,24 @@ pub fn error_detail(body: &[u8]) -> String {
     text.trim().chars().take(200).collect()
 }
 
-/// Only the host of an address, for the log: never a path, a query or a key.
-pub fn host_for_log(url: &Url) -> String {
-    match (url.host_str(), url.port()) {
-        (Some(h), Some(p)) => format!("{h}:{p}"),
-        (Some(h), None) => h.to_string(),
-        _ => "?".into(),
+/// Small standalone base64 encoder — not worth another dependency.
+/// Used for the data: URLs of cover images and of the images sent to a local model.
+pub fn base64_for(bytes: &[u8]) -> String {
+    base64(bytes)
+}
+
+fn base64(bytes: &[u8]) -> String {
+    const TABLE: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let mut out = String::with_capacity(bytes.len().div_ceil(3) * 4);
+    for chunk in bytes.chunks(3) {
+        let b = [chunk[0], *chunk.get(1).unwrap_or(&0), *chunk.get(2).unwrap_or(&0)];
+        let n = ((b[0] as u32) << 16) | ((b[1] as u32) << 8) | b[2] as u32;
+        out.push(TABLE[(n >> 18) as usize & 63] as char);
+        out.push(TABLE[(n >> 12) as usize & 63] as char);
+        out.push(if chunk.len() > 1 { TABLE[(n >> 6) as usize & 63] as char } else { '=' });
+        out.push(if chunk.len() > 2 { TABLE[n as usize & 63] as char } else { '=' });
     }
+    out
 }
 
 #[cfg(test)]
@@ -213,19 +199,12 @@ pub(crate) mod tests {
     }
 
     #[test]
-    fn the_anthropic_gateway_is_taken_as_a_base_url_and_must_be_https() {
-        let e = |s: &str| anthropic_endpoint(s).map(|u| u.to_string());
-        assert_eq!(e("https://gw.example.com").unwrap(), "https://gw.example.com/v1/messages");
-        assert_eq!(e("https://gw.example.com/").unwrap(), "https://gw.example.com/v1/messages");
-        assert_eq!(e("https://gw.example.com/anthropic").unwrap(), "https://gw.example.com/anthropic/v1/messages");
-        assert_eq!(e("https://gw.example.com/v1").unwrap(), "https://gw.example.com/v1/messages");
-        assert_eq!(e("https://gw.example.com/v1/messages/").unwrap(), "https://gw.example.com/v1/messages");
-        assert_eq!(e(" http://localhost:4000 ").unwrap(), "http://localhost:4000/v1/messages");
-        assert_eq!(e("http://127.0.0.1:4000/v1").unwrap(), "http://127.0.0.1:4000/v1/messages");
-        assert!(e("http://gw.example.com").is_err());
-        assert!(e("ftp://gw.example.com").is_err());
-        assert!(e("https://me:secret@gw.example.com").is_err());
-        assert!(e("not a url").is_err());
+    fn the_client_is_only_for_this_computer() {
+        let local = Url::parse("http://127.0.0.1:11434").unwrap();
+        assert!(client(&local, Duration::from_secs(1)).is_ok());
+        for remote in ["http://192.168.1.20:11434", "http://example.com", "https://api.openai.com/v1"] {
+            assert!(client(&Url::parse(remote).unwrap(), Duration::from_secs(1)).is_err(), "{remote}");
+        }
     }
 
     #[test]
@@ -235,14 +214,6 @@ pub(crate) mod tests {
         assert_eq!(error_detail(br#"[{"error":{"message":"quota"}}]"#), "quota");
         assert_eq!(error_detail(b"  plain text  "), "plain text");
         assert_eq!(error_detail("x".repeat(500).as_bytes()).len(), 200);
-    }
-
-    #[test]
-    fn only_the_host_goes_to_the_log() {
-        let url = Url::parse("https://gw.example.com:8443/secret/path?key=abc").unwrap();
-        assert_eq!(host_for_log(&url), "gw.example.com:8443");
-        let url = Url::parse("https://gw.example.com/v1/messages").unwrap();
-        assert_eq!(host_for_log(&url), "gw.example.com");
     }
 
     /// One-shot HTTP server on a free port answering the next request with `body`.

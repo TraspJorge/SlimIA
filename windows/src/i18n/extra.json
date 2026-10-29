@@ -53,19 +53,6 @@
       "de": "Eine nicht von Coucou erstellte Hook-Gruppe namens \"coucou\" ist bereits vorhanden — Coucou hat sie nicht verändert.",
       "tr": "Coucou'nun oluşturmadığı \"coucou\" adlı bir hook grubu zaten var — Coucou bunu değiştirmedi."
     },
-    "API error {code}": {
-      "zh-Hans": "API 错误 {code}",
-      "hi": "API त्रुटि {code}",
-      "es": "Error de API {code}",
-      "ar": "خطأ في الواجهة البرمجية {code}",
-      "fr": "Erreur d'API {code}",
-      "bn": "API ত্রুটি {code}",
-      "pt-BR": "Erro de API {code}",
-      "ru": "Ошибка API {code}",
-      "id": "Galat API {code}",
-      "de": "API-Fehler {code}",
-      "tr": "API hatası {code}"
-    },
     "API key (optional)": {
       "zh-Hans": "API 密钥（可选）",
       "hi": "API कुंजी (वैकल्पिक)",
@@ -78,19 +65,6 @@
       "id": "Kunci API (opsional)",
       "de": "API-Schlüssel (optional)",
       "tr": "API anahtarı (isteğe bağlı)"
-    },
-    "API key missing. Open settings.": {
-      "zh-Hans": "缺少 API 密钥。请打开设置。",
-      "hi": "API कुंजी नहीं है। सेटिंग्स खोलें।",
-      "es": "Falta la clave de API. Abre la configuración.",
-      "ar": "مفتاح API مفقود. افتح الإعدادات.",
-      "fr": "Clé d'API manquante. Ouvre les réglages.",
-      "bn": "API কী নেই। সেটিংস খুলুন।",
-      "pt-BR": "Falta a chave de API. Abra as configurações.",
-      "ru": "Нет API-ключа. Откройте настройки.",
-      "id": "Kunci API tidak ada. Buka pengaturan.",
-      "de": "API-Schlüssel fehlt. Öffne die Einstellungen.",
-      "tr": "API anahtarı eksik. Ayarları aç."
     },
     "Answer in terminal": {
       "zh-Hans": "在终端中回答",
@@ -261,19 +235,6 @@
       "de": "Backup → {path}",
       "tr": "Yedek → {path}"
     },
-    "Bad API response: {error}": {
-      "zh-Hans": "API 响应无效：{error}",
-      "hi": "API का जवाब गलत है: {error}",
-      "es": "Respuesta de la API no válida: {error}",
-      "ar": "استجابة غير صالحة من الواجهة البرمجية: {error}",
-      "fr": "Réponse de l'API invalide : {error}",
-      "bn": "API-র উত্তর ঠিক নয়: {error}",
-      "pt-BR": "Resposta da API inválida: {error}",
-      "ru": "Некорректный ответ API: {error}",
-      "id": "Respons API tidak valid: {error}",
-      "de": "Ungültige API-Antwort: {error}",
-      "tr": "Geçersiz API yanıtı: {error}"
-    },
     "Can't read {path}: {error}": {
       "zh-Hans": "无法读取 {path}：{error}",
       "hi": "{path} पढ़ा नहीं जा सकता: {error}",
@@ -286,19 +247,6 @@
       "id": "Tidak dapat membaca {path}: {error}",
       "de": "{path} kann nicht gelesen werden: {error}",
       "tr": "{path} okunamıyor: {error}"
-    },
-    "Canceled": {
-      "zh-Hans": "已取消",
-      "hi": "रद्द",
-      "es": "Cancelado",
-      "ar": "أُلغي",
-      "fr": "Annulé",
-      "bn": "বাতিল",
-      "pt-BR": "Cancelado",
-      "ru": "Отменено",
-      "id": "Dibatalkan",
-      "de": "Abgebrochen",
-      "tr": "İptal edildi"
     },
     "Cannot copy: {error}": {
       "zh-Hans": "无法复制：{error}",
@@ -339,32 +287,6 @@
       "de": "{path} kann nicht gelesen werden: {error}",
       "tr": "{path} okunamıyor: {error}"
     },
-    "Chat providers": {
-      "zh-Hans": "聊天服务商",
-      "hi": "चैट प्रदाता",
-      "es": "Proveedores de chat",
-      "ar": "مزوّدو الدردشة",
-      "fr": "Fournisseurs de chat",
-      "bn": "চ্যাট প্রদানকারী",
-      "pt-BR": "Provedores de chat",
-      "ru": "Провайдеры чата",
-      "id": "Penyedia obrolan",
-      "de": "Chatanbieter",
-      "tr": "Sohbet sağlayıcıları"
-    },
-    "Chat with Google AI, OpenAI or OpenRouter instead of Claude: add a key here, then click the model name above the chat box to switch provider and model. Keys stay in the system keychain. These providers get no web search and no tools: they can answer, never act on this computer.": {
-      "zh-Hans": "用 Google AI、OpenAI 或 OpenRouter 代替 Claude 聊天：在这里添加密钥，然后点击聊天框上方的模型名称来切换服务商和模型。密钥保存在系统钥匙串中。这些服务商没有网页搜索和工具：它们只能回答，绝不会在这台电脑上执行操作。",
-      "hi": "Claude की जगह Google AI, OpenAI या OpenRouter से चैट करें: यहाँ एक कुंजी जोड़ें, फिर प्रदाता और मॉडल बदलने के लिए चैट बॉक्स के ऊपर मॉडल के नाम पर क्लिक करें। कुंजियाँ सिस्टम कीचेन में रहती हैं। इन प्रदाताओं को न वेब सर्च मिलता है न टूल: वे जवाब दे सकते हैं, इस कंप्यूटर पर कभी कुछ नहीं करते।",
-      "es": "Chatea con Google AI, OpenAI u OpenRouter en lugar de Claude: añade una clave aquí y luego haz clic en el nombre del modelo encima del cuadro de chat para cambiar de proveedor y modelo. Las claves se quedan en el llavero del sistema. Estos proveedores no tienen búsqueda web ni herramientas: pueden responder, nunca actuar en este equipo.",
-      "ar": "دردش مع Google AI أو OpenAI أو OpenRouter بدلًا من Claude: أضف مفتاحًا هنا، ثم انقر على اسم النموذج فوق مربع الدردشة لتبديل المزوّد والنموذج. تبقى المفاتيح في سلسلة مفاتيح النظام. لا يحصل هؤلاء المزوّدون على بحث الويب ولا على الأدوات: يمكنهم الإجابة، ولا يتصرفون أبدًا على هذا الحاسوب.",
-      "fr": "Discute avec Google AI, OpenAI ou OpenRouter à la place de Claude : ajoute une clé ici, puis clique sur le nom du modèle au-dessus de la zone de chat pour changer de fournisseur et de modèle. Les clés restent dans le trousseau du système. Ces fournisseurs n'ont ni recherche web ni outils : ils peuvent répondre, jamais agir sur cet ordinateur.",
-      "bn": "Claude-এর বদলে Google AI, OpenAI বা OpenRouter-এর সঙ্গে চ্যাট করুন: এখানে একটি কী যোগ করুন, তারপর প্রদানকারী ও মডেল বদলাতে চ্যাট বক্সের উপরে মডেলের নামে ক্লিক করুন। কী সিস্টেম কীচেইনে থাকে। এই প্রদানকারীরা ওয়েব সার্চ বা টুল পায় না: তারা উত্তর দিতে পারে, এই কম্পিউটারে কখনো কিছু করে না।",
-      "pt-BR": "Converse com Google AI, OpenAI ou OpenRouter em vez do Claude: adicione uma chave aqui e clique no nome do modelo acima da caixa de chat para trocar de provedor e de modelo. As chaves ficam no chaveiro do sistema. Esses provedores não têm busca na web nem ferramentas: podem responder, nunca agir neste computador.",
-      "ru": "Общайтесь с Google AI, OpenAI или OpenRouter вместо Claude: добавьте ключ здесь, затем нажмите на название модели над полем чата, чтобы сменить провайдера и модель. Ключи хранятся в системной связке ключей. У этих провайдеров нет веб-поиска и инструментов: они могут отвечать, но никогда не действуют на этом компьютере.",
-      "id": "Mengobrol dengan Google AI, OpenAI, atau OpenRouter sebagai ganti Claude: tambahkan kunci di sini, lalu klik nama model di atas kotak obrolan untuk mengganti penyedia dan model. Kunci tetap di keychain sistem. Penyedia ini tidak punya pencarian web maupun alat: mereka bisa menjawab, tidak pernah bertindak di komputer ini.",
-      "de": "Chatte mit Google AI, OpenAI oder OpenRouter statt mit Claude: Hinterlege hier einen Schlüssel und klicke dann auf den Modellnamen über dem Chatfeld, um Anbieter und Modell zu wechseln. Schlüssel bleiben im Systemschlüsselbund. Diese Anbieter erhalten weder Websuche noch Werkzeuge: Sie können antworten, aber auf diesem Computer keine Aktionen ausführen.",
-      "tr": "Claude yerine Google AI, OpenAI veya OpenRouter ile sohbet et: buraya bir anahtar ekle, ardından sağlayıcı ve model değiştirmek için sohbet kutusunun üstündeki model adına tıkla. Anahtarlar sistemin anahtar zincirinde kalır. Bu sağlayıcılarda web araması ve araçlar yoktur: yanıt verebilirler, bu bilgisayarda işlem yapamazlar."
-    },
     "Chat with a model you run yourself: Ollama or LM Studio (leave the address empty for the usual one on this computer), or any server that speaks the OpenAI API, such as vLLM or llama.cpp. Once connected, pick it above the chat box.": {
       "zh-Hans": "与你自己运行的模型聊天：Ollama 或 LM Studio（地址留空即使用本机的默认地址），或任何兼容 OpenAI API 的服务器，例如 vLLM 或 llama.cpp。连接后，在聊天框上方选择它。",
       "hi": "अपने चलाए मॉडल से चैट करें: Ollama या LM Studio (इस कंप्यूटर के सामान्य पते के लिए पता खाली छोड़ें), या OpenAI API बोलने वाला कोई भी सर्वर, जैसे vLLM या llama.cpp। कनेक्ट होने के बाद, उसे चैट बॉक्स के ऊपर चुनें।",
@@ -390,32 +312,6 @@
       "id": "Pilih model",
       "de": "Modell auswählen",
       "tr": "Model seç"
-    },
-    "Classic token with the repo scope, or fine-grained with read access to Pull requests, Commit statuses and Actions.": {
-      "zh-Hans": "带 repo 权限范围的经典令牌，或对 Pull requests、Commit statuses 和 Actions 具有读取权限的细粒度令牌。",
-      "hi": "repo स्कोप वाला क्लासिक टोकन, या Pull requests, Commit statuses और Actions पर पढ़ने की अनुमति वाला fine-grained टोकन।",
-      "es": "Token clásico con el alcance repo, o detallado (fine-grained) con acceso de lectura a Pull requests, Commit statuses y Actions.",
-      "ar": "رمز كلاسيكي بنطاق repo، أو رمز دقيق الصلاحيات مع إذن قراءة لـ Pull requests وCommit statuses وActions.",
-      "fr": "Jeton classique avec la portée repo, ou à granularité fine avec un accès en lecture aux Pull requests, Commit statuses et Actions.",
-      "bn": "repo স্কোপসহ ক্লাসিক টোকেন, অথবা Pull requests, Commit statuses ও Actions-এ পড়ার অনুমতিসহ fine-grained টোকেন।",
-      "pt-BR": "Token clássico com o escopo repo, ou refinado (fine-grained) com acesso de leitura a Pull requests, Commit statuses e Actions.",
-      "ru": "Классический токен с областью repo или детализированный (fine-grained) с доступом на чтение к Pull requests, Commit statuses и Actions.",
-      "id": "Token klasik dengan cakupan repo, atau fine-grained dengan akses baca ke Pull requests, Commit statuses, dan Actions.",
-      "de": "Klassisches Token mit repo-Berechtigung oder ein fein abgestuftes Token mit Lesezugriff auf Pull Requests, Commit-Status und Actions.",
-      "tr": "repo kapsamına sahip klasik token veya Pull requests, Commit statuses ve Actions için okuma erişimi olan ayrıntılı token."
-    },
-    "Claude declined this one.": {
-      "zh-Hans": "Claude 拒绝了这个请求。",
-      "hi": "Claude ने इसे मना कर दिया।",
-      "es": "Claude ha rechazado esta petición.",
-      "ar": "رفض Claude هذا الطلب.",
-      "fr": "Claude a décliné cette demande.",
-      "bn": "Claude এটি প্রত্যাখ্যান করেছে।",
-      "pt-BR": "O Claude recusou este pedido.",
-      "ru": "Claude отклонил этот запрос.",
-      "id": "Claude menolak permintaan ini.",
-      "de": "Claude hat diese Anfrage abgelehnt.",
-      "tr": "Claude bunu reddetti."
     },
     "Claude needs an answer.": {
       "zh-Hans": "Claude 需要一个回答。",
@@ -599,19 +495,6 @@
       "de": "{path} konnte nicht entfernt werden: {error}",
       "tr": "{path} kaldırılamadı: {error}"
     },
-    "Could not remove: {error}": {
-      "zh-Hans": "无法移除：{error}",
-      "hi": "हटाया नहीं जा सका: {error}",
-      "es": "No se pudo quitar: {error}",
-      "ar": "تعذّرت الإزالة: {error}",
-      "fr": "Suppression impossible : {error}",
-      "bn": "সরানো যায়নি: {error}",
-      "pt-BR": "Não foi possível remover: {error}",
-      "ru": "Не удалось удалить: {error}",
-      "id": "Tidak dapat menghapus: {error}",
-      "de": "Entfernen fehlgeschlagen: {error}",
-      "tr": "Kaldırılamadı: {error}"
-    },
     "Could not save the image: {error}": {
       "zh-Hans": "无法保存图片：{error}",
       "hi": "छवि सहेजी नहीं जा सकी: {error}",
@@ -637,19 +520,6 @@
       "id": "Tidak dapat menyimpan baris status Anda saat ini di samping relay; tidak ada yang diubah.",
       "de": "Deine aktuelle Statuszeile konnte nicht neben dem Relay gespeichert werden; nichts wurde verändert.",
       "tr": "Mevcut durum satırın aracının yanına kaydedilemedi; hiçbir şey değiştirilmedi."
-    },
-    "Could not save: {error}": {
-      "zh-Hans": "无法保存：{error}",
-      "hi": "सहेजा नहीं जा सका: {error}",
-      "es": "No se pudo guardar: {error}",
-      "ar": "تعذّر الحفظ: {error}",
-      "fr": "Enregistrement impossible : {error}",
-      "bn": "সংরক্ষণ করা যায়নি: {error}",
-      "pt-BR": "Não foi possível salvar: {error}",
-      "ru": "Не удалось сохранить: {error}",
-      "id": "Tidak dapat menyimpan: {error}",
-      "de": "Speichern fehlgeschlagen: {error}",
-      "tr": "Kaydedilemedi: {error}"
     },
     "Could not write: {error}": {
       "zh-Hans": "无法写入：{error}",
@@ -689,45 +559,6 @@
       "id": "Server kustom",
       "de": "Eigener Server",
       "tr": "Özel sunucu"
-    },
-    "Default branch CI": {
-      "zh-Hans": "默认分支 CI",
-      "hi": "डिफ़ॉल्ट ब्रांच CI",
-      "es": "CI de la rama principal",
-      "ar": "CI للفرع الافتراضي",
-      "fr": "CI de la branche par défaut",
-      "bn": "ডিফল্ট ব্রাঞ্চ CI",
-      "pt-BR": "CI do branch padrão",
-      "ru": "CI основной ветки",
-      "id": "CI cabang utama",
-      "de": "CI des Standardbranches",
-      "tr": "Varsayılan dal CI durumu"
-    },
-    "Deployment": {
-      "zh-Hans": "部署",
-      "hi": "डिप्लॉयमेंट",
-      "es": "Despliegue",
-      "ar": "نشر",
-      "fr": "Déploiement",
-      "bn": "ডিপ্লয়মেন্ট",
-      "pt-BR": "Implantação",
-      "ru": "Развёртывание",
-      "id": "Deployment",
-      "de": "Bereitstellung",
-      "tr": "Dağıtım"
-    },
-    "Details": {
-      "zh-Hans": "详情",
-      "hi": "विवरण",
-      "es": "Detalles",
-      "ar": "التفاصيل",
-      "fr": "Détails",
-      "bn": "বিস্তারিত",
-      "pt-BR": "Detalhes",
-      "ru": "Подробности",
-      "id": "Detail",
-      "de": "Details",
-      "tr": "Ayrıntılar"
     },
     "Display under the cursor": {
       "zh-Hans": "光标所在的显示器",
@@ -858,19 +689,6 @@
       "id": "Masukkan alamat server terlebih dahulu.",
       "de": "Gib zuerst die Serveradresse ein.",
       "tr": "Önce sunucu adresini gir."
-    },
-    "Error": {
-      "zh-Hans": "错误",
-      "hi": "त्रुटि",
-      "es": "Error",
-      "ar": "خطأ",
-      "fr": "Erreur",
-      "bn": "ত্রুটি",
-      "pt-BR": "Erro",
-      "ru": "Ошибка",
-      "id": "Galat",
-      "de": "Fehler",
-      "tr": "Hata"
     },
     "File": {
       "zh-Hans": "文件",
@@ -1093,58 +911,6 @@
       "de": "Installieren…",
       "tr": "Kur…"
     },
-    "Instance URL": {
-      "zh-Hans": "实例地址",
-      "hi": "इंस्टेंस URL",
-      "es": "URL de la instancia",
-      "ar": "عنوان المثيل",
-      "fr": "URL de l'instance",
-      "bn": "ইনস্ট্যান্স URL",
-      "pt-BR": "URL da instância",
-      "ru": "URL экземпляра",
-      "id": "URL instans",
-      "de": "Instanz-URL",
-      "tr": "Sunucu URL'si"
-    },
-    "Integration lacks access": {
-      "zh-Hans": "集成没有访问权限",
-      "hi": "इंटीग्रेशन के पास पहुँच नहीं है",
-      "es": "La integración no tiene acceso",
-      "ar": "التكامل لا يملك صلاحية الوصول",
-      "fr": "L'intégration n'a pas l'accès",
-      "bn": "ইন্টিগ্রেশনের অ্যাক্সেস নেই",
-      "pt-BR": "A integração não tem acesso",
-      "ru": "У интеграции нет доступа",
-      "id": "Integrasi tidak punya akses",
-      "de": "Integration hat keinen Zugriff",
-      "tr": "Entegrasyonun erişimi yok"
-    },
-    "Integration token": {
-      "zh-Hans": "集成令牌",
-      "hi": "इंटीग्रेशन टोकन",
-      "es": "Token de integración",
-      "ar": "رمز التكامل",
-      "fr": "Jeton d'intégration",
-      "bn": "ইন্টিগ্রেশন টোকেন",
-      "pt-BR": "Token de integração",
-      "ru": "Токен интеграции",
-      "id": "Token integrasi",
-      "de": "Integrationstoken",
-      "tr": "Entegrasyon token'ı"
-    },
-    "Invalid API key (401)": {
-      "zh-Hans": "API 密钥无效（401）",
-      "hi": "अमान्य API कुंजी (401)",
-      "es": "Clave de API no válida (401)",
-      "ar": "مفتاح API غير صالح (401)",
-      "fr": "Clé d'API invalide (401)",
-      "bn": "অবৈধ API কী (401)",
-      "pt-BR": "Chave de API inválida (401)",
-      "ru": "Неверный API-ключ (401)",
-      "id": "Kunci API tidak valid (401)",
-      "de": "Ungültiger API-Schlüssel (401)",
-      "tr": "Geçersiz API anahtarı (401)"
-    },
     "Island lives on": {
       "zh-Hans": "岛所在位置",
       "hi": "आइलैंड कहाँ रहे",
@@ -1170,71 +936,6 @@
       "id": "Biarkan pulau tetap terbuka",
       "de": "Insel geöffnet halten",
       "tr": "Adayı açık tut"
-    },
-    "Key configured": {
-      "zh-Hans": "密钥已配置",
-      "hi": "कुंजी सेट है",
-      "es": "Clave configurada",
-      "ar": "المفتاح مُعدّ",
-      "fr": "Clé configurée",
-      "bn": "কী সেট করা আছে",
-      "pt-BR": "Chave configurada",
-      "ru": "Ключ настроен",
-      "id": "Kunci sudah diatur",
-      "de": "Schlüssel eingerichtet",
-      "tr": "Anahtar yapılandırıldı"
-    },
-    "Key from {site}": {
-      "zh-Hans": "密钥来自 {site}",
-      "hi": "कुंजी {site} से",
-      "es": "Clave de {site}",
-      "ar": "المفتاح من {site}",
-      "fr": "Clé sur {site}",
-      "bn": "কী পাবেন {site}-এ",
-      "pt-BR": "Chave em {site}",
-      "ru": "Ключ на {site}",
-      "id": "Kunci dari {site}",
-      "de": "Schlüssel von {site}",
-      "tr": "{site} üzerinden anahtar al"
-    },
-    "Key lacks access": {
-      "zh-Hans": "密钥没有访问权限",
-      "hi": "कुंजी के पास पहुँच नहीं है",
-      "es": "La clave no tiene acceso",
-      "ar": "المفتاح لا يملك صلاحية الوصول",
-      "fr": "La clé n'a pas l'accès",
-      "bn": "কী-এর অ্যাক্সেস নেই",
-      "pt-BR": "A chave não tem acesso",
-      "ru": "У ключа нет доступа",
-      "id": "Kunci tidak punya akses",
-      "de": "Schlüssel hat keinen Zugriff",
-      "tr": "Anahtarın erişimi yok"
-    },
-    "Key removed.": {
-      "zh-Hans": "密钥已移除。",
-      "hi": "कुंजी हटा दी गई।",
-      "es": "Clave quitada.",
-      "ar": "أُزيل المفتاح.",
-      "fr": "Clé retirée.",
-      "bn": "কী সরানো হয়েছে।",
-      "pt-BR": "Chave removida.",
-      "ru": "Ключ удалён.",
-      "id": "Kunci dihapus.",
-      "de": "Schlüssel entfernt.",
-      "tr": "Anahtar kaldırıldı."
-    },
-    "Key saved in the {store}.": {
-      "zh-Hans": "密钥已保存在 {store} 中。",
-      "hi": "कुंजी {store} में सहेजी गई है।",
-      "es": "Clave guardada en {store}.",
-      "ar": "حُفظ المفتاح في {store}.",
-      "fr": "Clé enregistrée dans {store}.",
-      "bn": "কী {store}-এ সংরক্ষিত।",
-      "pt-BR": "Chave salva em {store}.",
-      "ru": "Ключ сохранён в {store}.",
-      "id": "Kunci tersimpan di {store}.",
-      "de": "Schlüssel im {store} gespeichert.",
-      "tr": "Anahtar {store} içinde kaydedildi."
     },
     "Later — keep it waiting": {
       "zh-Hans": "稍后 — 让它等着",
@@ -1300,19 +1001,6 @@
       "id": "Alat utama",
       "de": "Hauptwerkzeug",
       "tr": "Ana araç"
-    },
-    "Meeting": {
-      "zh-Hans": "会议",
-      "hi": "मीटिंग",
-      "es": "Reunión",
-      "ar": "اجتماع",
-      "fr": "Réunion",
-      "bn": "মিটিং",
-      "pt-BR": "Reunião",
-      "ru": "Встреча",
-      "id": "Rapat",
-      "de": "Besprechung",
-      "tr": "Toplantı"
     },
     "Monday": {
       "zh-Hans": "星期一",
@@ -1392,19 +1080,6 @@
       "de": "Nächste Pill",
       "tr": "Sonraki araç"
     },
-    "No API key — add it in Settings.": {
-      "zh-Hans": "没有 API 密钥 — 请在设置中添加。",
-      "hi": "कोई API कुंजी नहीं — इसे सेटिंग्स में जोड़ें।",
-      "es": "No hay clave de API — añádela en Configuración.",
-      "ar": "لا يوجد مفتاح API — أضفه من الإعدادات.",
-      "fr": "Pas de clé d'API — ajoute-la dans les Réglages.",
-      "bn": "কোনো API কী নেই — সেটিংসে যোগ করুন।",
-      "pt-BR": "Sem chave de API — adicione nas Configurações.",
-      "ru": "Нет API-ключа — добавьте его в настройках.",
-      "id": "Tidak ada kunci API — tambahkan di Pengaturan.",
-      "de": "Kein API-Schlüssel — füge ihn in den Einstellungen hinzu.",
-      "tr": "API anahtarı yok — Ayarlar'dan ekle."
-    },
     "No Pictures or Downloads folder to save into.": {
       "zh-Hans": "没有可保存的“图片”或“下载”文件夹。",
       "hi": "सहेजने के लिए कोई Pictures या Downloads फ़ोल्डर नहीं है।",
@@ -1431,19 +1106,6 @@
       "de": "Keine Änderung.",
       "tr": "Değişiklik yok."
     },
-    "No connection: {error}": {
-      "zh-Hans": "无连接：{error}",
-      "hi": "कोई कनेक्शन नहीं: {error}",
-      "es": "Sin conexión: {error}",
-      "ar": "لا يوجد اتصال: {error}",
-      "fr": "Pas de connexion : {error}",
-      "bn": "সংযোগ নেই: {error}",
-      "pt-BR": "Sem conexão: {error}",
-      "ru": "Нет соединения: {error}",
-      "id": "Tidak ada koneksi: {error}",
-      "de": "Keine Verbindung: {error}",
-      "tr": "Bağlantı yok: {error}"
-    },
     "No display server was found, so global shortcuts are off.": {
       "zh-Hans": "未找到显示服务器，因此全局快捷键已关闭。",
       "hi": "कोई डिस्प्ले सर्वर नहीं मिला, इसलिए ग्लोबल शॉर्टकट बंद हैं।",
@@ -1469,19 +1131,6 @@
       "id": "Belum ada file — tidak ada yang perlu dicadangkan.",
       "de": "Keine vorhandene Datei — nichts zu sichern.",
       "tr": "Mevcut dosya yok — yedeklenecek bir şey yok."
-    },
-    "No key yet — the chat needs one.": {
-      "zh-Hans": "还没有密钥 — 聊天需要一个。",
-      "hi": "अभी कोई कुंजी नहीं — चैट को एक चाहिए।",
-      "es": "Aún no hay clave — el chat necesita una.",
-      "ar": "لا يوجد مفتاح بعد — تحتاج الدردشة إلى مفتاح.",
-      "fr": "Pas encore de clé — le chat en a besoin.",
-      "bn": "এখনো কোনো কী নেই — চ্যাটের একটি লাগবে।",
-      "pt-BR": "Ainda não há chave — o chat precisa de uma.",
-      "ru": "Ключа пока нет — он нужен для чата.",
-      "id": "Belum ada kunci — obrolan membutuhkannya.",
-      "de": "Noch kein Schlüssel — der Chat benötigt einen.",
-      "tr": "Henüz anahtar yok — sohbet için gerekli."
     },
     "No models yet. Download one in {name} first.": {
       "zh-Hans": "还没有模型。请先在 {name} 中下载一个。",
@@ -1521,19 +1170,6 @@
       "id": "Belum ada settings.json — tidak ada yang perlu dicadangkan.",
       "de": "Noch keine settings.json — nichts zu sichern.",
       "tr": "Henüz settings.json yok — yedeklenecek bir şey yok."
-    },
-    "No telemetry. Network requests only go to the services you configure yourself.": {
-      "zh-Hans": "没有遥测。网络请求只会发往你自己配置的服务。",
-      "hi": "कोई टेलीमेट्री नहीं। नेटवर्क अनुरोध केवल उन्हीं सेवाओं को जाते हैं जिन्हें आप खुद सेट करते हैं।",
-      "es": "Sin telemetría. Las solicitudes de red solo van a los servicios que configuras tú.",
-      "ar": "لا قياس عن بُعد. تذهب طلبات الشبكة فقط إلى الخدمات التي تضبطها بنفسك.",
-      "fr": "Aucune télémétrie. Les requêtes réseau ne vont qu'aux services que tu configures toi-même.",
-      "bn": "কোনো টেলিমেট্রি নেই। নেটওয়ার্ক অনুরোধ শুধু আপনার নিজের সেট করা পরিষেবাগুলোতেই যায়।",
-      "pt-BR": "Sem telemetria. As requisições de rede só vão para os serviços que você mesmo configura.",
-      "ru": "Никакой телеметрии. Сетевые запросы идут только к сервисам, которые вы настроили сами.",
-      "id": "Tanpa telemetri. Permintaan jaringan hanya ke layanan yang Anda atur sendiri.",
-      "de": "Keine Telemetrie. Netzwerkanfragen gehen nur an Dienste, die du selbst einrichtest.",
-      "tr": "Telemetri yok. Ağ istekleri yalnızca kendin yapılandırdığın servislere gönderilir."
     },
     "Not a valid address: {address}": {
       "zh-Hans": "不是有效的地址：{address}",
@@ -1717,32 +1353,6 @@
       "de": "PDF",
       "tr": "PDF"
     },
-    "Payment": {
-      "zh-Hans": "付款",
-      "hi": "भुगतान",
-      "es": "Pago",
-      "ar": "دفعة",
-      "fr": "Paiement",
-      "bn": "পেমেন্ট",
-      "pt-BR": "Pagamento",
-      "ru": "Платёж",
-      "id": "Pembayaran",
-      "de": "Zahlung",
-      "tr": "Ödeme"
-    },
-    "Personal access token with read_api and read_user scopes.": {
-      "zh-Hans": "具有 read_api 和 read_user 权限的个人访问令牌。",
-      "hi": "read_api और read_user स्कोप वाला व्यक्तिगत एक्सेस टोकन।",
-      "es": "Token de acceso personal con los permisos read_api y read_user.",
-      "ar": "رمز وصول شخصي بصلاحيتي read_api وread_user.",
-      "fr": "Jeton d’accès personnel avec les autorisations read_api et read_user.",
-      "bn": "read_api ও read_user অনুমতিসহ ব্যক্তিগত অ্যাক্সেস টোকেন।",
-      "pt-BR": "Token de acesso pessoal com os escopos read_api e read_user.",
-      "ru": "Личный токен доступа с правами read_api и read_user.",
-      "id": "Token akses pribadi dengan cakupan read_api dan read_user.",
-      "de": "Persönliches Zugriffstoken mit den Berechtigungen read_api und read_user.",
-      "tr": "read_api ve read_user kapsamlarına sahip kişisel erişim belirteci."
-    },
     "Pick a model above the chat box first.": {
       "zh-Hans": "请先在聊天框上方选择一个模型。",
       "hi": "पहले चैट बॉक्स के ऊपर एक मॉडल चुनें।",
@@ -1755,32 +1365,6 @@
       "id": "Pilih model di atas kotak obrolan terlebih dahulu.",
       "de": "Wähle zuerst ein Modell über dem Chatfeld aus.",
       "tr": "Önce sohbet kutusunun üstünden bir model seç."
-    },
-    "Pick a {name} model above the chat box.": {
-      "zh-Hans": "请在聊天框上方选择一个 {name} 模型。",
-      "hi": "चैट बॉक्स के ऊपर {name} का एक मॉडल चुनें।",
-      "es": "Elige un modelo de {name} encima del cuadro de chat.",
-      "ar": "اختر نموذجًا من {name} فوق مربع الدردشة.",
-      "fr": "Choisis un modèle {name} au-dessus de la zone de chat.",
-      "bn": "চ্যাট বক্সের উপরে {name}-এর একটি মডেল বেছে নিন।",
-      "pt-BR": "Escolha um modelo do {name} acima da caixa de chat.",
-      "ru": "Выберите модель {name} над полем чата.",
-      "id": "Pilih model {name} di atas kotak obrolan.",
-      "de": "Wähle ein {name}-Modell über dem Chatfeld aus.",
-      "tr": "Sohbet kutusunun üstünden bir {name} modeli seç."
-    },
-    "Pick up to {max} pills to show next to Mochi — {used}/{max} in use. Keys are stored in the {store}, never on disk.": {
-      "zh-Hans": "最多选择 {max} 个标签显示在 Mochi 旁边 — 已用 {used}/{max}。密钥保存在 {store} 中，绝不写入磁盘。",
-      "hi": "Mochi के बगल में दिखाने के लिए अधिकतम {max} टैब चुनें — {used}/{max} उपयोग में। कुंजियाँ {store} में रखी जाती हैं, डिस्क पर कभी नहीं।",
-      "es": "Elige hasta {max} pestañas para mostrar junto a Mochi — {used}/{max} en uso. Las claves se guardan en {store}, nunca en el disco.",
-      "ar": "اختر حتى {max} تبويبات لعرضها بجانب Mochi — {used}/{max} مستخدمة. تُحفظ المفاتيح في {store}، ولا تُكتب على القرص أبدًا.",
-      "fr": "Choisis jusqu'à {max} onglets à afficher à côté de Mochi — {used}/{max} utilisés. Les clés sont stockées dans {store}, jamais sur le disque.",
-      "bn": "Mochi-র পাশে দেখাতে সর্বোচ্চ {max}টি ট্যাব বেছে নিন — {used}/{max} ব্যবহৃত। কী {store}-এ রাখা হয়, কখনো ডিস্কে নয়।",
-      "pt-BR": "Escolha até {max} abas para mostrar ao lado do Mochi — {used}/{max} em uso. As chaves ficam em {store}, nunca no disco.",
-      "ru": "Выберите до {max} вкладок рядом с Mochi — занято {used}/{max}. Ключи хранятся в {store}, никогда на диске.",
-      "id": "Pilih hingga {max} tab untuk ditampilkan di samping Mochi — {used}/{max} terpakai. Kunci disimpan di {store}, tidak pernah di disk.",
-      "de": "Wähle bis zu {max} Pills neben Mochi — {used}/{max} belegt. Schlüssel werden im {store} gespeichert, niemals auf der Festplatte.",
-      "tr": "Mochi'nin yanında gösterilecek en fazla {max} araç seç — {used}/{max} kullanımda. Anahtarlar {store} içinde saklanır, diske yazılmaz."
     },
     "Press keys…": {
       "zh-Hans": "请按键…",
@@ -1821,19 +1405,6 @@
       "de": "Fragen",
       "tr": "Sorular"
     },
-    "Ready": {
-      "zh-Hans": "就绪",
-      "hi": "तैयार",
-      "es": "Listo",
-      "ar": "جاهز",
-      "fr": "Prêt",
-      "bn": "প্রস্তুত",
-      "pt-BR": "Pronto",
-      "ru": "Готово",
-      "id": "Siap",
-      "de": "Bereit",
-      "tr": "Hazır"
-    },
     "Reinstall hooks…": {
       "zh-Hans": "重新安装 hooks…",
       "hi": "hooks फिर से इंस्टॉल करें…",
@@ -1872,19 +1443,6 @@
       "id": "Relay",
       "de": "Relay",
       "tr": "Aracı"
-    },
-    "Repositories": {
-      "zh-Hans": "仓库",
-      "hi": "रिपॉज़िटरी",
-      "es": "Repositorios",
-      "ar": "المستودعات",
-      "fr": "Dépôts",
-      "bn": "রিপোজিটরি",
-      "pt-BR": "Repositórios",
-      "ru": "Репозитории",
-      "id": "Repositori",
-      "de": "Repositorys",
-      "tr": "Depolar"
     },
     "Reset to defaults": {
       "zh-Hans": "恢复默认",
@@ -1990,19 +1548,6 @@
       "de": "Bild speichern",
       "tr": "Görseli kaydet"
     },
-    "Save key": {
-      "zh-Hans": "保存密钥",
-      "hi": "कुंजी सहेजें",
-      "es": "Guardar clave",
-      "ar": "حفظ المفتاح",
-      "fr": "Enregistrer la clé",
-      "bn": "কী সংরক্ষণ করুন",
-      "pt-BR": "Salvar chave",
-      "ru": "Сохранить ключ",
-      "id": "Simpan kunci",
-      "de": "Schlüssel speichern",
-      "tr": "Anahtarı kaydet"
-    },
     "Saved as {name}": {
       "zh-Hans": "已保存为 {name}",
       "hi": "{name} के रूप में सहेजा गया",
@@ -2016,19 +1561,6 @@
       "de": "Als {name} gespeichert",
       "tr": "{name} olarak kaydedildi"
     },
-    "Saved. It never touches disk.": {
-      "zh-Hans": "已保存。它从不写入磁盘。",
-      "hi": "सहेजी गई। यह कभी डिस्क पर नहीं जाती।",
-      "es": "Guardada. Nunca toca el disco.",
-      "ar": "تم الحفظ. لا يُكتب على القرص أبدًا.",
-      "fr": "Enregistrée. Elle ne touche jamais le disque.",
-      "bn": "সংরক্ষিত। এটি কখনো ডিস্কে লেখা হয় না।",
-      "pt-BR": "Salva. Ela nunca vai para o disco.",
-      "ru": "Сохранено. Ключ никогда не попадает на диск.",
-      "id": "Tersimpan. Kunci tidak pernah ditulis ke disk.",
-      "de": "Gespeichert. Wird niemals auf die Festplatte geschrieben.",
-      "tr": "Kaydedildi. Diske hiçbir zaman yazılmaz."
-    },
     "Saving…": {
       "zh-Hans": "正在保存…",
       "hi": "सहेजा जा रहा है…",
@@ -2041,19 +1573,6 @@
       "id": "Menyimpan…",
       "de": "Wird gespeichert…",
       "tr": "Kaydediliyor…"
-    },
-    "Secret key": {
-      "zh-Hans": "私密密钥",
-      "hi": "सीक्रेट कुंजी",
-      "es": "Clave secreta",
-      "ar": "المفتاح السري",
-      "fr": "Clé secrète",
-      "bn": "সিক্রেট কী",
-      "pt-BR": "Chave secreta",
-      "ru": "Секретный ключ",
-      "id": "Kunci rahasia",
-      "de": "Geheimer Schlüssel",
-      "tr": "Gizli anahtar"
     },
     "Send Mochi to the desktop": {
       "zh-Hans": "把 Mochi 送到桌面",
@@ -2171,19 +1690,6 @@
       "id": "Menampilkan pemakaian paket Claude Anda (batas 5 jam dan mingguan) di header pulau. Coucou menambahkan relay baris status di ~/.claude/settings.json. Jika Anda sudah punya baris status, baris itu tetap berjalan seperti biasa. Khusus paket Pro dan Max.",
       "de": "Zeigt deine Claude-Tarifnutzung (5-Stunden- und Wochenlimits) im Insel-Kopfbereich. Coucou ergänzt einen Statuszeilen-Relay in ~/.claude/settings.json. Eine bestehende Statuszeile funktioniert wie bisher. Nur für Pro- und Max-Tarife.",
       "tr": "Claude plan kullanımını (5 saatlik ve haftalık sınırlar) adanın başlığında gösterir. Coucou, ~/.claude/settings.json içine bir durum satırı aracısı ekler. Mevcut durum satırın varsa eskisi gibi çalışmaya devam eder. Yalnızca Pro ve Max planları için."
-    },
-    "Shows your Codex plan usage (weekly limit and free resets left) in the island's header. Coucou asks the Codex CLI (codex app-server) when the pill shows; nothing is installed. Codex must be signed in with ChatGPT.": {
-      "zh-Hans": "在岛的顶栏显示你的 Codex 套餐用量（每周限额和剩余的免费重置次数）。标签显示时，Coucou 会询问 Codex CLI（codex app-server），不会安装任何东西。Codex 必须已用 ChatGPT 登录。",
-      "hi": "आइलैंड के हेडर में आपके Codex प्लान का उपयोग (साप्ताहिक सीमा और बचे मुफ़्त रीसेट) दिखाता है। टैब दिखने पर Coucou Codex CLI (codex app-server) से पूछता है; कुछ भी इंस्टॉल नहीं होता। Codex में ChatGPT से साइन इन होना ज़रूरी है।",
-      "es": "Muestra el uso de tu plan de Codex (límite semanal y reinicios gratuitos restantes) en la cabecera de la isla. Coucou consulta a la CLI de Codex (codex app-server) cuando aparece la pestaña; no se instala nada. Codex debe tener la sesión iniciada con ChatGPT.",
-      "ar": "يعرض استخدام خطة Codex (الحد الأسبوعي وإعادات التعيين المجانية المتبقية) في رأس الشريط. يسأل Coucou واجهة Codex CLI (codex app-server) عند ظهور التبويب، ولا يُثبَّت أي شيء. يجب تسجيل الدخول إلى Codex بحساب ChatGPT.",
-      "fr": "Affiche l'utilisation de ton forfait Codex (limite hebdomadaire et réinitialisations gratuites restantes) dans l'en-tête de l'île. Coucou interroge la CLI Codex (codex app-server) quand l'onglet s'affiche ; rien n'est installé. Codex doit être connecté avec ChatGPT.",
-      "bn": "আইল্যান্ডের হেডারে আপনার Codex প্ল্যানের ব্যবহার (সাপ্তাহিক সীমা ও বাকি ফ্রি রিসেট) দেখায়। ট্যাব দেখা গেলে Coucou Codex CLI (codex app-server)-কে জিজ্ঞেস করে; কিছুই ইনস্টল হয় না। Codex-এ ChatGPT দিয়ে সাইন ইন থাকতে হবে।",
-      "pt-BR": "Mostra o uso do seu plano Codex (limite semanal e redefinições grátis restantes) no cabeçalho da ilha. O Coucou consulta a CLI do Codex (codex app-server) quando a aba aparece; nada é instalado. O Codex precisa estar conectado com o ChatGPT.",
-      "ru": "Показывает использование тарифа Codex (недельный лимит и оставшиеся бесплатные сбросы) в заголовке острова. Coucou спрашивает Codex CLI (codex app-server), когда видна вкладка; ничего не устанавливается. В Codex нужно войти через ChatGPT.",
-      "id": "Menampilkan pemakaian paket Codex Anda (batas mingguan dan sisa reset gratis) di header pulau. Coucou menanyakan Codex CLI (codex app-server) saat tab tampil; tidak ada yang dipasang. Codex harus masuk dengan ChatGPT.",
-      "de": "Zeigt deine Codex-Tarifnutzung (Wochenlimit und verbleibende kostenlose Zurücksetzungen) im Insel-Kopfbereich. Coucou fragt die Codex CLI (codex app-server) ab, wenn die Pill angezeigt wird; es wird nichts installiert. Codex muss mit ChatGPT angemeldet sein.",
-      "tr": "Codex plan kullanımını (haftalık sınır ve kalan ücretsiz sıfırlama hakları) adanın başlığında gösterir. Araç göründüğünde Coucou, Codex CLI'a (codex app-server) sorgu gönderir; hiçbir şey kurulmaz. Codex'te ChatGPT ile oturum açılmış olmalı."
     },
     "Start a new Antigravity conversation to pick the hooks up.": {
       "zh-Hans": "开启新的 Antigravity 对话即可启用 hooks。",
@@ -2406,32 +1912,6 @@
       "de": "Die Serverantwort ist zu groß.",
       "tr": "Sunucunun yanıtı çok büyük."
     },
-    "This address is another machine, over plain http: what you ask travels unencrypted.": {
-      "zh-Hans": "这个地址是另一台机器，且使用明文 http：你的提问会以未加密的形式传输。",
-      "hi": "यह पता किसी दूसरी मशीन का है, सादे http पर: आप जो पूछते हैं वह बिना एन्क्रिप्शन के जाता है।",
-      "es": "Esta dirección es otra máquina, por http sin cifrar: lo que preguntas viaja sin cifrado.",
-      "ar": "هذا العنوان لجهاز آخر عبر http عادي: ما تسأله ينتقل دون تشفير.",
-      "fr": "Cette adresse est une autre machine, en http simple : ce que tu demandes circule en clair.",
-      "bn": "এই ঠিকানাটি অন্য মেশিনের, সাধারণ http-তে: আপনি যা জিজ্ঞেস করেন তা এনক্রিপশন ছাড়া যায়।",
-      "pt-BR": "Este endereço é outra máquina, por http simples: o que você pergunta trafega sem criptografia.",
-      "ru": "Этот адрес — другой компьютер, по обычному http: ваши запросы передаются без шифрования.",
-      "id": "Alamat ini adalah mesin lain, melalui http biasa: pertanyaan Anda dikirim tanpa enkripsi.",
-      "de": "Diese Adresse verweist auf einen anderen Computer und verwendet unverschlüsseltes HTTP: Deine Anfragen werden unverschlüsselt übertragen.",
-      "tr": "Bu adres başka bir bilgisayara ait ve düz http kullanıyor: soruların şifrelenmeden iletilir."
-    },
-    "This address is another machine: what you ask is sent to it.": {
-      "zh-Hans": "这个地址是另一台机器：你的提问会发送给它。",
-      "hi": "यह पता किसी दूसरी मशीन का है: आप जो पूछते हैं वह उसे भेजा जाता है।",
-      "es": "Esta dirección es otra máquina: lo que preguntas se le envía.",
-      "ar": "هذا العنوان لجهاز آخر: ما تسأله يُرسل إليه.",
-      "fr": "Cette adresse est une autre machine : ce que tu demandes lui est envoyé.",
-      "bn": "এই ঠিকানাটি অন্য একটি মেশিনের: আপনি যা জিজ্ঞেস করেন তা সেখানে পাঠানো হয়।",
-      "pt-BR": "Este endereço é outra máquina: o que você pergunta é enviado para ela.",
-      "ru": "Этот адрес — другой компьютер: ваши запросы отправляются туда.",
-      "id": "Alamat ini adalah mesin lain: pertanyaan Anda dikirim ke sana.",
-      "de": "Diese Adresse verweist auf einen anderen Computer: Deine Anfragen werden dorthin gesendet.",
-      "tr": "Bu adres başka bir bilgisayara ait: soruların o bilgisayara gönderilir."
-    },
     "This agent takes a plugin, not hook entries.": {
       "zh-Hans": "此代理使用插件，而不是 hook 条目。",
       "hi": "यह एजेंट प्लगइन लेता है, hook प्रविष्टियाँ नहीं।",
@@ -2536,45 +2016,6 @@
       "de": "Donnerstag",
       "tr": "Perşembe"
     },
-    "Token lacks access": {
-      "zh-Hans": "令牌没有访问权限",
-      "hi": "टोकन के पास पहुँच नहीं है",
-      "es": "El token no tiene acceso",
-      "ar": "الرمز لا يملك صلاحية الوصول",
-      "fr": "Le jeton n'a pas l'accès",
-      "bn": "টোকেনের অ্যাক্সেস নেই",
-      "pt-BR": "O token não tem acesso",
-      "ru": "У токена нет доступа",
-      "id": "Token tidak punya akses",
-      "de": "Token hat keinen Zugriff",
-      "tr": "Token'ın erişimi yok"
-    },
-    "Token lacks the needed scope": {
-      "zh-Hans": "令牌缺少所需的权限范围",
-      "hi": "टोकन में ज़रूरी स्कोप नहीं है",
-      "es": "Al token le falta el alcance necesario",
-      "ar": "يفتقر الرمز إلى النطاق المطلوب",
-      "fr": "Il manque au jeton la portée nécessaire",
-      "bn": "টোকেনে প্রয়োজনীয় স্কোপ নেই",
-      "pt-BR": "Falta ao token o escopo necessário",
-      "ru": "У токена нет нужной области доступа",
-      "id": "Token tidak memiliki cakupan yang diperlukan",
-      "de": "Token fehlt die erforderliche Berechtigung",
-      "tr": "Token gerekli kapsama sahip değil"
-    },
-    "Total stars": {
-      "zh-Hans": "星标总数",
-      "hi": "कुल स्टार",
-      "es": "Estrellas totales",
-      "ar": "إجمالي النجوم",
-      "fr": "Étoiles au total",
-      "bn": "মোট স্টার",
-      "pt-BR": "Total de estrelas",
-      "ru": "Всего звёзд",
-      "id": "Total bintang",
-      "de": "Sterne insgesamt",
-      "tr": "Toplam yıldız"
-    },
     "Tuesday": {
       "zh-Hans": "星期二",
       "hi": "मंगलवार",
@@ -2613,19 +2054,6 @@
       "id": "Mengetik “{char}”",
       "de": "Gibt „{char}“ ein",
       "tr": "“{char}” yazıyor"
-    },
-    "Unexpected API response.": {
-      "zh-Hans": "API 返回了意外的响应。",
-      "hi": "API से अप्रत्याशित जवाब।",
-      "es": "Respuesta inesperada de la API.",
-      "ar": "استجابة غير متوقعة من الواجهة البرمجية.",
-      "fr": "Réponse inattendue de l'API.",
-      "bn": "API থেকে অপ্রত্যাশিত উত্তর।",
-      "pt-BR": "Resposta inesperada da API.",
-      "ru": "Неожиданный ответ API.",
-      "id": "Respons API tak terduga.",
-      "de": "Unerwartete API-Antwort.",
-      "tr": "Beklenmeyen API yanıtı."
     },
     "Uninstall hooks…": {
       "zh-Hans": "卸载 hooks…",
@@ -2679,32 +2107,6 @@
       "de": "Unbekannter Agent \"{id}\".",
       "tr": "Bilinmeyen ajan \"{id}\"."
     },
-    "Untitled": {
-      "zh-Hans": "无标题",
-      "hi": "बिना शीर्षक",
-      "es": "Sin título",
-      "ar": "بلا عنوان",
-      "fr": "Sans titre",
-      "bn": "শিরোনামহীন",
-      "pt-BR": "Sem título",
-      "ru": "Без названия",
-      "id": "Tanpa judul",
-      "de": "Ohne Titel",
-      "tr": "Başlıksız"
-    },
-    "Use a secret key (sk_live_… not pk_live_…)": {
-      "zh-Hans": "请使用私密密钥（sk_live_…，而不是 pk_live_…）",
-      "hi": "सीक्रेट कुंजी का उपयोग करें (sk_live_…, pk_live_… नहीं)",
-      "es": "Usa una clave secreta (sk_live_…, no pk_live_…)",
-      "ar": "استخدم مفتاحًا سريًا (sk_live_… وليس pk_live_…)",
-      "fr": "Utilise une clé secrète (sk_live_…, pas pk_live_…)",
-      "bn": "সিক্রেট কী ব্যবহার করুন (sk_live_…, pk_live_… নয়)",
-      "pt-BR": "Use uma chave secreta (sk_live_…, não pk_live_…)",
-      "ru": "Используйте секретный ключ (sk_live_…, а не pk_live_…)",
-      "id": "Gunakan kunci rahasia (sk_live_…, bukan pk_live_…)",
-      "de": "Verwende einen geheimen Schlüssel (sk_live_… statt pk_live_…)",
-      "tr": "Gizli anahtar kullan (pk_live_… yerine sk_live_…)"
-    },
     "Use in chat": {
       "zh-Hans": "在聊天中使用",
       "hi": "चैट में उपयोग करें",
@@ -2744,19 +2146,6 @@
       "de": "Garderobe…",
       "tr": "Gardırop…"
     },
-    "Warning: the key would be sent unencrypted (http://) to another machine. Use https://, or a server on this computer.": {
-      "zh-Hans": "警告：密钥将以未加密的方式（http://）发送到另一台机器。请使用 https://，或本机上的服务器。",
-      "hi": "चेतावनी: कुंजी बिना एन्क्रिप्शन (http://) के किसी दूसरी मशीन को भेजी जाएगी। https:// या इसी कंप्यूटर का सर्वर उपयोग करें।",
-      "es": "Atención: la clave se enviaría sin cifrar (http://) a otra máquina. Usa https:// o un servidor en este equipo.",
-      "ar": "تحذير: سيُرسل المفتاح دون تشفير (http://) إلى جهاز آخر. استخدم https:// أو خادمًا على هذا الحاسوب.",
-      "fr": "Attention : la clé serait envoyée en clair (http://) à une autre machine. Utilise https://, ou un serveur sur cet ordinateur.",
-      "bn": "সতর্কতা: কী এনক্রিপশন ছাড়া (http://) অন্য মেশিনে পাঠানো হবে। https:// অথবা এই কম্পিউটারের সার্ভার ব্যবহার করুন।",
-      "pt-BR": "Atenção: a chave seria enviada sem criptografia (http://) para outra máquina. Use https:// ou um servidor neste computador.",
-      "ru": "Внимание: ключ будет отправлен без шифрования (http://) на другой компьютер. Используйте https:// или сервер на этом компьютере.",
-      "id": "Peringatan: kunci akan dikirim tanpa enkripsi (http://) ke mesin lain. Gunakan https://, atau server di komputer ini.",
-      "de": "Warnung: Der Schlüssel würde unverschlüsselt (http://) an einen anderen Computer gesendet. Verwende https:// oder einen Server auf diesem Computer.",
-      "tr": "Uyarı: anahtar başka bir bilgisayara şifrelenmeden (http://) gönderilir. https:// veya bu bilgisayardaki bir sunucuyu kullan."
-    },
     "Wednesday": {
       "zh-Hans": "星期三",
       "hi": "बुधवार",
@@ -2782,19 +2171,6 @@
       "id": "Berfungsi dari aplikasi apa pun. Klik pintasan untuk mengubahnya, lalu tekan tombol baru — Esc membatalkan, Backspace menghapusnya.",
       "de": "Arbeite in jeder App. Klicke auf eine Tastenkombination und drücke die neuen Tasten — Esc bricht ab, die Rücktaste entfernt sie.",
       "tr": "Her uygulamada çalışır. Değiştirmek için bir kısayola tıkla, ardından yeni tuşlara bas — Esc iptal eder, Backspace kaldırır."
-    },
-    "Workflow": {
-      "zh-Hans": "工作流",
-      "hi": "वर्कफ़्लो",
-      "es": "Flujo de trabajo",
-      "ar": "سير العمل",
-      "fr": "Workflow",
-      "bn": "ওয়ার্কফ্লো",
-      "pt-BR": "Fluxo de trabalho",
-      "ru": "Сценарий",
-      "id": "Alur kerja",
-      "de": "Workflow",
-      "tr": "İş akışı"
     },
     "Write to {path} failed: {error}": {
       "zh-Hans": "写入 {path} 失败：{error}",
@@ -2887,19 +2263,6 @@
       "de": "Falls eine nicht funktioniert, kannst du sie mit diesen Befehlen auch in den Tastatureinstellungen deines Systems hinzufügen:",
       "tr": "Bir kısayol çalışmazsa sistemin klavye ayarlarından şu komutlarla da ekleyebilirsin:"
     },
-    "all green": {
-      "zh-Hans": "全部通过",
-      "hi": "सब हरा",
-      "es": "todo en verde",
-      "ar": "كلها خضراء",
-      "fr": "tout est vert",
-      "bn": "সব সবুজ",
-      "pt-BR": "tudo verde",
-      "ru": "всё зелёное",
-      "id": "semua hijau",
-      "de": "alles erfolgreich",
-      "tr": "tümü başarılı"
-    },
     "coucou-hook.exe is not in place yet. Restart Coucou; if it still fails, build it with `cargo build -p coucou-hook`.": {
       "zh-Hans": "coucou-hook.exe 尚未就位。请重启 Coucou；如果仍然失败，请用 `cargo build -p coucou-hook` 构建它。",
       "hi": "coucou-hook.exe अभी अपनी जगह पर नहीं है। Coucou फिर से शुरू करें; अगर फिर भी न हो, तो इसे `cargo build -p coucou-hook` से बनाएँ।",
@@ -2912,19 +2275,6 @@
       "id": "coucou-hook.exe belum ada di tempatnya. Mulai ulang Coucou; jika masih gagal, build dengan `cargo build -p coucou-hook`.",
       "de": "coucou-hook.exe ist noch nicht vorhanden. Starte Coucou neu; falls es weiterhin fehlschlägt, erstelle die Datei mit `cargo build -p coucou-hook`.",
       "tr": "coucou-hook.exe henüz yerinde değil. Coucou'yu yeniden başlat; sorun sürerse `cargo build -p coucou-hook` ile derle."
-    },
-    "failing": {
-      "zh-Hans": "失败",
-      "hi": "विफल",
-      "es": "con fallos",
-      "ar": "فاشل",
-      "fr": "en échec",
-      "bn": "ব্যর্থ",
-      "pt-BR": "falhando",
-      "ru": "с ошибками",
-      "id": "gagal",
-      "de": "fehlgeschlagen",
-      "tr": "başarısız"
     },
     "finished": {
       "zh-Hans": "已完成",
@@ -3004,19 +2354,6 @@
       "de": "Zeilen",
       "tr": "satır"
     },
-    "no repos": {
-      "zh-Hans": "没有仓库",
-      "hi": "कोई रिपॉज़िटरी नहीं",
-      "es": "sin repositorios",
-      "ar": "لا مستودعات",
-      "fr": "aucun dépôt",
-      "bn": "কোনো রিপোজিটরি নেই",
-      "pt-BR": "nenhum repositório",
-      "ru": "нет репозиториев",
-      "id": "tidak ada repositori",
-      "de": "keine Repositorys",
-      "tr": "depo yok"
-    },
     "not installed": {
       "zh-Hans": "未安装",
       "hi": "इंस्टॉल नहीं है",
@@ -3029,32 +2366,6 @@
       "id": "belum terpasang",
       "de": "nicht installiert",
       "tr": "kurulu değil"
-    },
-    "passing": {
-      "zh-Hans": "通过",
-      "hi": "सफल",
-      "es": "correcto",
-      "ar": "ناجح",
-      "fr": "réussi",
-      "bn": "সফল",
-      "pt-BR": "passando",
-      "ru": "успешно",
-      "id": "lulus",
-      "de": "erfolgreich",
-      "tr": "başarılı"
-    },
-    "running": {
-      "zh-Hans": "运行中",
-      "hi": "चल रहा है",
-      "es": "en curso",
-      "ar": "قيد التشغيل",
-      "fr": "en cours",
-      "bn": "চলছে",
-      "pt-BR": "em execução",
-      "ru": "выполняется",
-      "id": "berjalan",
-      "de": "läuft",
-      "tr": "çalışıyor"
     },
     "seconds after you leave the island": {
       "zh-Hans": "鼠标离开岛后的秒数",
@@ -3082,19 +2393,6 @@
       "de": "settings.json: {what} hat einen unerwarteten Typ — Coucou hat nichts verändert.",
       "tr": "settings.json: {what} beklenmeyen bir türde — Coucou bunu değiştirmedi."
     },
-    "unknown": {
-      "zh-Hans": "未知",
-      "hi": "अज्ञात",
-      "es": "desconocido",
-      "ar": "غير معروف",
-      "fr": "inconnu",
-      "bn": "অজানা",
-      "pt-BR": "desconhecido",
-      "ru": "неизвестно",
-      "id": "tidak diketahui",
-      "de": "unbekannt",
-      "tr": "bilinmiyor"
-    },
     "{allowed} allowed, {denied} denied": {
       "zh-Hans": "允许 {allowed} 次，拒绝 {denied} 次",
       "hi": "{allowed} अनुमत, {denied} अस्वीकृत",
@@ -3107,56 +2405,6 @@
       "id": "{allowed} diizinkan, {denied} ditolak",
       "de": "{allowed} zugelassen, {denied} abgelehnt",
       "tr": "{allowed} izin verildi, {denied} reddedildi"
-    },
-    "{count} contributions": {
-      "zh-Hans": {
-        "other": "{count} 次贡献"
-      },
-      "hi": {
-        "one": "{count} योगदान",
-        "other": "{count} योगदान"
-      },
-      "es": {
-        "one": "{count} contribución",
-        "other": "{count} contribuciones"
-      },
-      "ar": {
-        "zero": "{count} مساهمة",
-        "one": "مساهمة واحدة",
-        "two": "مساهمتان",
-        "few": "{count} مساهمات",
-        "many": "{count} مساهمة",
-        "other": "{count} مساهمة"
-      },
-      "fr": {
-        "one": "{count} contribution",
-        "other": "{count} contributions"
-      },
-      "bn": {
-        "one": "{count}টি অবদান",
-        "other": "{count}টি অবদান"
-      },
-      "pt-BR": {
-        "one": "{count} contribuição",
-        "other": "{count} contribuições"
-      },
-      "ru": {
-        "one": "{count} вклад",
-        "few": "{count} вклада",
-        "many": "{count} вкладов",
-        "other": "{count} вклада"
-      },
-      "id": {
-        "other": "{count} kontribusi"
-      },
-      "de": {
-        "one": "{count} Beitrag",
-        "other": "{count} Beiträge"
-      },
-      "tr": {
-        "one": "{count} katkı",
-        "other": "{count} katkı"
-      }
     },
     "{count} models": {
       "zh-Hans": {
@@ -3206,56 +2454,6 @@
       "tr": {
         "one": "{count} model",
         "other": "{count} model"
-      }
-    },
-    "{count} repos": {
-      "zh-Hans": {
-        "other": "{count} 个仓库"
-      },
-      "hi": {
-        "one": "{count} रिपॉज़िटरी",
-        "other": "{count} रिपॉज़िटरी"
-      },
-      "es": {
-        "one": "{count} repositorio",
-        "other": "{count} repositorios"
-      },
-      "ar": {
-        "zero": "{count} مستودع",
-        "one": "مستودع واحد",
-        "two": "مستودعان",
-        "few": "{count} مستودعات",
-        "many": "{count} مستودعًا",
-        "other": "{count} مستودع"
-      },
-      "fr": {
-        "one": "{count} dépôt",
-        "other": "{count} dépôts"
-      },
-      "bn": {
-        "one": "{count}টি রিপোজিটরি",
-        "other": "{count}টি রিপোজিটরি"
-      },
-      "pt-BR": {
-        "one": "{count} repositório",
-        "other": "{count} repositórios"
-      },
-      "ru": {
-        "one": "{count} репозиторий",
-        "few": "{count} репозитория",
-        "many": "{count} репозиториев",
-        "other": "{count} репозитория"
-      },
-      "id": {
-        "other": "{count} repositori"
-      },
-      "de": {
-        "one": "{count} Repository",
-        "other": "{count} Repositorys"
-      },
-      "tr": {
-        "one": "{count} depo",
-        "other": "{count} depo"
       }
     },
     "{file} isn't UTF-8 text — Coucou won't touch it.": {
@@ -3336,45 +2534,6 @@
       "de": "{model} ist nicht installiert. Wähle ein anderes Modell über dem Chatfeld aus.",
       "tr": "{model} kurulu değil. Sohbet kutusunun üstünden başka bir model seç."
     },
-    "{name} API key missing. Add it in Settings.": {
-      "zh-Hans": "缺少 {name} 的 API 密钥。请在设置中添加。",
-      "hi": "{name} API कुंजी नहीं है। इसे सेटिंग्स में जोड़ें।",
-      "es": "Falta la clave de API de {name}. Añádela en Configuración.",
-      "ar": "مفتاح API الخاص بـ {name} مفقود. أضفه من الإعدادات.",
-      "fr": "Clé d'API {name} manquante. Ajoute-la dans les Réglages.",
-      "bn": "{name} API কী নেই। সেটিংসে যোগ করুন।",
-      "pt-BR": "Falta a chave de API do {name}. Adicione nas Configurações.",
-      "ru": "Нет API-ключа {name}. Добавьте его в настройках.",
-      "id": "Kunci API {name} tidak ada. Tambahkan di Pengaturan.",
-      "de": "API-Schlüssel für {name} fehlt. Füge ihn in den Einstellungen hinzu.",
-      "tr": "{name} API anahtarı eksik. Ayarlar'dan ekle."
-    },
-    "{name} rate limit reached (429): {detail}": {
-      "zh-Hans": "{name} 已达到速率限制（429）：{detail}",
-      "hi": "{name} की दर सीमा पूरी हो गई (429): {detail}",
-      "es": "{name}: se alcanzó el límite de solicitudes (429): {detail}",
-      "ar": "بلغ {name} حدّ المعدّل (429): {detail}",
-      "fr": "{name} : limite de débit atteinte (429) : {detail}",
-      "bn": "{name}-এর রেট লিমিটে পৌঁছেছে (429): {detail}",
-      "pt-BR": "{name}: limite de requisições atingido (429): {detail}",
-      "ru": "{name}: достигнут лимит запросов (429): {detail}",
-      "id": "Batas laju {name} tercapai (429): {detail}",
-      "de": "Anfragelimit für {name} erreicht (429): {detail}",
-      "tr": "{name} istek sınırına ulaşıldı (429): {detail}"
-    },
-    "{name} rejected the API key ({status}). Check it in Settings.": {
-      "zh-Hans": "{name} 拒绝了 API 密钥（{status}）。请在设置中检查。",
-      "hi": "{name} ने API कुंजी अस्वीकार कर दी ({status})। इसे सेटिंग्स में जाँचें।",
-      "es": "{name} rechazó la clave de API ({status}). Revísala en Configuración.",
-      "ar": "رفض {name} مفتاح API ({status}). تحقّق منه في الإعدادات.",
-      "fr": "{name} a refusé la clé d'API ({status}). Vérifie-la dans les Réglages.",
-      "bn": "{name} API কী প্রত্যাখ্যান করেছে ({status})। সেটিংসে যাচাই করুন।",
-      "pt-BR": "{name} recusou a chave de API ({status}). Verifique-a nas Configurações.",
-      "ru": "{name} отклонил API-ключ ({status}). Проверьте его в настройках.",
-      "id": "{name} menolak kunci API ({status}). Periksa di Pengaturan.",
-      "de": "{name} hat den API-Schlüssel abgelehnt ({status}). Prüfe ihn in den Einstellungen.",
-      "tr": "{name} API anahtarını reddetti ({status}). Ayarlar'dan kontrol et."
-    },
     "{name} wasn't written by Coucou — Coucou has not touched it.": {
       "zh-Hans": "{name} 不是由 Coucou 写入的 — Coucou 没有修改它。",
       "hi": "{name} Coucou ने नहीं लिखा था — Coucou ने इसे नहीं छुआ।",
@@ -3401,32 +2560,6 @@
       "de": "{name} — {width}×{height} bei {x},{y}",
       "tr": "{name} — {width}×{height}, konum: {x},{y}"
     },
-    "{name}: model not found (404). Pick another one above the chat box. {detail}": {
-      "zh-Hans": "{name}：未找到模型（404）。请在聊天框上方选择其他模型。{detail}",
-      "hi": "{name}: मॉडल नहीं मिला (404)। चैट बॉक्स के ऊपर कोई दूसरा चुनें। {detail}",
-      "es": "{name}: modelo no encontrado (404). Elige otro encima del cuadro de chat. {detail}",
-      "ar": "{name}: لم يُعثر على النموذج (404). اختر غيره فوق مربع الدردشة. {detail}",
-      "fr": "{name} : modèle introuvable (404). Choisis-en un autre au-dessus de la zone de chat. {detail}",
-      "bn": "{name}: মডেল পাওয়া যায়নি (404)। চ্যাট বক্সের উপরে অন্য একটি বেছে নিন। {detail}",
-      "pt-BR": "{name}: modelo não encontrado (404). Escolha outro acima da caixa de chat. {detail}",
-      "ru": "{name}: модель не найдена (404). Выберите другую над полем чата. {detail}",
-      "id": "{name}: model tidak ditemukan (404). Pilih yang lain di atas kotak obrolan. {detail}",
-      "de": "{name}: Modell nicht gefunden (404). Wähle ein anderes über dem Chatfeld aus. {detail}",
-      "tr": "{name}: model bulunamadı (404). Sohbet kutusunun üstünden başka bir model seç. {detail}"
-    },
-    "{name}: not enough credits (402). {detail}": {
-      "zh-Hans": "{name}：额度不足（402）。{detail}",
-      "hi": "{name}: पर्याप्त क्रेडिट नहीं (402)। {detail}",
-      "es": "{name}: no hay créditos suficientes (402). {detail}",
-      "ar": "{name}: الرصيد غير كافٍ (402). {detail}",
-      "fr": "{name} : crédits insuffisants (402). {detail}",
-      "bn": "{name}: যথেষ্ট ক্রেডিট নেই (402)। {detail}",
-      "pt-BR": "{name}: créditos insuficientes (402). {detail}",
-      "ru": "{name}: недостаточно кредитов (402). {detail}",
-      "id": "{name}: kredit tidak cukup (402). {detail}",
-      "de": "{name}: Nicht genügend Guthaben (402). {detail}",
-      "tr": "{name}: yeterli kredi yok (402). {detail}"
-    },
     "{n} available": {
       "zh-Hans": "可用 {n} 次",
       "hi": "{n} उपलब्ध",
@@ -3439,19 +2572,6 @@
       "id": "{n} tersedia",
       "de": "{n} verfügbar",
       "tr": "{n} kullanılabilir"
-    },
-    "{n}d": {
-      "zh-Hans": "{n} 天",
-      "hi": "{n} दि.",
-      "es": "{n} d",
-      "ar": "{n} ي",
-      "fr": "{n} j",
-      "bn": "{n} দি.",
-      "pt-BR": "{n} d",
-      "ru": "{n} д",
-      "id": "{n} h",
-      "de": "{n} T.",
-      "tr": "{n} gün"
     },
     "{n}h": {
       "zh-Hans": "{n} 小时",
@@ -3491,32 +2611,6 @@
       "id": "{path} berubah sejak pratinjau. Tidak ada yang ditulis — tinjau diff yang baru.",
       "de": "{path} wurde seit der Vorschau verändert. Nichts wurde geschrieben — prüfe den neuen Diff.",
       "tr": "{path} önizlemeden sonra değişti. Hiçbir şey yazılmadı — yeni değişiklikleri incele."
-    },
-    "{time} ago": {
-      "zh-Hans": "{time}前",
-      "hi": "{time} पहले",
-      "es": "hace {time}",
-      "ar": "منذ {time}",
-      "fr": "il y a {time}",
-      "bn": "{time} আগে",
-      "pt-BR": "há {time}",
-      "ru": "{time} назад",
-      "id": "{time} yang lalu",
-      "de": "vor {time}",
-      "tr": "{time} önce"
-    },
-    "{total} past year": {
-      "zh-Hans": "过去一年 {total}",
-      "hi": "पिछले वर्ष {total}",
-      "es": "{total} el último año",
-      "ar": "{total} في العام الماضي",
-      "fr": "{total} sur un an",
-      "bn": "গত বছরে {total}",
-      "pt-BR": "{total} no último ano",
-      "ru": "{total} за год",
-      "id": "{total} setahun terakhir",
-      "de": "{total} im letzten Jahr",
-      "tr": "geçen yıl {total}"
     },
     "{used}/{max} slots in use — the main tool doesn't take one.": {
       "zh-Hans": "已用 {used}/{max} 个位置 — 主要工具不占位置。",
@@ -3608,45 +2702,6 @@
       "id": "Angka-angka ini berasal dari alat baris perintah Claude Code. Aplikasi desktop Claude tidak mengirimkannya, jadi pengukur tetap kosong jika Anda hanya memakai aplikasi desktop.",
       "de": "Die Zahlen stammen aus dem Kommandozeilenprogramm Claude Code. Die Claude-Desktop-App meldet sie nicht; wenn du nur die Desktop-App nutzt, bleibt die Anzeige leer.",
       "tr": "Sayılar Claude Code komut satırı aracından gelir. Claude masaüstü uygulaması bunları bildirmez; yalnızca masaüstü uygulamasını kullanıyorsan gösterge boş kalır."
-    },
-    "Payment failed": {
-      "zh-Hans": "付款失败",
-      "hi": "भुगतान विफल",
-      "es": "Pago fallido",
-      "ar": "فشل الدفع",
-      "fr": "Paiement échoué",
-      "bn": "পেমেন্ট ব্যর্থ",
-      "pt-BR": "Pagamento falhou",
-      "ru": "Платёж не прошёл",
-      "id": "Pembayaran gagal",
-      "de": "Zahlung fehlgeschlagen",
-      "tr": "Ödeme başarısız"
-    },
-    "Delivered": {
-      "zh-Hans": "已送达",
-      "hi": "पहुँचाया गया",
-      "es": "Entregado",
-      "ar": "تم التسليم",
-      "fr": "Remis",
-      "bn": "পৌঁছেছে",
-      "pt-BR": "Entregue",
-      "ru": "Доставлено",
-      "id": "Terkirim",
-      "de": "Zugestellt",
-      "tr": "Teslim edildi"
-    },
-    "Not delivered": {
-      "zh-Hans": "未送达",
-      "hi": "नहीं पहुँचा",
-      "es": "No entregado",
-      "ar": "لم يتم التسليم",
-      "fr": "Non remis",
-      "bn": "পৌঁছায়নি",
-      "pt-BR": "Não entregue",
-      "ru": "Не доставлено",
-      "id": "Tidak terkirim",
-      "de": "Nicht zugestellt",
-      "tr": "Teslim edilmedi"
     },
     "Dictate anywhere on your computer": {
       "zh-Hans": "在电脑上的任何地方听写",
@@ -3778,19 +2833,6 @@
       "de": "Deine Stimme verlässt diesen Computer nie: Parakeet wandelt sie hier in Text um; die Aufnahme wird gelöscht, sobald der Text eingefügt ist.",
       "tr": "Sesin bu bilgisayardan asla dışarı çıkmaz: Parakeet burada metne dönüştürür; kayıt, metin yapıştırılır yapıştırılmaz silinir."
     },
-    "With Claude, the transcript (never the audio) goes to Anthropic with your key from Notch → Chat.": {
-      "zh-Hans": "使用 Claude 时，文字记录（绝不包括音频）会通过你在“Notch → 聊天”中设置的密钥发送给 Anthropic。",
-      "hi": "Claude के साथ, ट्रांसक्रिप्ट (ऑडियो कभी नहीं) Notch → चैट में दी गई आपकी कुंजी के साथ Anthropic को जाता है।",
-      "es": "Con Claude, la transcripción (nunca el audio) va a Anthropic con tu clave de Notch → Chat.",
-      "ar": "مع Claude، يذهب النص المكتوب (لا الصوت أبدًا) إلى Anthropic بمفتاحك من Notch ← الدردشة.",
-      "fr": "Avec Claude, la transcription (jamais l'audio) part chez Anthropic avec ta clé de Notch → Chat.",
-      "bn": "Claude-এ, ট্রান্সক্রিপ্ট (অডিও কখনো নয়) Notch → চ্যাট থেকে আপনার কী দিয়ে Anthropic-এ যায়।",
-      "pt-BR": "Com o Claude, a transcrição (nunca o áudio) vai para a Anthropic com sua chave de Notch → Chat.",
-      "ru": "С Claude расшифровка (но никогда не звук) уходит в Anthropic с вашим ключом из Notch → Чат.",
-      "id": "Dengan Claude, transkrip (tidak pernah audionya) dikirim ke Anthropic dengan kuncimu dari Notch → Obrolan.",
-      "de": "Mit Claude wird das Transkript mit deinem Schlüssel aus Notch → Chat an Anthropic gesendet, niemals das Audio.",
-      "tr": "Claude ile döküm, Çentik → Sohbet bölümündeki anahtarınla Anthropic'e gönderilir; ses asla gönderilmez."
-    },
     "Everything stays on this computer. Tell the people in the call that you are recording.": {
       "zh-Hans": "所有内容都留在这台电脑上。请告知通话中的人你正在录音。",
       "hi": "सब कुछ इसी कंप्यूटर पर रहता है। कॉल में मौजूद लोगों को बताएँ कि आप रिकॉर्ड कर रहे हैं।",
@@ -3856,45 +2898,6 @@
       "de": "Wird auf diesem Computer erfasst und nirgendwohin gesendet.",
       "tr": "Bu bilgisayarda hesaplanır, hiçbir yere gönderilmez."
     },
-    "Coucou writes your calls on this computer with Parakeet, and tells the voices apart with a second small model. Both are downloaded once (about {0} MB), then everything works offline.": {
-      "zh-Hans": "Coucou 用 Parakeet 在这台电脑上转写你的通话，并用另一个小模型区分不同的声音。两者只需下载一次（约 {0} MB），之后一切都可离线运行。",
-      "hi": "Coucou आपकी कॉल इसी कंप्यूटर पर Parakeet से लिखता है, और एक दूसरे छोटे मॉडल से आवाज़ें अलग पहचानता है। दोनों एक बार डाउनलोड होते हैं (लगभग {0} MB), फिर सब ऑफ़लाइन चलता है।",
-      "es": "Coucou escribe tus llamadas en este ordenador con Parakeet y distingue las voces con un segundo modelo pequeño. Ambos se descargan una vez (unos {0} MB) y luego todo funciona sin conexión.",
-      "ar": "يكتب Coucou مكالماتك على هذا الحاسوب باستخدام Parakeet، ويميّز الأصوات بنموذج صغير ثانٍ. يُنزَّل كلاهما مرة واحدة (نحو {0} ميغابايت)، ثم يعمل كل شيء دون اتصال.",
-      "fr": "Coucou écrit tes appels sur cet ordinateur avec Parakeet, et distingue les voix avec un second petit modèle. Les deux se téléchargent une fois (environ {0} Mo), puis tout marche hors ligne.",
-      "bn": "Coucou এই কম্পিউটারে Parakeet দিয়ে আপনার কল লেখে, আর দ্বিতীয় একটি ছোট মডেল দিয়ে কণ্ঠগুলো আলাদা করে। দুটোই একবার ডাউনলোড হয় (প্রায় {0} MB), তারপর সবকিছু অফলাইনে চলে।",
-      "pt-BR": "O Coucou escreve suas chamadas neste computador com o Parakeet e distingue as vozes com um segundo modelo pequeno. Os dois são baixados uma vez (cerca de {0} MB) e depois tudo funciona offline.",
-      "ru": "Coucou записывает ваши звонки на этом компьютере с помощью Parakeet и различает голоса второй небольшой моделью. Обе скачиваются один раз (около {0} МБ), дальше всё работает офлайн.",
-      "id": "Coucou menulis panggilanmu di komputer ini dengan Parakeet, dan membedakan suara dengan model kecil kedua. Keduanya diunduh sekali (sekitar {0} MB), lalu semuanya bekerja offline.",
-      "de": "Coucou transkribiert deine Gespräche auf diesem Computer mit Parakeet und unterscheidet die Stimmen mit einem zweiten kleinen Modell. Beide werden einmal heruntergeladen (etwa {0} MB), danach läuft alles offline.",
-      "tr": "Coucou görüşmelerini bu bilgisayarda Parakeet ile yazıya döker ve ikinci küçük bir modelle sesleri ayırt eder. İkisi de bir kez indirilir (yaklaşık {0} MB), sonra her şey çevrimdışı çalışır."
-    },
-    "The clean-up uses your Claude key. Add it in Notch → Chat.": {
-      "zh-Hans": "清理功能使用你的 Claude 密钥。请在“Notch → 聊天”中添加。",
-      "hi": "सफ़ाई आपकी Claude कुंजी इस्तेमाल करती है। इसे Notch → चैट में जोड़ें।",
-      "es": "La limpieza usa tu clave de Claude. Añádela en Notch → Chat.",
-      "ar": "يستخدم التنظيف مفتاح Claude الخاص بك. أضفه في Notch ← الدردشة.",
-      "fr": "Le nettoyage utilise ta clé Claude. Ajoute-la dans Notch → Chat.",
-      "bn": "পরিষ্কার করতে আপনার Claude কী লাগে। Notch → চ্যাট-এ যোগ করুন।",
-      "pt-BR": "A limpeza usa sua chave do Claude. Adicione-a em Notch → Chat.",
-      "ru": "Для очистки нужен ваш ключ Claude. Добавьте его в Notch → Чат.",
-      "id": "Pembersihan memakai kunci Claude-mu. Tambahkan di Notch → Obrolan.",
-      "de": "Die Überarbeitung nutzt deinen Claude-Schlüssel. Füge ihn unter Notch → Chat hinzu.",
-      "tr": "Düzenleme, Claude anahtarını kullanır. Çentik → Sohbet bölümünden ekle."
-    },
-    "With the clean-up on, the text (never your voice) goes to Anthropic with your Claude key. Off, everything stays on this computer.": {
-      "zh-Hans": "开启清理后，文字（绝不包括你的声音）会通过你的 Claude 密钥发送给 Anthropic。关闭时，一切都留在这台电脑上。",
-      "hi": "सफ़ाई चालू होने पर टेक्स्ट (आपकी आवाज़ कभी नहीं) आपकी Claude कुंजी के साथ Anthropic को जाता है। बंद होने पर सब कुछ इसी कंप्यूटर पर रहता है।",
-      "es": "Con la limpieza activada, el texto (nunca tu voz) va a Anthropic con tu clave de Claude. Desactivada, todo se queda en este ordenador.",
-      "ar": "مع تفعيل التنظيف، يذهب النص (لا صوتك أبدًا) إلى Anthropic بمفتاح Claude الخاص بك. عند إيقافه، يبقى كل شيء على هذا الحاسوب.",
-      "fr": "Nettoyage activé, le texte (jamais ta voix) part chez Anthropic avec ta clé Claude. Désactivé, tout reste sur cet ordinateur.",
-      "bn": "পরিষ্কার চালু থাকলে লেখা (আপনার কণ্ঠ কখনো নয়) আপনার Claude কী দিয়ে Anthropic-এ যায়। বন্ধ থাকলে সবকিছু এই কম্পিউটারেই থাকে।",
-      "pt-BR": "Com a limpeza ligada, o texto (nunca sua voz) vai para a Anthropic com sua chave do Claude. Desligada, tudo fica neste computador.",
-      "ru": "Когда очистка включена, текст (но никогда не голос) уходит в Anthropic с вашим ключом Claude. Когда выключена, всё остаётся на этом компьютере.",
-      "id": "Dengan pembersihan aktif, teks (tidak pernah suaramu) dikirim ke Anthropic dengan kunci Claude-mu. Saat nonaktif, semuanya tetap di komputer ini.",
-      "de": "Bei aktivierter Überarbeitung wird der Text mit deinem Claude-Schlüssel an Anthropic gesendet, niemals deine Stimme. Ist sie aus, bleibt alles auf diesem Computer.",
-      "tr": "Düzenleme açıkken metin, Claude anahtarınla Anthropic'e gönderilir; sesin asla gönderilmez. Kapalıyken her şey bu bilgisayarda kalır."
-    },
     "Mochi, his sounds and how the island behaves.": {
       "zh-Hans": "Mochi、它的声音以及岛的行为方式。",
       "hi": "Mochi, उसकी आवाज़ें और आइलैंड कैसे काम करता है।",
@@ -3946,32 +2949,6 @@
       "id": "Tombol yang membuka pulau dan tindakannya.",
       "de": "Die Tasten für die Insel und ihre Aktionen.",
       "tr": "Adayı ve işlemlerini açan tuşlar."
-    },
-    "Downloading the voice model…": {
-      "zh-Hans": "正在下载语音模型…",
-      "hi": "वॉइस मॉडल डाउनलोड हो रहा है…",
-      "es": "Descargando el modelo de voz…",
-      "ar": "جارٍ تنزيل نموذج الصوت…",
-      "fr": "Téléchargement du modèle de voix…",
-      "bn": "ভয়েস মডেল ডাউনলোড হচ্ছে…",
-      "pt-BR": "Baixando o modelo de voz…",
-      "ru": "Скачивается голосовая модель…",
-      "id": "Mengunduh model suara…",
-      "de": "Sprachmodell wird heruntergeladen…",
-      "tr": "Ses modeli indiriliyor…"
-    },
-    "Download the voice model to dictate": {
-      "zh-Hans": "下载语音模型即可听写",
-      "hi": "डिक्टेट करने के लिए वॉइस मॉडल डाउनलोड करें",
-      "es": "Descarga el modelo de voz para dictar",
-      "ar": "نزّل نموذج الصوت لتملي",
-      "fr": "Télécharge le modèle de voix pour dicter",
-      "bn": "ডিক্টেট করতে ভয়েস মডেল ডাউনলোড করুন",
-      "pt-BR": "Baixe o modelo de voz para ditar",
-      "ru": "Скачайте голосовую модель, чтобы диктовать",
-      "id": "Unduh model suara untuk mendikte",
-      "de": "Sprachmodell zum Diktieren herunterladen",
-      "tr": "Dikte etmek için ses modelini indir"
     },
     "Use the pill's microphone to dictate": {
       "zh-Hans": "用胶囊上的麦克风听写",
@@ -4038,227 +3015,6 @@
       "de": "Unter Wayland verwaltet der Desktop die Diktiertaste für Coucou: Ctrl+Alt+V oder die bei der Abfrage gewählten Tasten. Beim ersten Einfügen wirst du einmal gefragt, ob Coucou für dich tippen darf.",
       "tr": "Wayland'da masaüstü, Coucou için dikte tuşunu yönetir: Ctrl+Alt+V veya sorulduğunda seçtiğin tuşlar. İlk yapıştırmada Coucou'nun senin için yazmasına bir kez izin vermen istenir."
     },
-    "ElevenLabs key": {
-      "zh-Hans": "ElevenLabs 密钥",
-      "hi": "ElevenLabs कुंजी",
-      "es": "Clave de ElevenLabs",
-      "ar": "مفتاح ElevenLabs",
-      "fr": "Clé ElevenLabs",
-      "bn": "ElevenLabs কী",
-      "pt-BR": "Chave do ElevenLabs",
-      "ru": "Ключ ElevenLabs",
-      "id": "Kunci ElevenLabs",
-      "de": "ElevenLabs-Schlüssel",
-      "tr": "ElevenLabs anahtarı"
-    },
-    "Say « OK Coucou », then ask anything: add a pill, play music, the weather, an email to prepare.": {
-      "zh-Hans": "说「OK Coucou」，然后随便问：添加一个胶囊、播放音乐、天气、准备一封邮件。",
-      "hi": "« OK Coucou » कहें, फिर कुछ भी पूछें: एक पिल जोड़ें, संगीत चलाएँ, मौसम, कोई ईमेल तैयार करें।",
-      "es": "Di « OK Coucou » y pide lo que quieras: añadir una píldora, poner música, el tiempo, un correo por preparar.",
-      "ar": "قل « OK Coucou »، ثم اطلب أي شيء: إضافة كبسولة، تشغيل الموسيقى، الطقس، بريد إلكتروني لتجهيزه.",
-      "fr": "Dis « OK Coucou », puis demande ce que tu veux : ajouter une pilule, lancer de la musique, la météo, un e-mail à préparer.",
-      "bn": "« OK Coucou » বলুন, তারপর যা খুশি জিজ্ঞেস করুন: একটি পিল যোগ করা, গান চালানো, আবহাওয়া, একটি ইমেল তৈরি করা।",
-      "pt-BR": "Diga « OK Coucou » e peça o que quiser: adicionar uma pílula, tocar música, o clima, um e-mail para preparar.",
-      "ru": "Скажите « OK Coucou » и просите что угодно: добавить плашку, включить музыку, погоду, подготовить письмо.",
-      "id": "Ucapkan « OK Coucou », lalu minta apa saja: tambah pil, putar musik, cuaca, email yang perlu disiapkan.",
-      "de": "Sage « OK Coucou » und frage dann nach Belieben: eine Kapsel hinzufügen, Musik abspielen, das Wetter oder eine E-Mail vorbereiten.",
-      "tr": "« OK Coucou » de, sonra istediğini sor: araç ekleme, müzik çalma, hava durumu veya hazırlanacak bir e-posta."
-    },
-    "Listening": {
-      "zh-Hans": "聆听",
-      "hi": "सुनना",
-      "es": "Escucha",
-      "ar": "الاستماع",
-      "fr": "Écoute",
-      "bn": "শোনা",
-      "pt-BR": "Escuta",
-      "ru": "Прослушивание",
-      "id": "Mendengarkan",
-      "de": "Hört zu",
-      "tr": "Dinleniyor"
-    },
-    "Listen for « OK Coucou »": {
-      "zh-Hans": "聆听「OK Coucou」",
-      "hi": "« OK Coucou » के लिए सुनें",
-      "es": "Escuchar « OK Coucou »",
-      "ar": "الاستماع إلى « OK Coucou »",
-      "fr": "Écouter « OK Coucou »",
-      "bn": "« OK Coucou »-এর জন্য শুনুন",
-      "pt-BR": "Escutar « OK Coucou »",
-      "ru": "Слушать « OK Coucou »",
-      "id": "Dengarkan « OK Coucou »",
-      "de": "Auf « OK Coucou » hören",
-      "tr": "« OK Coucou » ifadesini dinle"
-    },
-    "The microphone stays open; only what follows « OK Coucou » goes further.": {
-      "zh-Hans": "麦克风保持开启；只有「OK Coucou」之后的内容才会被进一步处理。",
-      "hi": "माइक्रोफ़ोन खुला रहता है; केवल « OK Coucou » के बाद कही गई बात ही आगे जाती है।",
-      "es": "El micrófono sigue abierto; solo lo que va después de « OK Coucou » llega más lejos.",
-      "ar": "يبقى الميكروفون مفتوحًا؛ ولا يتجاوز الحاسوب إلا ما يأتي بعد « OK Coucou ».",
-      "fr": "Le micro reste ouvert ; seul ce qui suit « OK Coucou » va plus loin.",
-      "bn": "মাইক্রোফোন খোলা থাকে; কেবল « OK Coucou »-এর পরে যা বলা হয় সেটুকুই আরও এগোয়।",
-      "pt-BR": "O microfone fica aberto; só o que vem depois de « OK Coucou » vai adiante.",
-      "ru": "Микрофон остаётся включённым; дальше уходит только то, что сказано после « OK Coucou ».",
-      "id": "Mikrofon tetap terbuka; hanya yang diucapkan setelah « OK Coucou » yang diteruskan.",
-      "de": "Das Mikrofon bleibt offen; nur das nach « OK Coucou » Gesagte wird weiterverarbeitet.",
-      "tr": "Mikrofon açık kalır; yalnızca « OK Coucou » sonrasında söylediklerin işlenmeye devam eder."
-    },
-    "Hears « OK Coucou » here, without the internet.": {
-      "zh-Hans": "在这台电脑上听到「OK Coucou」，无需联网。",
-      "hi": "« OK Coucou » यहीं सुनता है, इंटरनेट के बिना।",
-      "es": "Oye « OK Coucou » aquí, sin internet.",
-      "ar": "يسمع « OK Coucou » هنا، دون إنترنت.",
-      "fr": "Entend « OK Coucou » ici, sans internet.",
-      "bn": "« OK Coucou » এখানেই শোনে, ইন্টারনেট ছাড়াই।",
-      "pt-BR": "Ouve « OK Coucou » aqui, sem internet.",
-      "ru": "Слышит « OK Coucou » прямо здесь, без интернета.",
-      "id": "Mendengar « OK Coucou » di sini, tanpa internet.",
-      "de": "Erkennt « OK Coucou » hier, ohne Internet.",
-      "tr": "« OK Coucou » ifadesini burada, internet olmadan duyar."
-    },
-    "Coucou answers with Claude: add your Claude key in Notch → Chat.": {
-      "zh-Hans": "Coucou 用 Claude 回答：请在 Notch → 聊天 中添加你的 Claude 密钥。",
-      "hi": "Coucou Claude से जवाब देता है: Notch → चैट में अपनी Claude कुंजी जोड़ें।",
-      "es": "Coucou responde con Claude: añade tu clave de Claude en Notch → Chat.",
-      "ar": "يجيب Coucou باستخدام Claude: أضف مفتاح Claude الخاص بك في Notch ← الدردشة.",
-      "fr": "Coucou répond avec Claude : ajoute ta clé Claude dans Notch → Chat.",
-      "bn": "Coucou Claude দিয়ে উত্তর দেয়: Notch → চ্যাট-এ আপনার Claude কী যোগ করুন।",
-      "pt-BR": "O Coucou responde com o Claude: adicione sua chave do Claude em Notch → Chat.",
-      "ru": "Coucou отвечает с помощью Claude: добавьте свой ключ Claude в Notch → Чат.",
-      "id": "Coucou menjawab dengan Claude: tambahkan kunci Claude-mu di Notch → Obrolan.",
-      "de": "Coucou antwortet mit Claude: Füge deinen Claude-Schlüssel unter Notch → Chat hinzu.",
-      "tr": "Coucou, Claude ile yanıt verir: Çentik → Sohbet bölümünden Claude anahtarını ekle."
-    },
-    "Download the voice model so Coucou can hear you.": {
-      "zh-Hans": "下载语音模型，Coucou 才能听到你。",
-      "hi": "आवाज़ मॉडल डाउनलोड करें ताकि Coucou आपको सुन सके।",
-      "es": "Descarga el modelo de voz para que Coucou pueda oírte.",
-      "ar": "نزّل نموذج الصوت حتى يتمكن Coucou من سماعك.",
-      "fr": "Télécharge le modèle vocal pour que Coucou puisse t'entendre.",
-      "bn": "ভয়েস মডেল ডাউনলোড করুন যাতে Coucou আপনাকে শুনতে পায়।",
-      "pt-BR": "Baixe o modelo de voz para o Coucou poder ouvir você.",
-      "ru": "Скачайте голосовую модель, чтобы Coucou мог вас слышать.",
-      "id": "Unduh model suara agar Coucou bisa mendengarmu.",
-      "de": "Lade das Sprachmodell herunter, damit Coucou dich hören kann.",
-      "tr": "Coucou'nun seni duyabilmesi için ses modelini indir."
-    },
-    "Answers": {
-      "zh-Hans": "回答",
-      "hi": "जवाब",
-      "es": "Respuestas",
-      "ar": "الإجابات",
-      "fr": "Réponses",
-      "bn": "উত্তর",
-      "pt-BR": "Respostas",
-      "ru": "Ответы",
-      "id": "Jawaban",
-      "de": "Antworten",
-      "tr": "Yanıtlar"
-    },
-    "System voice": {
-      "zh-Hans": "系统语音",
-      "hi": "सिस्टम की आवाज़",
-      "es": "Voz del sistema",
-      "ar": "صوت النظام",
-      "fr": "Voix du système",
-      "bn": "সিস্টেমের কণ্ঠ",
-      "pt-BR": "Voz do sistema",
-      "ru": "Системный голос",
-      "id": "Suara sistem",
-      "de": "Systemstimme",
-      "tr": "Sistem sesi"
-    },
-    "Text only": {
-      "zh-Hans": "仅文字",
-      "hi": "केवल टेक्स्ट",
-      "es": "Solo texto",
-      "ar": "نص فقط",
-      "fr": "Texte seul",
-      "bn": "শুধু টেক্সট",
-      "pt-BR": "Só texto",
-      "ru": "Только текст",
-      "id": "Teks saja",
-      "de": "Nur Text",
-      "tr": "Yalnızca metin"
-    },
-    "Coucou answers out loud": {
-      "zh-Hans": "Coucou 大声回答",
-      "hi": "Coucou ज़ोर से जवाब देता है",
-      "es": "Coucou responde en voz alta",
-      "ar": "يجيب Coucou بصوت عالٍ",
-      "fr": "Coucou répond à voix haute",
-      "bn": "Coucou জোরে উত্তর দেয়",
-      "pt-BR": "O Coucou responde em voz alta",
-      "ru": "Coucou отвечает вслух",
-      "id": "Coucou menjawab dengan suara",
-      "de": "Coucou antwortet laut",
-      "tr": "Coucou sesli yanıt verir"
-    },
-    "Female": {
-      "zh-Hans": "女声",
-      "hi": "महिला",
-      "es": "Femenina",
-      "ar": "أنثى",
-      "fr": "Féminine",
-      "bn": "নারী",
-      "pt-BR": "Feminina",
-      "ru": "Женский",
-      "id": "Perempuan",
-      "de": "Weiblich",
-      "tr": "Kadın"
-    },
-    "Male": {
-      "zh-Hans": "男声",
-      "hi": "पुरुष",
-      "es": "Masculina",
-      "ar": "ذكر",
-      "fr": "Masculine",
-      "bn": "পুরুষ",
-      "pt-BR": "Masculina",
-      "ru": "Мужской",
-      "id": "Laki-laki",
-      "de": "Männlich",
-      "tr": "Erkek"
-    },
-    "Your voice never leaves this computer: Parakeet turns it into text here. Only the words after « OK Coucou » go to Anthropic with your Claude key, and to ElevenLabs if you picked it for the answers.": {
-      "zh-Hans": "你的声音永远不会离开这台电脑：Parakeet 在本机把它转成文字。只有「OK Coucou」之后的文字会用你的 Claude 密钥发送给 Anthropic；如果你选了 ElevenLabs 来朗读回答，也会发送给 ElevenLabs。",
-      "hi": "आपकी आवाज़ कभी इस कंप्यूटर से बाहर नहीं जाती: Parakeet उसे यहीं टेक्स्ट में बदलता है। केवल « OK Coucou » के बाद के शब्द आपकी Claude कुंजी के साथ Anthropic को जाते हैं, और अगर आपने जवाबों के लिए ElevenLabs चुना है तो ElevenLabs को भी।",
-      "es": "Tu voz nunca sale de este ordenador: Parakeet la convierte en texto aquí. Solo las palabras después de « OK Coucou » van a Anthropic con tu clave de Claude, y a ElevenLabs si lo elegiste para las respuestas.",
-      "ar": "لا يغادر صوتك هذا الحاسوب أبدًا: يحوّله Parakeet إلى نص هنا. لا تذهب إلا الكلمات التي تلي « OK Coucou » إلى Anthropic بمفتاح Claude الخاص بك، وإلى ElevenLabs إن اخترته للإجابات.",
-      "fr": "Ta voix ne quitte jamais cet ordinateur : Parakeet la transforme en texte ici. Seuls les mots qui suivent « OK Coucou » partent chez Anthropic avec ta clé Claude, et chez ElevenLabs si tu l'as choisi pour les réponses.",
-      "bn": "আপনার কণ্ঠ কখনো এই কম্পিউটার ছেড়ে যায় না: Parakeet এখানেই একে টেক্সটে রূপান্তর করে। কেবল « OK Coucou »-এর পরের শব্দগুলো আপনার Claude কী দিয়ে Anthropic-এ যায়, আর উত্তরের জন্য ElevenLabs বেছে নিলে ElevenLabs-এও।",
-      "pt-BR": "Sua voz nunca sai deste computador: o Parakeet a transforma em texto aqui. Só as palavras depois de « OK Coucou » vão para a Anthropic com sua chave do Claude, e para a ElevenLabs se você a escolheu para as respostas.",
-      "ru": "Ваш голос никогда не покидает этот компьютер: Parakeet превращает его в текст здесь. Только слова после « OK Coucou » уходят в Anthropic с вашим ключом Claude и в ElevenLabs, если вы выбрали его для ответов.",
-      "id": "Suaramu tidak pernah keluar dari komputer ini: Parakeet mengubahnya menjadi teks di sini. Hanya kata-kata setelah « OK Coucou » yang dikirim ke Anthropic dengan kunci Claude-mu, dan ke ElevenLabs jika kamu memilihnya untuk jawaban.",
-      "de": "Deine Stimme verlässt diesen Computer nie: Parakeet wandelt sie hier in Text um. Nur die Wörter nach « OK Coucou » werden mit deinem Claude-Schlüssel an Anthropic gesendet und an ElevenLabs, falls du es für Antworten ausgewählt hast.",
-      "tr": "Sesin bu bilgisayardan asla dışarı çıkmaz: Parakeet burada metne dönüştürür. Yalnızca « OK Coucou » sonrasındaki sözcükler Claude anahtarınla Anthropic'e; yanıtlar için ElevenLabs'i seçtiysen ona da gönderilir."
-    },
-    "An email is never sent by Coucou: your mail app opens with it written, and you send it.": {
-      "zh-Hans": "Coucou 从不发送邮件：你的邮件应用会打开并填好内容，由你来发送。",
-      "hi": "Coucou कभी ईमेल नहीं भेजता: आपका मेल ऐप उसे लिखा हुआ खोलता है, और भेजते आप हैं।",
-      "es": "Coucou nunca envía un correo: tu app de correo se abre con él escrito, y lo envías tú.",
-      "ar": "لا يرسل Coucou أي بريد إلكتروني أبدًا: يُفتح تطبيق البريد لديك والرسالة مكتوبة، وأنت من يرسلها.",
-      "fr": "Coucou n'envoie jamais d'e-mail : ton app de mail s'ouvre avec le message écrit, et c'est toi qui l'envoies.",
-      "bn": "Coucou কখনো ইমেল পাঠায় না: আপনার মেল অ্যাপ লেখা ইমেলসহ খোলে, আর পাঠান আপনি।",
-      "pt-BR": "O Coucou nunca envia um e-mail: seu app de e-mail abre com ele escrito, e quem envia é você.",
-      "ru": "Coucou никогда не отправляет письма: ваше почтовое приложение откроется с готовым текстом, а отправите его вы.",
-      "id": "Coucou tidak pernah mengirim email: aplikasi email-mu terbuka dengan email yang sudah ditulis, dan kamu yang mengirimnya.",
-      "de": "Coucou sendet niemals eine E-Mail: Deine Mail-App öffnet sich mit dem vorbereiteten Text und du sendest ihn.",
-      "tr": "Coucou asla e-posta göndermez: posta uygulaman yazılmış e-postayla açılır ve sen gönderirsin."
-    },
-    "Coucou couldn't answer: check your Claude key in Notch → Chat.": {
-      "zh-Hans": "Coucou 无法回答：请检查 Notch → 聊天 中的 Claude 密钥。",
-      "hi": "Coucou जवाब नहीं दे सका: Notch → चैट में अपनी Claude कुंजी जाँचें।",
-      "es": "Coucou no pudo responder: revisa tu clave de Claude en Notch → Chat.",
-      "ar": "تعذّر على Coucou الإجابة: تحقّق من مفتاح Claude في Notch ← الدردشة.",
-      "fr": "Coucou n'a pas pu répondre : vérifie ta clé Claude dans Notch → Chat.",
-      "bn": "Coucou উত্তর দিতে পারেনি: Notch → চ্যাট-এ আপনার Claude কী যাচাই করুন।",
-      "pt-BR": "O Coucou não conseguiu responder: verifique sua chave do Claude em Notch → Chat.",
-      "ru": "Coucou не смог ответить: проверьте ключ Claude в Notch → Чат.",
-      "id": "Coucou tidak bisa menjawab: periksa kunci Claude-mu di Notch → Obrolan.",
-      "de": "Coucou konnte nicht antworten: Prüfe deinen Claude-Schlüssel unter Notch → Chat.",
-      "tr": "Coucou yanıt veremedi: Çentik → Sohbet bölümündeki Claude anahtarını kontrol et."
-    },
     "Show clock in the island": {
       "zh-Hans": "在灵动岛中显示时钟",
       "hi": "आइलैंड में घड़ी दिखाएँ",
@@ -4285,369 +3041,135 @@
       "de": "Datum und Uhrzeit in der Mitte der Insel, wenn sie kompakt ist.",
       "tr": "Ada kompaktken ortasında tarih ve saat."
     },
-    "Get new versions from the island?": {
-      "zh-Hans": "在岛里获取新版本？",
-      "hi": "नए वर्ज़न आइलैंड में पाएँ?",
-      "es": "¿Recibir las nuevas versiones en la isla?",
-      "ar": "هل تريد تلقي الإصدارات الجديدة في الشريط؟",
-      "fr": "Recevoir les nouvelles versions dans l'île ?",
-      "bn": "নতুন সংস্করণ আইল্যান্ডে পেতে চান?",
-      "pt-BR": "Receber as novas versões na ilha?",
-      "ru": "Получать новые версии прямо в острове?",
-      "id": "Dapatkan versi baru dari pulau?",
-      "de": "Neue Versionen direkt in der Insel?",
-      "tr": "Yeni sürümler adada görünsün mü?"
+    "Put the model files in {folder}, then check again.": {
+      "zh-Hans": "请将模型文件放入 {folder}，然后再次检查。",
+      "hi": "मॉडल फ़ाइलें {folder} में रखें, फिर दोबारा जाँचें।",
+      "es": "Pon los archivos del modelo en {folder} y vuelve a comprobar.",
+      "ar": "ضع ملفات النموذج في {folder} ثم تحقق مرة أخرى.",
+      "fr": "Mets les fichiers du modèle dans {folder}, puis vérifie à nouveau.",
+      "bn": "মডেলের ফাইলগুলো {folder}-এ রাখুন, তারপর আবার পরীক্ষা করুন।",
+      "pt-BR": "Coloque os arquivos do modelo em {folder} e verifique novamente.",
+      "ru": "Положите файлы модели в {folder}, затем проверьте снова.",
+      "id": "Letakkan berkas model di {folder}, lalu periksa lagi.",
+      "de": "Leg die Modelldateien in {folder} ab und prüfe erneut.",
+      "tr": "Model dosyalarını {folder} klasörüne koy, sonra tekrar kontrol et."
     },
-    "Mochi checks Coucou's releases on GitHub a few times a day and tells you when one is out. Nothing about you is sent.": {
-      "zh-Hans": "Mochi 每天会在 GitHub 上查看几次 Coucou 的版本，有新版本时告诉你。不会发送任何关于你的信息。",
-      "hi": "Mochi दिन में कुछ बार GitHub पर Coucou के रिलीज़ देखता है और नया आने पर बताता है। आपके बारे में कुछ नहीं भेजा जाता।",
-      "es": "Mochi revisa las versiones de Coucou en GitHub unas veces al día y te avisa cuando sale una. No se envía nada sobre ti.",
-      "ar": "يتحقق Mochi من إصدارات Coucou على GitHub بضع مرات يوميًا ويخبرك عند صدور إصدار جديد. لا يُرسَل أي شيء عنك.",
-      "fr": "Mochi regarde les versions de Coucou sur GitHub quelques fois par jour et te prévient quand il y en a une. Rien sur toi n’est envoyé.",
-      "bn": "Mochi দিনে কয়েকবার GitHub-এ Coucou-র রিলিজ দেখে এবং নতুন এলে জানায়। আপনার সম্পর্কে কিছুই পাঠানো হয় না।",
-      "pt-BR": "O Mochi verifica as versões do Coucou no GitHub algumas vezes por dia e avisa quando sai uma. Nada sobre você é enviado.",
-      "ru": "Mochi несколько раз в день проверяет релизы Coucou на GitHub и сообщает о новых. О вас ничего не отправляется.",
-      "id": "Mochi memeriksa rilis Coucou di GitHub beberapa kali sehari dan memberi tahu saat ada yang baru. Tidak ada data tentangmu yang dikirim.",
-      "de": "Mochi schaut ein paar Mal am Tag nach Coucous Releases auf GitHub und sagt dir, wenn eine neue da ist. Über dich wird nichts gesendet.",
-      "tr": "Mochi, Coucou'nun GitHub'daki sürümlerine günde birkaç kez bakar ve yenisi çıkınca sana söyler. Seninle ilgili hiçbir şey gönderilmez."
+    "Check again": {
+      "zh-Hans": "再次检查",
+      "hi": "फिर से जाँचें",
+      "es": "Comprobar de nuevo",
+      "ar": "تحقق مرة أخرى",
+      "fr": "Vérifier à nouveau",
+      "bn": "আবার পরীক্ষা করুন",
+      "pt-BR": "Verificar novamente",
+      "ru": "Проверить снова",
+      "id": "Periksa lagi",
+      "de": "Erneut prüfen",
+      "tr": "Tekrar kontrol et"
     },
-    "Coucou {version} is out": {
-      "zh-Hans": "Coucou {version} 已发布",
-      "hi": "Coucou {version} आ गया है",
-      "es": "Ya salió Coucou {version}",
-      "ar": "صدر Coucou {version}",
-      "fr": "Coucou {version} est sorti",
-      "bn": "Coucou {version} এসে গেছে",
-      "pt-BR": "Saiu o Coucou {version}",
-      "ru": "Вышел Coucou {version}",
-      "id": "Coucou {version} sudah rilis",
-      "de": "Coucou {version} ist da",
-      "tr": "Coucou {version} çıktı"
+    "The most accurate, offline, 25 languages. Files copied by hand (about {0} MB).": {
+      "zh-Hans": "最准确，离线，支持 25 种语言。需手动复制文件（约 {0} MB）。",
+      "hi": "सबसे सटीक, ऑफ़लाइन, 25 भाषाएँ। फ़ाइलें हाथ से कॉपी करनी होंगी (लगभग {0} MB)।",
+      "es": "El más preciso, sin conexión, 25 idiomas. Archivos copiados a mano (unos {0} MB).",
+      "ar": "الأدق، دون اتصال، 25 لغة. تُنسخ الملفات يدويًا (حوالي {0} ميغابايت).",
+      "fr": "Le plus précis, hors ligne, 25 langues. Fichiers copiés à la main (environ {0} Mo).",
+      "bn": "সবচেয়ে নির্ভুল, অফলাইন, ২৫টি ভাষা। ফাইল হাতে কপি করতে হবে (প্রায় {0} MB)।",
+      "pt-BR": "O mais preciso, offline, 25 idiomas. Arquivos copiados à mão (cerca de {0} MB).",
+      "ru": "Самая точная, офлайн, 25 языков. Файлы копируются вручную (около {0} МБ).",
+      "id": "Paling akurat, luring, 25 bahasa. Berkas disalin manual (sekitar {0} MB).",
+      "de": "Am genauesten, offline, 25 Sprachen. Dateien von Hand kopieren (etwa {0} MB).",
+      "tr": "En doğru, çevrimdışı, 25 dil. Dosyalar elle kopyalanır (yaklaşık {0} MB)."
     },
-    "You have {version}": {
-      "zh-Hans": "当前版本 {version}",
-      "hi": "आपके पास {version} है",
-      "es": "Tienes la {version}",
-      "ar": "لديك {version}",
-      "fr": "Tu as la {version}",
-      "bn": "আপনার কাছে {version}",
-      "pt-BR": "Você tem a {version}",
-      "ru": "У вас {version}",
-      "id": "Kamu punya {version}",
-      "de": "Du hast {version}",
-      "tr": "Sende {version} var"
+    "Your calls transcribed person by person. No bot in the meeting.": {
+      "zh-Hans": "按发言人逐个转写你的通话。会议中没有机器人。",
+      "hi": "आपकी कॉल व्यक्ति-दर-व्यक्ति लिखित रूप में। मीटिंग में कोई बॉट नहीं।",
+      "es": "Tus llamadas transcritas persona por persona. Sin bots en la reunión.",
+      "ar": "مكالماتك مكتوبة شخصًا بشخص. دون روبوت في الاجتماع.",
+      "fr": "Tes appels transcrits personne par personne. Aucun bot dans la réunion.",
+      "bn": "আপনার কলগুলো ব্যক্তি ধরে ধরে লেখা হয়। মিটিংয়ে কোনো বট নেই।",
+      "pt-BR": "Suas chamadas transcritas pessoa por pessoa. Sem bot na reunião.",
+      "ru": "Ваши звонки расшифрованы по участникам. В встрече нет бота.",
+      "id": "Panggilan Anda ditranskripsi per orang. Tanpa bot dalam rapat.",
+      "de": "Deine Gespräche, Person für Person transkribiert. Kein Bot im Meeting.",
+      "tr": "Görüşmelerin kişi kişi yazıya dökülür. Toplantıda bot yok."
     },
-    "What's new": {
-      "zh-Hans": "新功能",
-      "hi": "क्या नया है",
-      "es": "Novedades",
-      "ar": "ما الجديد",
-      "fr": "Nouveautés",
-      "bn": "নতুন কী",
-      "pt-BR": "Novidades",
-      "ru": "Что нового",
-      "id": "Yang baru",
-      "de": "Was ist neu",
-      "tr": "Yenilikler"
+    "The voice model is not installed": {
+      "zh-Hans": "语音模型尚未安装",
+      "hi": "आवाज़ मॉडल इंस्टॉल नहीं है",
+      "es": "El modelo de voz no está instalado",
+      "ar": "نموذج الصوت غير مثبّت",
+      "fr": "Le modèle vocal n'est pas installé",
+      "bn": "ভয়েস মডেল ইনস্টল করা নেই",
+      "pt-BR": "O modelo de voz não está instalado",
+      "ru": "Голосовая модель не установлена",
+      "id": "Model suara belum terpasang",
+      "de": "Das Sprachmodell ist nicht installiert",
+      "tr": "Ses modeli kurulu değil"
     },
-    "Downloading from GitHub… {percent} %": {
-      "zh-Hans": "正在从 GitHub 下载… {percent} %",
-      "hi": "GitHub से डाउनलोड हो रहा है… {percent} %",
-      "es": "Descargando desde GitHub… {percent} %",
-      "ar": "جارٍ التنزيل من GitHub… {percent} %",
-      "fr": "Téléchargement depuis GitHub… {percent} %",
-      "bn": "GitHub থেকে ডাউনলোড হচ্ছে… {percent} %",
-      "pt-BR": "Baixando do GitHub… {percent} %",
-      "ru": "Загрузка с GitHub… {percent} %",
-      "id": "Mengunduh dari GitHub… {percent} %",
-      "de": "Wird von GitHub geladen… {percent} %",
-      "tr": "GitHub'dan indiriliyor… %{percent}"
+    "Coucou writes your calls on this computer with Parakeet, and tells the voices apart with a second small model. Put both in the folder shown (about {0} MB); then everything works offline.": {
+      "zh-Hans": "Coucou 在这台电脑上用 Parakeet 转写你的通话，并用另一个小模型区分不同的声音。请把两者放入所示文件夹（约 {0} MB），之后一切都可离线运行。",
+      "hi": "Coucou इस कंप्यूटर पर Parakeet से आपकी कॉल लिखता है और एक दूसरे छोटे मॉडल से आवाज़ों को अलग पहचानता है। दोनों को दिखाए गए फ़ोल्डर में रखें (लगभग {0} MB); फिर सब कुछ ऑफ़लाइन चलता है।",
+      "es": "Coucou transcribe tus llamadas en este equipo con Parakeet y distingue las voces con un segundo modelo pequeño. Pon ambos en la carpeta indicada (unos {0} MB); después todo funciona sin conexión.",
+      "ar": "يكتب Coucou مكالماتك على هذا الحاسوب باستخدام Parakeet، ويميّز الأصوات بنموذج صغير ثانٍ. ضع الاثنين في المجلد الموضّح (حوالي {0} ميغابايت)، ثم يعمل كل شيء دون اتصال.",
+      "fr": "Coucou transcrit tes appels sur cet ordinateur avec Parakeet et distingue les voix avec un second petit modèle. Mets les deux dans le dossier indiqué (environ {0} Mo) ; ensuite tout fonctionne hors ligne.",
+      "bn": "Coucou এই কম্পিউটারেই Parakeet দিয়ে আপনার কল লেখে এবং আরেকটি ছোট মডেল দিয়ে কণ্ঠ আলাদা করে। দুটোই দেখানো ফোল্ডারে রাখুন (প্রায় {0} MB); তারপর সবকিছু অফলাইনে চলবে।",
+      "pt-BR": "O Coucou transcreve suas chamadas neste computador com o Parakeet e distingue as vozes com um segundo modelo pequeno. Coloque os dois na pasta indicada (cerca de {0} MB); depois tudo funciona offline.",
+      "ru": "Coucou расшифровывает ваши звонки на этом компьютере с помощью Parakeet и различает голоса второй небольшой моделью. Положите обе в указанную папку (около {0} МБ); после этого всё работает офлайн.",
+      "id": "Coucou menulis panggilan Anda di komputer ini dengan Parakeet, dan membedakan suara dengan model kecil kedua. Letakkan keduanya di folder yang ditunjukkan (sekitar {0} MB); setelah itu semuanya berjalan luring.",
+      "de": "Coucou schreibt deine Gespräche auf diesem Computer mit Parakeet mit und unterscheidet die Stimmen mit einem zweiten kleinen Modell. Leg beide in den angezeigten Ordner (etwa {0} MB); danach läuft alles offline.",
+      "tr": "Coucou, görüşmelerini bu bilgisayarda Parakeet ile yazıya döker ve sesleri ikinci küçük bir modelle ayırt eder. İkisini de gösterilen klasöre koy (yaklaşık {0} MB); sonra her şey çevrimdışı çalışır."
     },
-    "Installing… Coucou closes and comes back by itself.": {
-      "zh-Hans": "正在安装… Coucou 会关闭并自动重新打开。",
-      "hi": "इंस्टॉल हो रहा है… Coucou बंद होकर अपने आप फिर खुल जाएगा।",
-      "es": "Instalando… Coucou se cierra y vuelve a abrirse solo.",
-      "ar": "جارٍ التثبيت… سيُغلق Coucou ثم يعود من تلقاء نفسه.",
-      "fr": "Installation… Coucou se ferme et revient tout seul.",
-      "bn": "ইনস্টল হচ্ছে… Coucou বন্ধ হয়ে নিজে থেকেই আবার খুলবে।",
-      "pt-BR": "Instalando… O Coucou fecha e volta sozinho.",
-      "ru": "Установка… Coucou закроется и сам откроется снова.",
-      "id": "Memasang… Coucou akan menutup lalu terbuka lagi dengan sendirinya.",
-      "de": "Wird installiert… Coucou schließt sich und kommt von selbst wieder.",
-      "tr": "Yükleniyor… Coucou kapanır ve kendiliğinden geri gelir."
+    "Put the voice model in its folder to dictate": {
+      "zh-Hans": "将语音模型放入其文件夹即可听写",
+      "hi": "बोलकर लिखने के लिए आवाज़ मॉडल को उसके फ़ोल्डर में रखें",
+      "es": "Pon el modelo de voz en su carpeta para dictar",
+      "ar": "ضع نموذج الصوت في مجلده لتتمكن من الإملاء",
+      "fr": "Mets le modèle vocal dans son dossier pour dicter",
+      "bn": "ডিক্টেট করতে ভয়েস মডেলটি তার ফোল্ডারে রাখুন",
+      "pt-BR": "Coloque o modelo de voz na pasta dele para ditar",
+      "ru": "Положите голосовую модель в её папку, чтобы диктовать",
+      "id": "Letakkan model suara di foldernya untuk mendikte",
+      "de": "Leg das Sprachmodell in seinen Ordner, um zu diktieren",
+      "tr": "Dikte etmek için ses modelini klasörüne koy"
     },
-    "The update didn't go through": {
-      "zh-Hans": "更新未完成",
-      "hi": "अपडेट पूरा नहीं हुआ",
-      "es": "La actualización no se completó",
-      "ar": "لم يكتمل التحديث",
-      "fr": "La mise à jour n’a pas abouti",
-      "bn": "আপডেট সম্পন্ন হয়নি",
-      "pt-BR": "A atualização não foi concluída",
-      "ru": "Обновление не удалось",
-      "id": "Pembaruan tidak berhasil",
-      "de": "Das Update hat nicht geklappt",
-      "tr": "Güncelleme tamamlanamadı"
+    "Only a server on this computer is allowed.": {
+      "zh-Hans": "只允许使用这台电脑上的服务器。",
+      "hi": "केवल इसी कंप्यूटर का सर्वर अनुमत है।",
+      "es": "Solo se permite un servidor de este equipo.",
+      "ar": "يُسمح فقط بخادم على هذا الحاسوب.",
+      "fr": "Seul un serveur de cet ordinateur est autorisé.",
+      "bn": "শুধু এই কম্পিউটারের সার্ভার অনুমোদিত।",
+      "pt-BR": "Só é permitido um servidor deste computador.",
+      "ru": "Разрешён только сервер на этом компьютере.",
+      "id": "Hanya server di komputer ini yang diizinkan.",
+      "de": "Nur ein Server auf diesem Computer ist erlaubt.",
+      "tr": "Yalnızca bu bilgisayardaki bir sunucuya izin verilir."
     },
-    "Install {version}": {
-      "zh-Hans": "安装 {version}",
-      "hi": "{version} इंस्टॉल करें",
-      "es": "Instalar la {version}",
-      "ar": "تثبيت {version}",
-      "fr": "Installer la {version}",
-      "bn": "{version} ইনস্টল করুন",
-      "pt-BR": "Instalar a {version}",
-      "ru": "Установить {version}",
-      "id": "Pasang {version}",
-      "de": "{version} installieren",
-      "tr": "{version} sürümünü yükle"
+    "Pick up to {max} pills to show next to Mochi — {used}/{max} in use.": {
+      "zh-Hans": "最多选择 {max} 个标签显示在 Mochi 旁边 — 已用 {used}/{max}。",
+      "hi": "Mochi के बगल में दिखाने के लिए अधिकतम {max} टैब चुनें — {used}/{max} उपयोग में।",
+      "es": "Elige hasta {max} pestañas para mostrar junto a Mochi — {used}/{max} en uso.",
+      "ar": "اختر حتى {max} تبويبات لعرضها بجانب Mochi — {used}/{max} مستخدمة.",
+      "fr": "Choisis jusqu'à {max} onglets à afficher à côté de Mochi — {used}/{max} utilisés.",
+      "bn": "Mochi-র পাশে দেখাতে সর্বোচ্চ {max}টি ট্যাব বেছে নিন — {used}/{max} ব্যবহৃত।",
+      "pt-BR": "Escolha até {max} abas para mostrar ao lado do Mochi — {used}/{max} em uso.",
+      "ru": "Выберите до {max} вкладок рядом с Mochi — занято {used}/{max}.",
+      "id": "Pilih hingga {max} tab untuk ditampilkan di samping Mochi — {used}/{max} terpakai.",
+      "de": "Wähle bis zu {max} Pills neben Mochi — {used}/{max} belegt.",
+      "tr": "Mochi'nin yanında gösterilecek en fazla {max} araç seç — {used}/{max} kullanımda."
     },
-    "Get {version} on GitHub": {
-      "zh-Hans": "在 GitHub 上获取 {version}",
-      "hi": "{version} GitHub से लें",
-      "es": "Descargar la {version} en GitHub",
-      "ar": "احصل على {version} من GitHub",
-      "fr": "Récupérer la {version} sur GitHub",
-      "bn": "GitHub থেকে {version} নিন",
-      "pt-BR": "Baixar a {version} no GitHub",
-      "ru": "Скачать {version} на GitHub",
-      "id": "Ambil {version} di GitHub",
-      "de": "{version} auf GitHub holen",
-      "tr": "{version} sürümünü GitHub'dan al"
-    },
-    "Couldn't reach GitHub": {
-      "zh-Hans": "无法连接 GitHub",
-      "hi": "GitHub से संपर्क नहीं हो सका",
-      "es": "No se pudo contactar con GitHub",
-      "ar": "تعذّر الوصول إلى GitHub",
-      "fr": "GitHub ne répond pas",
-      "bn": "GitHub-এ পৌঁছানো যায়নি",
-      "pt-BR": "Não foi possível acessar o GitHub",
-      "ru": "Не удалось связаться с GitHub",
-      "id": "Tidak dapat menghubungi GitHub",
-      "de": "GitHub nicht erreichbar",
-      "tr": "GitHub'a ulaşılamadı"
-    },
-    "Coucou looks at its own releases on GitHub a few times a day. An update is installed only after your click, once its SHA-256 matches the one GitHub publishes.": {
-      "zh-Hans": "Coucou 每天会在 GitHub 上查看几次自己的版本。只有在你点击后，并且其 SHA-256 与 GitHub 公布的一致时，才会安装更新。",
-      "hi": "Coucou दिन में कुछ बार GitHub पर अपने रिलीज़ देखता है। अपडेट आपके क्लिक के बाद ही इंस्टॉल होता है, और तभी जब उसका SHA-256 GitHub के प्रकाशित SHA-256 से मेल खाए।",
-      "es": "Coucou revisa sus propias versiones en GitHub unas veces al día. Una actualización solo se instala después de tu clic, una vez que su SHA-256 coincide con el que publica GitHub.",
-      "ar": "يتحقق Coucou من إصداراته على GitHub بضع مرات يوميًا. لا يُثبَّت أي تحديث إلا بعد نقرتك، وبعد مطابقة SHA-256 الخاص به مع الذي ينشره GitHub.",
-      "fr": "Coucou regarde ses propres versions sur GitHub quelques fois par jour. Une mise à jour ne s'installe qu'après ton clic, une fois son SHA-256 vérifié avec celui que publie GitHub.",
-      "bn": "Coucou দিনে কয়েকবার GitHub-এ নিজের রিলিজ দেখে। আপনার ক্লিকের পরেই আপডেট ইনস্টল হয়, তাও কেবল যখন এর SHA-256 GitHub-এর প্রকাশিত SHA-256-এর সঙ্গে মেলে।",
-      "pt-BR": "O Coucou verifica as próprias versões no GitHub algumas vezes por dia. Uma atualização só é instalada depois do seu clique, quando o SHA-256 dela bate com o que o GitHub publica.",
-      "ru": "Coucou несколько раз в день проверяет свои релизы на GitHub. Обновление устанавливается только после вашего нажатия и только если его SHA-256 совпадает с тем, что публикует GitHub.",
-      "id": "Coucou memeriksa rilisnya sendiri di GitHub beberapa kali sehari. Pembaruan hanya dipasang setelah kamu mengeklik, dan setelah SHA-256-nya cocok dengan yang diterbitkan GitHub.",
-      "de": "Coucou schaut ein paar Mal am Tag nach seinen eigenen Releases auf GitHub. Ein Update wird erst nach deinem Klick installiert, wenn seine SHA-256 mit der von GitHub veröffentlichten übereinstimmt.",
-      "tr": "Coucou günde birkaç kez GitHub'daki kendi sürümlerine bakar. Güncelleme yalnızca sen tıkladıktan sonra, SHA-256 değeri GitHub'ın yayımladığıyla eşleştiğinde yüklenir."
-    },
-    "Coucou looks at its own releases on GitHub a few times a day and tells you when one is out. Update it the way you installed it: AppImage, .deb, .rpm or your package manager.": {
-      "zh-Hans": "Coucou 每天会在 GitHub 上查看几次自己的版本，有新版本时告诉你。请用你安装它的方式更新：AppImage、.deb、.rpm 或你的包管理器。",
-      "hi": "Coucou दिन में कुछ बार GitHub पर अपने रिलीज़ देखता है और नया आने पर बताता है। इसे उसी तरह अपडेट करें जैसे आपने इंस्टॉल किया था: AppImage, .deb, .rpm या आपका पैकेज मैनेजर।",
-      "es": "Coucou revisa sus propias versiones en GitHub unas veces al día y te avisa cuando sale una. Actualízalo como lo instalaste: AppImage, .deb, .rpm o tu gestor de paquetes.",
-      "ar": "يتحقق Coucou من إصداراته على GitHub بضع مرات يوميًا ويخبرك عند صدور إصدار جديد. حدّثه بالطريقة التي ثبّته بها: AppImage أو ‎.deb أو ‎.rpm أو مدير الحزم لديك.",
-      "fr": "Coucou regarde ses propres versions sur GitHub quelques fois par jour et te prévient quand il y en a une. Mets-le à jour comme tu l'as installé : AppImage, .deb, .rpm ou ton gestionnaire de paquets.",
-      "bn": "Coucou দিনে কয়েকবার GitHub-এ নিজের রিলিজ দেখে এবং নতুন এলে জানায়। যেভাবে ইনস্টল করেছিলেন সেভাবেই আপডেট করুন: AppImage, .deb, .rpm বা আপনার প্যাকেজ ম্যানেজার।",
-      "pt-BR": "O Coucou verifica as próprias versões no GitHub algumas vezes por dia e avisa quando sai uma. Atualize do jeito que você instalou: AppImage, .deb, .rpm ou seu gerenciador de pacotes.",
-      "ru": "Coucou несколько раз в день проверяет свои релизы на GitHub и сообщает о новых. Обновляйте его так же, как устанавливали: AppImage, .deb, .rpm или менеджер пакетов.",
-      "id": "Coucou memeriksa rilisnya sendiri di GitHub beberapa kali sehari dan memberi tahu saat ada yang baru. Perbarui dengan cara kamu memasangnya: AppImage, .deb, .rpm, atau manajer paketmu.",
-      "de": "Coucou schaut ein paar Mal am Tag nach seinen eigenen Releases auf GitHub und sagt dir, wenn eine neue da ist. Aktualisiere es so, wie du es installiert hast: AppImage, .deb, .rpm oder dein Paketmanager.",
-      "tr": "Coucou günde birkaç kez GitHub'daki kendi sürümlerine bakar ve yenisi çıkınca sana söyler. Onu nasıl yüklediysen öyle güncelle: AppImage, .deb, .rpm ya da paket yöneticin."
-    },
-    "The download failed. Try again, or get the new version on GitHub.": {
-      "zh-Hans": "下载失败。请重试，或前往 GitHub 获取新版本。",
-      "hi": "डाउनलोड नहीं हुआ। फिर कोशिश करें, या नया वर्ज़न GitHub से लें।",
-      "es": "La descarga falló. Inténtalo de nuevo o descarga la nueva versión en GitHub.",
-      "ar": "فشل التنزيل. حاول مجددًا أو احصل على الإصدار الجديد من GitHub.",
-      "fr": "Le téléchargement a échoué. Réessaie, ou récupère la nouvelle version sur GitHub.",
-      "bn": "ডাউনলোড ব্যর্থ। আবার চেষ্টা করুন, অথবা নতুন সংস্করণটি GitHub থেকে নিন।",
-      "pt-BR": "O download falhou. Tente de novo ou baixe a nova versão no GitHub.",
-      "ru": "Загрузка не удалась. Попробуйте снова или скачайте новую версию на GitHub.",
-      "id": "Unduhan gagal. Coba lagi, atau ambil versi barunya di GitHub.",
-      "de": "Der Download ist fehlgeschlagen. Versuch es noch mal oder hol dir die neue Version auf GitHub.",
-      "tr": "İndirme başarısız oldu. Tekrar dene ya da yeni sürümü GitHub'dan al."
-    },
-    "GitHub gave no checksum for this download, so nothing was installed.": {
-      "zh-Hans": "GitHub 没有提供此下载的校验值，因此没有安装任何内容。",
-      "hi": "GitHub ने इस डाउनलोड का चेकसम नहीं दिया, इसलिए कुछ भी इंस्टॉल नहीं हुआ।",
-      "es": "GitHub no dio ninguna suma de verificación para esta descarga, así que no se instaló nada.",
-      "ar": "لم يقدّم GitHub مجموع تحقق لهذا التنزيل، لذا لم يُثبَّت شيء.",
-      "fr": "GitHub n'a donné aucune somme de contrôle pour ce téléchargement : rien n'a été installé.",
-      "bn": "GitHub এই ডাউনলোডের কোনো চেকসাম দেয়নি, তাই কিছুই ইনস্টল হয়নি।",
-      "pt-BR": "O GitHub não informou o checksum deste download, então nada foi instalado.",
-      "ru": "GitHub не указал контрольную сумму для этой загрузки, поэтому ничего не установлено.",
-      "id": "GitHub tidak memberi checksum untuk unduhan ini, jadi tidak ada yang dipasang.",
-      "de": "GitHub hat für diesen Download keine Prüfsumme angegeben, daher wurde nichts installiert.",
-      "tr": "GitHub bu indirme için sağlama değeri vermedi, bu yüzden hiçbir şey yüklenmedi."
-    },
-    "The download isn't the file GitHub published for this version, so nothing was installed.": {
-      "zh-Hans": "下载的文件不是 GitHub 为此版本发布的文件，因此没有安装任何内容。",
-      "hi": "डाउनलोड की गई फ़ाइल वह नहीं है जो GitHub ने इस वर्ज़न के लिए प्रकाशित की थी, इसलिए कुछ भी इंस्टॉल नहीं हुआ।",
-      "es": "La descarga no es el archivo que GitHub publicó para esta versión, así que no se instaló nada.",
-      "ar": "الملف الذي تم تنزيله ليس الملف الذي نشره GitHub لهذا الإصدار، لذا لم يُثبَّت شيء.",
-      "fr": "Le téléchargement n'est pas le fichier publié sur GitHub pour cette version : rien n'a été installé.",
-      "bn": "ডাউনলোড করা ফাইলটি এই সংস্করণের জন্য GitHub-এ প্রকাশিত ফাইল নয়, তাই কিছুই ইনস্টল হয়নি।",
-      "pt-BR": "O download não é o arquivo que o GitHub publicou para esta versão, então nada foi instalado.",
-      "ru": "Загруженный файл не совпадает с тем, что GitHub опубликовал для этой версии, поэтому ничего не установлено.",
-      "id": "Unduhan ini bukan file yang diterbitkan GitHub untuk versi ini, jadi tidak ada yang dipasang.",
-      "de": "Der Download ist nicht die Datei, die GitHub für diese Version veröffentlicht hat, daher wurde nichts installiert.",
-      "tr": "İndirilen dosya GitHub'ın bu sürüm için yayımladığı dosya değil, bu yüzden hiçbir şey yüklenmedi."
-    },
-    "Windows blocked the installer. Get the new version from its release page instead.": {
-      "zh-Hans": "Windows 阻止了安装程序。请改从发布页面获取新版本。",
-      "hi": "Windows ने इंस्टॉलर रोक दिया। इसके बजाय नया वर्ज़न रिलीज़ पेज से लें।",
-      "es": "Windows bloqueó el instalador. Descarga la nueva versión desde su página de lanzamiento.",
-      "ar": "حظر Windows أداة التثبيت. احصل على الإصدار الجديد من صفحة الإصدار بدلًا من ذلك.",
-      "fr": "Windows a bloqué l'installeur. Récupère plutôt la nouvelle version sur sa page de publication.",
-      "bn": "Windows ইনস্টলারটি আটকে দিয়েছে। এর বদলে রিলিজ পেজ থেকে নতুন সংস্করণটি নিন।",
-      "pt-BR": "O Windows bloqueou o instalador. Baixe a nova versão pela página de lançamento.",
-      "ru": "Windows заблокировала установщик. Скачайте новую версию со страницы релиза.",
-      "id": "Windows memblokir pemasangnya. Ambil versi barunya dari halaman rilis saja.",
-      "de": "Windows hat das Installationsprogramm blockiert. Hol dir die neue Version stattdessen von der Release-Seite.",
-      "tr": "Windows yükleyiciyi engelledi. Yeni sürümü bunun yerine sürüm sayfasından al."
-    },
-    "Update Coucou to {version}…": {
-      "zh-Hans": "将 Coucou 更新到 {version}…",
-      "hi": "Coucou को {version} पर अपडेट करें…",
-      "es": "Actualizar Coucou a la {version}…",
-      "ar": "تحديث Coucou إلى {version}…",
-      "fr": "Mettre à jour Coucou vers la {version}…",
-      "bn": "Coucou {version}-এ আপডেট করুন…",
-      "pt-BR": "Atualizar o Coucou para a {version}…",
-      "ru": "Обновить Coucou до {version}…",
-      "id": "Perbarui Coucou ke {version}…",
-      "de": "Coucou auf {version} aktualisieren…",
-      "tr": "Coucou'yu {version} sürümüne güncelle…"
-    },
-    "You're on Coucou {version}": {
-      "zh-Hans": "你已在使用 Coucou {version}",
-      "hi": "अब आप Coucou {version} पर हैं",
-      "es": "Ya tienes Coucou {version}",
-      "ar": "أنت الآن على Coucou {version}",
-      "fr": "Tu es sur Coucou {version}",
-      "bn": "আপনি এখন Coucou {version}-এ",
-      "pt-BR": "Você está no Coucou {version}",
-      "ru": "У вас Coucou {version}",
-      "id": "Kamu sekarang di Coucou {version}",
-      "de": "Du hast jetzt Coucou {version}",
-      "tr": "Artık Coucou {version} sürümündesin"
-    },
-    "agent session": {
-      "zh-Hans": "次智能体会话",
-      "hi": "एजेंट सत्र",
-      "es": "sesión de agente",
-      "ar": "جلسة وكيل",
-      "fr": "session d'agent",
-      "bn": "এজেন্ট সেশন",
-      "pt-BR": "sessão de agente",
-      "ru": "сессия агента",
-      "id": "sesi agen",
-      "de": "Agent-Sitzung",
-      "tr": "ajan oturumu"
-    },
-    "agent sessions": {
-      "zh-Hans": "次智能体会话",
-      "hi": "एजेंट सत्र",
-      "es": "sesiones de agentes",
-      "ar": "جلسات وكلاء",
-      "fr": "sessions d'agents",
-      "bn": "এজেন্ট সেশন",
-      "pt-BR": "sessões de agentes",
-      "ru": "сессий агентов",
-      "id": "sesi agen",
-      "de": "Agent-Sitzungen",
-      "tr": "ajan oturumu"
-    },
-    "with your agents": {
-      "zh-Hans": "与智能体共处",
-      "hi": "आपके एजेंटों के साथ",
-      "es": "con tus agentes",
-      "ar": "مع وكلائك",
-      "fr": "avec tes agents",
-      "bn": "আপনার এজেন্টদের সঙ্গে",
-      "pt-BR": "com seus agentes",
-      "ru": "с вашими агентами",
-      "id": "bersama agenmu",
-      "de": "mit deinen Agents",
-      "tr": "ajanlarınla"
-    },
-    "lines written": {
-      "zh-Hans": "行代码",
-      "hi": "लिखी गई पंक्तियाँ",
-      "es": "líneas escritas",
-      "ar": "سطر مكتوب",
-      "fr": "lignes écrites",
-      "bn": "লেখা লাইন",
-      "pt-BR": "linhas escritas",
-      "ru": "строк написано",
-      "id": "baris ditulis",
-      "de": "geschriebene Zeilen",
-      "tr": "satır yazıldı"
-    },
-    "approval from the island": {
-      "zh-Hans": "次在岛中批准",
-      "hi": "आइलैंड से मंज़ूरी",
-      "es": "aprobación desde la isla",
-      "ar": "موافقة من الشريط",
-      "fr": "validation depuis l'île",
-      "bn": "আইল্যান্ড থেকে অনুমোদন",
-      "pt-BR": "aprovação pela ilha",
-      "ru": "решение на острове",
-      "id": "persetujuan dari pulau",
-      "de": "Freigabe aus der Insel",
-      "tr": "adadan onay"
-    },
-    "approvals from the island": {
-      "zh-Hans": "次在岛中批准",
-      "hi": "आइलैंड से मंज़ूरियाँ",
-      "es": "aprobaciones desde la isla",
-      "ar": "موافقات من الشريط",
-      "fr": "validations depuis l'île",
-      "bn": "আইল্যান্ড থেকে অনুমোদন",
-      "pt-BR": "aprovações pela ilha",
-      "ru": "решений на острове",
-      "id": "persetujuan dari pulau",
-      "de": "Freigaben aus der Insel",
-      "tr": "adadan onay"
-    },
-    "saved by dictating": {
-      "zh-Hans": "口述节省的时间",
-      "hi": "बोलकर लिखने से बचा समय",
-      "es": "ahorrado dictando",
-      "ar": "وُفّرت بالإملاء",
-      "fr": "gagné en dictant",
-      "bn": "বলে লিখে বাঁচানো সময়",
-      "pt-BR": "poupado ditando",
-      "ru": "сэкономлено диктовкой",
-      "id": "dihemat dengan dikte",
-      "de": "durch Diktieren gespart",
-      "tr": "dikte ederek kazanıldı"
-    },
-    "call transcribed": {
-      "zh-Hans": "次通话已转写",
-      "hi": "कॉल ट्रांसक्राइब हुई",
-      "es": "llamada transcrita",
-      "ar": "مكالمة مفرَّغة",
-      "fr": "appel transcrit",
-      "bn": "কল লিখিত হয়েছে",
-      "pt-BR": "chamada transcrita",
-      "ru": "звонок расшифрован",
-      "id": "panggilan ditranskrip",
-      "de": "transkribierter Anruf",
-      "tr": "çağrı yazıya döküldü"
-    },
-    "calls transcribed": {
-      "zh-Hans": "次通话已转写",
-      "hi": "कॉल ट्रांसक्राइब हुईं",
-      "es": "llamadas transcritas",
-      "ar": "مكالمات مفرَّغة",
-      "fr": "appels transcrits",
-      "bn": "কল লিখিত হয়েছে",
-      "pt-BR": "chamadas transcritas",
-      "ru": "звонков расшифровано",
-      "id": "panggilan ditranskrip",
-      "de": "transkribierte Anrufe",
-      "tr": "çağrı yazıya döküldü"
+    "Nothing leaves this computer: Coucou only talks to servers on this PC.": {
+      "zh-Hans": "没有任何内容会离开这台电脑：Coucou 只与这台电脑上的服务器通信。",
+      "hi": "कुछ भी इस कंप्यूटर से बाहर नहीं जाता: Coucou केवल इसी पीसी के सर्वरों से बात करता है।",
+      "es": "Nada sale de este equipo: Coucou solo habla con servidores de este PC.",
+      "ar": "لا شيء يغادر هذا الحاسوب: يتحدث Coucou فقط مع خوادم على هذا الجهاز.",
+      "fr": "Rien ne quitte cet ordinateur : Coucou ne parle qu'à des serveurs de ce PC.",
+      "bn": "কিছুই এই কম্পিউটার ছেড়ে যায় না: Coucou শুধু এই পিসির সার্ভারের সাথে কথা বলে।",
+      "pt-BR": "Nada sai deste computador: o Coucou só fala com servidores deste PC.",
+      "ru": "Ничто не покидает этот компьютер: Coucou общается только с серверами на этом ПК.",
+      "id": "Tidak ada yang keluar dari komputer ini: Coucou hanya berbicara dengan server di PC ini.",
+      "de": "Nichts verlässt diesen Computer: Coucou spricht nur mit Servern auf diesem PC.",
+      "tr": "Hiçbir şey bu bilgisayardan çıkmaz: Coucou yalnızca bu bilgisayardaki sunucularla konuşur."
     }
   }
 }

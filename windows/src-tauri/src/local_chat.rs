@@ -59,6 +59,9 @@ fn may_carry_key(url: &Url) -> bool {
 /// Settings → Local models: stores the key for the address typed next to it.
 pub fn set_custom_key(typed_url: &str, key: &str) -> Result<(), String> {
     let url = net::normalise_server_url(typed_url)?;
+    if !net::is_loopback_url(&url) {
+        return Err("Only a server on this computer is allowed.".to_string());
+    }
     if !may_carry_key(&url) {
         return Err(t("A key is only sent over https, or to a server on this computer."));
     }

@@ -74,14 +74,6 @@ pub enum Edge {
     Right,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
-#[serde(rename_all = "lowercase")]
-pub enum SummaryEngine {
-    #[default]
-    Claude,
-    Off,
-}
-
 /// The preferences of dictation and of the window.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", default)]
@@ -94,19 +86,10 @@ pub struct Prefs {
     pub mic: String,
     /// Days the history is kept: 0 = not kept, -1 = forever.
     pub keep_days: i64,
-    /// Clean the words with Claude before pasting them (needs the Claude key).
-    pub cleanup: bool,
     /// The style of the apps that have none of their own.
     pub default_style: Style,
-    pub summary_engine: SummaryEngine,
     /// Open the Coucou window when Coucou is opened (not when it starts with the computer).
     pub open_at_launch: bool,
-    /// « OK Coucou »: listen for it and answer with Claude (needs the Claude key).
-    pub voice: bool,
-    /// How Coucou answers out loud: "system", "elevenlabs" or "off".
-    pub voice_output: String,
-    /// The ElevenLabs voice: "female" or "male".
-    pub voice_gender: String,
 }
 
 impl Default for Prefs {
@@ -117,13 +100,8 @@ impl Default for Prefs {
             edge: Edge::Bottom,
             mic: String::new(),
             keep_days: 30,
-            cleanup: false,
             default_style: Style::Natural,
-            summary_engine: SummaryEngine::Claude,
             open_at_launch: true,
-            voice: false,
-            voice_output: "system".into(),
-            voice_gender: "female".into(),
         }
     }
 }
@@ -248,12 +226,6 @@ impl Store {
         text::prepare(raw, &self.words.words, &self.words.replacements, &self.snippets)
     }
 
-    pub fn style_for(&self, app: Option<&str>) -> Style {
-        app.and_then(|id| self.app_styles.iter().find(|s| s.id == id))
-            .map(|s| s.style)
-            .unwrap_or(self.prefs.default_style)
-    }
-
     /// The last thing dictated, for "paste again".
     pub fn last_text(&self) -> Option<String> {
         self.history.first().map(|e| e.text.clone()).or_else(|| self.last_unkept.clone())
@@ -367,17 +339,6 @@ mod tests {
         // Saved on disk and read back.
         let again = Store::load_from(dir.clone());
         assert_eq!(again.stats.days["2026-10-14"].dictations, 2);
-        let _ = std::fs::remove_dir_all(dir);
-    }
-
-    #[test]
-    fn styles_follow_the_app_or_the_default() {
-        let (mut s, dir) = temp_store();
-        assert_eq!(s.style_for(Some("outlook")), Style::Polished);
-        assert_eq!(s.style_for(Some("code")), Style::Verbatim);
-        assert_eq!(s.style_for(Some("notepad")), Style::Natural);
-        s.prefs.default_style = Style::Polished;
-        assert_eq!(s.style_for(None), Style::Polished);
         let _ = std::fs::remove_dir_all(dir);
     }
 

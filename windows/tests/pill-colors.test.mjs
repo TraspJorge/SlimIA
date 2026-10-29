@@ -5,7 +5,7 @@
 import { beforeEach, test } from "node:test";
 import assert from "node:assert/strict";
 import { PILL_PALETTE, normalizeHex, parsePillColors, pillColor, withPillColor } from "../src/core/pill-colors.ts";
-import { PILL_CATALOG, pillDefinition } from "../src/core/pills.ts";
+import { pillDefinition } from "../src/core/pills.ts";
 import { DEFAULT_SETTINGS, State } from "../src/core/state.ts";
 
 const VS_CODE = pillDefinition("integration_claude").color;
@@ -22,17 +22,15 @@ test("a colour is six hex digits, written #RRGGBB in upper case", () => {
   }
 });
 
-test("the palette is ten different colours the catalog already uses", () => {
+test("the palette is ten different colours", () => {
   // The same list as PillColors.palette on macOS (tests/PillColorsTests.swift).
   assert.deepEqual(PILL_PALETTE, [
     "#F5F6F8", "#F4505E", "#F29B38", "#FACC15", "#4ADE80",
     "#2DD4BF", "#38BDF8", "#818CF8", "#C084FC", "#E879F9",
   ]);
-  const catalog = new Set(PILL_CATALOG.map((p) => p.color));
   assert.equal(new Set(PILL_PALETTE).size, 10);
   for (const hex of PILL_PALETTE) {
     assert.equal(normalizeHex(hex), hex, hex);
-    assert.ok(catalog.has(hex), `${hex} is not a catalog colour`);
   }
 });
 
@@ -82,9 +80,10 @@ test("with no preference every pill is painted as the catalog says", () => {
 
 test("a pill is created in the colour the user gave it", () => {
   State.settings.pillColors = { integration_claude: TEAL };
+  State.settings.activeIntegrations = ["agent_gemini"];
   State.loadIntegrationTasks();
   assert.equal(colorOf("integration_claude"), TEAL);
-  assert.equal(colorOf("integration_github"), pillDefinition("integration_github").color);
+  assert.equal(colorOf("agent_gemini"), pillDefinition("agent_gemini").color);
 });
 
 test("a colour picked later reaches the pills already on the island, and back", () => {

@@ -114,8 +114,6 @@ export interface Settings {
   screen: string;
   autostart: boolean;
   hooksInstalled: boolean;
-  /** Claude model used by the chat. */
-  model: string;
   /** Show the Claude plan pill (5 h and weekly limits) in the island's header. */
   showPlanInNotch: boolean;
   /** Coucou's status line relay is installed in Claude Code's settings. */
@@ -124,7 +122,7 @@ export interface Settings {
   showCodexPlanInNotch: boolean;
   /** Who the chat talks to (see core/providers.ts); picked in the chat view. */
   chatProvider: ProviderId;
-  /** The model picked for each provider other than Anthropic, by provider id. */
+  /** The model picked for each provider, by provider id. */
   chatModels: Record<string, string>;
   /** Model server addresses once connected; empty means not connected. */
   ollamaUrl: string;
@@ -162,18 +160,15 @@ export const DEFAULT_SETTINGS: Settings = {
   openOnHover: false,
   showClock: false,
   absenceInterval: 180,
-  activeIntegrations: [
-    "integration_resend", "integration_n8n", "integration_vercel", "integration_github",
-  ],
+  activeIntegrations: [],
   mainPill: DEFAULT_MAIN_PILL,
   screen: "primary",
   autostart: false,
   hooksInstalled: false,
-  model: "claude-opus-5",
   showPlanInNotch: false,
   planRelayInstalled: false,
   showCodexPlanInNotch: false,
-  chatProvider: "anthropic",
+  chatProvider: "ollama",
   chatModels: {},
   ollamaUrl: "",
   lmstudioUrl: "",

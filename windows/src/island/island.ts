@@ -27,11 +27,8 @@ import { refreshHookPills } from "./integrations";
 import { DesktopLink } from "./desktop";
 import type { ViewCommand } from "./shortcuts";
 import { DRAG_THRESHOLD } from "../mochi/desktop-logic";
-import { Updates } from "./update";
-import { UPDATE_BLUE, showsUpdateHint } from "../whats-new/whats-new";
 
 const BOT_OVERHANG = 40;
-const UPDATE_BLUE_RGB = hexToRGB(UPDATE_BLUE);
 const CLAUDE_DESKTOP_ID = "agent_claude-desktop";
 /** Extra canvas on each side of Mochi, for the witch hat's brim and the Santa hat's tip. */
 const BOT_SIDE = 24;
@@ -188,21 +185,10 @@ export class Island {
       openTarget: () => {
         const task = State.focusTask;
         if (!task) return;
-        const urls: Record<string, string> = {
-          integration_resend: "https://resend.com/emails",
-          integration_vercel: "https://vercel.com/dashboard",
-          integration_github: "https://github.com/pulls",
-          integration_stripe: "https://dashboard.stripe.com/payments",
-          integration_notion: "https://notion.so",
-          integration_calcom: "https://app.cal.com/bookings",
-        };
         if (task.id === CLAUDE_DESKTOP_ID) void Bridge.openClaudeDesktop();
         else if (task.id === "integration_claude" || task.sessionId) {
           void Bridge.openSession(task.sessionId ?? null, task.sessionCwd ?? null);
-        } else if (task.id === "integration_n8n") void Bridge.openN8n();
-        else if (task.id === "integration_gitea") void Bridge.openGitea();
-        else if (task.id === SPOTIFY_ID) void Bridge.spotifyOpen();
-        else if (urls[task.id]) void Bridge.openUrl(urls[task.id]);
+        } else if (task.id === SPOTIFY_ID) void Bridge.spotifyOpen();
       },
       openUrl: (url) => {
         if (url) void Bridge.openUrl(url);
@@ -457,18 +443,9 @@ export class Island {
     this.expand(view);
   }
 
-  /** A new Coucou waits and Mochi has nothing else to say (he is blue). */
-  private updateHintOn(): boolean {
-    return !State.paused && showsUpdateHint(Updates.waiting(), State.effectiveState, State.pendingApproval != null);
-  }
-
-  /**
-   * What a click or a hover opens on: while Mochi is blue, the new version
-   * ("Coucou X is out", Update now); otherwise the usual view. A waiting
-   * permission or question always comes first.
-   */
+  /** What a click or a hover opens on (a waiting permission or question always comes first). */
   private openingView(): IslandViewName {
-    return this.updateHintOn() ? "update" : State.defaultView();
+    return State.defaultView();
   }
 
   reveal() {
@@ -1112,17 +1089,12 @@ export class Island {
     if (!ctx) return;
 
     const focus = State.focusTask;
-    // A new Coucou waits: over an idle or sleeping Mochi, the blue and the arrow
-    // badge (whats-new.ts). Anything Mochi has to say comes first.
-    this.engine.setUpdateHint(this.updateHintOn() ? UPDATE_BLUE_RGB : null);
     // While a plan card is open Mochi wears the plan's colour, like its pill.
     this.engine.bodyColor = planCardOpen()
       ? hexToRGB(openPlanColor())
-      : this.engine.showsUpdateHint
-        ? UPDATE_BLUE_RGB
-        : focus?.isIntegration
-          ? hexToRGB(focus.color)
-          : null;
+      : focus?.isIntegration
+        ? hexToRGB(focus.color)
+        : null;
     this.engine.particleOverhang = BOT_OVERHANG;
     this.engine.lookX = this.lookX();
     this.engine.lookY = this.lookY();

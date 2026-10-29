@@ -7,7 +7,7 @@ import { onEvent } from "../../core/bridge";
 import { FlowBridge, clock, speakerColor, type Note, type NotesState } from "../../core/flow";
 import type { HubContext } from "../shell";
 import { emptyState, glowCard } from "../hero";
-import { button, iconButton, segmented } from "../ui";
+import { button, iconButton } from "../ui";
 import { modelsControl } from "./flowsettings";
 
 const lang = () => document.documentElement.lang || undefined;
@@ -20,15 +20,14 @@ function minutes(note: Note): number {
 export async function notesPage(page: HTMLElement, ctx: HubContext) {
   let state: NotesState = (await FlowBridge.notes()) ?? { notes: [], recording: null, working: [] };
   let selected: string | null = state.recording ?? state.notes[0]?.id ?? null;
-  let tab: "summary" | "transcript" = "summary";
   let startError = "";
 
-  page.append(ctx.hero("notes", t("Notetaker"), t("Your calls transcribed person by person, with a summary and the to-dos. No bot in the meeting."), [], true));
+  page.append(ctx.hero("notes", t("Notetaker"), t("Your calls transcribed person by person. No bot in the meeting."), [], true));
   if (ctx.status.models.parakeet.state !== "ready") {
     page.append(glowCard(
       "#3B9EFF",
-      h("div", { style: "font:700 15px var(--font)", text: t("One download, then offline") }),
-      h("div", { class: "hub-note", style: "color:#b7bbc2", text: t("Coucou writes your calls on this computer with Parakeet, and tells the voices apart with a second small model. Both are downloaded once (about {0} MB), then everything works offline.", { 0: ctx.status.models.downloadMb }) }),
+      h("div", { style: "font:700 15px var(--font)", text: t("The voice model is not installed") }),
+      h("div", { class: "hub-note", style: "color:#b7bbc2", text: t("Coucou writes your calls on this computer with Parakeet, and tells the voices apart with a second small model. Put both in the folder shown (about {0} MB); then everything works offline.", { 0: ctx.status.models.downloadMb }) }),
       modelsControl(ctx, () => ctx.navigate("notes")),
     ));
   }
@@ -194,40 +193,7 @@ export async function notesPage(page: HTMLElement, ctx: HubContext) {
       detail.append(emptyState(t("Nobody was heard in this recording."), "idle", "#3B9EFF"));
       return;
     }
-    const tabs = segmented<"summary" | "transcript">([["summary", t("Summary")], ["transcript", t("Transcript")]], tab, (next) => {
-      tab = next;
-      drawDetail();
-    });
-    detail.append(h("div", {}, tabs));
-    detail.append(tab === "summary" ? summary(note) : transcript(note, ""));
-  }
-
-  function summary(note: Note): HTMLElement {
-    const el = h("div", { style: "display:flex;flex-direction:column;gap:14px;align-items:flex-start" });
-    const busy = state.working.includes(note.id);
-    if (!note.summary && note.keyPoints.length === 0 && note.todos.length === 0) {
-      el.append(h("div", { class: "hub-note", text: busy ? t("Writing the summary…") : t("No summary yet.") }));
-      if (!busy) el.append(button(t("Write the summary"), () => void FlowBridge.summarize(note.id), "primary", true));
-      return el;
-    }
-    if (note.summary) el.append(h("div", { class: "hub-card", style: "font-size:14px;line-height:1.55;color:var(--hub-body);align-self:stretch", text: note.summary }));
-    if (note.keyPoints.length) {
-      const ul = h("ul", { style: "margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px;font-size:13.5px" });
-      for (const p of note.keyPoints) ul.append(h("li", { text: p }));
-      el.append(h("div", { class: "hub-label", text: t("Key points") }), ul);
-    }
-    if (note.todos.length) {
-      el.append(h("div", { class: "hub-label", text: t("To do") }));
-      for (const todo of note.todos) {
-        const box = h("input", { type: "checkbox" }) as HTMLInputElement;
-        box.checked = todo.done;
-        box.addEventListener("change", () => void FlowBridge.toggleTodo(note.id, todo.id));
-        const extra = [todo.owner, todo.due].filter(Boolean).join(" · ");
-        el.append(h("label", { class: "hub-todo" }, box, h("span", {}, h("span", { text: todo.text, style: todo.done ? "text-decoration:line-through;opacity:.6" : "" }), extra ? h("div", { class: "who", text: extra }) : null)));
-      }
-    }
-    el.append(button(busy ? t("Writing the summary…") : t("Write the summary again"), () => void FlowBridge.summarize(note.id), "", true));
-    return el;
+    detail.append(transcript(note, ""));
   }
 
   function transcript(note: Note, empty: string): HTMLElement {

@@ -1,10 +1,9 @@
 // The chat, whoever answers it: the conversation, the system prompt, and which
-// provider a turn goes to. Each provider's own wire format lives in its module:
-// claude.rs (Anthropic), openai_compat.rs (OpenAI, Google AI, OpenRouter) and
-// local_chat.rs (Ollama, LM Studio, any OpenAI-compatible server).
+// provider a turn goes to. Only models on this computer answer: local_chat.rs
+// (Ollama, LM Studio, an OpenAI-compatible server on 127.0.0.1).
 //
-// API keys never leave the credential store and file bytes never cross the IPC
-// boundary: the island sends the question and gets the answer's text back.
+// File bytes never cross the IPC boundary: the island sends the question and
+// gets the answer's text back.
 
 use std::sync::Mutex;
 
@@ -13,9 +12,10 @@ use serde_json::{json, Value};
 use tauri::AppHandle;
 
 use crate::settings::Settings;
-use crate::{claude, local_chat, openai_compat, secrets};
+use crate::local_chat;
 
-pub const ANTHROPIC: &str = "anthropic";
+/// The provider a fresh install starts on.
+pub const DEFAULT_PROVIDER: &str = "ollama";
 
 #[derive(Debug, Clone, Deserialize)]
 #[serde(tag = "kind", rename_all = "camelCase")]
@@ -159,16 +159,11 @@ pub fn plain_question(first: bool, context: Option<&ChatContext>, query: &str) -
 
 /// The model chosen for `provider`, or its default.
 pub fn model_for(settings: &Settings, provider: &str) -> String {
-    if provider == ANTHROPIC {
-        let m = settings.model.trim();
-        return if m.is_empty() { claude::DEFAULT_MODEL.to_string() } else { m.to_string() };
-    }
     settings
         .chat_models
         .get(provider)
         .map(|m| m.trim().to_string())
         .filter(|m| !m.is_empty())
-        .or_else(|| openai_compat::provider(provider).map(|p| p.default_model.to_string()))
         .unwrap_or_default()
 }
 
@@ -205,14 +200,12 @@ pub async fn send(
     context: Option<ChatContext>,
 ) -> Result<ChatReply, String> {
     let context = context.map(checked_context).transpose()?;
-    let provider = settings.chat_provider.as_str();
+    // A settings.json from a build with cloud providers may still name one: it reads as the default.
+    let provider = match settings.chat_provider.as_str() {
+        known if local_chat::server(settings, known).is_some() => known,
+        _ => DEFAULT_PROVIDER,
+    };
     let model = model_for(settings, provider);
-    if provider == ANTHROPIC || provider.is_empty() {
-        return claude::send(chat, &model, query, context).await;
-    }
-    if let Some(p) = openai_compat::provider(provider) {
-        return openai_compat::send(chat, p, &model, query, context).await;
-    }
     if let Some(server) = local_chat::server(settings, provider) {
         return local_chat::send(app, chat, &server, &model, query, context).await;
     }
@@ -220,18 +213,9 @@ pub async fn send(
 }
 
 /// The models `provider` offers. Asked only when the user opens the picker on
-/// that provider, and only once it has a key (or, for a local server, an
-/// address): nothing is sent anywhere before that.
+/// that provider, and only once it has an address: nothing is sent anywhere
+/// before that.
 pub async fn models(settings: &Settings, provider: &str) -> Result<Vec<ModelInfo>, String> {
-    let no_key = || crate::i18n::t("No API key — add it in Settings.");
-    if provider == ANTHROPIC {
-        let key = secrets::get(claude::KEY).ok_or_else(no_key)?;
-        return claude::models(&key).await;
-    }
-    if let Some(p) = openai_compat::provider(provider) {
-        let key = secrets::get(p.key).ok_or_else(no_key)?;
-        return openai_compat::models(p, &key).await;
-    }
     if let Some(server) = local_chat::server(settings, provider) {
         return local_chat::models(&server).await;
     }
@@ -252,14 +236,14 @@ mod tests {
     #[test]
     fn a_turn_is_recorded_only_once_it_succeeds() {
         let chat = Chat::default();
-        let t = chat.begin("anthropic");
+        let t = chat.begin("ollama");
         assert!(t.first);
         assert!(t.history.is_empty());
         // A failed turn records nothing: the next one is still the first.
-        let t = chat.begin("anthropic");
+        let t = chat.begin("ollama");
         assert!(t.first);
         chat.commit(&t, json!({"role":"user","content":[{"type":"text","text":"hi"}]}), json!({"role":"assistant","content":[{"type":"text","text":"hello"}]}), "hi", "hello");
-        let t = chat.begin("anthropic");
+        let t = chat.begin("ollama");
         assert!(!t.first);
         assert_eq!(t.history.len(), 2);
         assert!(t.history[0]["content"].is_array());
@@ -268,7 +252,7 @@ mod tests {
     #[test]
     fn switching_provider_never_sends_claude_blocks_to_another_one() {
         let chat = Chat::default();
-        let t = chat.begin("anthropic");
+        let t = chat.begin("ollama");
         let blocks = json!([
             {"type":"server_tool_use","id":"srvtoolu_1","name":"web_search","input":{"query":"x"}},
             {"type":"web_search_tool_result","tool_use_id":"srvtoolu_1","content":[]},
@@ -287,7 +271,7 @@ mod tests {
 
         // And back: Claude gets the plain turns too, including OpenAI's answer.
         chat.commit(&t, json!({"role":"user","content":"more"}), json!({"role":"assistant","content":"Sure."}), "more", "Sure.");
-        let t = chat.begin("anthropic");
+        let t = chat.begin("ollama");
         assert_eq!(t.history.len(), 4);
         assert_eq!(t.history[3], json!({"role":"assistant","content":"Sure."}));
         assert!(!serde_json::to_string(&t.history).unwrap().contains("web_search"));
@@ -332,15 +316,11 @@ mod tests {
     #[test]
     fn the_model_comes_from_the_settings_or_the_provider_default() {
         let mut s = Settings::default();
-        assert_eq!(model_for(&s, "anthropic"), claude::DEFAULT_MODEL);
-        assert_eq!(model_for(&s, "openai"), openai_compat::provider("openai").unwrap().default_model);
         assert_eq!(model_for(&s, "ollama"), "");
-        s.chat_models.insert("openai".into(), " gpt-x ".into());
+        s.chat_models.insert("lmstudio".into(), " gpt-x ".into());
         s.chat_models.insert("ollama".into(), "llama3.2".into());
-        s.model = "claude-haiku-4-5".into();
-        assert_eq!(model_for(&s, "openai"), "gpt-x");
+        assert_eq!(model_for(&s, "lmstudio"), "gpt-x");
         assert_eq!(model_for(&s, "ollama"), "llama3.2");
-        assert_eq!(model_for(&s, "anthropic"), "claude-haiku-4-5");
     }
 
     #[test]

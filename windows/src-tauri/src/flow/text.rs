@@ -83,11 +83,6 @@ pub fn finish(text: &str, snippets: &BTreeMap<String, String>) -> String {
     out
 }
 
-/// Whether a rewritten text still has every mark (otherwise the rewrite is not used).
-pub fn keeps_marks(text: &str, snippets: &BTreeMap<String, String>) -> bool {
-    snippets.keys().all(|m| text.contains(m.as_str()))
-}
-
 /// Everything done on this computer: snippets, replacements and the dictionary.
 #[cfg(test)]
 pub fn apply(text: &str, words: &[String], replacements: &[Replacement], snippets: &[Snippet]) -> String {
@@ -305,8 +300,6 @@ mod tests {
         let reps = vec![rep("code", "CODE")];
         let p = prepare("merci, ma signature", &[], &reps, &snippets);
         assert_eq!(p.text, "merci, ⟦1⟧");
-        assert!(keeps_marks(&p.text, &p.snippets));
-        assert!(!keeps_marks("merci", &p.snippets));
         assert_eq!(finish(&p.text, &p.snippets), "merci, Belle journée,\nLouis Code");
         // A snippet with no text is never a mark.
         let empty = vec![snip("vide", "")];

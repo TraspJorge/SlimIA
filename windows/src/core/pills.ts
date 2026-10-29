@@ -5,7 +5,7 @@
 //
 // What is added for Windows and Linux is `support` — not every Mac pill has
 // something behind it here — and `connect`, which says what makes the pill
-// "connected": its hooks being installed, a key in the OS credential store, or
+// "connected": its hooks being installed, a model server being connected, or
 // nothing at all.
 
 import type { AgentSource } from "./state";
@@ -35,8 +35,6 @@ export type PillSupport = "yes" | "windows" | "linux" | "soon" | "no";
 export type PillConnect =
   /** Hook events: connected once the hooks are installed (Mac #183). */
   | { kind: "hooks" }
-  /** A key in the credential store. */
-  | { kind: "key"; key: string }
   /** A model server the chat is connected to (Settings → Local models). */
   | { kind: "server"; field: "ollamaUrl" | "lmstudioUrl" }
   /** Nothing to set up. */
@@ -57,7 +55,6 @@ export interface PillDefinition {
 export type HostOs = "windows" | "linux";
 
 const hooks: PillConnect = { kind: "hooks" };
-const key = (k: string): PillConnect => ({ kind: "key", key: k });
 const none: PillConnect = { kind: "none" };
 const server = (field: "ollamaUrl" | "lmstudioUrl"): PillConnect => ({ kind: "server", field });
 
@@ -101,37 +98,12 @@ export const PILL_CATALOG: readonly PillDefinition[] = [
   { id: "agent_claude-desktop", name: "Claude Desktop", color: "#D97757", category: "agent",
     subtitle: N_("Agent"), source: "agent", support: "windows", connect: none },
   // ── AI for the chat ────────────────────────────────────────────────────────
-  { id: "ai_anthropic", name: "Anthropic", color: ACCENT.anthropic, category: "ai",
-    subtitle: N_("Chat"), source: "n8n", support: "yes", connect: key("anthropic-api-key") },
-  // The chat talks to each of them (src-tauri/src/chat.rs): a key for the
-  // cloud ones, a connected server for the local ones.
-  { id: "ai_google", name: "Google AI", color: ACCENT.google, category: "ai",
-    subtitle: N_("Chat"), source: "n8n", support: "yes", connect: key("google-api-key") },
-  { id: "ai_openai", name: "OpenAI", color: ACCENT.openai, category: "ai",
-    subtitle: N_("Chat"), source: "n8n", support: "yes", connect: key("openai-api-key") },
+  // The chat talks to a model server on this computer (src-tauri/src/chat.rs).
   { id: "ai_ollama", name: "Ollama", color: ACCENT.ollama, category: "ai",
     subtitle: N_("Chat"), source: "n8n", support: "yes", connect: server("ollamaUrl") },
   { id: "ai_lmstudio", name: "LM Studio", color: ACCENT.lmstudio, category: "ai",
     subtitle: N_("Chat"), source: "n8n", support: "yes", connect: server("lmstudioUrl") },
   // ── Services ───────────────────────────────────────────────────────────────
-  { id: "integration_resend", name: "Resend", color: "#22C55E", category: "service",
-    subtitle: N_("Integration"), source: "n8n", support: "yes", connect: key("resend-api-key") },
-  { id: "integration_n8n", name: "n8n", color: "#F29B38", category: "service",
-    subtitle: N_("Integration"), source: "n8n", support: "yes", connect: key("n8n-api-key") },
-  { id: "integration_vercel", name: "Vercel", color: "#7C5CFF", category: "service",
-    subtitle: N_("Integration"), source: "n8n", support: "yes", connect: key("vercel-token") },
-  { id: "integration_github", name: "GitHub", color: "#F4505E", category: "service",
-    subtitle: N_("Integration"), source: "n8n", support: "yes", connect: key("github-token") },
-  { id: "integration_gitlab", name: "GitLab", color: "#FC6D26", category: "service",
-    subtitle: N_("Integration"), source: "n8n", support: "yes", connect: key("gitlab-token") },
-  { id: "integration_gitea", name: "Gitea", color: "#609926", category: "service",
-    subtitle: N_("Integration"), source: "n8n", support: "yes", connect: key("gitea-token") },
-  { id: "integration_notion", name: "Notion", color: "#8C8C8C", category: "service",
-    subtitle: N_("Integration"), source: "n8n", support: "yes", connect: key("notion-api-key") },
-  { id: "integration_calcom", name: "Cal.com", color: "#C9956A", category: "service",
-    subtitle: N_("Integration"), source: "n8n", support: "yes", connect: key("calcom-api-key") },
-  { id: "integration_stripe", name: "Stripe", color: "#0570DE", category: "service",
-    subtitle: N_("Integration"), source: "n8n", support: "yes", connect: key("stripe-api-key") },
   { id: "integration_music", name: "Apple Music", color: "#FA2D48", category: "service",
     subtitle: N_("Integration"), source: "n8n", support: "no", connect: none },
   // Spotify through MPRIS on Linux and the system media controls on Windows

@@ -23,11 +23,6 @@ use serde::Serialize;
 use tauri::AppHandle;
 
 pub const PILL_ID: &str = "integration_spotify";
-/// Where "Get Spotify" leads when it isn't installed.
-#[cfg(not(windows))]
-pub const DOWNLOAD_URL: &str = "https://www.spotify.com/download/linux/";
-#[cfg(windows)]
-pub const DOWNLOAD_URL: &str = "https://www.spotify.com/download/windows/";
 /// Island events: the player's state, and a track's cover as a data URL.
 const STATE_EVENT: &str = "spotify";
 const ARTWORK_EVENT: &str = "spotify-artwork";
@@ -347,27 +342,16 @@ pub fn short_artist(raw: &str) -> String {
 // ── Artwork ───────────────────────────────────────────────────────────────────
 
 /// Where a cover may be read from. The URL comes from another program: only
-/// Spotify's own image CDN, or a local file (a local track's cover).
+/// a local file (a local track's cover) is accepted.
 #[derive(Debug, PartialEq)]
 pub enum ArtSource {
-    Https(String),
     File(std::path::PathBuf),
 }
 
 pub fn artwork_source(raw: &str) -> Option<ArtSource> {
-    // Some Spotify builds point at open.spotify.com/image/ID, which only
-    // redirects to the CDN.
-    let raw = match raw.strip_prefix("https://open.spotify.com/image/") {
-        Some(id) => format!("https://i.scdn.co/image/{id}"),
-        None => raw.to_string(),
-    };
-    let url = reqwest::Url::parse(&raw).ok()?;
+    // Only a cover on this computer is shown: nothing is downloaded.
+    let url = reqwest::Url::parse(raw).ok()?;
     match url.scheme() {
-        "https" => {
-            let host = url.host_str()?.to_ascii_lowercase();
-            let ours = host == "i.scdn.co" || host.ends_with(".scdn.co") || host.ends_with(".spotifycdn.com");
-            (ours && url.port().is_none() && url.username().is_empty()).then(|| ArtSource::Https(url.to_string()))
-        }
         "file" => {
             if url.host_str().is_some_and(|h| !h.is_empty() && h != "localhost") {
                 return None;
@@ -396,7 +380,7 @@ pub fn sniff_image(bytes: &[u8]) -> Option<&'static str> {
 
 fn data_url(bytes: &[u8]) -> Option<String> {
     let mime = sniff_image(bytes)?;
-    Some(format!("data:{mime};base64,{}", crate::claude::base64_for(bytes)))
+    Some(format!("data:{mime};base64,{}", crate::net::base64_for(bytes)))
 }
 
 #[derive(Serialize, Clone)]
@@ -1029,7 +1013,6 @@ mod linux {
                 Err(err) => crate::log::line(format!("spotify: could not start it: {err}")),
             }
         }
-        crate::platform::open_url(DOWNLOAD_URL);
         false
     }
 
@@ -1056,17 +1039,6 @@ mod linux {
         }
         let app = app.clone();
         match artwork_source(&url) {
-            Some(ArtSource::Https(remote)) => {
-                // Pause means nothing reaches the network.
-                if crate::integrations::PAUSED.load(std::sync::atomic::Ordering::Relaxed) {
-                    ART.lock().unwrap().loading = None;
-                    return;
-                }
-                tauri::async_runtime::spawn(async move {
-                    let bytes = fetch(&remote).await;
-                    finish_artwork(&app, url, bytes);
-                });
-            }
             Some(ArtSource::File(path)) => {
                 tauri::async_runtime::spawn_blocking(move || {
                     let bytes = std::fs::metadata(&path)
@@ -1080,19 +1052,6 @@ mod linux {
                 ART.lock().unwrap().loading = None;
             }
         }
-    }
-
-    async fn fetch(url: &str) -> Option<Vec<u8>> {
-        let client = reqwest::Client::builder()
-            .timeout(Duration::from_secs(10))
-            .redirect(reqwest::redirect::Policy::none())
-            .build()
-            .ok()?;
-        let response = client.get(url).send().await.ok()?;
-        if !response.status().is_success() {
-            return None;
-        }
-        crate::net::read_capped(response, ARTWORK_LIMIT).await.ok()
     }
 
     fn finish_artwork(app: &AppHandle, url: String, bytes: Option<Vec<u8>>) {
@@ -1872,14 +1831,13 @@ mod win {
     }
 
     /// Spotify's URI scheme brings it forward, or starts it. Without Spotify,
-    /// its download page.
+    /// nothing happens (no download page is opened).
     pub fn open() -> bool {
         let running = SHARED.lock().unwrap().state.running;
         if running || installed() {
             crate::platform::open_url("spotify:");
             return true;
         }
-        crate::platform::open_url(DOWNLOAD_URL);
         false
     }
 }
@@ -2032,22 +1990,10 @@ mod tests {
     }
 
     #[test]
-    fn covers_come_only_from_spotify_or_a_local_file() {
-        assert_eq!(
-            artwork_source("https://i.scdn.co/image/ab67"),
-            Some(ArtSource::Https("https://i.scdn.co/image/ab67".into()))
-        );
-        assert_eq!(
-            artwork_source("https://open.spotify.com/image/ab67"),
-            Some(ArtSource::Https("https://i.scdn.co/image/ab67".into()))
-        );
-        assert!(matches!(artwork_source("https://mosaic.scdn.co/640/x"), Some(ArtSource::Https(_))));
-        assert!(matches!(artwork_source("https://image-cdn-ak.spotifycdn.com/image/x"), Some(ArtSource::Https(_))));
+    fn covers_come_only_from_a_local_file() {
+        // Remote covers are never fetched: nothing here goes to the network.
+        assert_eq!(artwork_source("https://i.scdn.co/image/ab67"), None);
         assert_eq!(artwork_source("http://i.scdn.co/image/ab67"), None);
-        assert_eq!(artwork_source("https://evil.example/i.scdn.co"), None);
-        assert_eq!(artwork_source("https://i.scdn.co.evil.example/x"), None);
-        assert_eq!(artwork_source("https://user@i.scdn.co/x"), None);
-        assert_eq!(artwork_source("https://i.scdn.co:8443/x"), None);
         // A local track's cover (Linux paths: the client only runs there).
         #[cfg(unix)]
         assert_eq!(

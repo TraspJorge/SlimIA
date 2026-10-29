@@ -8,7 +8,6 @@
 // through the dictionary, the snippets and (if turned on) Claude's clean-up,
 // and are pasted. The thread sleeps on its channel while nothing happens.
 
-pub mod cleanup;
 pub mod logic;
 pub mod paste;
 pub mod pill;
@@ -127,7 +126,6 @@ pub fn setup(app: &AppHandle) {
     if prefs.enabled {
         enable(app, &flow);
     }
-    crate::voice::sync(app);
 }
 
 /// The key as the pages write it ("right_ctrl"…), or "wayland" where the
@@ -183,7 +181,7 @@ fn disable(app: &AppHandle, flow: &Arc<Flow>) {
         s.enabled = false;
         s.phase = "idle".into();
     });
-    if !crate::notes::is_recording(app) && !crate::voice::is_listening() {
+    if !crate::notes::is_recording(app) {
         speech::unload();
     }
 }
@@ -380,20 +378,11 @@ fn process(app: &AppHandle, flow: &Arc<Flow>, samples: &[f32], front: Option<&(S
         pill::update(app, |s| s.phase = "idle".into());
         return Ok(());
     }
-    let (prepared, style, cleanup, words, key) = {
+    let (prepared, key) = {
         let store = flow.store.lock().unwrap();
-        let app_id = front.map(|(id, _)| id.as_str());
-        (store.prepare(&raw), store.style_for(app_id), store.prefs.cleanup, store.words.words.clone(), store.prefs.key)
+        (store.prepare(&raw), store.prefs.key)
     };
-    let mut written = prepared.text.clone();
-    if cleanup && style != store::Style::Verbatim && cleanup::has_key() {
-        let app_name = front.map(|(_, n)| n.clone());
-        let cleaned = tauri::async_runtime::block_on(cleanup::clean(&prepared.text, style, app_name.as_deref(), &words));
-        if text::keeps_marks(&cleaned, &prepared.snippets) {
-            written = cleaned;
-        }
-    }
-    let final_text = text::finish(&written, &prepared.snippets);
+    let final_text = text::finish(&prepared.text, &prepared.snippets);
     crate::log::line(format!("flow: {} words in {:?}", text::word_count(&final_text), started.elapsed()));
 
     os::wait_key_released(key);
@@ -446,7 +435,6 @@ pub struct FlowStatus {
     models: speech::ModelsStatus,
     /// "ok", or why the key can't be watched here ("wayland", "no-display").
     keys: String,
-    has_claude_key: bool,
     mics: Vec<audio::InputDevice>,
     platform: &'static str,
     /// Coucou started with the computer.
@@ -464,7 +452,6 @@ pub fn flow_status(flow: State<Arc<Flow>>) -> FlowStatus {
             Ok(()) => "ok".into(),
             Err(why) => why.into(),
         },
-        has_claude_key: cleanup::has_key(),
         mics: audio::input_devices(),
         platform: if cfg!(windows) { "windows" } else { "linux" },
         autostarted: crate::launched_at_login(),
@@ -497,13 +484,6 @@ pub fn flow_set_prefs(app: AppHandle, flow: State<Arc<Flow>>, prefs: Prefs) {
     }
     if prefs.enabled && (!before.enabled || restart) {
         enable(&app, &flow);
-    }
-    if before.voice != prefs.voice || before.mic != prefs.mic {
-        if before.mic != prefs.mic {
-            crate::voice::restart(&app);
-        } else {
-            crate::voice::sync(&app);
-        }
     }
     let _ = app.emit("flow-prefs", &prefs);
 }
@@ -640,11 +620,6 @@ pub fn flow_copy(text: String) -> bool {
 pub fn flow_paste_again(app: AppHandle, flow: State<Arc<Flow>>) {
     let flow = flow.inner().clone();
     std::thread::spawn(move || paste_again(&app, &flow));
-}
-
-#[tauri::command]
-pub fn flow_models_download(app: AppHandle) {
-    speech::download(app);
 }
 
 #[tauri::command]

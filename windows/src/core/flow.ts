@@ -30,25 +30,19 @@ export interface FlowPrefs {
   edge: Edge;
   mic: string;
   keepDays: number;
-  cleanup: boolean;
   defaultStyle: Style;
-  summaryEngine: "claude" | "off";
   openAtLaunch: boolean;
-  /** « OK Coucou »: listen for it and answer with Claude. */
-  voice: boolean;
-  voiceOutput: VoiceOutput;
-  voiceGender: "female" | "male";
 }
 
 export type ModelState =
   | { state: "missing" }
-  | { state: "downloading"; fraction: number }
-  | { state: "ready" }
-  | { state: "failed"; error: string };
+  | { state: "ready" };
 
 export interface ModelsStatus {
   parakeet: ModelState;
   downloadMb: number;
+  /** Where the model folders go. */
+  folder: string;
 }
 
 export interface FlowStatus {
@@ -56,7 +50,6 @@ export interface FlowStatus {
   models: ModelsStatus;
   /** "ok", or why the key can't be watched ("wayland", "no-display"). */
   keys: string;
-  hasClaudeKey: boolean;
   mics: { name: string; default: boolean }[];
   platform: "windows" | "linux";
   autostarted: boolean;
@@ -170,17 +163,7 @@ export interface PillState {
   noteStartedAt: number | null;
   announcement: Announcement | null;
   enabled: boolean;
-  /** « OK Coucou » is talking with you. */
-  voice: VoiceView | null;
 }
-
-export interface VoiceView {
-  phase: "listening" | "thinking" | "speaking";
-  heard: string;
-  answer: string;
-}
-
-export type VoiceOutput = "system" | "elevenlabs" | "off";
 
 export const FlowBridge = {
   status: () => call<FlowStatus>("flow_status"),
@@ -200,7 +183,6 @@ export const FlowBridge = {
   runningApps: () => call<{ id: string; name: string }[]>("flow_running_apps"),
   copy: (text: string) => call<boolean>("flow_copy", { text }),
   pasteAgain: () => call<void>("flow_paste_again"),
-  download: () => call<void>("flow_models_download"),
   removeModels: () => call<void>("flow_models_remove"),
 
   notes: () => call<NotesState>("notes_state"),
@@ -210,7 +192,6 @@ export const FlowBridge = {
   renameSpeaker: (id: string, speaker: string, name: string) => call<void>("notes_rename_speaker", { id, speaker, name }),
   toggleTodo: (id: string, todo: string) => call<void>("notes_toggle_todo", { id, todo }),
   deleteNote: (id: string) => call<void>("notes_delete", { id }),
-  summarize: (id: string) => call<void>("notes_summarize", { id }),
   retryNote: (id: string) => call<void>("notes_retry", { id }),
   markdown: (id: string) => call<string>("notes_markdown", { id }),
   exportNote: (id: string) => callOrThrow<string>("notes_export", { id }),
@@ -219,10 +200,6 @@ export const FlowBridge = {
   pillHot: (rects: [number, number, number, number][]) => call<void>("pill_hot", { rects }),
   pillHover: (inside: boolean) => call<void>("pill_hover", { inside }),
   pillAction: (action: string, id?: number) => call<void>("pill_action", { action, id: id ?? null }),
-  /** The pill has said what « OK Coucou » answered. */
-  voiceDone: (id: number) => call<void>("voice_done", { id, text: null }),
-  /** speech-dispatcher or espeak-ng, where the webview has no voice. */
-  sayNative: (text: string, lang: string | null) => call<boolean>("voice_say_native", { text, lang }),
 };
 
 /** One colour per person in a call: you first, then the others. */

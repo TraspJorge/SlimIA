@@ -198,11 +198,6 @@ export class BotEngine {
   isMini = false;
   /** Solid body colour for mini bots / integration pills (null = Mochi gradient). */
   bodyColor: RGB | null = null;
-  /**
-   * A new Coucou waits (whats-new/whats-new.ts): while Mochi is idle or asleep
-   * he wears the up-arrow badge. The island turns his body blue alongside.
-   */
-  private updateHint: RGB | null = null;
 
   // Animated state (BotEngine `s`)
   yaw = 0; pitch = 0; roll = 0; tilt = 0; open = 1;
@@ -315,22 +310,7 @@ export class BotEngine {
     }
   }
 
-  /** The update badge (blue arrow) while one waits, else nothing. Asked every frame; cheap. */
-  setUpdateHint(color: RGB | null) {
-    const was = this.updateHint;
-    const same = color === was || (color != null && was != null && color.every((c, i) => c === was[i]));
-    if (same) return;
-    this.updateHint = color;
-    this.setBadge(this.stateBadge());
-  }
-
-  /** Whether the update hint shows now: only over an idle or sleeping Mochi. */
-  get showsUpdateHint(): boolean {
-    return this.updateHint != null && (this.state === "idle" || this.state === "sleeping");
-  }
-
   private stateBadge(): Badge | null {
-    if (this.showsUpdateHint && this.updateHint) return { kind: "arrow", color: this.updateHint };
     return this.cfg.badge;
   }
 

@@ -9,21 +9,23 @@ import { FlowBridge, type Edge, type FlowKey, type ModelsStatus } from "../../co
 import type { HubContext } from "../shell";
 import { button, card, divider, keyKeycap, keycap, label, number, row, segmented, select, toggle } from "../ui";
 
-/** Download / progress / installed, for the voice model. Redraws itself. */
+/** Installed or missing, for the voice model. Nothing is downloaded: the files are put in a folder by hand. */
 export function modelsControl(ctx: HubContext, onReady?: () => void): HTMLElement {
-  const el = h("div", { style: "display:flex;align-items:center;gap:8px" });
+  const el = h("div", { style: "display:flex;flex-direction:column;align-items:flex-end;gap:6px" });
   let confirming = false;
   const draw = (models: ModelsStatus) => {
     clear(el);
-    const m = models.parakeet;
-    if (m.state === "missing") {
-      el.append(button(t("Download"), () => void FlowBridge.download(), "primary"));
-    } else if (m.state === "downloading") {
-      const bar = h("div", { class: "hub-progress" }, h("i", { style: `width:${Math.round(m.fraction * 100)}%` }));
-      el.append(bar, h("span", { class: "hub-note", text: `${Math.round(m.fraction * 100)} %` }));
-    } else if (m.state === "failed") {
-      el.append(h("span", { class: "hub-note", text: m.error, title: m.error, style: "max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" }));
-      el.append(button(t("Retry"), () => void FlowBridge.download()));
+    if (models.parakeet.state === "missing") {
+      el.append(
+        h("span", { class: "hub-note", style: "text-align:end;user-select:text", text: t("Put the model files in {folder}, then check again.", { folder: models.folder }) }),
+        button(t("Check again"), () => {
+          void ctx.refresh().then((fresh) => {
+            ctx.status.models = fresh.models;
+            draw(fresh.models);
+            if (fresh.models.parakeet.state === "ready") onReady?.();
+          });
+        }, "primary", true),
+      );
     } else if (confirming) {
       el.append(
         button(t("Remove the models"), () => {
@@ -104,16 +106,13 @@ export async function flowSettingsPage(page: HTMLElement, ctx: HubContext) {
   // ── Recognition ──
   page.append(label(t("Recognition")));
   page.append(card(
-    row(t("Parakeet, on your computer"), t("The most accurate, offline, 25 languages. Downloaded once (about {0} MB).", { 0: number(status.models.downloadMb) }), modelsControl(ctx)),
+    row(t("Parakeet, on your computer"), t("The most accurate, offline, 25 languages. Files copied by hand (about {0} MB).", { 0: number(status.models.downloadMb) }), modelsControl(ctx)),
     h("div", { class: "hub-note", text: t("Your voice never leaves this computer: Parakeet turns it into text here, and the recording is dropped as soon as it is pasted.") }),
   ));
 
   // ── Notetaker ──
   page.append(label(t("Notetaker")));
   page.append(card(
-    row(t("Summaries"), null, select([["claude", t("Claude (your key)")], ["off", t("No summary")]], prefs.summaryEngine, (engine) => void ctx.setPrefs((p) => (p.summaryEngine = engine)))),
-    h("div", { class: "hub-note", text: t("With Claude, the transcript (never the audio) goes to Anthropic with your key from Notch → Chat.") }),
-    divider(),
     h("div", { class: "hub-note", text: t("Everything stays on this computer. Tell the people in the call that you are recording.") }),
   ));
 

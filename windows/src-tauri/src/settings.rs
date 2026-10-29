@@ -27,8 +27,6 @@ pub struct Settings {
     pub screen: String,
     pub autostart: bool,
     pub hooks_installed: bool,
-    /// Claude model used by the chat. Changeable in the settings window.
-    pub model: String,
     /// Show the Claude plan pill (5 h and weekly limits) in the island's header.
     /// Off until the user turns it on, so the header stays as it shipped.
     pub show_plan_in_notch: bool,
@@ -38,12 +36,10 @@ pub struct Settings {
     /// Show the Codex plan pill (5 h / weekly limits from `codex app-server`).
     /// Off by default; nothing is installed for it.
     pub show_codex_plan_in_notch: bool,
-    /// Who the chat talks to: "anthropic", a cloud provider of
-    /// openai_compat.rs ("openai", "google", "openrouter"), or a model server
-    /// of local_chat.rs ("ollama", "lmstudio", "custom"). Picked in the chat view.
+    /// Who the chat talks to: a model server of local_chat.rs ("ollama",
+    /// "lmstudio", "custom"), always on this computer. Picked in the chat view.
     pub chat_provider: String,
-    /// The model picked for each provider other than Anthropic (whose model is
-    /// `model`), by provider id.
+    /// The model picked for each provider, by provider id.
     pub chat_models: BTreeMap<String, String>,
     /// Addresses of the model servers once connected; empty means not connected.
     pub ollama_url: String,
@@ -90,10 +86,6 @@ pub struct DesktopSpot {
     pub space: String,
 }
 
-fn default_model() -> String {
-    crate::claude::DEFAULT_MODEL.to_string()
-}
-
 impl Default for Settings {
     fn default() -> Self {
         Self {
@@ -102,21 +94,15 @@ impl Default for Settings {
             auto_close_interval: 15.0,
             open_on_hover: false,
             absence_interval: 180.0,
-            active_integrations: vec![
-                "integration_resend".into(),
-                "integration_n8n".into(),
-                "integration_vercel".into(),
-                "integration_github".into(),
-            ],
+            active_integrations: Vec::new(),
             main_pill: "integration_claude".into(),
             screen: "primary".into(),
             autostart: false,
             hooks_installed: false,
-            model: default_model(),
             show_plan_in_notch: false,
             plan_relay_installed: false,
             show_codex_plan_in_notch: false,
-            chat_provider: crate::chat::ANTHROPIC.into(),
+            chat_provider: crate::chat::DEFAULT_PROVIDER.into(),
             chat_models: BTreeMap::new(),
             ollama_url: String::new(),
             lmstudio_url: String::new(),
@@ -390,7 +376,6 @@ mod tests {
   "screen": "cursor",
   "autostart": true,
   "hooksInstalled": true,
-  "model": "some-model",
   "showPlanInNotch": true,
   "planRelayInstalled": true,
   "showCodexPlanInNotch": true,
@@ -487,18 +472,10 @@ mod tests {
     }
 
     #[test]
-    fn a_file_from_before_the_model_setting_keeps_everything_else() {
-        let loaded = shown(&parse(&custom_with("model", None)).unwrap());
-        let mut expected = custom();
-        expected["model"] = json!(crate::claude::DEFAULT_MODEL);
-        assert_eq!(loaded, expected);
-    }
-
-    #[test]
     fn a_file_from_before_the_wardrobe_dresses_mochi_for_the_seasons() {
         let loaded = parse(&custom_with("mochiOutfit", None)).unwrap();
         assert_eq!(loaded.mochi_outfit, "auto");
-        assert_eq!(loaded.model, "some-model");
+        assert_eq!(loaded.mochi_outfit, "witchHat");
         assert!(!loaded.sound_enabled);
     }
 
@@ -519,7 +496,7 @@ mod tests {
         .unwrap();
         // The whole field falls back, and nothing else does.
         assert_eq!(loaded.desktop_mochi, DesktopMochiPref::default());
-        assert_eq!(loaded.model, "some-model");
+        assert_eq!(loaded.mochi_outfit, "witchHat");
 
         let loaded = parse(&custom_with("desktopMochi", Some(json!({ "onDesktop": true })))).unwrap();
         assert!(loaded.desktop_mochi.on_desktop);
@@ -541,7 +518,7 @@ mod tests {
         // Not a map of strings: the colours fall back, and nothing else does.
         let loaded = parse(&custom_with("pillColors", Some(json!(["#2DD4BF"])))).unwrap();
         assert!(loaded.pill_colors.is_empty());
-        assert_eq!(loaded.model, "some-model");
+        assert_eq!(loaded.mochi_outfit, "witchHat");
     }
 
     #[test]
@@ -794,7 +771,6 @@ mod tests {
                 "screen",
                 "autostart",
                 "hooksInstalled",
-                "model",
                 "showPlanInNotch",
                 "planRelayInstalled",
                 "showCodexPlanInNotch",

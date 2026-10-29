@@ -2,10 +2,12 @@
 
 ## Unreleased
 
-- **Local only (this branch: Windows and Linux)** — the phone link is removed: no TLS server, no mDNS announcement, no relay, no pairing, and nothing is approved, answered or chatted from a phone. The WhatsApp integration is removed too. The app accepts nothing from outside; only the agents' local hook pipe listens. The "Android phone" settings page, its commands, settings, keystore entries and translations are gone, and so are their dependencies (`rustls`, `rcgen`, `qrcode`, `mdns-sd`, `tokio-tungstenite`).
+- **Local only (this branch: Windows and Linux)** — nothing comes in and nothing goes out.
+  - Inbound: the phone link (no TLS server, no mDNS announcement, no relay, no pairing, nothing approved, answered or chatted from a phone) and the WhatsApp integration are removed. Only the agents' local hook pipe listens.
+  - Outbound: the one HTTP client now refuses any address that is not this computer and the build has no TLS. Removed: updates and "What's new", the cloud chat (Anthropic, OpenAI, Google AI, OpenRouter), the GitHub, GitLab, Gitea, Stripe, Vercel, n8n, Resend, Notion and Cal.com pills, « OK Coucou », the Claude clean-up of dictations and the call summaries, the Codex plan gauge, the voice model download (the files are copied by hand) and Spotify's cover and download-page fetches.
+  - The Settings pages for all of this, their commands, settings, keystore entries, translations and tests are gone, and so are the dependencies (`rustls`, `rcgen`, `qrcode`, `mdns-sd`, `tokio-tungstenite`, `ring`).
+  - New: [firewall scripts](windows/firewall/README.md) to block the network from the system's side too.
 - **Trimmed to Windows and Linux** — the macOS, iPhone and Android apps are not part of this branch. The entries below are upstream's history and still describe them.
-
-- **Mac: WhatsApp statuses aren't chats** — a contact's WhatsApp Status and channel posts no longer show up as a conversation in the WhatsApp pill (#901, same fix as #910)
 
 ## Windows and Linux 0.5.3 — October 22, 2026
 

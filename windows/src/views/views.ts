@@ -11,18 +11,15 @@ import { createMiniBot, pruneMiniBots } from "../mochi/minibots";
 import { buildPrompt } from "./chat";
 import { buildChoose, buildUpload, buildUploading } from "./upload";
 import { renderIntegrationCard, type IntegrationCardHooks } from "./integrations";
-import { highlightRow, listRows, openRow } from "./github";
 import { pillDefinition, sessionSubtitle } from "../core/pills";
 import {
-  PlanCard, buildPlanPill, claudePillVisible, codexPillVisible, planCardOpen, refreshCodexPlanUsage,
+  PlanCard, buildPlanPill, claudePillVisible, codexPillVisible, planCardOpen,
 } from "./usage";
 import { buildDiffCard } from "./diff";
 import { lastTextStep } from "../core/diff";
 import { Bridge } from "../core/bridge";
 import { buildRecap } from "./recap";
 import { buildWardrobe } from "./wardrobe";
-import { buildUpdate } from "./update";
-import { buildWhatsNew } from "./whatsnew";
 import { buildSpotifyCard, buildSpotifyPill, type SpotifyPillHost } from "./spotify";
 import { SPOTIFY_ID } from "../core/spotify";
 import type { Outfit, OutfitSelection } from "../mochi/wardrobe";
@@ -123,7 +120,6 @@ export function buildHeader(actions: ViewActions): ViewHost {
   const claudePill = buildPlanPill(false);
   const codexPill = buildPlanPill(true);
   const planPills = h("div", { class: "plan-pills" }, claudePill.el, codexPill.el);
-  let codexShown = false;
 
   function go(v: IslandViewName) {
     actions.blip();
@@ -165,10 +161,6 @@ export function buildHeader(actions: ViewActions): ViewHost {
     headerActions.classList.toggle("both-plans", claudeOn && codexOn);
     if (claudeOn) claudePill.sync();
     if (codexOn) codexPill.sync();
-    // Codex is asked when its pill comes into view (stale answers only).
-    const shown = codexOn && State.mode === "expanded";
-    if (shown && !codexShown) refreshCodexPlanUsage();
-    codexShown = shown;
   }
 }
 
@@ -215,8 +207,6 @@ function buildOverview(actions: ViewActions): ViewHost {
   let lastFocus: string | null = null;
   let mode: "ticker" | "card" | "plan" | "diff" | "spotify" | null = null;
   let cardKey = "";
-  /** The list row highlighted at the last sync, to scroll only when it moves. */
-  let shownSelection: number | null = null;
 
   // Leaving the overview or folding the island closes the diff, as on macOS.
   State.subscribe(() => {
@@ -275,9 +265,7 @@ function buildOverview(actions: ViewActions): ViewHost {
     },
     command(command) {
       if (command === "openSelection") {
-        // Ctrl+O: what a click on the highlighted row does.
-        if (mode !== "card" || State.cardSelection == null) return;
-        openRow(listRows(leftBody)[State.cardSelection]);
+        // Ctrl+O opened the highlighted row of a list card; no card has a list here.
         return;
       }
       // Ctrl+E (⌘E, islandToggleDiff): closes the diff that is open, else
@@ -387,12 +375,9 @@ function buildOverview(actions: ViewActions): ViewHost {
 
       jump.style.display = detailOpen || mode === "plan" || mode === "diff" ? "none" : "";
 
-      // Ctrl+↓ Ctrl+↑ walk the open GitHub list (cardItemCount / cardSelection).
-      const rows = mode === "card" ? listRows(leftBody) : [];
-      State.cardItemCount = rows.length;
-      if (State.cardSelection != null && State.cardSelection >= rows.length) State.cardSelection = null;
-      highlightRow(rows, State.cardSelection, State.cardSelection !== shownSelection);
-      shownSelection = State.cardSelection;
+      // No card has a list to walk with Ctrl+↓ Ctrl+↑.
+      State.cardItemCount = 0;
+      State.cardSelection = null;
 
       const others = State.otherTasks.slice(0, 4);
       const pillKey = others.map((t) => `${t.id}:${t.color}:${t.pillBadge ?? ""}`).join("|");
@@ -484,7 +469,7 @@ function buildEmpty(actions: ViewActions): ViewHost {
       h("div", { class: "sub", text: tl("Drop a file or window, or ask me anything.") }),
     ),
     h("div", { class: "grow" }),
-    btn(tl("Ask Claude"), "primary", () => actions.setView("prompt")),
+    btn(tl("Open the chat"), "primary", () => actions.setView("prompt")),
   );
   return { el: h("div", { class: "view" }, card(null, body)), sync() {} };
 }
@@ -658,7 +643,6 @@ function buildError(actions: ViewActions): ViewHost {
   const detail = h("div", { class: "detail" });
   const row = h("div", { class: "actions" },
     btn(tl("Retry"), "primary", () => actions.setView(State.defaultView())),
-    btn(tl("Open in n8n"), "secondary", () => actions.openUrl("")),
   );
   const el = h("div", { class: "view" }, card("red", stack(116, 16, who, title, detail, row)));
   return {
@@ -826,8 +810,6 @@ export function buildViews(
   map.set("choose", buildChoose(actions));
   map.set("recap", buildRecap(actions));
   map.set("wardrobe", buildWardrobe(actions));
-  map.set("update", buildUpdate());
-  map.set("whatsNew", buildWhatsNew());
   // Not in the Windows v1: sending a file by email, window attach + web result.
   map.set("mail", buildPlaceholder(tl("Sending by email isn't in this version."), ""));
   map.set("searching", buildPlaceholder(tl("Claude is searching…"), ""));

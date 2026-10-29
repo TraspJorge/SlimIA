@@ -5,7 +5,6 @@
 use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
 use crate::flow::text::new_id;
 
@@ -227,71 +226,6 @@ pub fn clock(seconds: f64) -> String {
     }
 }
 
-/// The summary, key points and to-dos read from the model's answer.
-#[derive(Debug, Clone, PartialEq)]
-pub struct Summary {
-    pub title: Option<String>,
-    pub summary: String,
-    pub key_points: Vec<String>,
-    pub todos: Vec<Todo>,
-}
-
-pub const SUMMARY_INSTRUCTIONS: &str = "You write the notes of a meeting from its transcript. Each line is \"Name: words\".\n\
-Write in the language of the transcript. Invent nothing that was not said.\n\
-Reply ONLY with JSON, no code block, in this exact shape:\n\
-{\"title\": \"a short title, 6 words at most\", \"summary\": \"2 to 4 sentences: what was decided and why\", \
-\"key_points\": [\"up to 6 short points\"], \"todos\": [{\"text\": \"the task\", \"owner\": \"the person's name as written in the transcript, or null\", \"due\": \"the deadline as said, or null\"}]}";
-
-/// Reads the model's JSON answer, even wrapped in a code block or with text
-/// around it. None when there is no JSON in it.
-pub fn parse_summary(reply: &str) -> Option<Summary> {
-    let open = reply.find('{')?;
-    let close = reply.rfind('}')?;
-    if open >= close {
-        return None;
-    }
-    let json: Value = serde_json::from_str(&reply[open..=close]).ok()?;
-    let obj = json.as_object()?;
-    let summary = obj.get("summary").and_then(Value::as_str).unwrap_or("").trim().to_string();
-    let key_points: Vec<String> = obj
-        .get("key_points")
-        .and_then(Value::as_array)
-        .map(|a| a.iter().filter_map(Value::as_str).filter(|s| !s.is_empty()).map(String::from).collect())
-        .unwrap_or_default();
-    let field = |d: &serde_json::Map<String, Value>, k: &str| -> Option<String> {
-        let v = d.get(k)?.as_str()?;
-        if v.is_empty() || v.eq_ignore_ascii_case("null") {
-            None
-        } else {
-            Some(v.to_string())
-        }
-    };
-    let todos: Vec<Todo> = obj
-        .get("todos")
-        .and_then(Value::as_array)
-        .map(|a| {
-            a.iter()
-                .filter_map(|item| {
-                    if let Some(text) = item.as_str() {
-                        return (!text.is_empty()).then(|| Todo { id: new_id(), text: text.into(), owner: None, due: None, done: false });
-                    }
-                    let d = item.as_object()?;
-                    let text = d.get("text")?.as_str()?;
-                    if text.is_empty() {
-                        return None;
-                    }
-                    Some(Todo { id: new_id(), text: text.into(), owner: field(d, "owner"), due: field(d, "due"), done: false })
-                })
-                .collect()
-        })
-        .unwrap_or_default();
-    if summary.is_empty() && key_points.is_empty() && todos.is_empty() {
-        return None;
-    }
-    let title = obj.get("title").and_then(Value::as_str).map(|s| s.trim().to_string()).filter(|s| !s.is_empty());
-    Some(Summary { title, summary, key_points, todos })
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -366,17 +300,8 @@ mod tests {
     }
 
     #[test]
-    fn clock_and_summary_parsing() {
+    fn clock_is_minutes_and_seconds() {
         assert_eq!(clock(75.0), "1:15");
         assert_eq!(clock(3725.0), "1:02:05");
-        let reply = "Voici :\n```json\n{\"title\":\"Point produit\",\"summary\":\"On lance.\",\"key_points\":[\"a\",\"\"],\"todos\":[{\"text\":\"Envoyer\",\"owner\":\"null\",\"due\":\"vendredi\"},\"Relire\"]}\n```";
-        let s = parse_summary(reply).unwrap();
-        assert_eq!(s.title.as_deref(), Some("Point produit"));
-        assert_eq!(s.key_points, ["a"]);
-        assert_eq!(s.todos.len(), 2);
-        assert_eq!(s.todos[0].owner, None);
-        assert_eq!(s.todos[0].due.as_deref(), Some("vendredi"));
-        assert!(parse_summary("no json here").is_none());
-        assert!(parse_summary("{\"summary\":\"\"}").is_none());
     }
 }
