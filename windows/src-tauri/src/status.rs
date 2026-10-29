@@ -19,6 +19,8 @@ use std::time::{Duration, Instant};
 use serde::Serialize;
 use serde_json::Value;
 
+/// How many recent steps a session keeps.
+const MAX_STEPS: usize = 3;
 /// A session nobody touched for this long is dropped from the file.
 const FORGET_AFTER_MS: u64 = 30 * 60 * 1000;
 /// "Finished" is shown this long, then the icon rests.
@@ -61,6 +63,8 @@ pub struct SessionStatus {
     pub state: State,
     /// The tool in use, as the island writes it ("Edit · main.rs").
     pub detail: String,
+    /// The last few tools, oldest first, ending with `detail`.
+    pub steps: Vec<String>,
     pub updated_at: u64,
 }
 
@@ -132,13 +136,24 @@ impl Tracker {
             project: project.clone(),
             state: State::Idle,
             detail: String::new(),
+            steps: Vec::new(),
             updated_at: now,
         });
         // A tool finishing keeps the line of the tool that ran; only a new one replaces it.
         let keep_detail = detail.is_empty() && state == State::Working && entry.state == State::Working;
         let changed = entry.state != state || (!keep_detail && entry.detail != detail);
         entry.state = state;
+        if event == "UserPromptSubmit" {
+            // A new question starts a new list of steps.
+            entry.steps.clear();
+        }
         if !keep_detail {
+            if !detail.is_empty() && entry.steps.last() != Some(&detail) {
+                entry.steps.push(detail.clone());
+                if entry.steps.len() > MAX_STEPS {
+                    entry.steps.remove(0);
+                }
+            }
             entry.detail = detail;
         }
         if !project.is_empty() {
@@ -314,6 +329,20 @@ mod tests {
         assert_eq!(t.snapshot(3).sessions[0].detail, "Read · a.rs");
         t.apply("PreToolUse", &json!({ "session_id": "a", "tool_name": "Bash", "tool_input": { "command": "ls" } }), 4);
         assert_eq!(t.snapshot(5).sessions[0].detail, "Bash · ls");
+    }
+
+    #[test]
+    fn the_last_steps_are_kept_and_a_new_question_clears_them() {
+        let mut t = Tracker::default();
+        for (i, cmd) in ["a", "b", "c", "d"].iter().enumerate() {
+            t.apply("PreToolUse", &json!({ "session_id": "s", "tool_name": "Bash", "tool_input": { "command": cmd } }), i as u64 + 1);
+        }
+        assert_eq!(t.snapshot(9).sessions[0].steps, ["Bash · b", "Bash · c", "Bash · d"]);
+        // The same tool twice in a row is one line.
+        t.apply("PreToolUse", &json!({ "session_id": "s", "tool_name": "Bash", "tool_input": { "command": "d" } }), 10);
+        assert_eq!(t.snapshot(11).sessions[0].steps.len(), 3);
+        t.apply("UserPromptSubmit", &json!({ "session_id": "s" }), 12);
+        assert!(t.snapshot(13).sessions[0].steps.is_empty());
     }
 
     #[test]

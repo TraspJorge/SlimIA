@@ -45,45 +45,11 @@ namespace Coucou {
         return lang.has_prefix ("pt") ? pt : en;
     }
 
-    public class SessionRow : Gtk.Box {
-        public SessionRow (string project, string detail, Mood mood) {
-            Object (orientation: Gtk.Orientation.HORIZONTAL, spacing: 8);
-            var dot = new Gtk.DrawingArea ();
-            dot.set_size_request (10, 10);
-            dot.valign = Gtk.Align.CENTER;
-            dot.draw.connect ((cr) => {
-                double r, g, b;
-                mood.rgb (out r, out g, out b);
-                cr.set_source_rgb (r, g, b);
-                cr.arc (5, 5, 4.5, 0, 2 * Math.PI);
-                cr.fill ();
-                return true;
-            });
-            var name = new Gtk.Label (project == "" ? "Claude Code" : project);
-            name.get_style_context ().add_class ("title");
-            name.xalign = 0;
-            name.ellipsize = Pango.EllipsizeMode.END;
-            name.max_width_chars = 18;
-            var text = new Gtk.Label (detail);
-            text.xalign = 0;
-            text.hexpand = true;
-            text.ellipsize = Pango.EllipsizeMode.END;
-            text.max_width_chars = 30;
-            text.opacity = 0.65;
-            pack_start (dot, false, false, 0);
-            pack_start (name, false, false, 0);
-            pack_start (text, true, true, 0);
-        }
-    }
-
     public class Indicator : Wingpanel.Indicator {
         private Gtk.DrawingArea? mochi = null;
         private Gtk.Box? panel = null;
-        private Gtk.Label? headline = null;
-        private Gtk.Box? sessions_box = null;
-        private Gtk.Label? answer_title = null;
-        private Gtk.Label? answer_text = null;
-        private Gtk.Button? open_button = null;
+        private Gtk.DrawingArea? big_mochi = null;
+        private static bool styled = false;
 
         private Mood mood = Mood.OFF;
         private string exe = "";
@@ -116,7 +82,8 @@ namespace Coucou {
                 blink_id = Timeout.add (3600, () => {
                     blinking = true;
                     mochi.queue_draw ();
-                    Timeout.add (150, () => { blinking = false; mochi.queue_draw (); return false; });
+                    if (big_mochi != null) big_mochi.queue_draw ();
+                    Timeout.add (150, () => { blinking = false; mochi.queue_draw (); if (big_mochi != null) big_mochi.queue_draw (); return false; });
                     return true;
                 });
                 refresh ();
@@ -128,39 +95,9 @@ namespace Coucou {
 
         public override Gtk.Widget? get_widget () {
             if (panel == null) {
-                panel = new Gtk.Box (Gtk.Orientation.VERTICAL, 10);
-                panel.margin = 14;
-                panel.set_size_request (360, -1);
-
-                headline = new Gtk.Label ("");
-                headline.xalign = 0;
-                headline.get_style_context ().add_class ("h3");
-                panel.pack_start (headline, false, false, 0);
-
-                sessions_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 6);
-                panel.pack_start (sessions_box, false, false, 0);
-
-                panel.pack_start (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), false, false, 0);
-
-                answer_title = new Gtk.Label ("");
-                answer_title.xalign = 0;
-                answer_title.opacity = 0.65;
-                panel.pack_start (answer_title, false, false, 0);
-
-                answer_text = new Gtk.Label ("");
-                answer_text.xalign = 0;
-                answer_text.yalign = 0;
-                answer_text.wrap = true;
-                answer_text.wrap_mode = Pango.WrapMode.WORD_CHAR;
-                answer_text.max_width_chars = 46;
-                answer_text.selectable = true;
-                panel.pack_start (answer_text, false, false, 0);
-
-                open_button = new Gtk.Button.with_label (tr ("Open Coucou", "Abrir o Coucou"));
-                open_button.clicked.connect (open_coucou);
-                panel.pack_start (open_button, false, false, 0);
-
-                panel.show_all ();
+                install_style ();
+                panel = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+                panel.get_style_context ().add_class ("coucou-island");
                 update_panel ();
             }
             return panel;
@@ -244,6 +181,7 @@ namespace Coucou {
                 tick_id = Timeout.add (90, () => {
                     phase++;
                     if (mochi != null) mochi.queue_draw ();
+                    if (big_mochi != null) big_mochi.queue_draw ();
                     if (!mood.pulses ()) {
                         tick_id = 0;
                         return false;
@@ -468,7 +406,7 @@ namespace Coucou {
         private string mood_text (Mood m) {
             switch (m) {
                 case WORKING: return tr ("Working…", "Trabalhando…");
-                case WAITING: return tr ("Waiting for you", "Esperando você");
+                case WAITING: return tr ("needs permission", "precisa de permissão");
                 case FINISHED: return tr ("Finished", "Terminou");
                 case ERROR: return tr ("Something went wrong", "Algo deu errado");
                 case OFF: return tr ("Coucou is not running", "O Coucou não está aberto");
@@ -481,41 +419,213 @@ namespace Coucou {
             return new DateTime.from_unix_local (ms / 1000).format ("%H:%M");
         }
 
+        private static string hex (Mood m) {
+            double r, g, b;
+            mini_rgb (m, out r, out g, out b);
+            if (m == Mood.IDLE || m == Mood.OFF) {
+                return "#8A8F98";
+            }
+            return "#%02X%02X%02X".printf ((int) (r * 255), (int) (g * 255), (int) (b * 255));
+        }
+
+        // The look of Coucou's open island: a black panel, dark cards with a fine rim.
+        private static void install_style () {
+            if (styled) {
+                return;
+            }
+            styled = true;
+            var css = new Gtk.CssProvider ();
+            try {
+                css.load_from_data ("""
+                    .coucou-island { background: #000000; border-radius: 22px; padding: 12px; }
+                    .coucou-card { background-image: linear-gradient(to bottom, #16181d, #0b0c0f);
+                                   border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; padding: 14px; }
+                    .coucou-title { color: #ffffff; font-weight: 700; font-size: 13px; }
+                    .coucou-kind { color: rgba(255,255,255,0.5); font-size: 12px; }
+                    .coucou-sub { color: rgba(255,255,255,0.62); font-size: 12px; }
+                    .coucou-step { color: #e8e9ec; font-family: monospace; font-size: 11.5px;
+                                   background: rgba(255,255,255,0.08); border-radius: 9px; padding: 6px 10px; }
+                    .coucou-stepnow { color: #ffffff; font-size: 12.5px; font-weight: 600; }
+                    .coucou-answer { color: rgba(255,255,255,0.78); font-size: 12px; }
+                    .coucou-link { color: #e8e9ec; font-weight: 700; font-size: 12px; background: none;
+                                   border: none; box-shadow: none; padding: 2px 0; min-height: 0; }
+                    .coucou-link:hover { color: #ffffff; text-decoration: underline; }
+                    .coucou-cell { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+                                   border-radius: 13px; padding: 6px 10px; }
+                    .coucou-cell label { color: rgba(255,255,255,0.8); font-size: 12px; }
+                    .coucou-dim { color: rgba(255,255,255,0.4); font-size: 11px; }
+                """);
+                Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css,
+                    Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            } catch (Error e) {
+                warning ("coucou: style: %s", e.message);
+            }
+        }
+
+        private Gtk.Label label (string text, string css_class, bool wrap = false) {
+            var l = new Gtk.Label (null);
+            l.set_markup ("");
+            l.label = text;
+            l.xalign = 0;
+            l.get_style_context ().add_class (css_class);
+            if (wrap) {
+                l.wrap = true;
+                l.wrap_mode = Pango.WrapMode.WORD_CHAR;
+                l.max_width_chars = 44;
+                l.yalign = 0;
+            } else {
+                l.ellipsize = Pango.EllipsizeMode.END;
+            }
+            return l;
+        }
+
+        private Gtk.Button link (string text) {
+            var b = new Gtk.Button.with_label (text);
+            b.relief = Gtk.ReliefStyle.NONE;
+            b.get_style_context ().add_class ("coucou-link");
+            b.clicked.connect (open_coucou);
+            return b;
+        }
+
+        private Gtk.Box dot_title (string project, string kind, Mood m) {
+            var row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 7);
+            var dot = new Gtk.DrawingArea ();
+            dot.set_size_request (8, 8);
+            dot.valign = Gtk.Align.CENTER;
+            dot.draw.connect ((cr) => {
+                double r, g, b;
+                mini_rgb (m, out r, out g, out b);
+                cr.set_source_rgb (r, g, b);
+                cr.arc (4, 4, 3.6, 0, 2 * Math.PI);
+                cr.fill ();
+                return true;
+            });
+            row.pack_start (dot, false, false, 0);
+            row.pack_start (label (project == "" ? "Claude Code" : project, "coucou-title"), false, false, 0);
+            row.pack_start (label (kind, "coucou-kind"), false, false, 0);
+            return row;
+        }
+
+        private Gtk.Widget session_cell (Json.Object s) {
+            var m = Mood.parse (s.get_string_member_with_default ("state", "idle"));
+            var cell = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 8);
+            cell.get_style_context ().add_class ("coucou-cell");
+            var mini = new Gtk.DrawingArea ();
+            mini.set_size_request (22, 19);
+            mini.valign = Gtk.Align.CENTER;
+            mini.draw.connect ((cr) => {
+                cr.scale (2.6, 2.6);
+                paint_mini (cr, 0, 0.6, m);
+                return true;
+            });
+            cell.pack_start (mini, false, false, 0);
+            var name = new Gtk.Label (s.get_string_member_with_default ("project", ""));
+            name.xalign = 0;
+            name.ellipsize = Pango.EllipsizeMode.END;
+            name.max_width_chars = 12;
+            name.hexpand = true;
+            cell.pack_start (name, true, true, 0);
+            return cell;
+        }
+
         private void update_panel () {
             if (panel == null) {
                 return;
             }
-            headline.label = mood_text (mood);
-            foreach (var child in sessions_box.get_children ()) {
-                sessions_box.remove (child);
+            foreach (var child in panel.get_children ()) {
+                panel.remove (child);
             }
-            if (sessions != null) {
-                uint n = uint.min (sessions.get_length (), 5);
-                for (uint i = 0; i < n; i++) {
-                    var s = sessions.get_object_element (i);
-                    var m = Mood.parse (s.get_string_member_with_default ("state", "idle"));
-                    var detail = s.get_string_member_with_default ("detail", "");
-                    if (detail == "") {
-                        detail = mood_text (m);
-                    }
-                    sessions_box.pack_start (new SessionRow (s.get_string_member_with_default ("project", ""), detail, m),
-                        false, false, 0);
+            big_mochi = null;
+
+            // Who the main card is about: the session that needs you most (the first one).
+            Json.Object? top = null;
+            if (sessions != null && sessions.get_length () > 0) {
+                top = sessions.get_object_element (0);
+            }
+            string project = top != null ? top.get_string_member_with_default ("project", "") : "";
+            string detail = top != null ? top.get_string_member_with_default ("detail", "") : "";
+            bool has_answer = answer_body != "";
+
+            // ── The main card: Mochi, who, what ──
+            var main = new Gtk.Box (Gtk.Orientation.VERTICAL, 10);
+            main.get_style_context ().add_class ("coucou-card");
+            main.set_size_request (360, -1);
+
+            var top_row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 14);
+            big_mochi = new Gtk.DrawingArea ();
+            big_mochi.set_size_request (76, 66);
+            big_mochi.valign = Gtk.Align.CENTER;
+            big_mochi.draw.connect ((cr) => {
+                paint_mochi (cr, big_mochi.get_allocated_width () / 2.0, big_mochi.get_allocated_height () / 2.0, 25);
+                return true;
+            });
+            top_row.pack_start (big_mochi, false, false, 0);
+
+            var info = new Gtk.Box (Gtk.Orientation.VERTICAL, 6);
+            info.valign = Gtk.Align.CENTER;
+            info.pack_start (dot_title (project, mood == Mood.WAITING ? mood_text (mood) : "Claude Code", mood), false, false, 0);
+            // The last steps, newest at the bottom with its arrow, as on the island.
+            bool any_step = false;
+            if (top != null && top.has_member ("steps")) {
+                var steps = top.get_array_member ("steps");
+                uint count = steps.get_length ();
+                for (uint i = 0; i < count; i++) {
+                    bool newest = i == count - 1;
+                    var line = label ((newest ? "› " : "") + steps.get_string_element (i), newest ? "coucou-stepnow" : "coucou-sub");
+                    line.set_tooltip_text (steps.get_string_element (i));
+                    info.pack_start (line, false, false, 0);
+                    any_step = true;
                 }
             }
-            sessions_box.show_all ();
-            sessions_box.visible = sessions_box.get_children ().length () > 0;
+            if (!any_step) {
+                if (mood == Mood.WAITING && detail != "") {
+                    info.pack_start (label (detail, "coucou-step"), false, false, 0);
+                } else {
+                    info.pack_start (label (mood_text (mood), "coucou-sub"), false, false, 0);
+                }
+            } else if (mood == Mood.WAITING && detail != "") {
+                info.pack_start (label (detail, "coucou-step"), false, false, 0);
+            } else if (mood != Mood.WORKING) {
+                info.pack_start (label (mood_text (mood), "coucou-sub"), false, false, 0);
+            }
+            var links = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 14);
+            links.sensitive = mood != Mood.OFF;
+            links.pack_start (link (tr ("Open chat", "Abrir o chat")), false, false, 0);
+            info.pack_start (links, false, false, 0);
+            top_row.pack_start (info, true, true, 0);
+            main.pack_start (top_row, false, false, 0);
 
-            bool has_answer = answer_body != "";
-            answer_title.visible = has_answer;
-            answer_text.visible = has_answer;
+            if (mood == Mood.WAITING) {
+                main.pack_start (label (tr ("Answer in the Coucou island.", "Responda na ilha do Coucou."), "coucou-dim"), false, false, 0);
+            }
             if (has_answer) {
                 var when = clock (answer_at);
-                answer_title.label = tr ("Last answer", "Última resposta")
+                main.pack_start (label (tr ("Last answer", "Última resposta")
                     + (answer_project != "" ? " · " + answer_project : "")
-                    + (when != "" ? " · " + when : "");
-                answer_text.label = answer_body;
+                    + (when != "" ? " · " + when : ""), "coucou-dim"), false, false, 0);
+                var answer = label (answer_body, "coucou-answer", true);
+                answer.lines = 7;
+                answer.ellipsize = Pango.EllipsizeMode.END;
+                answer.selectable = true;
+                main.pack_start (answer, false, false, 0);
             }
-            open_button.sensitive = mood != Mood.OFF;
+
+            var body = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 10);
+            body.pack_start (main, true, true, 0);
+
+            // ── The other sessions, as on the island's right card ──
+            if (sessions != null && sessions.get_length () > 1) {
+                var side = new Gtk.Box (Gtk.Orientation.VERTICAL, 8);
+                side.get_style_context ().add_class ("coucou-card");
+                side.set_size_request (190, -1);
+                uint n = uint.min (sessions.get_length (), 6);
+                for (uint i = 1; i < n; i++) {
+                    side.pack_start (session_cell (sessions.get_object_element (i)), false, false, 0);
+                }
+                body.pack_start (side, false, false, 0);
+            }
+            panel.pack_start (body, false, false, 0);
+            panel.show_all ();
         }
     }
 }
