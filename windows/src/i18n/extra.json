@@ -1652,19 +1652,6 @@
       "de": "In dieser Unterhaltung gibt es noch nichts anzuzeigen.",
       "tr": "Bu konuşmada henüz gösterilecek bir şey yok."
     },
-    "Permissions and questions are answered from the island.": {
-      "zh-Hans": "权限请求和问题在灵动岛上回答。",
-      "hi": "अनुमतियों और सवालों का जवाब आइलैंड से दिया जाता है।",
-      "es": "Los permisos y las preguntas se responden desde la isla.",
-      "ar": "تتم الإجابة عن الأذونات والأسئلة من الجزيرة.",
-      "fr": "Les permissions et les questions se répondent depuis l'île.",
-      "bn": "অনুমতি ও প্রশ্নের উত্তর আইল্যান্ড থেকে দেওয়া হয়।",
-      "pt-BR": "As permissões e as perguntas são respondidas pela ilha.",
-      "ru": "На разрешения и вопросы отвечают на острове.",
-      "id": "Izin dan pertanyaan dijawab dari pulau.",
-      "de": "Berechtigungen und Fragen beantwortest du auf der Insel.",
-      "tr": "İzinler ve sorular ada üzerinden yanıtlanır."
-    },
     "Mochi and his sounds.": {
       "zh-Hans": "Mochi 和他的声音。",
       "hi": "Mochi और उसकी आवाज़ें।",
@@ -1703,6 +1690,45 @@
       "id": "Buka Slimai",
       "de": "Slimai öffnen",
       "tr": "Slimai'yi aç"
+    },
+    "Clear list": {
+      "zh-Hans": "清空列表",
+      "hi": "सूची साफ़ करें",
+      "es": "Limpiar lista",
+      "ar": "مسح القائمة",
+      "fr": "Vider la liste",
+      "bn": "তালিকা মুছুন",
+      "pt-BR": "Limpar lista",
+      "ru": "Очистить список",
+      "id": "Bersihkan daftar",
+      "de": "Liste leeren",
+      "tr": "Listeyi temizle"
+    },
+    "Show all": {
+      "zh-Hans": "显示全部",
+      "hi": "सभी दिखाएँ",
+      "es": "Mostrar todo",
+      "ar": "عرض الكل",
+      "fr": "Tout afficher",
+      "bn": "সব দেখান",
+      "pt-BR": "Mostrar tudo",
+      "ru": "Показать все",
+      "id": "Tampilkan semua",
+      "de": "Alle anzeigen",
+      "tr": "Tümünü göster"
+    },
+    "Allow or deny from the top bar; answer questions in the terminal.": {
+      "zh-Hans": "在顶栏允许或拒绝；在终端中回答问题。",
+      "hi": "ऊपरी बार से अनुमति दें या अस्वीकार करें; प्रश्नों का उत्तर टर्मिनल में दें।",
+      "es": "Permite o deniega desde la barra superior; responde las preguntas en el terminal.",
+      "ar": "اسمح أو ارفض من الشريط العلوي؛ أجب عن الأسئلة في الطرفية.",
+      "fr": "Autorisez ou refusez depuis la barre du haut ; répondez aux questions dans le terminal.",
+      "bn": "উপরের বার থেকে অনুমতি দিন বা প্রত্যাখ্যান করুন; প্রশ্নের উত্তর টার্মিনালে দিন।",
+      "pt-BR": "Permita ou negue pela barra superior; responda às perguntas no terminal.",
+      "ru": "Разрешайте или отклоняйте с верхней панели; отвечайте на вопросы в терминале.",
+      "id": "Izinkan atau tolak dari bilah atas; jawab pertanyaan di terminal.",
+      "de": "Erlaube oder verweigere in der oberen Leiste; beantworte Fragen im Terminal.",
+      "tr": "Üst çubuktan izin verin veya reddedin; soruları terminalde yanıtlayın."
     }
   }
 }

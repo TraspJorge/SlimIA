@@ -962,3 +962,6 @@ button.hub-icon svg {
 .ret-md .md-quote { display: flex; align-items: stretch; gap: 8px; opacity: .85; }
 .ret-md .md-quote i { flex: 0 0 2px; border-radius: 1px; background: rgba(255,255,255,.3); }
 .ret-md .md-rule { width: 100%; border: 0; border-top: 1px solid rgba(255,255,255,.25); }
+
+.ret-bar { display: flex; justify-content: space-between; padding: 4px 6px 8px; }
+.ret-items { display: flex; flex-direction: column; gap: 6px; }

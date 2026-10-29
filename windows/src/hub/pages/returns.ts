@@ -14,6 +14,26 @@ import { emptyState } from "../hero";
 /** How often the open conversation is read again. */
 const POLL_MS = 2000;
 
+const CLEARED_KEY = "slimai.chat.clearedAt";
+
+/** Conversations whose last activity is before this are left out of the list (the files stay untouched). */
+function clearedAt(): number {
+  try {
+    return Number(localStorage.getItem(CLEARED_KEY)) || 0;
+  } catch {
+    return 0;
+  }
+}
+
+function setClearedAt(ms: number) {
+  try {
+    if (ms > 0) localStorage.setItem(CLEARED_KEY, String(ms));
+    else localStorage.removeItem(CLEARED_KEY);
+  } catch {
+    // No storage: the list simply comes back next time.
+  }
+}
+
 /** The conversation picked last, kept while the window is open. */
 let picked: string | null = null;
 
@@ -51,9 +71,11 @@ function drawEntry(entry: ReturnEntry): HTMLElement {
 export async function returnsPage(page: HTMLElement, ctx: HubContext) {
   page.append(ctx.hero("chat", t("Chat"), t("What Claude answered in your conversations, read from this computer."), [], true));
 
-  const list = h("div", { class: "ret-list" });
+  const items = h("div", { class: "ret-items" });
+  const bar = h("div", { class: "ret-bar" });
+  const list = h("div", { class: "ret-list" }, bar, items);
   const log = h("div", { class: "ret-log" });
-  const note = h("div", { class: "hub-note ret-foot", text: t("Permissions and questions are answered from the island.") });
+  const note = h("div", { class: "hub-note ret-foot", text: t("Allow or deny from the top bar; answer questions in the terminal.") });
   page.append(h("div", { class: "ret-wrap" }, list, h("div", { class: "ret-main" }, log, note)));
 
   let sessions: ReturnSession[] = [];
@@ -64,8 +86,31 @@ export async function returnsPage(page: HTMLElement, ctx: HubContext) {
     return log.scrollHeight - log.scrollTop - log.clientHeight < 60;
   }
 
+  function drawBar() {
+    clear(bar);
+    bar.append(h("button", {
+      class: "link-btn",
+      text: t("Clear list"),
+      onclick: () => {
+        setClearedAt(Date.now());
+        void refresh();
+      },
+    }));
+    if (clearedAt() > 0) {
+      bar.append(h("button", {
+        class: "link-btn",
+        text: t("Show all"),
+        onclick: () => {
+          setClearedAt(0);
+          void refresh();
+        },
+      }));
+    }
+  }
+
   function drawList() {
-    clear(list);
+    clear(items);
+    drawBar();
     for (const s of sessions) {
       const item = h("button", { class: s.id === picked ? "ret-item on" : "ret-item", onclick: () => void pick(s.id) },
         h("div", { class: "ret-item-top" },
@@ -74,7 +119,7 @@ export async function returnsPage(page: HTMLElement, ctx: HubContext) {
         ),
         h("div", { class: "ret-item-title", text: s.title }),
       );
-      list.append(item);
+      items.append(item);
     }
   }
 
@@ -103,7 +148,8 @@ export async function returnsPage(page: HTMLElement, ctx: HubContext) {
   }
 
   async function refresh() {
-    sessions = (await Bridge.returnsSessions()) ?? [];
+    const cut = clearedAt();
+    sessions = ((await Bridge.returnsSessions()) ?? []).filter((s) => s.updatedAt > cut);
     if (!picked || !sessions.some((s) => s.id === picked)) picked = sessions[0]?.id ?? null;
     drawList();
     if (!picked) {
