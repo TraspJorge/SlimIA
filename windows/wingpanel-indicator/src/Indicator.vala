@@ -396,13 +396,14 @@ namespace SlimIA {
 
         // ── The page with the island's Mochi ─────────────────────────────────
 
-        private WebKit.WebView? make_view (string page, string hash, int w, int h) {
+        private WebKit.WebView? make_view (string page, string hash, int w, int h, bool solid = false) {
             if (!FileUtils.test (WEB_DIR + page, FileTest.EXISTS)) {
                 return null;
             }
             // Nothing is kept: no cookies, no cache, no storage.
             var view = new WebKit.WebView.with_context (new WebKit.WebContext.ephemeral ());
-            view.set_background_color ({ 0, 0, 0, 0 });
+            // The card's pages sit on its solid dark; only the bar capsule is see-through.
+            view.set_background_color (solid ? Gdk.RGBA () { red = 0.0588, green = 0.0667, blue = 0.0824, alpha = 1.0 } : Gdk.RGBA ());
             view.set_size_request (w, h);
             view.can_focus = false;
             view.get_settings ().enable_developer_extras = false;
@@ -1260,7 +1261,7 @@ namespace SlimIA {
                     .slimia-pop, .slimia-pop decoration { background: transparent; box-shadow: none;
                                                           border: none; }
                     .slimia-island { background: #000000; border-radius: 0 0 26px 26px; padding: 12px; }
-                    .slimia-card { background-image: linear-gradient(to bottom, #16181d, #0b0c0f);
+                    .slimia-card { background-color: #0f1115;
                                    border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; padding: 14px; }
                     .slimia-title { color: #ffffff; font-weight: 700; font-size: 13px; }
                     .slimia-kind { color: rgba(255,255,255,0.5); font-size: 12px; }
@@ -1444,7 +1445,7 @@ namespace SlimIA {
 
             var top_row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 14);
             if (big_view == null) {
-                big_view = make_view ("index.html", "#big", 84, 76);
+                big_view = make_view ("index.html", "#big", 84, 76, true);
                 if (big_view != null) {
                     big_box = new Gtk.EventBox ();
                     big_box.visible_window = false;
@@ -1588,7 +1589,7 @@ namespace SlimIA {
                 + (answer_project != "" ? " · " + answer_project : "")
                 + (when != "" ? " · " + when : ""), "slimia-dim"), false, false, 0);
             if (answer_view == null) {
-                answer_view = make_view ("answer.html", "", 330, 40);
+                answer_view = make_view ("answer.html", "", 330, 40, true);
                 if (answer_view != null) {
                     // The page says how tall its text is (its title); up to a screenful, then it scrolls.
                     answer_view.notify["title"].connect (() => {
