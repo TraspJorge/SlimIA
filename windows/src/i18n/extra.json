@@ -27,18 +27,18 @@
       "de": "+ Unteragent",
       "tr": "+ alt ajan"
     },
-    "A hook group named \"coucou\" that SlimIA did not write is already there — SlimIA has not touched it.": {
-      "zh-Hans": "已存在一个并非 SlimIA 写入的名为“coucou”的 hook 组 — SlimIA 没有修改它。",
-      "hi": "“coucou” नाम का एक hook समूह पहले से है जिसे SlimIA ने नहीं लिखा — SlimIA ने इसे नहीं छुआ।",
-      "es": "Ya existe un grupo de hooks llamado «coucou» que no escribió SlimIA — SlimIA no lo ha tocado.",
-      "ar": "توجد بالفعل مجموعة hooks باسم «coucou» لم يكتبها SlimIA — لم يمسّها SlimIA.",
-      "fr": "Un groupe de hooks nommé « coucou » que SlimIA n'a pas écrit existe déjà — SlimIA n'y a pas touché.",
-      "bn": "“coucou” নামে একটি hook গ্রুপ আগে থেকেই আছে যা SlimIA লেখেনি — SlimIA এতে হাত দেয়নি।",
-      "pt-BR": "Já existe um grupo de hooks chamado “coucou” que não foi escrito pelo SlimIA — o SlimIA não mexeu nele.",
-      "ru": "Уже есть группа хуков «coucou», которую написал не SlimIA, — SlimIA её не трогал.",
-      "id": "Sudah ada grup hook bernama “coucou” yang tidak ditulis SlimIA — SlimIA tidak menyentuhnya.",
-      "de": "Eine nicht von SlimIA erstellte Hook-Gruppe namens \"coucou\" ist bereits vorhanden — SlimIA hat sie nicht verändert.",
-      "tr": "SlimIA'nun oluşturmadığı \"coucou\" adlı bir hook grubu zaten var — SlimIA bunu değiştirmedi."
+    "A hook group named \"slimia\" that SlimIA did not write is already there — SlimIA has not touched it.": {
+      "zh-Hans": "已存在一个并非 SlimIA 写入的名为“slimia”的 hook 组 — SlimIA 没有修改它。",
+      "hi": "“slimia” नाम का एक hook समूह पहले से है जिसे SlimIA ने नहीं लिखा — SlimIA ने इसे नहीं छुआ।",
+      "es": "Ya existe un grupo de hooks llamado «slimia» que no escribió SlimIA — SlimIA no lo ha tocado.",
+      "ar": "توجد بالفعل مجموعة hooks باسم «slimia» لم يكتبها SlimIA — لم يمسّها SlimIA.",
+      "fr": "Un groupe de hooks nommé « slimia » que SlimIA n'a pas écrit existe déjà — SlimIA n'y a pas touché.",
+      "bn": "“slimia” নামে একটি hook গ্রুপ আগে থেকেই আছে যা SlimIA লেখেনি — SlimIA এতে হাত দেয়নি।",
+      "pt-BR": "Já existe um grupo de hooks chamado “slimia” que não foi escrito pelo SlimIA — o SlimIA não mexeu nele.",
+      "ru": "Уже есть группа хуков «slimia», которую написал не SlimIA, — SlimIA её не трогал.",
+      "id": "Sudah ada grup hook bernama “slimia” yang tidak ditulis SlimIA — SlimIA tidak menyentuhnya.",
+      "de": "Eine nicht von SlimIA erstellte Hook-Gruppe namens \"slimia\" ist bereits vorhanden — SlimIA hat sie nicht verändert.",
+      "tr": "SlimIA'nun oluşturmadığı \"slimia\" adlı bir hook grubu zaten var — SlimIA bunu değiştirmedi."
     },
     "Answer in terminal": {
       "zh-Hans": "在终端中回答",
@@ -963,18 +963,18 @@
       "de": "Entfernt nur SlimIAs Einträge. Deine eigenen Hooks bleiben unverändert.",
       "tr": "Yalnızca SlimIA'nun girdilerini kaldırır. Kendi hook'ların korunur."
     },
-    "Turn it on once with `hermes plugins enable coucou`, then start a new Hermes session.": {
-      "zh-Hans": "先用 `hermes plugins enable coucou` 启用一次，然后开启新的 Hermes 会话。",
-      "hi": "इसे एक बार `hermes plugins enable coucou` से चालू करें, फिर Hermes का नया सत्र शुरू करें।",
-      "es": "Actívalo una vez con `hermes plugins enable coucou` y luego abre una nueva sesión de Hermes.",
-      "ar": "فعّله مرة واحدة بالأمر `hermes plugins enable coucou`، ثم ابدأ جلسة Hermes جديدة.",
-      "fr": "Active-le une fois avec `hermes plugins enable coucou`, puis lance une nouvelle session Hermes.",
-      "bn": "একবার `hermes plugins enable coucou` দিয়ে চালু করুন, তারপর Hermes-এর নতুন সেশন শুরু করুন।",
-      "pt-BR": "Ative uma vez com `hermes plugins enable coucou` e depois inicie uma nova sessão do Hermes.",
-      "ru": "Включите его один раз командой `hermes plugins enable coucou`, затем начните новую сессию Hermes.",
-      "id": "Aktifkan sekali dengan `hermes plugins enable coucou`, lalu mulai sesi Hermes baru.",
-      "de": "Aktiviere es einmal mit `hermes plugins enable coucou` und starte dann eine neue Hermes-Sitzung.",
-      "tr": "Bir kez `hermes plugins enable coucou` ile etkinleştir, ardından yeni bir Hermes oturumu başlat."
+    "Turn it on once with `hermes plugins enable slimia`, then start a new Hermes session.": {
+      "zh-Hans": "先用 `hermes plugins enable slimia` 启用一次，然后开启新的 Hermes 会话。",
+      "hi": "इसे एक बार `hermes plugins enable slimia` से चालू करें, फिर Hermes का नया सत्र शुरू करें।",
+      "es": "Actívalo una vez con `hermes plugins enable slimia` y luego abre una nueva sesión de Hermes.",
+      "ar": "فعّله مرة واحدة بالأمر `hermes plugins enable slimia`، ثم ابدأ جلسة Hermes جديدة.",
+      "fr": "Active-le une fois avec `hermes plugins enable slimia`, puis lance une nouvelle session Hermes.",
+      "bn": "একবার `hermes plugins enable slimia` দিয়ে চালু করুন, তারপর Hermes-এর নতুন সেশন শুরু করুন।",
+      "pt-BR": "Ative uma vez com `hermes plugins enable slimia` e depois inicie uma nova sessão do Hermes.",
+      "ru": "Включите его один раз командой `hermes plugins enable slimia`, затем начните новую сессию Hermes.",
+      "id": "Aktifkan sekali dengan `hermes plugins enable slimia`, lalu mulai sesi Hermes baru.",
+      "de": "Aktiviere es einmal mit `hermes plugins enable slimia` und starte dann eine neue Hermes-Sitzung.",
+      "tr": "Bir kez `hermes plugins enable slimia` ile etkinleştir, ardından yeni bir Hermes oturumu başlat."
     },
     "Uninstall hooks…": {
       "zh-Hans": "卸载 hooks…",
@@ -1028,18 +1028,18 @@
       "de": "Schreiben nach {path} fehlgeschlagen: {error}",
       "tr": "{path} dosyasına yazılamadı: {error}"
     },
-    "coucou-hook.exe is not in place yet. Restart SlimIA; if it still fails, build it with `cargo build -p coucou-hook`.": {
-      "zh-Hans": "coucou-hook.exe 尚未就位。请重启 SlimIA；如果仍然失败，请用 `cargo build -p coucou-hook` 构建它。",
-      "hi": "coucou-hook.exe अभी अपनी जगह पर नहीं है। SlimIA फिर से शुरू करें; अगर फिर भी न हो, तो इसे `cargo build -p coucou-hook` से बनाएँ।",
-      "es": "coucou-hook.exe aún no está en su sitio. Reinicia SlimIA; si sigue fallando, compílalo con `cargo build -p coucou-hook`.",
-      "ar": "coucou-hook.exe ليس في مكانه بعد. أعد تشغيل SlimIA؛ وإن استمر الفشل فابنِه بالأمر `cargo build -p coucou-hook`.",
-      "fr": "coucou-hook.exe n'est pas encore en place. Redémarre SlimIA ; si ça échoue encore, compile-le avec `cargo build -p coucou-hook`.",
-      "bn": "coucou-hook.exe এখনো জায়গামতো নেই। SlimIA আবার চালু করুন; তবুও না হলে `cargo build -p coucou-hook` দিয়ে এটি বানান।",
-      "pt-BR": "O coucou-hook.exe ainda não está no lugar. Reinicie o SlimIA; se continuar falhando, compile-o com `cargo build -p coucou-hook`.",
-      "ru": "coucou-hook.exe ещё не на месте. Перезапустите SlimIA; если не поможет, соберите его командой `cargo build -p coucou-hook`.",
-      "id": "coucou-hook.exe belum ada di tempatnya. Mulai ulang SlimIA; jika masih gagal, build dengan `cargo build -p coucou-hook`.",
-      "de": "coucou-hook.exe ist noch nicht vorhanden. Starte SlimIA neu; falls es weiterhin fehlschlägt, erstelle die Datei mit `cargo build -p coucou-hook`.",
-      "tr": "coucou-hook.exe henüz yerinde değil. SlimIA'yu yeniden başlat; sorun sürerse `cargo build -p coucou-hook` ile derle."
+    "slimia-hook.exe is not in place yet. Restart SlimIA; if it still fails, build it with `cargo build -p slimia-hook`.": {
+      "zh-Hans": "slimia-hook.exe 尚未就位。请重启 SlimIA；如果仍然失败，请用 `cargo build -p slimia-hook` 构建它。",
+      "hi": "slimia-hook.exe अभी अपनी जगह पर नहीं है। SlimIA फिर से शुरू करें; अगर फिर भी न हो, तो इसे `cargo build -p slimia-hook` से बनाएँ।",
+      "es": "slimia-hook.exe aún no está en su sitio. Reinicia SlimIA; si sigue fallando, compílalo con `cargo build -p slimia-hook`.",
+      "ar": "slimia-hook.exe ليس في مكانه بعد. أعد تشغيل SlimIA؛ وإن استمر الفشل فابنِه بالأمر `cargo build -p slimia-hook`.",
+      "fr": "slimia-hook.exe n'est pas encore en place. Redémarre SlimIA ; si ça échoue encore, compile-le avec `cargo build -p slimia-hook`.",
+      "bn": "slimia-hook.exe এখনো জায়গামতো নেই। SlimIA আবার চালু করুন; তবুও না হলে `cargo build -p slimia-hook` দিয়ে এটি বানান।",
+      "pt-BR": "O slimia-hook.exe ainda não está no lugar. Reinicie o SlimIA; se continuar falhando, compile-o com `cargo build -p slimia-hook`.",
+      "ru": "slimia-hook.exe ещё не на месте. Перезапустите SlimIA; если не поможет, соберите его командой `cargo build -p slimia-hook`.",
+      "id": "slimia-hook.exe belum ada di tempatnya. Mulai ulang SlimIA; jika masih gagal, build dengan `cargo build -p slimia-hook`.",
+      "de": "slimia-hook.exe ist noch nicht vorhanden. Starte SlimIA neu; falls es weiterhin fehlschlägt, erstelle die Datei mit `cargo build -p slimia-hook`.",
+      "tr": "slimia-hook.exe henüz yerinde değil. SlimIA'yu yeniden başlat; sorun sürerse `cargo build -p slimia-hook` ile derle."
     },
     "finished": {
       "zh-Hans": "已完成",
@@ -1326,19 +1326,6 @@
       "id": "Spotify, untuk kontrol di bilah.",
       "de": "Spotify, für die Steuerung in der Leiste.",
       "tr": "Spotify, çubuktaki kontroller için."
-    },
-    "Open SlimIA": {
-      "zh-Hans": "打开 SlimIA",
-      "hi": "SlimIA खोलें",
-      "es": "Abrir SlimIA",
-      "ar": "فتح SlimIA",
-      "fr": "Ouvrir SlimIA",
-      "bn": "SlimIA খুলুন",
-      "pt-BR": "Abrir o SlimIA",
-      "ru": "Открыть SlimIA",
-      "id": "Buka SlimIA",
-      "de": "SlimIA öffnen",
-      "tr": "SlimIA'yi aç"
     },
     "Clear list": {
       "zh-Hans": "清空列表",

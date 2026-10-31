@@ -7,10 +7,10 @@ for SlimIA.
 
 | System | Script | How |
 |---|---|---|
-| Windows | [block-network.ps1](block-network.ps1) | Windows Defender Firewall rules, inbound and outbound, for `coucou.exe` and `coucou-hook.exe`. Loopback is not filtered, so a local model (Ollama, LM Studio) still works. |
+| Windows | [block-network.ps1](block-network.ps1) | Windows Defender Firewall rules, inbound and outbound, for `slimia.exe` and `slimia-hook.exe`. Loopback is not filtered, so a local model (Ollama, LM Studio) still works. |
 | Linux | [run-offline.sh](run-offline.sh) | Starts SlimIA in a systemd scope with `IPAddressDeny=any` and `IPAddressAllow=localhost`. |
 
-**Limit on Windows.** The rules cover `coucou.exe` and `coucou-hook.exe`. The page itself is drawn by
+**Limit on Windows.** The rules cover `slimia.exe` and `slimia-hook.exe`. The page itself is drawn by
 Microsoft's WebView2 runtime, which runs as its own `msedgewebview2.exe`. SlimIA's page asks for nothing
 outside (its content security policy allows no address), but that runtime has its own background
 traffic (component updates) that these rules do not block, and blocking `msedgewebview2.exe` would

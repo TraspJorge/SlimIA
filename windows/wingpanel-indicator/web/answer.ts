@@ -1,5 +1,5 @@
 // The last answer of the agent, in the popup: the same markdown the Chat page draws,
-// in a scrolling box. The indicator (Vala) hands the text over: `coucou.answer("…")`,
+// in a scrolling box. The indicator (Vala) hands the text over: `slimia.answer("…")`,
 // and reads the height it wants from the page's title.
 
 import { renderMarkdown } from "../../src/views/markdown";
@@ -10,7 +10,7 @@ function report() {
   document.title = String(Math.ceil(root.scrollHeight));
 }
 
-(window as unknown as { coucou: { answer(text: string): void } }).coucou = {
+(window as unknown as { slimia: { answer(text: string): void } }).slimia = {
   answer(text: string) {
     root.textContent = "";
     renderMarkdown(root, text);

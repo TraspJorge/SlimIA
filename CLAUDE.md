@@ -9,7 +9,7 @@ em `windows/hook`, o indicador da barra superior (Vala) em `windows/wingpanel-in
 - Nunca sobrescrever `~/.claude/settings.json`: backup datado, mostrar o diff e só escrever com confirmação.
 - Nunca aprovar uma permissão sem um clique explícito (o `--decide` só vale para o pedido pendente da ilha).
 - O Chat só lê `~/.claude/projects`; nunca escreve nem apaga lá.
-- Os nomes internos seguem `coucou` (comando, `~/.config/coucou`, `coucou-hook`) para não quebrar hooks instalados.
+- Os nomes internos são `slimia` (comando, `~/.config/slimia`, `slimia-hook`). Ao renomear de novo, reinstale os hooks do `~/.claude/settings.json`.
 
 ## Testes
 ```

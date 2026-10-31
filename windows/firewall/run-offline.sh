@@ -3,7 +3,7 @@
 # (127.0.0.0/8 and ::1), enforced by the kernel through systemd's cgroup
 # filter. A model server on 127.0.0.1 (Ollama, LM Studio) still works.
 #
-#   ./run-offline.sh /path/to/coucou
+#   ./run-offline.sh /path/to/slimia
 #
 # Needs systemd with cgroup v2 and sudo: the filter is set by the system
 # manager (a user manager cannot load it). The program itself still runs as
@@ -13,7 +13,7 @@
 
 set -eu
 
-program="${1:?usage: run-offline.sh /path/to/coucou}"
+program="${1:?usage: run-offline.sh /path/to/slimia}"
 
 # What a desktop program needs to find your session (display, bus, runtime dir).
 env_args=""

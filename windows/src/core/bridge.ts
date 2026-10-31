@@ -15,7 +15,7 @@ async function call<T>(cmd: string, args?: Record<string, unknown>): Promise<T |
   try {
     return await invoke<T>(cmd, args);
   } catch (err) {
-    console.error(`[coucou] ${cmd} failed`, err);
+    console.error(`[slimia] ${cmd} failed`, err);
     return null;
   }
 }
@@ -110,7 +110,7 @@ export const Bridge = {
 
   openSettingsWindow: (page?: string) => call<void>("open_settings_window", { page: page ?? null }),
 
-  /** Writes to %LOCALAPPDATA%\SlimIA\coucou.log, next to the Rust lines. */
+  /** Writes to %LOCALAPPDATA%\SlimIA\slimia.log, next to the Rust lines. */
   log: (message: string) => call<void>("log_line", { message }),
 
   // ── Claude Code hooks ─────────────────────────────────────────────────────
@@ -235,7 +235,7 @@ export async function emitToWindow(label: string, event: string, payload?: unkno
   try {
     await emitTo(label, event, payload);
   } catch (err) {
-    console.error(`[coucou] emit ${event} failed`, err);
+    console.error(`[slimia] emit ${event} failed`, err);
   }
 }
 

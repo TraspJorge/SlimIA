@@ -3,13 +3,13 @@
 #
 #   .\block-network.ps1                       # add the rules
 #   .\block-network.ps1 -Remove                # take them off again
-#   .\block-network.ps1 -Program "D:\SlimIA\coucou.exe"
+#   .\block-network.ps1 -Program "D:\SlimIA\slimia.exe"
 #
 # Windows Firewall does not filter the loopback interface, so SlimIA can still
 # reach a model server on this PC (Ollama, LM Studio on 127.0.0.1).
 
 param(
-    [string[]]$Program = @("$env:LOCALAPPDATA\SlimIA\coucou.exe", "$env:LOCALAPPDATA\SlimIA\coucou-hook.exe"),
+    [string[]]$Program = @("$env:LOCALAPPDATA\SlimIA\slimia.exe", "$env:LOCALAPPDATA\SlimIA\slimia-hook.exe"),
     [switch]$Remove
 )
 

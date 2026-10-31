@@ -64,7 +64,7 @@ terminal.
   fora, e a página do Mochi na barra roda num WebKit efêmero que só abre o próprio arquivo.
 - **Sem voz:** sem ditado, sem microfone, sem modelo de fala.
 - **Segunda trava, pelo sistema:** [windows/firewall/](windows/firewall/README.md).
-- O indicador da barra só lê um arquivo local (`~/.local/share/coucou/status.json`) e só executa o app com
+- O indicador da barra só lê um arquivo local (`~/.local/share/slimia/status.json`) e só executa o app com
   `--shortcut openChat`, `--spotify <ação>` e `--decide allow|deny <pedido>`.
 
 ## Instalar (Linux, testado no elementary OS 8 / Pantheon)
@@ -75,8 +75,8 @@ Precisa de Rust, Node 20+ e, para o indicador da barra: `meson`, `valac`, `libwi
 ```sh
 cd windows
 npm install
-npx tauri build --no-bundle          # gera windows/target/release/coucou
-GDK_BACKEND=x11 ./target/release/coucou
+npx tauri build --no-bundle          # gera windows/target/release/slimia
+GDK_BACKEND=x11 ./target/release/slimia
 ```
 
 0. Abra o app pelo menu da bandeja (**Abrir SlimIA**) para chegar ao Chat e às **Configurações**.
@@ -87,7 +87,7 @@ GDK_BACKEND=x11 ./target/release/coucou
 
 ```sh
 cd windows/wingpanel-indicator
-./install.sh        # compila, instala em /usr/lib/.../wingpanel e /usr/share/coucou-indicator,
+./install.sh        # compila, instala em /usr/lib/.../wingpanel e /usr/share/slimia-indicator,
                     # pede sua senha pelo diálogo do sistema e reinicia a barra (precisa de Node)
 ./uninstall.sh      # tira o indicador e a página do Mochi
 ```
@@ -102,8 +102,8 @@ nesta versão.
 
 ## Onde ficam os dados
 
-- `~/.config/coucou/settings.json`: suas configurações.
-- `~/.local/share/coucou/status.json`: o estado que o indicador lê (só neste computador).
+- `~/.config/slimia/settings.json`: suas configurações.
+- `~/.local/share/slimia/status.json`: o estado que o indicador lê (só neste computador).
 - `~/.claude/projects/`: as conversas do Claude Code, que o Chat só **lê**.
 - O app só altera o `~/.claude/settings.json` quando você pede, com backup datado e o diff na tela.
 
@@ -113,12 +113,12 @@ nesta versão.
 windows/
   src/                  front-end (TypeScript): ilha e janela (Chat, Geral, Agentes, Integrações)
   src-tauri/            backend (Rust): hooks, canal local, Spotify, status.json
-  hook/                 coucou-hook: o relé que os agentes chamam
+  hook/                 slimia-hook: o relé que os agentes chamam
   wingpanel-indicator/  indicador da barra (Vala + página do Mochi em web/)
   firewall/             scripts para bloquear a rede pelo sistema
 ```
 
-Os nomes internos continuam `coucou` (comando, pasta `~/.config/coucou`, `coucou-hook`) para não quebrar hooks
+Os nomes internos continuam `slimia` (comando, pasta `~/.config/slimia`, `slimia-hook`) para não quebrar hooks
 já instalados nem configurações.
 
 ## Testes

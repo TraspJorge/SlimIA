@@ -6,7 +6,7 @@
 // finished, asleep), dances to Spotify, and the panel is the open island: the pill
 // in front on the left, the others on the right, a click brings one to the front.
 //
-// It does not talk to SlimIA: it reads ~/.local/share/coucou/status.json, which the
+// It does not talk to SlimIA: it reads ~/.local/share/slimia/status.json, which the
 // SlimIA app rewrites on every hook event and every Spotify change
 // (src-tauri/src/status.rs). It opens no connection. The only things it runs are
 // SlimIA's own `--shortcut openChat` and `--spotify playPause|next|previous`.
@@ -150,7 +150,7 @@ namespace SlimIA {
         private const double BPM = 112.0;
 
         // Where the page with the island's own Mochi engine is installed (web/).
-        private const string WEB_DIR = "/usr/share/coucou-indicator/";
+        private const string WEB_DIR = "/usr/share/slimia-indicator/";
 
         private Gtk.EventBox? capsule = null;
         private Gtk.DrawingArea? cap_draw = null;
@@ -200,7 +200,10 @@ namespace SlimIA {
         private double dance_level = 0;
 
         public Indicator () {
-            Object (code_name: "coucou");
+            Object (code_name: "slimia");
+            // The panel is a Wayland client: WebKit's GPU paths can paint its pages black there.
+            Environment.set_variable ("WEBKIT_DISABLE_DMABUF_RENDERER", "1", false);
+            Environment.set_variable ("WEBKIT_DISABLE_COMPOSITING_MODE", "1", false);
             visible = true;
             t0 = now_s ();
         }
@@ -210,7 +213,7 @@ namespace SlimIA {
         }
 
         private static string status_path () {
-            return Path.build_filename (Environment.get_user_data_dir (), "coucou", "status.json");
+            return Path.build_filename (Environment.get_user_data_dir (), "slimia", "status.json");
         }
 
         // ── Wingpanel ────────────────────────────────────────────────────────
@@ -234,20 +237,20 @@ namespace SlimIA {
                 capsule.add_events (Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK
                     | Gdk.EventMask.POINTER_MOTION_MASK | Gdk.EventMask.SCROLL_MASK
                     | Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.SMOOTH_SCROLL_MASK);
-                capsule.enter_notify_event.connect (() => { hover_to = 1; hover_since = now_s (); js (cap_view, "coucou.hover(true)"); ensure_tick (); return false; });
-                capsule.leave_notify_event.connect (() => { hover_to = 0; hover_since = 0; look_x = 0; js (cap_view, "coucou.hover(false)"); ensure_tick (); return false; });
+                capsule.enter_notify_event.connect (() => { hover_to = 1; hover_since = now_s (); js (cap_view, "slimia.hover(true)"); ensure_tick (); return false; });
+                capsule.leave_notify_event.connect (() => { hover_to = 0; hover_since = 0; look_x = 0; js (cap_view, "slimia.hover(false)"); ensure_tick (); return false; });
                 capsule.motion_notify_event.connect ((ev) => {
                     double half = capsule.get_allocated_width () / 2.0;
                     look_x = double.max (-1.0, double.min (1.0, (ev.x - half) / half));
                     double vy = (ev.y - capsule.get_allocated_height () / 2.0) / 40.0;
-                    js (cap_view, "coucou.look(%.3f,%.3f)".printf (look_x * 0.6, vy));
+                    js (cap_view, "slimia.look(%.3f,%.3f)".printf (look_x * 0.6, vy));
                     return false;
                 });
                 capsule.button_press_event.connect ((ev) => {
                     pop_at = now_s ();
-                    js (cap_view, "coucou.click()");
+                    js (cap_view, "slimia.click()");
                     // The click is the "seen" of whatever was blinking.
-                    run_coucou ({ "--ack" });
+                    run_slimia ({ "--ack" });
                     ensure_tick ();
                     if (ev.button == 2 && music_playing ()) {
                         // Middle click: play/pause without opening anything.
@@ -274,7 +277,7 @@ namespace SlimIA {
             if (panel == null) {
                 install_style ();
                 panel = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-                panel.get_style_context ().add_class ("coucou-island");
+                panel.get_style_context ().add_class ("slimia-island");
                 update_panel ();
                 reveal = new Gtk.Revealer ();
                 reveal.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
@@ -295,7 +298,7 @@ namespace SlimIA {
             Idle.add (() => { reveal.reveal_child = true; return false; });
             var top = panel.get_toplevel ();
             if (top != null) {
-                top.get_style_context ().add_class ("coucou-pop");
+                top.get_style_context ().add_class ("slimia-pop");
             }
         }
 
@@ -476,8 +479,8 @@ namespace SlimIA {
                 return;
             }
             last_scene = scene;
-            js (cap_view, "coucou.set(" + scene + ")");
-            js (big_view, "coucou.set(" + scene + ")");
+            js (cap_view, "slimia.set(" + scene + ")");
+            js (big_view, "slimia.set(" + scene + ")");
         }
 
         // The last answer goes to its page as a JSON string; the page draws the markdown.
@@ -490,7 +493,7 @@ namespace SlimIA {
             var gen = new Json.Generator ();
             gen.root = node;
             answer_sent = answer_body;
-            js (answer_view, "coucou.answer(" + gen.to_data (null) + ")");
+            js (answer_view, "slimia.answer(" + gen.to_data (null) + ")");
         }
 
         private void redraw () {
@@ -500,7 +503,7 @@ namespace SlimIA {
 
         // ── Commands to SlimIA ───────────────────────────────────────────────
 
-        private void run_coucou (string[] args) {
+        private void run_slimia (string[] args) {
             if (exe == "") {
                 return;
             }
@@ -513,7 +516,7 @@ namespace SlimIA {
                     SpawnFlags.SEARCH_PATH | SpawnFlags.STDOUT_TO_DEV_NULL | SpawnFlags.STDERR_TO_DEV_NULL,
                     null, null);
             } catch (Error e) {
-                warning ("coucou: could not run: %s", e.message);
+                warning ("slimia: could not run: %s", e.message);
             }
         }
 
@@ -525,18 +528,18 @@ namespace SlimIA {
                 }
             }
             pop_at = now_s ();
-            run_coucou ({ "--decide", decision, request });
+            run_slimia ({ "--decide", decision, request });
             close ();
         }
 
         private void open_chat () {
             close ();
             // A second launch only brings the running SlimIA forward (single instance).
-            run_coucou ({ "--shortcut", "openChat" });
+            run_slimia ({ "--shortcut", "openChat" });
         }
 
         private void player (string action) {
-            run_coucou ({ "--spotify", action });
+            run_slimia ({ "--spotify", action });
         }
 
         // ── Reading the status file ──────────────────────────────────────────
@@ -1254,44 +1257,44 @@ namespace SlimIA {
             var css = new Gtk.CssProvider ();
             try {
                 css.load_from_data ("""
-                    .coucou-pop, .coucou-pop decoration { background: transparent; box-shadow: none;
+                    .slimia-pop, .slimia-pop decoration { background: transparent; box-shadow: none;
                                                           border: none; }
-                    .coucou-island { background: #000000; border-radius: 0 0 26px 26px; padding: 12px; }
-                    .coucou-card { background-image: linear-gradient(to bottom, #16181d, #0b0c0f);
+                    .slimia-island { background: #000000; border-radius: 0 0 26px 26px; padding: 12px; }
+                    .slimia-card { background-image: linear-gradient(to bottom, #16181d, #0b0c0f);
                                    border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; padding: 14px; }
-                    .coucou-title { color: #ffffff; font-weight: 700; font-size: 13px; }
-                    .coucou-kind { color: rgba(255,255,255,0.5); font-size: 12px; }
-                    .coucou-sub { color: rgba(255,255,255,0.62); font-size: 12px; }
-                    .coucou-stepnow { color: #ffffff; font-size: 12.5px; font-weight: 600; }
-                    .coucou-step { color: #e8e9ec; font-family: monospace; font-size: 11.5px;
+                    .slimia-title { color: #ffffff; font-weight: 700; font-size: 13px; }
+                    .slimia-kind { color: rgba(255,255,255,0.5); font-size: 12px; }
+                    .slimia-sub { color: rgba(255,255,255,0.62); font-size: 12px; }
+                    .slimia-stepnow { color: #ffffff; font-size: 12.5px; font-weight: 600; }
+                    .slimia-step { color: #e8e9ec; font-family: monospace; font-size: 11.5px;
                                    background: rgba(255,255,255,0.08); border-radius: 9px; padding: 6px 10px; }
-                    .coucou-answer { color: rgba(255,255,255,0.78); font-size: 12px; }
-                    .coucou-link { color: #e8e9ec; font-weight: 700; font-size: 12px; background: none;
+                    .slimia-answer { color: rgba(255,255,255,0.78); font-size: 12px; }
+                    .slimia-link { color: #e8e9ec; font-weight: 700; font-size: 12px; background: none;
                                    border: none; box-shadow: none; padding: 2px 0; min-height: 0; }
-                    .coucou-link:hover { color: #ffffff; text-decoration: underline; }
-                    .coucou-cell { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+                    .slimia-link:hover { color: #ffffff; text-decoration: underline; }
+                    .slimia-cell { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
                                    border-radius: 13px; padding: 6px 10px; box-shadow: none; }
-                    .coucou-cell:hover { background: rgba(255,255,255,0.11); border-color: rgba(255,255,255,0.22); }
-                    .coucou-cell label { color: rgba(255,255,255,0.82); font-size: 12px; }
-                    .coucou-dim { color: rgba(255,255,255,0.4); font-size: 11px; }
-                    .coucou-ctl { color: #ffffff; background: none; border: none; box-shadow: none;
+                    .slimia-cell:hover { background: rgba(255,255,255,0.11); border-color: rgba(255,255,255,0.22); }
+                    .slimia-cell label { color: rgba(255,255,255,0.82); font-size: 12px; }
+                    .slimia-dim { color: rgba(255,255,255,0.4); font-size: 11px; }
+                    .slimia-ctl { color: #ffffff; background: none; border: none; box-shadow: none;
                                   padding: 4px 8px; min-height: 0; min-width: 0; border-radius: 14px; }
-                    .coucou-ctl:hover { background: rgba(255,255,255,0.14); }
-                    .coucou-play { color: #000000; background: #ffffff; border: none; box-shadow: none;
+                    .slimia-ctl:hover { background: rgba(255,255,255,0.14); }
+                    .slimia-play { color: #000000; background: #ffffff; border: none; box-shadow: none;
                                    border-radius: 16px; padding: 5px 10px; min-height: 0; min-width: 0; }
-                    .coucou-play:hover { background: #dddddd; }
-                    .coucou-allow { color: #04210f; background: #34d399; border: none; box-shadow: none;
+                    .slimia-play:hover { background: #dddddd; }
+                    .slimia-allow { color: #04210f; background: #34d399; border: none; box-shadow: none;
                                     border-radius: 14px; padding: 6px 12px; font-weight: 700; min-height: 0; }
-                    .coucou-allow:hover { background: #6ee7b7; }
-                    .coucou-deny { color: #ffffff; background: rgba(255,255,255,0.12); border: none; box-shadow: none;
+                    .slimia-allow:hover { background: #6ee7b7; }
+                    .slimia-deny { color: #ffffff; background: rgba(255,255,255,0.12); border: none; box-shadow: none;
                                    border-radius: 14px; padding: 6px 12px; font-weight: 700; min-height: 0; }
-                    .coucou-deny:hover { background: rgba(255,90,90,0.55); }
-                    .coucou-time { color: rgba(255,255,255,0.5); font-size: 10.5px; }
+                    .slimia-deny:hover { background: rgba(255,90,90,0.55); }
+                    .slimia-time { color: rgba(255,255,255,0.5); font-size: 10.5px; }
                 """);
                 Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css,
                     Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             } catch (Error e) {
-                warning ("coucou: style: %s", e.message);
+                warning ("slimia: style: %s", e.message);
             }
         }
 
@@ -1313,7 +1316,7 @@ namespace SlimIA {
         private Gtk.Button link (string text) {
             var b = new Gtk.Button.with_label (text);
             b.relief = Gtk.ReliefStyle.NONE;
-            b.get_style_context ().add_class ("coucou-link");
+            b.get_style_context ().add_class ("slimia-link");
             b.clicked.connect (open_chat);
             return b;
         }
@@ -1339,8 +1342,8 @@ namespace SlimIA {
                 return true;
             });
             row.pack_start (dot, false, false, 0);
-            row.pack_start (label (title, "coucou-title"), false, false, 0);
-            row.pack_start (label (kind, "coucou-kind"), false, false, 0);
+            row.pack_start (label (title, "slimia-title"), false, false, 0);
+            row.pack_start (label (kind, "slimia-kind"), false, false, 0);
             return row;
         }
 
@@ -1348,7 +1351,7 @@ namespace SlimIA {
         private Gtk.Widget cell (Pill p) {
             var button = new Gtk.Button ();
             button.relief = Gtk.ReliefStyle.NONE;
-            button.get_style_context ().add_class ("coucou-cell");
+            button.get_style_context ().add_class ("slimia-cell");
             var row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 8);
             var mini = new Gtk.DrawingArea ();
             mini.set_size_request (24, 21);
@@ -1436,7 +1439,7 @@ namespace SlimIA {
 
             var f = front ();
             var main = new Gtk.Box (Gtk.Orientation.VERTICAL, 10);
-            main.get_style_context ().add_class ("coucou-card");
+            main.get_style_context ().add_class ("slimia-card");
             main.set_size_request (360, -1);
 
             var top_row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 14);
@@ -1450,14 +1453,14 @@ namespace SlimIA {
                     big_box.add (big_view);
                     big_box.add_events (Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK
                         | Gdk.EventMask.POINTER_MOTION_MASK | Gdk.EventMask.BUTTON_PRESS_MASK);
-                    big_box.enter_notify_event.connect (() => { js (big_view, "coucou.hover(true)"); return false; });
-                    big_box.leave_notify_event.connect (() => { js (big_view, "coucou.hover(false)"); return false; });
+                    big_box.enter_notify_event.connect (() => { js (big_view, "slimia.hover(true)"); return false; });
+                    big_box.leave_notify_event.connect (() => { js (big_view, "slimia.hover(false)"); return false; });
                     big_box.motion_notify_event.connect ((ev) => {
-                        js (big_view, "coucou.look(%.3f,%.3f)".printf ((ev.x - 42) / 42.0, (ev.y - 38) / 38.0));
+                        js (big_view, "slimia.look(%.3f,%.3f)".printf ((ev.x - 42) / 42.0, (ev.y - 38) / 38.0));
                         return false;
                     });
                     big_box.button_press_event.connect (() => {
-                        js (big_view, "coucou.click()");
+                        js (big_view, "slimia.click()");
                         return true;
                     });
                     big_box.show_all ();
@@ -1499,7 +1502,7 @@ namespace SlimIA {
                 add_player (main);
             } else {
                 if (f != null && f.mood.alerts () && !(f.mood == Mood.APPROVAL && f.request != "")) {
-                    main.pack_start (label (tr ("Answer in the terminal.", "Responda no terminal."), "coucou-dim"), false, false, 0);
+                    main.pack_start (label (tr ("Answer in the terminal.", "Responda no terminal."), "slimia-dim"), false, false, 0);
                 }
                 add_answer (main, f);
             }
@@ -1511,7 +1514,7 @@ namespace SlimIA {
             var rest = others (f);
             if (rest.length () > 0) {
                 var side = new Gtk.Box (Gtk.Orientation.VERTICAL, 8);
-                side.get_style_context ().add_class ("coucou-card");
+                side.get_style_context ().add_class ("slimia-card");
                 side.set_size_request (190, -1);
                 uint n = uint.min (rest.length (), 6);
                 for (uint i = 0; i < n; i++) {
@@ -1542,7 +1545,7 @@ namespace SlimIA {
                 uint count = f.steps.get_length ();
                 for (uint i = 0; i < count; i++) {
                     bool newest = i == count - 1;
-                    var line = label ((newest ? "› " : "") + f.steps.get_string_element (i), newest ? "coucou-stepnow" : "coucou-sub");
+                    var line = label ((newest ? "› " : "") + f.steps.get_string_element (i), newest ? "slimia-stepnow" : "slimia-sub");
                     line.set_tooltip_text (f.steps.get_string_element (i));
                     info.pack_start (line, false, false, 0);
                     any = true;
@@ -1551,17 +1554,17 @@ namespace SlimIA {
             string newest_step = (f != null && f.steps != null && f.steps.get_length () > 0)
                 ? f.steps.get_string_element (f.steps.get_length () - 1) : "";
             if (f != null && f.mood.alerts () && f.detail != "" && f.detail != newest_step) {
-                info.pack_start (label (f.detail, "coucou-step"), false, false, 0);
+                info.pack_start (label (f.detail, "slimia-step"), false, false, 0);
             } else if (!any || mood == Mood.OFF || mood == Mood.SLEEPING || mood == Mood.IDLE || mood == Mood.FINISHED) {
-                info.pack_start (label (mood_text (mood), "coucou-sub"), false, false, 0);
+                info.pack_start (label (mood_text (mood), "slimia-sub"), false, false, 0);
             }
             if (f != null && f.mood == Mood.APPROVAL && f.request != "") {
                 var ask = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 8);
                 ask.margin_top = 4;
                 var deny = new Gtk.Button.with_label (tr ("Deny", "Negar"));
-                deny.get_style_context ().add_class ("coucou-deny");
+                deny.get_style_context ().add_class ("slimia-deny");
                 var allow = new Gtk.Button.with_label (tr ("Allow", "Permitir"));
-                allow.get_style_context ().add_class ("coucou-allow");
+                allow.get_style_context ().add_class ("slimia-allow");
                 string req = f.request;
                 deny.clicked.connect (() => decide ("deny", req));
                 allow.clicked.connect (() => decide ("allow", req));
@@ -1583,7 +1586,7 @@ namespace SlimIA {
             var when = clock (answer_at);
             main.pack_start (label (tr ("Last answer", "Última resposta")
                 + (answer_project != "" ? " · " + answer_project : "")
-                + (when != "" ? " · " + when : ""), "coucou-dim"), false, false, 0);
+                + (when != "" ? " · " + when : ""), "slimia-dim"), false, false, 0);
             if (answer_view == null) {
                 answer_view = make_view ("answer.html", "", 330, 40);
                 if (answer_view != null) {
@@ -1600,7 +1603,7 @@ namespace SlimIA {
                 push_answer ();
                 return;
             }
-            var answer = label (answer_body, "coucou-answer", true);
+            var answer = label (answer_body, "slimia-answer", true);
             answer.lines = 7;
             answer.ellipsize = Pango.EllipsizeMode.END;
             answer.selectable = true;
@@ -1611,13 +1614,13 @@ namespace SlimIA {
         private void build_music_card (Gtk.Box info, Pill f) {
             info.pack_start (dot_title ("Spotify", music_playing () ? tr ("playing", "tocando") : tr ("paused", "pausado"),
                 0.114, 0.725, 0.329), false, false, 0);
-            info.pack_start (label (f.label, "coucou-stepnow"), false, false, 0);
-            info.pack_start (label (f.detail != "" ? f.detail : tr ("Nothing playing", "Nada tocando"), "coucou-sub"), false, false, 0);
+            info.pack_start (label (f.label, "slimia-stepnow"), false, false, 0);
+            info.pack_start (label (f.detail != "" ? f.detail : tr ("Nothing playing", "Nada tocando"), "slimia-sub"), false, false, 0);
             var controls = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6);
-            controls.pack_start (icon_button ("media-skip-backward-symbolic", "coucou-ctl", "previous"), false, false, 0);
+            controls.pack_start (icon_button ("media-skip-backward-symbolic", "slimia-ctl", "previous"), false, false, 0);
             controls.pack_start (icon_button (music_playing () ? "media-playback-pause-symbolic" : "media-playback-start-symbolic",
-                "coucou-play", "playPause"), false, false, 0);
-            controls.pack_start (icon_button ("media-skip-forward-symbolic", "coucou-ctl", "next"), false, false, 0);
+                "slimia-play", "playPause"), false, false, 0);
+            controls.pack_start (icon_button ("media-skip-forward-symbolic", "slimia-ctl", "next"), false, false, 0);
             info.pack_start (controls, false, false, 0);
         }
 
@@ -1641,8 +1644,8 @@ namespace SlimIA {
             });
             main.pack_start (progress_bar, false, false, 0);
             var times = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 0);
-            time_now = label (stamp (music_position ()), "coucou-time");
-            time_total = label (stamp (duration), "coucou-time");
+            time_now = label (stamp (music_position ()), "slimia-time");
+            time_total = label (stamp (duration), "slimia-time");
             time_total.xalign = 1;
             times.pack_start (time_now, true, true, 0);
             times.pack_start (time_total, false, false, 0);

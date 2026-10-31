@@ -90,7 +90,7 @@ fn save_settings(app: AppHandle, shared: State<Shared>, settings: Settings) {
         let manager = app.autolaunch();
         let result = if settings.autostart { manager.enable() } else { manager.disable() };
         if let Err(err) = result {
-            eprintln!("[coucou] autostart: {err}");
+            eprintln!("[slimia] autostart: {err}");
         }
     }
     if screen_changed {
@@ -606,9 +606,9 @@ pub fn run() {
 
     let mut builder = tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, argv, _cwd| {
-            // `coucou --shortcut <action>`: what a desktop's own keyboard
+            // `slimia --shortcut <action>`: what a desktop's own keyboard
             // settings run where we can't listen for keys ourselves (Wayland).
-            // `coucou --spotify playPause|next|previous`: the top bar's indicator.
+            // `slimia --spotify playPause|next|previous`: the top bar's indicator.
             if let Some(action) = spotify_action(&argv) {
                 let app = app.clone();
                 tauri::async_runtime::spawn(async move {
@@ -761,25 +761,25 @@ mod tests {
     #[test]
     fn the_command_line_can_press_only_a_players_three_buttons() {
         let args = |a: &[&str]| a.iter().map(|s| s.to_string()).collect::<Vec<_>>();
-        assert_eq!(spotify_action(&args(&["coucou", "--spotify", "playPause"])), Some("playPause"));
-        assert_eq!(spotify_action(&args(&["coucou", "--spotify", "next"])), Some("next"));
-        assert_eq!(spotify_action(&args(&["coucou", "--spotify", "previous"])), Some("previous"));
+        assert_eq!(spotify_action(&args(&["slimia", "--spotify", "playPause"])), Some("playPause"));
+        assert_eq!(spotify_action(&args(&["slimia", "--spotify", "next"])), Some("next"));
+        assert_eq!(spotify_action(&args(&["slimia", "--spotify", "previous"])), Some("previous"));
         // Nothing else: no seek, no volume, no free text.
         for bad in ["seek", "volume", "shuffle", "", "playpause", "next; rm -rf"] {
-            assert_eq!(spotify_action(&args(&["coucou", "--spotify", bad])), None, "{bad}");
+            assert_eq!(spotify_action(&args(&["slimia", "--spotify", bad])), None, "{bad}");
         }
-        assert_eq!(spotify_action(&args(&["coucou", "--spotify"])), None);
-        assert_eq!(bar_decision(&args(&["coucou", "--decide", "allow", "123-4"])), Some(("allow", "123-4".into())));
-        assert_eq!(bar_decision(&args(&["coucou", "--decide", "deny", "9-1"])), Some(("deny", "9-1".into())));
+        assert_eq!(spotify_action(&args(&["slimia", "--spotify"])), None);
+        assert_eq!(bar_decision(&args(&["slimia", "--decide", "allow", "123-4"])), Some(("allow", "123-4".into())));
+        assert_eq!(bar_decision(&args(&["slimia", "--decide", "deny", "9-1"])), Some(("deny", "9-1".into())));
         for bad in [&["--decide", "always", "1-1"][..], &["--decide", "allow"], &["--decide", "allow", "x;rm"], &["--decide", "allow", ""]] {
             assert_eq!(bar_decision(&args(bad)), None, "{bad:?}");
         }
-        assert_eq!(spotify_action(&args(&["coucou", "--shortcut", "openChat"])), None);
+        assert_eq!(spotify_action(&args(&["slimia", "--shortcut", "openChat"])), None);
     }
 
     #[test]
     fn only_an_existing_file_by_its_full_path_reaches_the_editor() {
-        let dir = std::env::temp_dir().join(format!("coucou-diff-file-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("slimia-diff-file-{}", std::process::id()));
         std::fs::create_dir_all(&dir).unwrap();
         let file = dir.join("edited.ts");
         std::fs::write(&file, "x").unwrap();

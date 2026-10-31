@@ -370,7 +370,7 @@ mod tests {
 
     #[test]
     fn the_last_answer_is_the_last_thing_claude_said() {
-        let dir = std::env::temp_dir().join(format!("coucou-last-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("slimia-last-{}", std::process::id()));
         std::fs::create_dir_all(&dir).unwrap();
         let file = dir.join("s.jsonl");
         std::fs::write(&file, concat!(
@@ -397,7 +397,7 @@ mod tests {
 
     #[test]
     fn only_the_end_of_a_long_file_is_read_and_a_cut_line_is_dropped() {
-        let dir = std::env::temp_dir().join(format!("coucou-returns-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("slimia-returns-{}", std::process::id()));
         std::fs::create_dir_all(&dir).unwrap();
         let file = dir.join("s.jsonl");
         let mut body = String::new();

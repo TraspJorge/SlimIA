@@ -10,5 +10,5 @@ A descrição, a instalação e as garantias de ser local estão no [README da r
 npm install
 npx tsc --noEmit && npm test       # TypeScript
 cargo test --workspace             # Rust
-npx tauri build --no-bundle        # ./target/release/coucou
+npx tauri build --no-bundle        # ./target/release/slimia
 ```

@@ -1,14 +1,14 @@
-# Coucou in the top bar (elementary OS / Wingpanel)
+# SlimIA in the top bar (elementary OS / Wingpanel)
 
 A small Mochi in the panel that changes colour with what the agents are doing
-(grey: Coucou is closed · white: nothing running · blue: working · orange: waiting
+(grey: SlimIA is closed · white: nothing running · blue: working · orange: waiting
 for you · green: finished · red: something went wrong), and a panel with the
 sessions and Claude's last answer.
 
-It does not talk to Coucou and opens no connection: it reads
-`~/.local/share/coucou/status.json`, which the Coucou app rewrites on every hook
-event (`src-tauri/src/status.rs`). The only thing it runs is Coucou's own
-`--shortcut openChat` when you press **Open Coucou**.
+It does not talk to SlimIA and opens no connection: it reads
+`~/.local/share/slimia/status.json`, which the SlimIA app rewrites on every hook
+event (`src-tauri/src/status.rs`). The only thing it runs is SlimIA's own
+`--shortcut openChat` when you press **Open SlimIA**.
 
 ```
 ./install.sh      # builds it, installs it in the panel (password dialog), restarts the panel

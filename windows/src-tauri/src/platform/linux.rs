@@ -23,7 +23,7 @@ use tauri::{AppHandle, WebviewWindow};
 use super::{home_dir, LocalTime};
 
 /// File name of the Claude Code relay.
-pub const HOOK_EXE: &str = "coucou-hook";
+pub const HOOK_EXE: &str = "slimia-hook";
 
 /// Environment variable holding the home directory.
 pub const HOME_VAR: &str = "HOME";
@@ -39,16 +39,16 @@ fn xdg(var: &str, fallback: &str) -> PathBuf {
         .unwrap_or_else(|| home_dir().join(fallback))
 }
 
-/// ~/.config/coucou — preferences.
+/// ~/.config/slimia — preferences.
 pub fn config_dir() -> PathBuf {
-    xdg("XDG_CONFIG_HOME", ".config").join("coucou")
+    xdg("XDG_CONFIG_HOME", ".config").join("slimia")
 }
 
-/// ~/.local/share/coucou — where coucou-hook, the inbox and the log live. The
+/// ~/.local/share/slimia — where slimia-hook, the inbox and the log live. The
 /// relay has to sit at a stable path: an AppImage is mounted somewhere new on
 /// every launch.
 pub fn local_dir() -> PathBuf {
-    xdg("XDG_DATA_HOME", ".local/share").join("coucou")
+    xdg("XDG_DATA_HOME", ".local/share").join("slimia")
 }
 
 /// Where a saved image goes, best first: the XDG pictures folder named in
@@ -97,7 +97,7 @@ pub fn prepare_environment() {
     if std::env::var_os("APPIMAGE").is_none() || std::env::var_os("GST_REGISTRY").is_some() {
         return;
     }
-    let cache = xdg("XDG_CACHE_HOME", ".cache").join("coucou");
+    let cache = xdg("XDG_CACHE_HOME", ".cache").join("slimia");
     if std::fs::create_dir_all(&cache).is_ok() {
         std::env::set_var("GST_REGISTRY", cache.join("gstreamer-registry.bin"));
     }
@@ -107,13 +107,13 @@ pub fn prepare_environment() {
 /// to go, so the island lands in the middle of the screen. Through XWayland it
 /// can be placed, and a Dock window survives "show desktop" (Super+D).
 /// An inherited GDK_BACKEND=wayland is overridden too: editors and terminals
-/// pass theirs down to every child. COUCOU_X11=0 keeps the Wayland window.
+/// pass theirs down to every child. SLIMIA_X11=0 keeps the Wayland window.
 fn prefer_x11_on_gnome() {
     let env = |k: &str| std::env::var(k).unwrap_or_default();
     if should_prefer_x11(
         &env("XDG_SESSION_TYPE"),
         &env("XDG_CURRENT_DESKTOP"),
-        &env("COUCOU_X11"),
+        &env("SLIMIA_X11"),
         &env("DISPLAY"),
     ) {
         std::env::set_var("GDK_BACKEND", "x11");
@@ -200,8 +200,8 @@ fn is_private_dir(dir: &Path) -> bool {
         .unwrap_or(false)
 }
 
-/// Where coucou-hook finds us: `$XDG_RUNTIME_DIR/coucou.sock`, or
-/// `/run/user/<uid>/coucou.sock` when the variable is missing. A directory
+/// Where slimia-hook finds us: `$XDG_RUNTIME_DIR/slimia.sock`, or
+/// `/run/user/<uid>/slimia.sock` when the variable is missing. A directory
 /// that is not ours and private means no relay at all — never a fallback to a
 /// shared place like /tmp. Must match `socket_path()` in hook/src/unix.rs
 /// exactly.
@@ -210,7 +210,7 @@ pub fn relay_socket_path() -> Option<PathBuf> {
         .map(PathBuf::from)
         .filter(|p| p.is_absolute())
         .unwrap_or_else(|| PathBuf::from(format!("/run/user/{}", unsafe { libc::getuid() })));
-    is_private_dir(&dir).then(|| dir.join("coucou.sock"))
+    is_private_dir(&dir).then(|| dir.join("slimia.sock"))
 }
 
 // ── Who we are ────────────────────────────────────────────────────────────────
@@ -295,9 +295,9 @@ mod layer {
     }
 }
 
-/// COUCOU_LAYER_SHELL=0 is the way out on a compositor where it misbehaves.
+/// SLIMIA_LAYER_SHELL=0 is the way out on a compositor where it misbehaves.
 fn layer_shell_wanted() -> bool {
-    std::env::var("COUCOU_LAYER_SHELL").map(|v| v != "0").unwrap_or(true)
+    std::env::var("SLIMIA_LAYER_SHELL").map(|v| v != "0").unwrap_or(true)
 }
 
 /// True once the island window is a layer-shell surface.
@@ -321,7 +321,7 @@ pub fn unblock_webview_drops(_app: &AppHandle) {}
 /// the keyboard. Must run before the window is first shown: a layer surface
 /// cannot be made out of a window the compositor already knows.
 ///
-/// Without layer-shell (GNOME, X11, or COUCOU_LAYER_SHELL=0) the window stays
+/// Without layer-shell (GNOME, X11, or SLIMIA_LAYER_SHELL=0) the window stays
 /// an ordinary always-on-top window that refuses focus; where it lands is then
 /// up to the window manager.
 pub fn make_non_activating(win: &WebviewWindow) {
@@ -334,7 +334,7 @@ pub fn make_non_activating(win: &WebviewWindow) {
     let supported = unsafe { layer::gtk_layer_is_supported() } != 0;
     if !wanted || !supported || gw.is_realized() {
         let why = if !wanted {
-            "COUCOU_LAYER_SHELL=0"
+            "SLIMIA_LAYER_SHELL=0"
         } else if supported {
             "window already shown"
         } else {
@@ -345,8 +345,8 @@ pub fn make_non_activating(win: &WebviewWindow) {
         if !gw.is_realized() {
             // On X11 a Dock is kept above everything and is the only kind of
             // window, besides the desktop, that "show desktop" leaves alone.
-            // COUCOU_DOCK=0 falls back to a utility window.
-            let dock = std::env::var("COUCOU_DOCK").map(|v| v != "0").unwrap_or(true);
+            // SLIMIA_DOCK=0 falls back to a utility window.
+            let dock = std::env::var("SLIMIA_DOCK").map(|v| v != "0").unwrap_or(true);
             gw.set_type_hint(if dock {
                 gtk::gdk::WindowTypeHint::Dock
             } else {
@@ -365,7 +365,7 @@ pub fn make_non_activating(win: &WebviewWindow) {
     let ptr = gtk_window_ptr(&gw);
     unsafe {
         layer::gtk_layer_init_for_window(ptr);
-        layer::gtk_layer_set_namespace(ptr, c"coucou".as_ptr());
+        layer::gtk_layer_set_namespace(ptr, c"slimia".as_ptr());
         layer::gtk_layer_set_layer(ptr, layer::LAYER_OVERLAY);
         // Top edge only: the compositor centres the surface horizontally.
         layer::gtk_layer_set_anchor(ptr, layer::EDGE_TOP, 1);
@@ -399,12 +399,12 @@ pub fn make_non_activating(win: &WebviewWindow) {
 /// own panel, and the panel can end up on top: the island then hides behind the
 /// top bar. An override-redirect window is not managed by the window manager and
 /// is drawn above everything, panels included, like a menu. It has to be made
-/// before the window is first mapped. Off unless COUCOU_OVERLAY=1: under Gala
+/// before the window is first mapped. Off unless SLIMIA_OVERLAY=1: under Gala
 /// (elementary) such a window is not drawn at all.
 fn raise_above_panels(gw: &gtk::ApplicationWindow) {
     use gtk::glib::prelude::ObjectExt;
     let x11 = gtk::gdk::Display::default().is_some_and(|d| d.type_().name().contains("X11"));
-    let wanted = std::env::var("COUCOU_OVERLAY").is_ok_and(|v| v == "1");
+    let wanted = std::env::var("SLIMIA_OVERLAY").is_ok_and(|v| v == "1");
     if !x11 || !wanted || gw.is_mapped() {
         return;
     }
@@ -554,7 +554,7 @@ fn apply_input_region(gw: &impl IsA<gtk::Widget>, rect: Region) {
 /// grab made through XWayland only sees keys typed into other X11 windows, so
 /// it would look registered and never fire. On Wayland the shortcuts go to the
 /// desktop through the XDG GlobalShortcuts portal instead (portal.rs), and
-/// where there is none Settings explains how to bind `coucou --shortcut <id>`
+/// where there is none Settings explains how to bind `slimia --shortcut <id>`
 /// in the desktop's own keyboard settings.
 pub fn global_shortcuts_blocked() -> Option<&'static str> {
     let set = |var: &str| std::env::var_os(var).is_some_and(|v| !v.is_empty());
@@ -620,7 +620,7 @@ pub fn prepare_desktop_window(win: &WebviewWindow, mode: super::DesktopMode) -> 
             let ptr = gtk_window_ptr(&gw);
             unsafe {
                 layer::gtk_layer_init_for_window(ptr);
-                layer::gtk_layer_set_namespace(ptr, c"coucou-mochi".as_ptr());
+                layer::gtk_layer_set_namespace(ptr, c"slimia-mochi".as_ptr());
                 // Above windows, below fullscreen video — like a floating panel.
                 layer::gtk_layer_set_layer(ptr, layer::LAYER_TOP);
                 layer::gtk_layer_set_anchor(ptr, layer::EDGE_TOP, 1);
@@ -749,7 +749,7 @@ mod tests {
 
     #[test]
     fn only_a_private_directory_of_ours_can_hold_the_relay_socket() {
-        let base = std::env::temp_dir().join(format!("coucou-rt-{}", std::process::id()));
+        let base = std::env::temp_dir().join(format!("slimia-rt-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&base);
         let dir = base.join("runtime");
         std::fs::create_dir_all(&dir).unwrap();
@@ -800,7 +800,7 @@ mod tests {
     #[test]
     fn private_dirs_are_closed_to_everyone_else() {
         use std::os::unix::fs::MetadataExt;
-        let dir = std::env::temp_dir().join(format!("coucou-priv-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("slimia-priv-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
         std::fs::create_dir_all(&dir).unwrap();
         std::fs::set_permissions(&dir, std::fs::Permissions::from_mode(0o755)).unwrap();

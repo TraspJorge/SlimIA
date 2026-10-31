@@ -18,7 +18,7 @@ use crate::config_file::{self, FileEdit, Plan};
 use crate::{platform, settings};
 
 /// Marker that identifies a SlimIA entry: the relay's file name.
-const MARKER: &str = "coucou-hook";
+const MARKER: &str = "slimia-hook";
 
 // ── The relay command line ────────────────────────────────────────────────────
 
@@ -142,13 +142,13 @@ impl Agent {
             Agent::Antigravity => vec![home.join(".gemini").join("config").join("hooks.json")],
             Agent::Cursor => vec![home.join(".cursor").join("hooks.json")],
             Agent::Codex => vec![home.join(".codex").join("hooks.json")],
-            Agent::Copilot => vec![home.join(".copilot").join("hooks").join("coucou.json")],
+            Agent::Copilot => vec![home.join(".copilot").join("hooks").join("slimia.json")],
             Agent::Muse => vec![home.join(".config").join("muse").join("settings.json")],
             // OpenCode and Amp read ~/.config on Windows too.
-            Agent::OpenCode => vec![home.join(".config").join("opencode").join("plugins").join("coucou.js")],
-            Agent::Amp => vec![home.join(".config").join("amp").join("plugins").join("coucou.ts")],
+            Agent::OpenCode => vec![home.join(".config").join("opencode").join("plugins").join("slimia.js")],
+            Agent::Amp => vec![home.join(".config").join("amp").join("plugins").join("slimia.ts")],
             Agent::Hermes => {
-                let dir = home.join(".hermes").join("plugins").join("coucou");
+                let dir = home.join(".hermes").join("plugins").join("slimia");
                 vec![dir.join("__init__.py"), dir.join("plugin.yaml")]
             }
         }
@@ -252,7 +252,7 @@ impl Agent {
         };
         match self {
             Agent::Gemini => groups_have_ours(&json(), "gemini"),
-            Agent::Antigravity => json().get("coucou").is_some_and(antigravity_is_ours),
+            Agent::Antigravity => json().get("slimia").is_some_and(antigravity_is_ours),
             Agent::Cursor => groups_have_ours(&json(), "cursor"),
             Agent::Codex => groups_have_ours(&json(), "codex"),
             Agent::Copilot => json()
@@ -302,7 +302,7 @@ impl Agent {
             Agent::Muse => t("Start a new Muse Code session to pick the hooks up."),
             Agent::OpenCode => t("Restart OpenCode to load the plugin."),
             Agent::Amp => t("Restart Amp to load the plugin."),
-            Agent::Hermes => t("Turn it on once with `hermes plugins enable coucou`, then start a new Hermes session."),
+            Agent::Hermes => t("Turn it on once with `hermes plugins enable slimia`, then start a new Hermes session."),
         }
     }
 }
@@ -357,7 +357,7 @@ pub fn apply(id: &str, install: bool, fingerprint: &str) -> Result<String, Strin
 
 fn apply_in(agent: Agent, home: &Path, relay: &Relay, install: bool, fingerprint: &str) -> Result<String, String> {
     let backups = config_file::apply(&agent.edits(home, relay, install), fingerprint)?;
-    // Hermes loads every folder under plugins/: an empty `coucou` one goes too.
+    // Hermes loads every folder under plugins/: an empty `slimia` one goes too.
     if agent == Agent::Hermes && !install {
         if let Some(dir) = agent.files(home)[0].parent() {
             let _ = std::fs::remove_dir(dir);
@@ -514,7 +514,7 @@ fn gemini_install(root: &Value, commands: &[(String, String, u64)]) -> Result<Va
 
 // ── Antigravity — ~/.gemini/config/hooks.json ─────────────────────────────────
 //
-// Hooks are named groups at the top level; SlimIA's is `coucou`. Tool events
+// Hooks are named groups at the top level; SlimIA's is `slimia`. Tool events
 // take matcher groups, lifecycle events take handlers directly; timeouts are
 // in seconds. Merge and removal come from #298 (kobaltgit). The relay answers
 // PreToolUse with "{}" — no decision — never with an allow: Antigravity's own
@@ -541,7 +541,7 @@ fn antigravity_block(relay: &Relay) -> Value {
     Value::Object(block)
 }
 
-/// A `coucou` group SlimIA wrote (it runs the relay as `--agent antigravity`).
+/// A `slimia` group SlimIA wrote (it runs the relay as `--agent antigravity`).
 fn antigravity_is_ours(group: &Value) -> bool {
     let text = group.to_string();
     text.contains(MARKER) && text.contains("--agent antigravity")
@@ -549,18 +549,18 @@ fn antigravity_is_ours(group: &Value) -> bool {
 
 fn antigravity_install(root: &Value, block: &Value) -> Result<Value, String> {
     let mut root = root.as_object().cloned().unwrap_or_default();
-    if root.get("coucou").is_some_and(|g| !antigravity_is_ours(g)) {
-        return Err(crate::i18n::t("A hook group named \"coucou\" that SlimIA did not write is already there — SlimIA has not touched it."));
+    if root.get("slimia").is_some_and(|g| !antigravity_is_ours(g)) {
+        return Err(crate::i18n::t("A hook group named \"slimia\" that SlimIA did not write is already there — SlimIA has not touched it."));
     }
-    root.insert("coucou".into(), block.clone());
+    root.insert("slimia".into(), block.clone());
     Ok(Value::Object(root))
 }
 
 /// Removes SlimIA's group, and only if it is SlimIA's.
 fn antigravity_uninstall(root: &Value) -> Result<Value, String> {
     let mut root = root.as_object().cloned().unwrap_or_default();
-    if root.get("coucou").is_some_and(antigravity_is_ours) {
-        root.remove("coucou");
+    if root.get("slimia").is_some_and(antigravity_is_ours) {
+        root.remove("slimia");
     }
     Ok(Value::Object(root))
 }
@@ -625,7 +625,7 @@ fn codex_install(root: &Value, command: &str) -> Result<Value, String> {
     groups_install(root, "codex", events).map(Value::Object)
 }
 
-// ── GitHub Copilot CLI — ~/.copilot/hooks/coucou.json ─────────────────────────
+// ── GitHub Copilot CLI — ~/.copilot/hooks/slimia.json ─────────────────────────
 //
 // A file of SlimIA's own in Copilot's hooks folder: camelCase events, each
 // entry `{"type": "command", "bash": …, "timeoutSec": N}`, plus `powershell`
@@ -757,7 +757,7 @@ fn plugin_edit(path: PathBuf, content: String, install: bool) -> FileEdit<'stati
 }
 
 const OPENCODE_PLUGIN: &str = r#"// SlimIA plugin for OpenCode — generated by SlimIA.
-// Forwards OpenCode's events to SlimIA's relay (coucou-hook), fire-and-forget:
+// Forwards OpenCode's events to SlimIA's relay (slimia-hook), fire-and-forget:
 // OpenCode never waits on it, and nothing happens when SlimIA is closed.
 import { spawn } from 'node:child_process';
 
@@ -783,7 +783,7 @@ function forward(hook_event_name, payload) {
   } catch {}
 }
 
-export const CoucouPlugin = async ({ directory } = {}) => ({
+export const SlimIAPlugin = async ({ directory } = {}) => ({
   event: async ({ event }) => {
     const hook_event_name = EVENT_MAP[event?.type];
     if (!hook_event_name) return;
@@ -811,7 +811,7 @@ export const CoucouPlugin = async ({ directory } = {}) => ({
 });
 
 export default {
-  id: 'coucou',
+  id: 'slimia',
   setup: async (ctx = {}) => {
     const dir = ctx.directory || '';
     if (ctx.tool?.hook) {
@@ -848,14 +848,14 @@ export default {
         } catch {}
       })();
     }
-    return CoucouPlugin(ctx);
+    return SlimIAPlugin(ctx);
   },
-  server: CoucouPlugin,
+  server: SlimIAPlugin,
 };
 "#;
 
 const AMP_PLUGIN: &str = r#"// SlimIA plugin for Amp — generated by SlimIA.
-// Forwards Amp's events to SlimIA's relay (coucou-hook), fire-and-forget and
+// Forwards Amp's events to SlimIA's relay (slimia-hook), fire-and-forget and
 // display only: Amp never waits on it, and it never decides anything for Amp.
 import { spawn } from 'node:child_process';
 
@@ -891,7 +891,7 @@ export default function (amp: any): void {
 "#;
 
 const HERMES_PLUGIN: &str = r#"# SlimIA plugin for Hermes Agent — generated by SlimIA.
-# Session and tool events go to SlimIA's relay (coucou-hook), fire-and-forget:
+# Session and tool events go to SlimIA's relay (slimia-hook), fire-and-forget:
 # Hermes never waits on it, and keeps every approval decision to itself.
 import json, os, subprocess, threading
 
@@ -960,7 +960,7 @@ def register(ctx):
     ctx.register_hook('pre_approval_request', pre_approval_request)
 "#;
 
-const HERMES_PLUGIN_YAML: &str = r#"name: coucou
+const HERMES_PLUGIN_YAML: &str = r#"name: slimia
 version: "1.0"
 description: SlimIA island integration — generated by SlimIA
 "#;
@@ -971,15 +971,15 @@ mod tests {
     use crate::config_file::tests::scratch;
 
     fn linux() -> Relay {
-        Relay { exe: "/home/me/.local/share/coucou/bin/coucou-hook".into(), windows: false }
+        Relay { exe: "/home/me/.local/share/slimia/bin/slimia-hook".into(), windows: false }
     }
 
     fn windows(exe: &str) -> Relay {
         Relay { exe: exe.into(), windows: true }
     }
 
-    const WIN: &str = r"C:\Users\me\AppData\Local\Coucou\bin\coucou-hook.exe";
-    const WIN_SPACE: &str = r"C:\Users\Jane O'Neil\AppData\Local\Coucou\bin\coucou-hook.exe";
+    const WIN: &str = r"C:\Users\me\AppData\Local\SlimIA\bin\slimia-hook.exe";
+    const WIN_SPACE: &str = r"C:\Users\Jane O'Neil\AppData\Local\SlimIA\bin\slimia-hook.exe";
 
     /// Installs then uninstalls `agent` in a fresh home holding `existing` in
     /// its first file, and returns (installed file, uninstalled file).
@@ -1015,12 +1015,12 @@ mod tests {
     fn the_command_is_quoted_for_the_shell_that_runs_it() {
         assert_eq!(
             linux().command(Shell::Cmd, "--agent codex"),
-            "'/home/me/.local/share/coucou/bin/coucou-hook' --agent codex"
+            "'/home/me/.local/share/slimia/bin/slimia-hook' --agent codex"
         );
         let w = windows(WIN);
         assert_eq!(
             w.command(Shell::Sh, "Stop"),
-            "\"C:/Users/me/AppData/Local/Coucou/bin/coucou-hook.exe\" Stop"
+            "\"C:/Users/me/AppData/Local/SlimIA/bin/slimia-hook.exe\" Stop"
         );
         assert_eq!(
             w.command(Shell::PowerShell, "--agent gemini Stop"),
@@ -1033,7 +1033,7 @@ mod tests {
         assert_eq!(spaced.command(Shell::Cmd, "x"), format!("\"{WIN_SPACE}\" x"));
         assert_eq!(
             spaced.command(Shell::PowerShell, "x"),
-            r"& 'C:\Users\Jane O''Neil\AppData\Local\Coucou\bin\coucou-hook.exe' x"
+            r"& 'C:\Users\Jane O''Neil\AppData\Local\SlimIA\bin\slimia-hook.exe' x"
         );
     }
 
@@ -1073,8 +1073,8 @@ mod tests {
 
     #[test]
     fn installing_twice_leaves_one_entry_per_event() {
-        let once = gemini_install(&json!({}), &[("BeforeTool".into(), "'x/coucou-hook' --agent gemini PreToolUse".into(), 5000)]).unwrap();
-        let twice = gemini_install(&once, &[("BeforeTool".into(), "'y/coucou-hook' --agent gemini PreToolUse".into(), 5000)]).unwrap();
+        let once = gemini_install(&json!({}), &[("BeforeTool".into(), "'x/slimia-hook' --agent gemini PreToolUse".into(), 5000)]).unwrap();
+        let twice = gemini_install(&once, &[("BeforeTool".into(), "'y/slimia-hook' --agent gemini PreToolUse".into(), 5000)]).unwrap();
         assert_eq!(twice["hooks"]["BeforeTool"].as_array().unwrap().len(), 1);
     }
 
@@ -1086,7 +1086,7 @@ mod tests {
             if file.extension().is_some_and(|e| e == "json") {
                 std::fs::create_dir_all(file.parent().unwrap()).unwrap();
                 let shaped: &[&str] = match agent {
-                    Agent::Antigravity => &[r#"{"coucou":"nope"}"#],
+                    Agent::Antigravity => &[r#"{"slimia":"nope"}"#],
                     _ => &[r#"{"hooks":"nope"}"#, r#"{"hooks":[1]}"#],
                 };
                 for odd in shaped.iter().copied().chain(["[1,2]", "{ broken", "\"text\""]) {
@@ -1105,7 +1105,7 @@ mod tests {
         let existing = r#"{"my-guard":{"PreToolUse":[{"matcher":"run_command","hooks":[{"command":"/bin/guard"}]}]}}"#;
         let (home, installed, removed) = round_trip(Agent::Antigravity, Some(existing));
         assert_eq!(installed["my-guard"]["PreToolUse"][0]["matcher"], "run_command");
-        let ours = &installed["coucou"];
+        let ours = &installed["slimia"];
         for event in ANTIGRAVITY_TOOL_EVENTS {
             assert_eq!(ours[event][0]["matcher"], "*");
             let cmd = ours[event][0]["hooks"][0]["command"].as_str().unwrap();
@@ -1120,8 +1120,8 @@ mod tests {
     }
 
     #[test]
-    fn a_coucou_group_someone_else_wrote_is_neither_replaced_nor_removed() {
-        let theirs = json!({ "coucou": { "Stop": [{ "command": "/bin/notify" }] } });
+    fn a_slimia_group_someone_else_wrote_is_neither_replaced_nor_removed() {
+        let theirs = json!({ "slimia": { "Stop": [{ "command": "/bin/notify" }] } });
         assert!(antigravity_install(&theirs, &antigravity_block(&linux())).is_err());
         assert_eq!(antigravity_uninstall(&theirs).unwrap(), theirs);
     }
@@ -1151,7 +1151,7 @@ mod tests {
 
     #[test]
     fn a_new_cursor_file_gets_its_version() {
-        let after = cursor_install(&json!({}), "'x/coucou-hook' --agent cursor").unwrap();
+        let after = cursor_install(&json!({}), "'x/slimia-hook' --agent cursor").unwrap();
         assert_eq!(after["version"], 1);
         // A version the user set is theirs.
         let after = cursor_install(&json!({ "version": 2 }), "c").unwrap();
@@ -1182,7 +1182,7 @@ mod tests {
     }
 
     #[test]
-    fn copilot_gets_a_file_of_its_own_which_goes_when_coucou_leaves() {
+    fn copilot_gets_a_file_of_its_own_which_goes_when_slimia_leaves() {
         let (home, installed, removed) = round_trip(Agent::Copilot, None);
         assert_eq!(installed["version"], 1);
         for (event, timeout) in COPILOT_EVENTS {
@@ -1211,7 +1211,7 @@ mod tests {
         assert_eq!(entry["powershell"], format!("& '{WIN}' --agent copilot preToolUse"));
         assert_eq!(
             entry["bash"],
-            "\"C:/Users/me/AppData/Local/Coucou/bin/coucou-hook.exe\" --agent copilot preToolUse"
+            "\"C:/Users/me/AppData/Local/SlimIA/bin/slimia-hook.exe\" --agent copilot preToolUse"
         );
     }
 
@@ -1250,7 +1250,7 @@ mod tests {
             let main = std::fs::read_to_string(&agent.files(&home)[0]).unwrap();
             // The relay itself, at this machine's path, as a string literal: no
             // shell, no macOS path.
-            assert!(main.contains(r#""/home/me/.local/share/coucou/bin/coucou-hook""#), "{agent:?}");
+            assert!(main.contains(r#""/home/me/.local/share/slimia/bin/slimia-hook""#), "{agent:?}");
             assert!(!main.contains("/bin/sh") && !main.contains("nb-hook"), "{agent:?}");
             assert!(main.contains(&format!("'--agent', '{}'", agent.id())), "{agent:?}");
             // Never a verdict for the agent.
@@ -1267,7 +1267,7 @@ mod tests {
     }
 
     #[test]
-    fn a_plugin_file_coucou_did_not_write_is_left_alone() {
+    fn a_plugin_file_slimia_did_not_write_is_left_alone() {
         let home = scratch("plugin-foreign");
         let file = Agent::OpenCode.files(&home)[0].clone();
         std::fs::create_dir_all(file.parent().unwrap()).unwrap();
@@ -1300,11 +1300,11 @@ mod tests {
     fn opencode_plugin_exports_v2_default_and_v1_named_plugin() {
         let plugins = Agent::OpenCode.plugin(&windows(WIN_SPACE)).unwrap();
         let plugin = &plugins[0];
-        assert!(plugin.contains("export const CoucouPlugin ="));
+        assert!(plugin.contains("export const SlimIAPlugin ="));
         assert!(plugin.contains("export default {"));
-        assert!(plugin.contains("id: 'coucou'"));
+        assert!(plugin.contains("id: 'slimia'"));
         assert!(plugin.contains("setup: async (ctx = {}) => {"));
-        assert!(plugin.contains("return CoucouPlugin(ctx);"));
+        assert!(plugin.contains("return SlimIAPlugin(ctx);"));
         assert!(is_our_plugin(plugin));
     }
 }

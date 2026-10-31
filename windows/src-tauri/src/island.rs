@@ -556,7 +556,7 @@ pub fn refresh_click_through(app: &AppHandle, gate: &PollGate) {
 /// On Linux, once the top bar's indicator is installed it is the only face of Mochi:
 /// the island keeps running (it takes the hooks and the answers) but is not drawn.
 pub fn bar_only() -> bool {
-    cfg!(target_os = "linux") && std::path::Path::new("/usr/share/coucou-indicator/index.html").exists()
+    cfg!(target_os = "linux") && std::path::Path::new("/usr/share/slimia-indicator/index.html").exists()
 }
 
 pub fn set_ignore_cursor(app: &AppHandle, ignore: bool) {

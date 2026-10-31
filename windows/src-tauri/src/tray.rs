@@ -28,7 +28,7 @@ pub fn build(app: &AppHandle) -> tauri::Result<()> {
     let menu = Menu::with_items(app, &[open, settings, &sep, quit])?;
     app.manage(Items(items));
 
-    let mut builder = TrayIconBuilder::with_id("coucou")
+    let mut builder = TrayIconBuilder::with_id("slimia")
         .tooltip("SlimIA")
         .menu(&menu)
         .on_menu_event(|app: &AppHandle, event| match event.id.as_ref() {

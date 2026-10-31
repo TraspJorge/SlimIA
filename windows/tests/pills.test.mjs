@@ -16,7 +16,7 @@ installFakeDom();
 // ── The catalog itself ────────────────────────────────────────────────────────
 
 test("the catalog holds the pills of this build, with the Claude Code label for Windows and Linux", () => {
-  // From NotchBuddy/Sources/CoucouKit/PillCatalog.swift, without the services and
+  // From NotchBuddy/Sources/SlimIAKit/PillCatalog.swift, without the services and
   // cloud AI providers this build leaves out (it never goes to the network): an ID is a
   // contract value, and a colour or subtitle that drifts is a visible bug.
   // Windows and Linux name the Claude Code integration after the agent.

@@ -3,7 +3,7 @@
 #   ./linux/install-launcher.sh
 set -eu
 here=$(cd "$(dirname "$0")/.." && pwd)
-exe="$here/target/release/coucou"
+exe="$here/target/release/slimia"
 [ -x "$exe" ] || { echo "build it first: npx tauri build --no-bundle" >&2; exit 1; }
 icons="${XDG_DATA_HOME:-$HOME/.local/share}/icons/hicolor"
 apps="${XDG_DATA_HOME:-$HOME/.local/share}/applications"
@@ -20,7 +20,7 @@ Exec=env GDK_BACKEND=x11 $exe
 Icon=slimia
 Terminal=false
 Categories=Development;Utility;
-StartupWMClass=coucou
+StartupWMClass=slimia
 EOF
 command -v gtk-update-icon-cache >/dev/null 2>&1 && gtk-update-icon-cache -q -t "$icons" || true
 command -v update-desktop-database >/dev/null 2>&1 && update-desktop-database -q "$apps" || true

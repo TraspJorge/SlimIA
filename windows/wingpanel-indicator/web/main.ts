@@ -1,6 +1,6 @@
 // The Mochi of the top bar: the island's own engine (src/mochi/engine.ts), drawn
 // on a small canvas inside the Wingpanel indicator. The indicator (Vala) only
-// tells it what is going on — `coucou.set(...)` — and where the pointer is.
+// tells it what is going on — `slimia.set(...)` — and where the pointer is.
 // Nothing here reads a file or opens a connection.
 
 import { BotEngine, hexToRGB } from "../../src/mochi/engine";
@@ -87,7 +87,7 @@ const api = {
     else main.squash();
   },
 };
-(window as unknown as { coucou: typeof api }).coucou = api;
+(window as unknown as { slimia: typeof api }).slimia = api;
 
 function fit(): { w: number; h: number; dpr: number } {
   const dpr = Math.min(2, window.devicePixelRatio || 1);

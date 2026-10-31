@@ -1,5 +1,5 @@
 project(
-    'coucou-wingpanel-indicator',
+    'slimia-wingpanel-indicator',
     'vala', 'c',
     version: '0.1.0',
     meson_version: '>=0.57.0'
@@ -10,10 +10,10 @@ indicators_dir = wingpanel_dep.get_variable('indicatorsdir')
 
 # Same warning flags as the indicators that ship with the desktop; the module is
 # loaded into the panel, so it must not export anything but get_indicator().
-add_project_arguments(['-DGETTEXT_PACKAGE="coucou-wingpanel-indicator"'], language: 'c')
+add_project_arguments(['-DGETTEXT_PACKAGE="slimia-wingpanel-indicator"'], language: 'c')
 
 shared_module(
-    'coucou',
+    'slimia',
     'src/Indicator.vala',
     dependencies: [
         dependency('glib-2.0'),

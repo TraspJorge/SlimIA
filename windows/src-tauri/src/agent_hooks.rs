@@ -1,7 +1,7 @@
 // Whether each hook-driven pill is connected.
 //
 // A pill fed by hook events has no key: it is connected once the agent's config
-// routes its events to coucou-hook (Mac #183 — the idle card used to say "Key
+// routes its events to slimia-hook (Mac #183 — the idle card used to say "Key
 // not configured" for these). Only reads; nothing here ever writes.
 //
 // Claude Code is read here, with the Mac's own rule. Every other agent is read
@@ -15,10 +15,10 @@ use std::path::PathBuf;
 use serde_json::Value;
 
 
-/// Port of `coucouHooksPresent(inSettings:)` (ClaudeHookDetection.swift): true
+/// Port of `slimiaHooksPresent(inSettings:)` (ClaudeHookDetection.swift): true
 /// when a parsed `~/.claude/settings.json` routes Claude Code's SessionStart
 /// events to SlimIA. The command text is what tells: SlimIA's relay here is
-/// `coucou-hook`, the Mac's is `~/.claude/coucou/nb-hook` (or NotchBuddy in the
+/// `slimia-hook`, the Mac's is `~/.claude/slimia/nb-hook` (or NotchBuddy in the
 /// App Store build), so a settings file shared between machines reads the same.
 pub fn claude_hooks_present(settings: &Value) -> bool {
     let Some(groups) = settings
@@ -33,7 +33,7 @@ pub fn claude_hooks_present(settings: &Value) -> bool {
             hooks.iter().any(|hook| {
                 hook.get("command")
                     .and_then(Value::as_str)
-                    .is_some_and(|c| c.contains("NotchBuddy") || c.contains("coucou"))
+                    .is_some_and(|c| c.contains("NotchBuddy") || c.contains("slimia"))
             })
         })
     })
@@ -77,14 +77,14 @@ mod tests {
     // The ten cases of tests/ClaudeHookDetectionTests.swift, plus this build's relay.
 
     #[test]
-    fn the_hook_coucou_writes_is_installed() {
+    fn the_hook_slimia_writes_is_installed() {
         assert!(claude_hooks_present(&settings(
             r#"{"hooks":{"SessionStart":[{"hooks":[
-              {"type":"command","command":"\"C:/Users/me/AppData/Local/Coucou/bin/coucou-hook.exe\" SessionStart"}]}]}}"#
+              {"type":"command","command":"\"C:/Users/me/AppData/Local/SlimIA/bin/slimia-hook.exe\" SessionStart"}]}]}}"#
         )));
         assert!(claude_hooks_present(&settings(
             r#"{"hooks":{"SessionStart":[{"hooks":[
-              {"type":"command","command":"'/home/me/.local/share/coucou/bin/coucou-hook' SessionStart"}]}]}}"#
+              {"type":"command","command":"'/home/me/.local/share/slimia/bin/slimia-hook' SessionStart"}]}]}}"#
         )));
     }
 
@@ -92,7 +92,7 @@ mod tests {
     fn the_mac_builds_hooks_count_too() {
         assert!(claude_hooks_present(&settings(
             r#"{"hooks":{"SessionStart":[{"hooks":[
-              {"type":"command","command":"$HOME/.claude/coucou/nb-hook"}]}]}}"#
+              {"type":"command","command":"$HOME/.claude/slimia/nb-hook"}]}]}}"#
         )));
         assert!(claude_hooks_present(&settings(
             r#"{"hooks":{"SessionStart":[{"hooks":[
@@ -105,7 +105,7 @@ mod tests {
         assert!(claude_hooks_present(&settings(
             r#"{"hooks":{"SessionStart":[
               {"hooks":[{"type":"command","command":"/usr/local/bin/other-tool"}]},
-              {"hooks":[{"type":"command","command":"$HOME/.claude/coucou/nb-hook"}]}]}}"#
+              {"hooks":[{"type":"command","command":"$HOME/.claude/slimia/nb-hook"}]}]}}"#
         )));
     }
 
@@ -123,7 +123,7 @@ mod tests {
     fn hooks_for_other_events_do_not_count() {
         assert!(!claude_hooks_present(&settings(
             r#"{"hooks":{"PreToolUse":[{"hooks":[
-              {"type":"command","command":"$HOME/.claude/coucou/nb-hook"}]}]}}"#
+              {"type":"command","command":"$HOME/.claude/slimia/nb-hook"}]}]}}"#
         )));
     }
 

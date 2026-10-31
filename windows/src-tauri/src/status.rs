@@ -3,7 +3,7 @@
 // indicator is a separate program inside the panel, so it reads this file
 // instead of talking to SlimIA.
 //
-//   ~/.local/share/coucou/status.json
+//   ~/.local/share/slimia/status.json
 //
 // It holds the state of every recent session (working, waiting for you,
 // finished…), the one state the bar's icon shows, and the last answer Claude
@@ -123,7 +123,7 @@ struct Tracker {
 /// The agent a hook comes from, as the island routes it: a tagged agent, Cursor's
 /// terminal, else Claude Code.
 fn agent_of(payload: &Value) -> String {
-    let tag = payload.get("coucou_agent").and_then(Value::as_str).unwrap_or("");
+    let tag = payload.get("slimia_agent").and_then(Value::as_str).unwrap_or("");
     let valid = !tag.is_empty()
         && tag.len() <= 24
         && tag != "claude"
@@ -573,7 +573,7 @@ mod tests {
         let mut t = Tracker::default();
         ev(&mut t, "SessionStart", "old", 1);
         ev(&mut t, "Stop", "claude-new", 50);
-        t.apply("Stop", &json!({ "session_id": "gemini", "cwd": "/x/y", "coucou_agent": "gemini" }), 60);
+        t.apply("Stop", &json!({ "session_id": "gemini", "cwd": "/x/y", "slimia_agent": "gemini" }), 60);
         let later = 60 + FORGET_AFTER_MS + 10;
         let ids: Vec<String> = t.snapshot(later).sessions.into_iter().map(|s| s.id).collect();
         assert_eq!(ids, ["claude-new"]);
@@ -582,7 +582,7 @@ mod tests {
     #[test]
     fn old_sessions_are_forgotten_and_unknown_events_do_nothing() {
         let mut t = Tracker::default();
-        t.apply("UserPromptSubmit", &json!({ "session_id": "a", "cwd": "/x/y", "coucou_agent": "gemini" }), 1);
+        t.apply("UserPromptSubmit", &json!({ "session_id": "a", "cwd": "/x/y", "slimia_agent": "gemini" }), 1);
         assert!(!ev(&mut t, "StatusLine", "a", 2));
         assert!(!ev(&mut t, "Notification", "a", 2));
         assert!(t.snapshot(1 + FORGET_AFTER_MS + 1).sessions.is_empty());
@@ -612,9 +612,9 @@ mod tests {
     fn each_session_knows_its_agent_and_the_pill_colour() {
         let mut t = Tracker::default();
         t.apply("Stop", &json!({ "session_id": "c" }), 1);
-        t.apply("Stop", &json!({ "session_id": "g", "coucou_agent": "gemini" }), 2);
+        t.apply("Stop", &json!({ "session_id": "g", "slimia_agent": "gemini" }), 2);
         t.apply("Stop", &json!({ "session_id": "x", "term_editor": "cursor" }), 3);
-        t.apply("Stop", &json!({ "session_id": "bad", "coucou_agent": "Has Space" }), 4);
+        t.apply("Stop", &json!({ "session_id": "bad", "slimia_agent": "Has Space" }), 4);
         let s = t.snapshot(5);
         let of = |id: &str| s.sessions.iter().find(|x| x.id == id).map(|x| (x.agent.clone(), x.color.clone())).unwrap();
         assert_eq!(of("c"), ("claude".into(), "#F5F6F8".into()));

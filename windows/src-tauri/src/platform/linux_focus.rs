@@ -376,7 +376,7 @@ mod kwin {
             }),
         );
 
-        let name = format!("coucou-focus-{}-{}", std::process::id(), COUNTER.fetch_add(1, Ordering::Relaxed));
+        let name = format!("slimia-focus-{}-{}", std::process::id(), COUNTER.fetch_add(1, Ordering::Relaxed));
         let path = dir.join(format!("{name}.js"));
         let written = std::fs::OpenOptions::new()
             .write(true)

@@ -12,7 +12,7 @@ ninja -C build
 if command -v node >/dev/null 2>&1 || [ -x "$HOME/.local/node/bin/node" ]; then
     PATH="$HOME/.local/node/bin:$PATH" node web/build.mjs
 fi
-pkexec sh -c 'install -d -m 0755 /usr/share/coucou-indicator && install -m 0644 "$1"/web/dist/* /usr/share/coucou-indicator/ && install -m 0644 "$1"/build/libcoucou.so "$2"/libcoucou.so' sh "$PWD" "$dir"
+pkexec sh -c 'install -d -m 0755 /usr/share/slimia-indicator && install -m 0644 "$1"/web/dist/* /usr/share/slimia-indicator/ && install -m 0644 "$1"/build/libslimia.so "$2"/libslimia.so' sh "$PWD" "$dir"
 echo "installed in $dir"
 # The panel loads indicators at start: restart it (the session brings it back).
 pkill -x io.elementary.wingpanel 2>/dev/null || pkill -f '^io.elementary.wingpanel' || true

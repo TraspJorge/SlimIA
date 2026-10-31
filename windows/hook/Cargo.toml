@@ -1,12 +1,12 @@
 [package]
-name = "coucou-hook"
-description = "Relays Claude Code hook events to Coucou over a named pipe (Windows) or a Unix socket (Linux)"
+name = "slimia-hook"
+description = "Relays Claude Code hook events to SlimIA over a named pipe (Windows) or a Unix socket (Linux)"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 
 [[bin]]
-name = "coucou-hook"
+name = "slimia-hook"
 path = "src/main.rs"
 
 [dependencies]
